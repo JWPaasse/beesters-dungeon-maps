@@ -1,16 +1,16 @@
 name: Release
 
-# Publishes a release when a version tag is pushed, e.g. v0.2.0.
+# When you publish a release on GitHub (Releases > Draft a new release, tag e.g. v0.1.0),
+# this builds the addon zip, checks it, and attaches it to that release.
 on:
-  push:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+  release:
+    types: [published]
 
 permissions:
   contents: write
 
 jobs:
-  release:
+  attach-zip:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,13 +21,15 @@ jobs:
         run: |
           pip install lupa
           python3 tools/test_addon.py
-      - name: Build zip and publish
+      - name: Build zip and attach it to the release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          version="${GITHUB_REF_NAME#v}"
+          tag="${{ github.event.release.tag_name }}"
           toc=$(grep -m1 '^## Version:' BeestersDungeonMaps/BeestersDungeonMaps.toc | sed 's/## Version: *//' | tr -d '\r')
-          if [ "$version" != "$toc" ]; then echo "Tag $version does not match TOC version $toc"; exit 1; fi
+          case "$tag" in
+            "v${toc}"|"v${toc}-"*) ;;
+            *) echo "Release tag $tag does not match the addon version $toc in the TOC file."; exit 1 ;;
+          esac
           ./tools/package.sh
-          notes=$(awk "/^## ${version}/{flag=1; next} /^## /{flag=0} flag" CHANGELOG.md)
-          gh release create "$GITHUB_REF_NAME" "dist/BeestersDungeonMaps-${version}.zip" --title "$version" --notes "$notes" --latest
+          gh release upload "$tag" "dist/BeestersDungeonMaps-${toc}.zip" --clobber
