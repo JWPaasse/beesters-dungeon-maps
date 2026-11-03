@@ -31,6 +31,7 @@ To update: delete the old `BeestersDungeonMaps` folder, then unzip the new one. 
 - Open your world map: dungeon and raid entrances show on zone and continent maps. Hover one for its level range.
 - `/bdm` opens the options. If another addon already uses `/bdm`, use `/beesterdm`.
 - `/bdm status` prints the game version, the data version and the map you are on. Handy when reporting a problem.
+- `/bdm probe` prints what the game supports (map frames, icons, dungeon map art). Run it once outside and once inside a dungeon when reporting map problems.
 
 ## Works with Questie
 

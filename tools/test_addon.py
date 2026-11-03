@@ -58,7 +58,10 @@ C_Map = {
     GetMapInfo = function(id) return maps[id] end,
     GetMapRectOnMap = function(child, parent) return 0.4, 0.6, 0.3, 0.5 end,
     GetBestMapForUnit = function() return 1413 end,
+    GetMapArtLayers = function(id) if id == 279 then return { {} } end return nil end,
 }
+function IsInInstance() return false, "none" end
+function GetInstanceInfo() return "Wailing Caverns", "party", 1, "Normal", 5, 0, false, 43 end
 C_Texture = { GetAtlasInfo = function(atlas) return nil end }
 C_AddOns = { GetAddOnMetadata = function() return "0.1.0-test" end }
 function GetBuildInfo() return "1.60.1", "70753", "Nov 4 2026", 16001 end
@@ -157,6 +160,9 @@ def main():
         check("pin and tooltip code runs (Blackrock Mountain, 2 dungeons)", true)
 
         SlashCmdList.BEESTERSDUNGEONMAPS("status")
+        SlashCmdList.BEESTERSDUNGEONMAPS("probe")
+        IsInInstance = function() return true, "party" end
+        SlashCmdList.BEESTERSDUNGEONMAPS("probe")
         SlashCmdList.BEESTERSDUNGEONMAPS("")
         check("slash command runs", true)
         return table.concat(results, "\n")
