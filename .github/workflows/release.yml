@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # A release builds from its own tag. A manual run builds from the current main branch.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.release.tag_name || github.ref }}
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Run checks
