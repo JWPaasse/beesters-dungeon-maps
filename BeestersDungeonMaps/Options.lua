@@ -67,8 +67,13 @@ function ns:InitOptions()
     panel = CreateFrame("Frame")
     panel.name = ns.title
 
+    local logo = panel:CreateTexture(nil, "ARTWORK")
+    logo:SetTexture(ns.logo)
+    logo:SetSize(48, 48)
+    logo:SetPoint("TOPLEFT", 12, -10)
+
     local title = panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
-    title:SetPoint("TOPLEFT", 16, -16)
+    title:SetPoint("TOPLEFT", logo, "TOPRIGHT", 10, -6)
     title:SetText(ns.title)
 
     local subtitle = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
@@ -77,7 +82,7 @@ function ns:InitOptions()
         ns.version, ns.slashCommand or "/beesterdm", tostring(ns.dataVersion)))
 
     local header = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    header:SetPoint("TOPLEFT", subtitle, "BOTTOMLEFT", 0, -20)
+    header:SetPoint("TOPLEFT", logo, "BOTTOMLEFT", 4, -16)
     header:SetText(WORLD_MAP or "World Map")
 
     local dungeons = NewCheckbox(panel, "Show dungeon entrances", "Show dungeon entrances on zone and continent maps.", "showDungeons", header)

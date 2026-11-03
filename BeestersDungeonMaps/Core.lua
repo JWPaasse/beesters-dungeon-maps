@@ -4,6 +4,7 @@
 local ADDON_NAME, ns = ...
 
 ns.title = "Beester's Dungeon Maps"
+ns.logo = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Logo128"
 ns.version = C_AddOns and C_AddOns.GetAddOnMetadata and C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version")
     or (GetAddOnMetadata and GetAddOnMetadata(ADDON_NAME, "Version")) or "?"
 

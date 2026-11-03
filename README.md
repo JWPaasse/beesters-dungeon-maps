@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/logo-256.png" width="160" alt="Beester's Dungeon Maps logo"></p>
+
 # Beester's Dungeon Maps
 
 A World of Warcraft: Forever addon that puts dungeon and raid entrances on your world map, shows dungeon maps with their bosses, and lists every dungeon's quests in the map's quest panel.
@@ -36,7 +38,7 @@ Beester's Dungeon Maps does not need Questie and does not read Questie while you
 
 ## Data and credits
 
-- Entrance coordinates: [QuestieDB](https://github.com/Questie/QuestieDB) (GPL-3.0), Forever data. `tools/build_data.py` turns it into `BeestersDungeonMaps/Data/Entrances.lua`. A GitHub Action rebuilds it every week.
+- Entrance coordinates: [QuestieDB](https://github.com/Questie/QuestieDB) (GPL-3.0), Forever data. `tools/build_data.py` turns it into `BeestersDungeonMaps/Data/Entrances.lua`. A GitHub Action rebuilds it every day until December 23, 2026, then every Monday, and publishes a new release whenever the data changed.
 - Instance list and level ranges: `tools/instances.json` (our own). New Forever dungeons missing from QuestieDB are listed there.
 - Dungeon maps for the new Forever dungeons: Santiago Reyes (watermarked, used with permission). Coming in a later version.
 

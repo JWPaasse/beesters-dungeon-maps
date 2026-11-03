@@ -1,33 +1,74 @@
 name: Refresh data from QuestieDB
 
+# Daily while WoW Forever is new and data changes fast, weekly (Mondays) after DAILY_UNTIL.
+# The workflow runs every day; after the cut-off date it skips every day except Monday.
+# To change the cut-off, edit DAILY_UNTIL below. Manual runs ("Run workflow") always refresh.
+
 on:
   schedule:
-    - cron: "17 4 * * 1"   # every Monday, 04:17 UTC
+    - cron: "17 4 * * *"   # every day, 04:17 UTC (05:17 in the Netherlands in winter)
   workflow_dispatch:
 
 permissions:
   contents: write
 
+env:
+  DAILY_UNTIL: "2026-12-23"   # two weeks after the December 9 raids open
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
+      - name: Daily or weekly?
+        id: schedule
+        run: |
+          today=$(date -u +%F)
+          weekday=$(date -u +%u)   # 1 = Monday
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [[ "$today" < "$DAILY_UNTIL" ]] || [ "$weekday" = "1" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Weekly mode: skipping until Monday."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.schedule.outputs.run == 'true'
+
       - uses: actions/setup-python@v5
+        if: steps.schedule.outputs.run == 'true'
         with:
           python-version: "3.12"
+
       - name: Get QuestieDB
+        if: steps.schedule.outputs.run == 'true'
         run: git clone --depth 1 https://github.com/Questie/QuestieDB.git /tmp/QuestieDB
+
       - name: Rebuild data
+        if: steps.schedule.outputs.run == 'true'
         run: python3 tools/build_data.py /tmp/QuestieDB
+
       - name: Run checks
+        if: steps.schedule.outputs.run == 'true'
         run: |
           pip install lupa
           python3 tools/test_addon.py
-      - name: Commit if anything changed
+
+      - name: Commit and publish if the data changed
+        if: steps.schedule.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet; then echo "No data changes."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -am "Refresh data from QuestieDB"
           git push
+
+          version=$(grep -m1 '^## Version:' BeestersDungeonMaps/BeestersDungeonMaps.toc | sed 's/## Version: *//' | tr -d '\r')
+          stamp=$(date -u +%Y%m%d)
+          ./tools/package.sh
+          tag="v${version}-data.${stamp}"
+          gh release create "$tag" "dist/BeestersDungeonMaps-${version}.zip#BeestersDungeonMaps-${version}-data.${stamp}.zip" \
+            --title "${version} data update ${stamp}" \
+            --notes "Automatic data update from QuestieDB. Same features as ${version}, with the latest dungeon entrances and quest data." \
+            --latest

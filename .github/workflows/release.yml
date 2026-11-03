@@ -1,0 +1,33 @@
+name: Release
+
+# Publishes a release when a version tag is pushed, e.g. v0.2.0.
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run checks
+        run: |
+          pip install lupa
+          python3 tools/test_addon.py
+      - name: Build zip and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          toc=$(grep -m1 '^## Version:' BeestersDungeonMaps/BeestersDungeonMaps.toc | sed 's/## Version: *//' | tr -d '\r')
+          if [ "$version" != "$toc" ]; then echo "Tag $version does not match TOC version $toc"; exit 1; fi
+          ./tools/package.sh
+          notes=$(awk "/^## ${version}/{flag=1; next} /^## /{flag=0} flag" CHANGELOG.md)
+          gh release create "$GITHUB_REF_NAME" "dist/BeestersDungeonMaps-${version}.zip" --title "$version" --notes "$notes" --latest
