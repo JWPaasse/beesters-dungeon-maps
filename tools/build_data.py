@@ -35,12 +35,13 @@ def parse_dungeons(path):
     text = path.read_text(encoding="utf-8")
     body = text.split("local dungeons = {", 1)[1].split("\n}\n", 1)[0]
     entries = {}
-    line_re = re.compile(r"^\s*\[(\d+)\]\s*=\s*\{\"([^\"]+)\",.*?,(\d+),\{(.*)\}\},?", re.M)
+    line_re = re.compile(r"^\s*\[(\d+)\]\s*=\s*\{\"([^\"]+)\",(nil|\{[^}]*\}),(\d+),\{(.*)\}\},?", re.M)
     point_re = re.compile(r"\{\s*(\d+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*\}")
     for m in line_re.finditer(body):
         area = int(m.group(1))
-        points = [(int(z), float(x), float(y)) for z, x, y in point_re.findall(m.group(4))]
-        entries[area] = {"name": m.group(2), "points": points}
+        alternates = [int(a) for a in re.findall(r"\d+", m.group(3))] if m.group(3) != "nil" else []
+        points = [(int(z), float(x), float(y)) for z, x, y in point_re.findall(m.group(5))]
+        entries[area] = {"name": m.group(2), "alternates": alternates, "points": points}
     return entries
 
 

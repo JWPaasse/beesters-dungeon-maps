@@ -39,6 +39,7 @@ Beester's Dungeon Maps does not need Questie and does not read Questie while you
 ## Data and credits
 
 - Entrance coordinates: [QuestieDB](https://github.com/Questie/QuestieDB) (GPL-3.0), Forever data. `tools/build_data.py` turns it into `BeestersDungeonMaps/Data/Entrances.lua`. A GitHub Action rebuilds it every day until December 23, 2026, then every Monday, and publishes a new release whenever the data changed.
+- Dungeon quests, lead-in chains, quest givers, quest items and reward items: QuestieDB's Forever data with all its corrections applied, through QuestieDB's own loader (`tools/build_quests.py` → `BeestersDungeonMaps/Data/Quests.lua`). Not shown in game yet; the quest panel comes next.
 - Instance list and level ranges: `tools/instances.json` (our own). New Forever dungeons missing from QuestieDB are listed there.
 - Dungeon maps for the new Forever dungeons: Santiago Reyes (watermarked, used with permission). Coming in a later version.
 
@@ -47,7 +48,8 @@ World of Warcraft and Blizzard Entertainment are trademarks or registered tradem
 ## For developers
 
 ```
-python3 tools/build_data.py /path/to/QuestieDB   # rebuild data
+python3 tools/build_data.py /path/to/QuestieDB   # rebuild entrance data
+python3 tools/build_quests.py /path/to/QuestieDB # rebuild quest data (needs lupa)
 pip install lupa && python3 tools/test_addon.py  # run the checks
 ./tools/package.sh                               # build the zip into dist/
 ```

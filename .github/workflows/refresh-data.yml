@@ -45,7 +45,10 @@ jobs:
 
       - name: Rebuild data
         if: steps.schedule.outputs.run == 'true'
-        run: python3 tools/build_data.py /tmp/QuestieDB
+        run: |
+          pip install lupa
+          python3 tools/build_data.py /tmp/QuestieDB
+          python3 tools/build_quests.py /tmp/QuestieDB
 
       - name: Run checks
         if: steps.schedule.outputs.run == 'true'
