@@ -72,3 +72,12 @@ jobs:
             --title "${version} data update ${stamp}" \
             --notes "Automatic data update from QuestieDB. Same features as ${version}, with the latest dungeon entrances and quest data." \
             --latest
+          echo "zip=dist/BeestersDungeonMaps-${version}.zip" >> "$GITHUB_ENV"
+          echo "label=${version}-data.${stamp}" >> "$GITHUB_ENV"
+
+      - name: Upload the data update to CurseForge
+        if: steps.schedule.outputs.run == 'true' && env.zip != ''
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
+        run: ./tools/upload_curseforge.sh "$zip" "$label" "Automatic data update from QuestieDB."

@@ -1,19 +1,27 @@
 name: Release
 
 # When you publish a release on GitHub (Releases > Draft a new release, tag e.g. v0.1.0),
-# this builds the addon zip, checks it, and attaches it to that release.
+# this checks the addon, builds the zip, attaches it to the release and uploads it to CurseForge.
+# You can also run it by hand: Actions > Release > Run workflow, and type the release tag.
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, e.g. v0.1.0"
+        required: true
 
 permissions:
   contents: write
 
 jobs:
-  attach-zip:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -22,14 +30,23 @@ jobs:
           pip install lupa
           python3 tools/test_addon.py
       - name: Build zip and attach it to the release
+        id: build
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
-          tag="${{ github.event.release.tag_name }}"
           toc=$(grep -m1 '^## Version:' BeestersDungeonMaps/BeestersDungeonMaps.toc | sed 's/## Version: *//' | tr -d '\r')
-          case "$tag" in
+          case "$TAG" in
             "v${toc}"|"v${toc}-"*) ;;
-            *) echo "Release tag $tag does not match the addon version $toc in the TOC file."; exit 1 ;;
+            *) echo "Release tag $TAG does not match the addon version $toc in the TOC file."; exit 1 ;;
           esac
           ./tools/package.sh
-          gh release upload "$tag" "dist/BeestersDungeonMaps-${toc}.zip" --clobber
+          gh release upload "$TAG" "dist/BeestersDungeonMaps-${toc}.zip" --clobber
+          echo "zip=dist/BeestersDungeonMaps-${toc}.zip" >> "$GITHUB_OUTPUT"
+          gh release view "$TAG" --json body --template '{{.body}}' > /tmp/notes.md || true
+      - name: Upload to CurseForge
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: ./tools/upload_curseforge.sh "${{ steps.build.outputs.zip }}" "${TAG#v}" "$(cat /tmp/notes.md 2>/dev/null)"
