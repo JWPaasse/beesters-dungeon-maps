@@ -4,6 +4,7 @@
 # Needs CF_API_TOKEN (secret) and CF_PROJECT_ID (variable). Skips quietly when they are not set,
 # so GitHub releases keep working before the CurseForge project exists.
 #
+# --form-string sends the JSON exactly as is; plain -F would cut it at the first ";".
 # Game version 17053 is "WoW Forever" on CurseForge (the same ID Questie uploads with).
 # List of IDs: GET https://wow.curseforge.com/api/game/versions with header X-API-TOKEN.
 set -euo pipefail
@@ -40,7 +41,7 @@ EOF
 echo "Uploading $zip_file to CurseForge project $CF_PROJECT_ID as $release_type"
 status=$(curl -sS -o /tmp/cf_response.txt -w "%{http_code}" \
   -H "X-API-TOKEN: $CF_API_TOKEN" \
-  -F "metadata=$metadata" \
+  --form-string "metadata=$metadata" \
   -F "file=@$zip_file" \
   "https://wow.curseforge.com/api/projects/${CF_PROJECT_ID}/upload-file")
 
