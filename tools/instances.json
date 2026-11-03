@@ -1,0 +1,40 @@
+{
+  "_comment": "Instances that exist in WoW Forever. Keys are QuestieDB AreaIDs. Entrance coordinates come from QuestieDB; everything here is our own curation. Level ranges: Blizzard for new dungeons, Classic Era Group Finder for the rest.",
+  "instances": {
+    "2437":  { "key": "rfc",      "name": "Ragefire Chasm",            "kind": "dungeon", "levels": "13-18" },
+    "16919": { "key": "hot",      "name": "Hall of Thanes",            "kind": "dungeon", "levels": "13-18", "new": true },
+    "16611": { "key": "rol",      "name": "Ruins of Lordaeron",        "kind": "dungeon", "levels": "15-20", "new": true },
+    "718":   { "key": "wc",       "name": "Wailing Caverns",           "kind": "dungeon", "levels": "17-24" },
+    "1581":  { "key": "dm",       "name": "The Deadmines",             "kind": "dungeon", "levels": "17-26" },
+    "209":   { "key": "sfk",      "name": "Shadowfang Keep",           "kind": "dungeon", "levels": "22-30" },
+    "719":   { "key": "bfd",      "name": "Blackfathom Deeps",         "kind": "dungeon", "levels": "24-32" },
+    "717":   { "key": "stocks",   "name": "The Stockade",              "kind": "dungeon", "levels": "24-32" },
+    "16732": { "key": "exc",      "name": "Excavation Site: Wetlands", "kind": "dungeon", "levels": "26-31", "new": true },
+    "16544": { "key": "dal",      "name": "City of Dalaran",           "kind": "dungeon", "levels": "28-33", "new": true },
+    "721":   { "key": "gnomer",   "name": "Gnomeregan",                "kind": "dungeon", "levels": "29-38" },
+    "491":   { "key": "rfk",      "name": "Razorfen Kraul",            "kind": "dungeon", "levels": "29-38" },
+    "796":   { "key": "sm",       "name": "Scarlet Monastery",         "kind": "dungeon", "levels": "30-46", "note": "Four wings: Graveyard, Library, Armory and Cathedral." },
+    "722":   { "key": "rfd",      "name": "Razorfen Downs",            "kind": "dungeon", "levels": "37-46" },
+    "1337":  { "key": "ulda",     "name": "Uldaman",                   "kind": "dungeon", "levels": "41-51" },
+    "1176":  { "key": "zf",       "name": "Zul'Farrak",                "kind": "dungeon", "levels": "44-54" },
+    "2100":  { "key": "mara",     "name": "Maraudon",                  "kind": "dungeon", "levels": "46-55" },
+    "1477":  { "key": "st",       "name": "Sunken Temple",             "kind": "dungeon", "levels": "50-60" },
+    "1584":  { "key": "brd",      "name": "Blackrock Depths",          "kind": "dungeon", "levels": "52-60" },
+    "1583":  { "key": "brs",      "name": "Blackrock Spire",           "kind": "dungeon", "levels": "55-60", "note": "Lower and Upper Blackrock Spire." },
+    "10026": { "key": "dme",      "name": "Dire Maul East",            "kind": "dungeon", "levels": "54-60" },
+    "10022": { "key": "dmn",      "name": "Dire Maul North",           "kind": "dungeon", "levels": "56-60" },
+    "10023": { "key": "dmw",      "name": "Dire Maul West",            "kind": "dungeon", "levels": "56-60" },
+    "2057":  { "key": "scholo",   "name": "Scholomance",               "kind": "dungeon", "levels": "58-60" },
+    "2017":  { "key": "strat",    "name": "Stratholme",                "kind": "dungeon", "levels": "58-60", "note": "Main Gate and Service Gate." },
+    "2159":  { "key": "ony",      "name": "Onyxia's Lair",             "kind": "raid",    "levels": "60", "size": "40 players" }
+  },
+  "missing": [
+    "The Drowned City (35-40) - not in QuestieDB yet",
+    "Krol'dok Stronghold (40-45) - not in QuestieDB yet",
+    "Alcaz Prison (48-53) - not in QuestieDB yet",
+    "Blackmaw Hold (55-60) - not in QuestieDB yet",
+    "Shaper's Terrace (58-60) - not in QuestieDB yet",
+    "Barrow Deeps (10-player raid) - not in QuestieDB yet",
+    "Hyjal Summit (20-player raid, Forever version) - not in QuestieDB yet"
+  ]
+}

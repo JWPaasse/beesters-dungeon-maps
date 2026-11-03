@@ -1,0 +1,33 @@
+name: Refresh data from QuestieDB
+
+on:
+  schedule:
+    - cron: "17 4 * * 1"   # every Monday, 04:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Get QuestieDB
+        run: git clone --depth 1 https://github.com/Questie/QuestieDB.git /tmp/QuestieDB
+      - name: Rebuild data
+        run: python3 tools/build_data.py /tmp/QuestieDB
+      - name: Run checks
+        run: |
+          pip install lupa
+          python3 tools/test_addon.py
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet; then echo "No data changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Refresh data from QuestieDB"
+          git push
