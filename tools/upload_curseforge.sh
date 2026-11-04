@@ -39,16 +39,22 @@ EOF
 )
 
 echo "Uploading $zip_file to CurseForge project $CF_PROJECT_ID as $release_type"
-status=$(curl -sS -o /tmp/cf_response.txt -w "%{http_code}" \
-  -H "X-API-TOKEN: $CF_API_TOKEN" \
-  --form-string "metadata=$metadata" \
-  -F "file=@$zip_file" \
-  "https://wow.curseforge.com/api/projects/${CF_PROJECT_ID}/upload-file")
+# CurseForge sometimes answers 5xx when it is busy (launch days). Retry those a few times;
+# a 4xx means the request itself is wrong, so that fails straight away.
+for attempt in 1 2 3 4; do
+  status=$(curl -sS -o /tmp/cf_response.txt -w "%{http_code}" \
+    -H "X-API-TOKEN: $CF_API_TOKEN" \
+    --form-string "metadata=$metadata" \
+    -F "file=@$zip_file" \
+    "https://wow.curseforge.com/api/projects/${CF_PROJECT_ID}/upload-file") || status="000"
 
-if [ "$status" = "200" ]; then
-  echo "CurseForge upload successful: $(cat /tmp/cf_response.txt)"
-else
-  echo "CurseForge upload failed (HTTP $status):"
-  cat /tmp/cf_response.txt
-  exit 1
-fi
+  if [ "$status" = "200" ]; then
+    echo "CurseForge upload successful: $(cat /tmp/cf_response.txt)"
+    exit 0
+  fi
+  echo "CurseForge upload failed (HTTP $status), attempt $attempt:"
+  cat /tmp/cf_response.txt; echo
+  case "$status" in 5*|000) ;; *) exit 1 ;; esac
+  [ "$attempt" -lt 4 ] && sleep $((attempt * 30))
+done
+exit 1
