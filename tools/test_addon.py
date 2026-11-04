@@ -51,7 +51,8 @@ local maps = {
     [1415] = { name = "Eastern Kingdoms", mapType = 2, parentMapID = 947 },
     [1413] = { name = "The Barrens", mapType = 3, parentMapID = 1414 },
     [1420] = { name = "Tirisfal Glades", mapType = 3, parentMapID = 1415 },
-    [1458] = { name = "Undercity", mapType = 3, parentMapID = 1420 },
+    -- As in the real client: cities hang under the continent, not under their zone.
+    [1458] = { name = "Undercity", mapType = 3, parentMapID = 1415 },
 }
 setmetatable(maps, { __index = function(_, id) return { name = "Zone " .. id, mapType = 3, parentMapID = 0 } end })
 C_Map = {
@@ -168,6 +169,15 @@ def main():
         return table.concat(results, "\n")
     end""")
     output = checks(ns)
+
+    # The world map refuses pin templates that set their own OnEnter/OnLeave scripts
+    # (assertion in MapCanvasMixin:AcquirePin); hovering must come from the mixin.
+    import re
+    xml = (ADDON / "MapPins.xml").read_text(encoding="utf-8")
+    bad = re.search(r"<(OnEnter|OnLeave)\b", xml)
+    output += "\n" + ("FAIL" if bad else "PASS") + " map pin template has no OnEnter/OnLeave scripts"
+    motion = 'enableMouseMotion="true"' in xml
+    output += "\n" + ("PASS" if motion else "FAIL") + " map pin template enables mouse motion (tooltips)"
     print(output)
     if "FAIL" in output:
         sys.exit(1)

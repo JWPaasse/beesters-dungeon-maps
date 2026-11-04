@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Fixed: opening the world map gave a Lua error (`Blizzard_MapCanvas.lua:309: assertion failed`) and no entrance pins showed. Found by testing in the UIForever simulator.
+- Entrances inside capital cities now also show on the zone around them: Ragefire Chasm on Durotar, Ruins of Lordaeron on Tirisfal Glades, The Stockade on Elwynn Forest.
+
 ## 0.1.0 (first test build)
 
 - Dungeon and raid entrance pins on zone and continent maps, using the world map's own pin system.

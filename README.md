@@ -8,7 +8,7 @@ It is built to look and feel like the game's own interface: it uses the world ma
 
 ## Status
 
-**Version 0.1.0 (first test build):** dungeon and raid entrance pins on zone and continent maps, with tooltips, plus an options panel.
+**Version 0.1.1 (test build):** dungeon and raid entrance pins on zone and continent maps, with tooltips, plus an options panel.
 
 Coming next:
 - Dungeon maps (Classic's own maps for the old dungeons, Santiago Reyes's maps for the new ones)

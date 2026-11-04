@@ -36,6 +36,22 @@ local function IsAncestor(ancestorID, mapID)
     return ancestorCache[key]
 end
 
+-- Capital cities hang under the continent in the map tree, not under the zone around them,
+-- so their entrances (Ragefire Chasm, Ruins of Lordaeron, The Stockade) would not show on
+-- that zone. city map -> surrounding zone map.
+local CITY_IN_ZONE = {
+    [1454] = 1411, -- Orgrimmar -> Durotar
+    [1458] = 1420, -- Undercity -> Tirisfal Glades
+    [1453] = 1429, -- Stormwind City -> Elwynn Forest
+    [1455] = 1426, -- Ironforge -> Dun Morogh
+    [1456] = 1412, -- Thunder Bluff -> Mulgore
+    [1457] = 1438, -- Darnassus -> Teldrassil
+}
+
+local function ShowsOn(mapID, zoneMapID)
+    return IsAncestor(mapID, zoneMapID) or CITY_IN_ZONE[zoneMapID] == mapID
+end
+
 -- An entrance point can lead to more than one instance (Blackrock Mountain).
 -- It counts as a raid only when every instance behind it is a raid.
 local function EntranceKind(instanceKeys)
@@ -55,14 +71,10 @@ end
 BeestersDungeonMapsEntrancePinMixin = CreateFromMixins(MapCanvasPinMixin)
 local PinMixin = BeestersDungeonMapsEntrancePinMixin
 
+-- Called by the world map (MapCanvasMixin:AcquirePin) when it creates a new pin.
 function PinMixin:OnLoad()
     self:UseFrameLevelType("PIN_FRAME_LEVEL_AREA_POI")
     self:SetScalingLimits(1, 1.0, 1.2)
-    -- Hover shows a tooltip; clicks pass through to the map so zooming and dragging keep working.
-    if self.SetMouseClickEnabled then
-        self:SetMouseClickEnabled(false)
-        self:SetMouseMotionEnabled(true)
-    end
 end
 
 function PinMixin:OnAcquired(entrance, x, y, kind)
@@ -148,7 +160,7 @@ function Provider:RefreshAllData()
     for zoneMapID, entrances in pairs(ns.Entrances) do
         local direct = (zoneMapID == mapID)
         local minX, maxX, minY, maxY
-        if not direct and IsAncestor(mapID, zoneMapID) then
+        if not direct and ShowsOn(mapID, zoneMapID) then
             minX, maxX, minY, maxY = C_Map.GetMapRectOnMap(zoneMapID, mapID)
         end
         local placeable = direct or (minX and maxX and maxX > minX and maxY > minY)

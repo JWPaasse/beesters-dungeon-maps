@@ -1,15 +1,16 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/AddOns/Blizzard_SharedXML/UI.xsd">
-    <Frame name="BeestersDungeonMapsEntrancePinTemplate" mixin="BeestersDungeonMapsEntrancePinMixin" virtual="true">
+    <!--
+        Map pin template. No <Scripts> here on purpose: the world map calls the mixin's
+        OnLoad, OnMouseEnter and OnMouseLeave itself, and it refuses pins whose template sets
+        OnEnter/OnLeave scripts (assertion in MapCanvasMixin:AcquirePin).
+        enableMouseMotion lets the map hook up hovering; clicks pass through to the map.
+    -->
+    <Frame name="BeestersDungeonMapsEntrancePinTemplate" mixin="BeestersDungeonMapsEntrancePinMixin" enableMouseMotion="true" virtual="true">
         <Size x="24" y="24"/>
         <Layers>
             <Layer level="ARTWORK">
                 <Texture parentKey="Icon" setAllPoints="true"/>
             </Layer>
         </Layers>
-        <Scripts>
-            <OnLoad method="OnLoad"/>
-            <OnEnter method="OnMouseEnter"/>
-            <OnLeave method="OnMouseLeave"/>
-        </Scripts>
     </Frame>
 </Ui>
