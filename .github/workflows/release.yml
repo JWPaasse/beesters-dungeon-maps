@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Release tag, e.g. v0.1.0"
+        description: "Release tag, e.g. v0.1.1 (0.1.1 works too)"
         required: true
 
 permissions:
@@ -36,6 +36,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
+          case "$TAG" in v*) ;; *) TAG="v$TAG" ;; esac   # accept "0.1.1" as well as "v0.1.1"
           toc=$(grep -m1 '^## Version:' BeestersDungeonMaps/BeestersDungeonMaps.toc | sed 's/## Version: *//' | tr -d '\r')
           case "$TAG" in
             "v${toc}"|"v${toc}-"*) ;;
