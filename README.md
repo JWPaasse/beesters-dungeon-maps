@@ -41,6 +41,7 @@ Beester's Dungeon Maps does not need Questie and does not read Questie while you
 
 - Entrance coordinates: [QuestieDB](https://github.com/Questie/QuestieDB) (GPL-3.0), Forever data. `tools/build_data.py` turns it into `BeestersDungeonMaps/Data/Entrances.lua`. A GitHub Action rebuilds it every day until December 23, 2026, then every Monday, and publishes a new release whenever the data changed.
 - Dungeon quests, lead-in chains, quest givers, quest items and reward items: QuestieDB's Forever data with all its corrections applied, through QuestieDB's own loader (`tools/build_quests.py` → `BeestersDungeonMaps/Data/Quests.lua`). Not shown in game yet; the quest panel comes next.
+- Dungeon bosses and their order: the WoW Forever client's own DungeonEncounter table, read from [wago.tools](https://wago.tools) (`tools/build_bosses.py` → `BeestersDungeonMaps/Data/Bosses.lua`), with each boss's loot from QuestieDB. Not shown in game yet; boss pins come with the dungeon maps.
 - Instance list and level ranges: `tools/instances.json` (our own). New Forever dungeons missing from QuestieDB are listed there.
 - Dungeon maps for the new Forever dungeons: Santiago Reyes (watermarked, used with permission). Coming in a later version.
 
@@ -51,6 +52,7 @@ World of Warcraft and Blizzard Entertainment are trademarks or registered tradem
 ```
 python3 tools/build_data.py /path/to/QuestieDB   # rebuild entrance data
 python3 tools/build_quests.py /path/to/QuestieDB # rebuild quest data (needs lupa)
+python3 tools/build_bosses.py /path/to/QuestieDB # rebuild bosses (fetches wago.tools; or pass a CSV)
 pip install lupa && python3 tools/test_addon.py  # run the checks
 ./tools/package.sh                               # build the zip into dist/
 ```

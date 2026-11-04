@@ -1,16 +1,31 @@
-name: Refresh data from QuestieDB
+name: Refresh data
 
+# Rebuilds the addon's data from QuestieDB (entrances, quests, loot) and from the WoW Forever
+# client's boss table on wago.tools.
 # Daily while WoW Forever is new and data changes fast, weekly (Mondays) after DAILY_UNTIL.
 # The workflow runs every day; after the cut-off date it skips every day except Monday.
-# To change the cut-off, edit DAILY_UNTIL below. Manual runs ("Run workflow") always refresh.
+# To change the cut-off, edit DAILY_UNTIL below. Manual runs ("Run workflow") always refresh,
+# and so does any change to the data tools.
+#
+# A new release (and CurseForge upload) is only made when a file the addon loads in the game
+# changed. Data files that no feature uses yet are kept up to date without a release.
 
 on:
   schedule:
     - cron: "17 4 * * *"   # every day, 04:17 UTC (05:17 in the Netherlands in winter)
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "tools/**"
+      - ".github/workflows/refresh-data.yml"
 
 permissions:
   contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
 
 env:
   DAILY_UNTIL: "2026-12-23"   # two weeks after the December 9 raids open
@@ -24,7 +39,7 @@ jobs:
         run: |
           today=$(date -u +%F)
           weekday=$(date -u +%u)   # 1 = Monday
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [[ "$today" < "$DAILY_UNTIL" ]] || [ "$weekday" = "1" ]; then
+          if [ "${{ github.event_name }}" != "schedule" ] || [[ "$today" < "$DAILY_UNTIL" ]] || [ "$weekday" = "1" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
           else
             echo "Weekly mode: skipping until Monday."
@@ -49,31 +64,42 @@ jobs:
           pip install lupa
           python3 tools/build_data.py /tmp/QuestieDB
           python3 tools/build_quests.py /tmp/QuestieDB
+          # wago.tools can be briefly unavailable; keep yesterday's bosses rather than failing the run.
+          python3 tools/build_bosses.py /tmp/QuestieDB || echo "::warning::Boss data not refreshed (wago.tools unavailable?)"
 
       - name: Run checks
         if: steps.schedule.outputs.run == 'true'
-        run: |
-          pip install lupa
-          python3 tools/test_addon.py
+        run: python3 tools/test_addon.py
 
-      - name: Commit and publish if the data changed
+      - name: Commit, and publish if the addon's loaded data changed
         if: steps.schedule.outputs.run == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if git diff --quiet; then echo "No data changes."; exit 0; fi
+          git add BeestersDungeonMaps/Data
+          if git diff --cached --quiet; then echo "No data changes."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -am "Refresh data from QuestieDB"
+
+          toc=BeestersDungeonMaps/BeestersDungeonMaps.toc
+          loaded=$(grep -v '^##' "$toc" | tr -d '\r' | sed '/^\s*$/d; s#\\#/#g; s#^#BeestersDungeonMaps/#')
+          changed=$(git diff --cached --name-only)
+          echo "Changed: $changed"
+          git commit -m "Refresh data"
           git push
 
-          version=$(grep -m1 '^## Version:' BeestersDungeonMaps/BeestersDungeonMaps.toc | sed 's/## Version: *//' | tr -d '\r')
-          stamp=$(date -u +%Y%m%d)
+          if ! printf '%s\n' "$changed" | grep -qxF -f <(printf '%s\n' "$loaded"); then
+            echo "Only data that no feature loads yet changed. No release."
+            exit 0
+          fi
+
+          version=$(grep -m1 '^## Version:' "$toc" | sed 's/## Version: *//' | tr -d '\r')
+          stamp=$(date -u +%Y%m%d%H%M)
           ./tools/package.sh
           tag="v${version}-data.${stamp}"
           gh release create "$tag" "dist/BeestersDungeonMaps-${version}.zip#BeestersDungeonMaps-${version}-data.${stamp}.zip" \
             --title "${version} data update ${stamp}" \
-            --notes "Automatic data update from QuestieDB. Same features as ${version}, with the latest dungeon entrances and quest data." \
+            --notes "Automatic data update. Same features as ${version}, with the latest dungeon entrances, quests and bosses." \
             --latest
           echo "zip=dist/BeestersDungeonMaps-${version}.zip" >> "$GITHUB_ENV"
           echo "label=${version}-data.${stamp}" >> "$GITHUB_ENV"
@@ -83,4 +109,4 @@ jobs:
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-        run: ./tools/upload_curseforge.sh "$zip" "$label" "Automatic data update from QuestieDB."
+        run: ./tools/upload_curseforge.sh "$zip" "$label" "Automatic data update."
