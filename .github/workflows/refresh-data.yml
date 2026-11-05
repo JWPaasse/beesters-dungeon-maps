@@ -65,7 +65,7 @@ jobs:
           python3 tools/build_data.py /tmp/QuestieDB
           python3 tools/build_quests.py /tmp/QuestieDB
           # Full quest text and rewards from the CMaNGOS Classic database (keeps the old file if it fails).
-          python3 tools/build_quest_text.py || echo "::warning::Quest text not refreshed"
+          python3 tools/build_quest_text.py --questiedb /tmp/QuestieDB || echo "::warning::Quest text not refreshed"
           # wago.tools can be briefly unavailable; keep yesterday's bosses rather than failing the run.
           python3 tools/build_bosses.py /tmp/QuestieDB || echo "::warning::Boss data not refreshed (wago.tools unavailable?)"
 

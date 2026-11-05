@@ -1,0 +1,11 @@
+{
+ "_source": "Rewards of quests new in WoW Forever, which the CMaNGOS Classic database doesn't have, read from their Wowhead pages (wowhead.com/forever). The addon prefers the game's own reward data when the game has it.",
+ "quests": {
+  "92401": {"choice": [[251485,1],[251486,1]]},
+  "92421": {"choice": [[279874,1],[279875,1]]},
+  "92422": {"choice": [[251533,1],[251534,1]]},
+  "92456": {"choice": [[279835,1],[279836,1]]},
+  "92457": {"choice": [[279837,1],[279838,1]]},
+  "92458": {"choice": [[279839,1],[279840,1],[279841,1]]}
+ }
+}

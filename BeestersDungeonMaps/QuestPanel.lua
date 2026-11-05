@@ -823,17 +823,26 @@ local function RewardButton(d, itemID, count, x, y)
         end
         b:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetItemByID(self.itemID)
+            if self.special then
+                GameTooltip:SetText(self.special.tooltip, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+            else
+                GameTooltip:SetItemByID(self.itemID)
+            end
             GameTooltip:Show()
         end)
         b:SetScript("OnLeave", function() GameTooltip:Hide() end)
         b:SetScript("OnClick", function(self)
+            if self.special then return end
             local _, link = (C_Item and C_Item.GetItemInfo or GetItemInfo)(self.itemID)
             if link and HandleModifiedItemClick then HandleModifiedItemClick(link) end
         end)
         d.buttons[d.buttonCount] = b
     end
-    b.itemID, b.count = itemID, count
+    if type(itemID) == "table" then
+        b.special, b.itemID, b.count = itemID, false, false
+    else
+        b.special, b.itemID, b.count = false, itemID, count
+    end
     d.FillReward(b)
     b:ClearAllPoints()
     b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", x, -y)
@@ -841,7 +850,16 @@ local function RewardButton(d, itemID, count, x, y)
 end
 
 -- Name, colour and border of a reward; called again when the item's data arrives.
+-- Experience and money use the same button, like the game's own reward list.
 local function FillReward(b)
+    if b.special then
+        b.waiting = false
+        if type(b.Icon) == "table" then b.Icon:SetTexture(b.special.icon) end
+        if type(b.Name) == "table" then b.Name:SetText(b.special.text); b.Name:SetTextColor(1, 1, 1) end
+        if type(b.Count) == "table" then b.Count:SetText(""); b.Count:Hide() end
+        if type(b.IconBorder) == "table" then b.IconBorder:Hide() end
+        return
+    end
     local itemID = b.itemID
     local name, _, quality, _, _, _, _, _, _, icon = (C_Item and C_Item.GetItemInfo or GetItemInfo)(itemID)
     if not name and C_Item and C_Item.RequestLoadItemDataByID then C_Item.RequestLoadItemDataByID(itemID) end
@@ -878,6 +896,55 @@ local function RewardGrid(d, items, y)
     return y + math.ceil(#items / 2) * cellH + 6
 end
 
+-- Experience for this character: the game's number while the quest is in your log,
+-- otherwise the quest's experience scaled the way the game does it for higher levels
+-- (full up to 5 levels above the quest, then less; none at the level cap).
+local MAX_LEVEL = (GetMaxLevelForPlayerExpansion and GetMaxLevelForPlayerExpansion()) or MAX_PLAYER_LEVEL or 60
+local function QuestXP(questID, baseXP, questLevel)
+    if InLog(questID) and GetQuestLogRewardXP then
+        local xp = GetQuestLogRewardXP(questID)
+        if xp and xp > 0 then return xp end
+    end
+    if not baseXP or baseXP <= 0 then return 0 end
+    local level = UnitLevel("player")
+    if level >= MAX_LEVEL then return 0 end
+    local factor = math.max(1, math.min(10, 2 * ((questLevel or level) - level) + 20))
+    local xp = baseXP * factor / 10
+    if xp <= 100 then xp = 5 * math.floor((xp + 2) / 5)
+    elseif xp <= 500 then xp = 10 * math.floor((xp + 5) / 10)
+    elseif xp <= 1000 then xp = 25 * math.floor((xp + 12) / 25)
+    else xp = 50 * math.floor((xp + 25) / 50) end
+    return xp
+end
+
+-- Rewards straight from the game (the same calls its quest tooltips use). The game loads a
+-- quest's data on request; QUEST_DATA_LOAD_RESULT then redraws the details.
+local requestedQuestData = {}
+local function LiveRewards(questID)
+    if not (GetQuestLogRewardXP and GetNumQuestLogChoices and GetQuestLogChoiceInfo) then return end
+    if C_QuestLog.RequestLoadQuestByID and not requestedQuestData[questID]
+        and not (C_QuestLog.HasQuestData and C_QuestLog.HasQuestData(questID)) then
+        requestedQuestData[questID] = true -- once: the answer redraws the page, which must not ask again
+        C_QuestLog.RequestLoadQuestByID(questID)
+    end
+    local ok, result = pcall(function()
+        local r = { xp = GetQuestLogRewardXP(questID) or 0, money = GetQuestLogRewardMoney and GetQuestLogRewardMoney(questID) or 0,
+            choice = {}, fixed = {} }
+        for i = 1, GetNumQuestLogChoices(questID) or 0 do
+            local _, _, count, _, _, itemID = GetQuestLogChoiceInfo(i, questID)
+            if itemID then table.insert(r.choice, { itemID, count or 1 }) end
+        end
+        for i = 1, (GetNumQuestLogRewards and GetNumQuestLogRewards(questID)) or 0 do
+            local _, _, count, _, _, itemID = GetQuestLogRewardInfo(i, questID)
+            if itemID then table.insert(r.fixed, { itemID, count or 1 }) end
+        end
+        return r
+    end)
+    if ok and result and (result.xp > 0 or result.money > 0 or #result.choice > 0 or #result.fixed > 0) then
+        return result
+    end
+end
+
 function ShowDetail(id, entry, stepOverride)
     local q = Q(id)
     if not q then return end
@@ -890,6 +957,7 @@ function ShowDetail(id, entry, stepOverride)
     local step = Q(stepID) or q
     local text = ns.QuestText and ns.QuestText[stepID]
     local inLog = InLog(stepID)
+    d.current = { id = id, entry = entry, stepOverride = stepOverride, stepID = stepID }
     d.textCount, d.buttonCount = 0, 0
     for _, fs in ipairs(d.texts) do fs:Hide() end
     for _, b in ipairs(d.buttons) do b:Hide() end
@@ -947,16 +1015,33 @@ function ShowDetail(id, entry, stepOverride)
         for _, itemID in ipairs(step[F.REWARDS] or {}) do table.insert(fixed, { itemID, 1 }) end
     end
     local money = text and text[5] or 0
-    if #choice > 0 or #fixed > 0 or money > 0 then
+    local xp = QuestXP(stepID, text and text[7], step[F.LEVEL])
+    -- The game's own reward data, when it has it for this quest (exact for your character).
+    local live = LiveRewards(stepID)
+    if live then
+        choice, fixed = live.choice, live.fixed
+        if live.money > 0 then money = live.money end
+        if live.xp > 0 then xp = live.xp end
+    end
+    -- Items you always get, then experience and money, as in the game's quest details.
+    local receive = {}
+    for _, pair in ipairs(fixed) do table.insert(receive, pair) end
+    if xp > 0 then
+        table.insert(receive, { { icon = "Interface\\Icons\\XP_Icon", text = BreakUpLargeNumbers and BreakUpLargeNumbers(xp) or tostring(xp),
+            tooltip = (EXPERIENCE_COLON or "Experience:") .. " " .. (BreakUpLargeNumbers and BreakUpLargeNumbers(xp) or xp) } })
+    end
+    if money > 0 then
+        table.insert(receive, { { icon = "Interface\\Icons\\INV_Misc_Coin_01", text = MoneyText(money), tooltip = MoneyText(money) } })
+    end
+    if #choice > 0 or #receive > 0 then
         y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y, 4)
         if #choice > 0 then
             y = PageText(d, "QuestFont", REWARD_CHOICES or "You will be able to choose one of these rewards:", y, 4)
             y = RewardGrid(d, choice, y)
         end
-        if #fixed > 0 or money > 0 then
+        if #receive > 0 then
             y = PageText(d, "QuestFont", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", y, 4)
-            if money > 0 then y = PageText(d, "QuestFont", MoneyText(money), y, 6) end
-            if #fixed > 0 then y = RewardGrid(d, fixed, y) end
+            y = RewardGrid(d, receive, y)
         end
     end
     d.Page:SetHeight(y + 8)
@@ -1157,11 +1242,18 @@ function ns:InitQuestPanel()
     WorldMapFrame:HookScript("OnHide", function() ns.keepQuestPanel = false; ns:HideDungeonQuests() end)
     local events = CreateFrame("Frame")
     for _, event in ipairs({ "QUEST_LOG_UPDATE", "QUEST_ACCEPTED", "QUEST_TURNED_IN", "QUEST_REMOVED",
-        "PLAYER_LEVEL_UP", "QUEST_WATCH_LIST_CHANGED", "GET_ITEM_INFO_RECEIVED" }) do
+        "PLAYER_LEVEL_UP", "QUEST_WATCH_LIST_CHANGED", "GET_ITEM_INFO_RECEIVED", "QUEST_DATA_LOAD_RESULT" }) do
         pcall(events.RegisterEvent, events, event)
     end
     local pending = false
-    events:SetScript("OnEvent", function(_, event)
+    events:SetScript("OnEvent", function(_, event, arg1, arg2)
+        if event == "QUEST_DATA_LOAD_RESULT" then
+            -- The game's reward data for the quest on the page has arrived: redraw it.
+            local d = panel and panel.Detail
+            local c = d and d:IsShown() and d.current
+            if c and arg1 == c.stepID and arg2 then ShowDetail(c.id, c.entry, c.stepOverride) end
+            return
+        end
         if event == "GET_ITEM_INFO_RECEIVED" then
             -- Reward names arrive a moment after the page opens; fill them in.
             local d = panel and panel.Detail

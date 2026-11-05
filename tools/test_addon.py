@@ -442,6 +442,20 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ok, err = pcall(ns.ShowQuestDetail, 5728, entry)
         check("detail page opens for a chain step" .. (ok and "" or (": " .. tostring(err))), ok)
         check("detail page has quest text for Ragefire Chasm quests", ns.QuestText and ns.QuestText[5725] ~= nil)
+        -- Experience: from the data (5725 at its level), and the game's own number when it has one.
+        local function special()
+            local out = {}
+            for i = 1, qp.Detail.buttonCount do local b = qp.Detail.buttons[i]; if b.special then table.insert(out, b.special.text) end end
+            return table.concat(out, ",")
+        end
+        ns.ShowQuestDetail(5725)
+        check("quest details show experience from the data", ns.QuestText[5725][7] > 0 and special():find("%d") ~= nil)
+        GetQuestLogRewardXP = function(id) return id == 92422 and 4600 or 0 end
+        GetNumQuestLogChoices = function(id) return id == 92422 and 2 or 0 end
+        GetQuestLogChoiceInfo = function(i, id) return "x", 1, 1, 3, true, 251532 + i end
+        ns.ShowQuestDetail(92422)
+        check("quest details use the game's experience and rewards when it has them", special() == "4600")
+        GetQuestLogRewardXP, GetNumQuestLogChoices, GetQuestLogChoiceInfo = nil, nil, nil
         -- Show on map keeps the dungeon's quests open; the dungeon tab brings the map back.
         local before = addonSetMapID
         ns:ShowQuestMarker(1454, 0.5, 0.5, "Hidden Enemies", "Pick up: Thrall")

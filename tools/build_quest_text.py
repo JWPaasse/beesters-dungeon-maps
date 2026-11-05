@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 """Build BeestersDungeonMaps/Data/QuestText.lua: the full text and rewards of the dungeon quests.
 
-    python3 tools/build_quest_text.py [ClassicDB.sql.gz]
+    python3 tools/build_quest_text.py [ClassicDB.sql.gz] [--questiedb /path/to/QuestieDB]
 
 QuestieDB only has each quest's short objective line. The quest's own description, its
 objectives with counts, and its rewards (fixed items, choice items, money) come from the
 CMaNGOS Classic database (GPL-3.0, https://github.com/cmangos/classic-db). Without a file
 argument the latest Full_DB dump is downloaded. Only quests the addon lists (Data/Quests.lua)
-are kept. Quests new in WoW Forever aren't in the Classic database; those keep QuestieDB's line.
+are kept. Quests new in WoW Forever aren't in the Classic database; their rewards come from
+tools/quest_rewards.json (read from Wowhead) and their text stays QuestieDB's short line.
+Experience: QuestieDB's Forever quest XP table (support/Forever/QuestXP), else tools/quest_rewards.json.
 """
 import gzip
+import json
 import re
 import sys
 import urllib.request
@@ -78,8 +81,27 @@ def lua_str(s):
     return '"' + s + '"'
 
 
+def quest_xp(qdb):
+    """[questID] = base experience, from QuestieDB's Forever QuestXP table."""
+    path = qdb / "support" / "Forever" / "QuestXP" / "xpDB-classic.lua" if qdb else None
+    if not path or not path.exists():
+        return {}
+    return {int(q): int(x) for q, x in re.findall(r"^\s*\[(\d+)\] = \{-?\d+, (\d+)\}", path.read_text(encoding="utf-8"), re.M)}
+
+
 def main():
-    raw = Path(sys.argv[1]).read_bytes() if len(sys.argv) > 1 else download()
+    args = sys.argv[1:]
+    qdb = None
+    if "--questiedb" in args:
+        i = args.index("--questiedb")
+        qdb = Path(args[i + 1])
+        del args[i:i + 2]
+    elif Path("/tmp/QuestieDB").exists():
+        qdb = Path("/tmp/QuestieDB")
+    xp_table = quest_xp(qdb)
+    extra_file = ROOT / "tools" / "quest_rewards.json"
+    extra = json.loads(extra_file.read_text(encoding="utf-8"))["quests"] if extra_file.exists() else {}
+    raw = Path(args[0]).read_bytes() if args else download()
     sql = gzip.decompress(raw).decode("utf-8", errors="replace")
     create = re.search(r"CREATE TABLE `quest_template` \((.*?)\) ENGINE", sql, re.S).group(1)
     cols = re.findall(r"^\s*`(\w+)`", create, re.M)
@@ -95,10 +117,15 @@ def main():
         "local _, ns = ...",
         "",
         "-- [questID] = { description, objectives, { {itemID, count}... } choice rewards,",
-        "--   { {itemID, count}... } fixed rewards, money (copper), { {itemOrCreatureID, count, isItem}... } goals }",
+        "--   { {itemID, count}... } fixed rewards, money (copper), { {itemOrCreatureID, count, isItem}... } goals,",
+        "--   experience at the quest's level (0 = unknown) }",
         "ns.QuestText = {",
     ]
+    def pairs(xs):
+        return "{" + ",".join("{%d,%d}" % (a, b) for a, b in xs) + "}"
+
     found = 0
+    done = set()
     for r in rows:
         q = dict(zip(cols, r))
         qid = q["entry"]
@@ -111,12 +138,22 @@ def main():
         goals += [(abs(q[f"ReqCreatureOrGOId{i}"]), q[f"ReqCreatureOrGOCount{i}"], False)
                   for i in range(1, 5) if q[f"ReqCreatureOrGOId{i}"]]
         money = max(q["RewOrReqMoney"] or 0, 0)
-        pairs = lambda xs: "{" + ",".join("{%d,%d}" % (a, b) for a, b in xs) + "}"
         gl = "{" + ",".join("{%d,%d,%s}" % (a, b, "true" if c else "false") for a, b, c in goals) + "}"
-        out.append(f"    [{qid}] = {{{lua_str(q['Details'])},{lua_str(q['Objectives'])},{pairs(choice)},{pairs(fixed)},{money},{gl}}},")
+        xp = xp_table.get(qid) or (extra.get(str(qid)) or {}).get("xp", 0)
+        out.append(f"    [{qid}] = {{{lua_str(q['Details'])},{lua_str(q['Objectives'])},{pairs(choice)},{pairs(fixed)},{money},{gl},{xp}}},")
+        done.add(qid)
+    # Quests the Classic database doesn't have (new in WoW Forever): rewards and experience only.
+    added = 0
+    for qid_text, r in sorted(extra.items(), key=lambda kv: int(kv[0])):
+        qid = int(qid_text)
+        if qid in done or qid not in wanted:
+            continue
+        added += 1
+        xp = xp_table.get(qid) or r.get("xp", 0)
+        out.append(f"    [{qid}] = {{\"\",\"\",{pairs(r.get('choice', []))},{pairs(r.get('fixed', []))},{r.get('money', 0)},{{}},{xp}}},")
     out.append("}")
     OUT.write_text("\n".join(out) + "\n", encoding="utf-8")
-    print(f"Wrote {OUT.relative_to(ROOT)}: text for {found} of {len(wanted)} quests ({OUT.stat().st_size // 1024} KB)")
+    print(f"Wrote {OUT.relative_to(ROOT)}: text for {found} of {len(wanted)} quests, rewards only for {added} more ({OUT.stat().st_size // 1024} KB)")
 
 
 if __name__ == "__main__":
