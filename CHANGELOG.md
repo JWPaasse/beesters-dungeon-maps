@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.5
+
+- Fixed: clicking a place in the map's top bar during a fight could give an "action blocked" error. The Dungeons button in the top bar is now a separate button of the addon's own.
+- Fixed: boss loot lists left out items the game hadn't loaded yet (for example Charlga Razorflank's Pronged Reaver), or showed them as "Loading..." for good. The addon now carries the names, quality and binding of boss loot itself.
+- Items a boss shares with a rare or its own adds now count as its loot (for example the Haunting Blade, and Noxxion's items).
+
 ## 0.2.4
 
 - Quest details show experience and money as reward buttons, like the game's quest log. Experience, money and items come from the game itself whenever it has them, so they match what the game shows you.
