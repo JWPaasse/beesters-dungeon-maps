@@ -213,12 +213,14 @@ end
 
 function ns:ShowQuestMarker(mapID, x, y, title, who)
     ns.questMarker = { mapID = mapID, x = x, y = y, title = title, who = who }
+    ns.keepQuestPanel = true -- the dungeon's quest list stays open next to the zone map
     if WorldMapFrame:GetMapID() == mapID then
         ns:CloseDungeonMap(true)
         ns:RefreshMapPins()
     else
         WorldMapFrame:SetMapID(mapID) -- closes the dungeon map and redraws the pins
     end
+    ns.keepQuestPanel = false
 end
 
 function ns:ClearQuestMarker()

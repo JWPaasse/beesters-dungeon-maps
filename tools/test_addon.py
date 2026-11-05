@@ -374,6 +374,12 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ok, err = pcall(ns.ShowQuestDetail, 5728, entry)
         check("detail page opens for a chain step" .. (ok and "" or (": " .. tostring(err))), ok)
         check("detail page has quest text for Ragefire Chasm quests", ns.QuestText and ns.QuestText[5725] ~= nil)
+        -- Show on map keeps the dungeon's quests open; the dungeon tab brings the map back.
+        ns:ShowQuestMarker(1454, 0.5, 0.5, "Hidden Enemies", "Pick up: Thrall")
+        check("Show on map keeps the dungeon quest tab open", qp:IsShown() and BeestersDungeonMapsQuestTabs:IsShown()
+            and not ns:IsDungeonMapOpen())
+        BeestersDungeonMapsQuestTabs.Dungeon.scripts.OnClick()
+        check("the dungeon tab brings the dungeon map back", ns:IsDungeonMapOpen() and ns:CurrentDungeonKey() == "rfc")
         local used = 0
         for _, r in ipairs({ qp.Child }) do used = used + 1 end
         check("quest list has rows", qp.Child ~= nil)

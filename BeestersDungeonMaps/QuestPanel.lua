@@ -149,27 +149,6 @@ local function TurnInInfo(q)
     end
 end
 
--- Show a quest step on its zone map: where to hand it in when it's in your log,
--- otherwise where to pick it up.
-local function ShowStepOnMap(stepID)
-    local q = Q(stepID)
-    if not q then return end
-    local who, mapID, x, y
-    local verb
-    if InLog(stepID) then
-        who, mapID, x, y = TurnInInfo(q)
-        verb = "Hand in"
-    else
-        who, mapID, x, y = StartInfo(q)
-        verb = "Pick up"
-    end
-    if mapID then
-        ns:ShowQuestMarker(mapID, x, y, q[F.NAME], ("%s: %s"):format(verb, who or "?"))
-    else
-        ns:Print(("%s: %s – no map spot known (it may be inside a dungeon)."):format(q[F.NAME], who or "?"))
-    end
-end
-
 ----------------------------------------------------------------------
 -- Building the list
 ----------------------------------------------------------------------
@@ -555,9 +534,9 @@ local function AddChain(y, entry)
         if sq then
             local last = i == #steps
             local name = ("%d. %s"):format(i, sq[F.NAME])
-            local showMap = function() ShowStepOnMap(stepID) end
+            local showStep = function() ShowDetail(entry.id, entry, stepID) end
             if i < (entry.step or 1) then
-                y = AddStepLine(y, 40, name, "done", 0.55, 0.55, 0.55, showMap, last, "<Click to show where it was picked up>")
+                y = AddStepLine(y, 40, name, "done", 0.55, 0.55, 0.55, showStep, last, "<Click for details>")
             elseif i == (entry.step or 1) then
                 local where
                 if InLog(stepID) then
@@ -567,8 +546,7 @@ local function AddChain(y, entry)
                     local zone = mapID and C_Map.GetMapInfo(mapID)
                     if who then where = (" – %s%s"):format(who, zone and (", " .. zone.name) or "") end
                 end
-                y = AddStepLine(y, 40, name .. (where or ""), "current", 1, 1, 1, showMap, last,
-                    InLog(stepID) and "<Click to show where to hand it in>" or "<Click to show where to pick it up>")
+                y = AddStepLine(y, 40, name .. (where or ""), "current", 1, 1, 1, showStep, last, "<Click for details>")
                 -- The step's progress, right under it.
                 if InLog(stepID) and C_QuestLog.GetQuestObjectives then
                     for _, obj in ipairs(C_QuestLog.GetQuestObjectives(stepID) or {}) do
@@ -589,7 +567,7 @@ local function AddChain(y, entry)
                     end
                 end
             else
-                y = AddStepLine(y, 40, name, "todo", 0.6, 0.6, 0.6, showMap, last, "<Click to show where to pick it up>")
+                y = AddStepLine(y, 40, name, "todo", 0.6, 0.6, 0.6, showStep, last, "<Click for details>")
             end
         end
     end
@@ -645,10 +623,8 @@ local function AddQuestRow(y, entry, kind)
     t.Box:SetShown(inLog)
     if inLog then
         SetTracked(t, C_QuestLog.GetQuestWatchType and C_QuestLog.GetQuestWatchType(entry.id) ~= nil)
-        t.hint = "<Click to open the quest>"
-        t:SetScript("OnClick", function(self)
-            if QuestMapFrame_ShowQuestDetails then QuestMapFrame_ShowQuestDetails(self.questID) end
-        end)
+        t.hint = "<Click for details>"
+        t:SetScript("OnClick", function(self) ShowDetail(self.questID, entry) end)
     else
         t.hint = "<Click for details>"
         t:SetScript("OnClick", function(self) ShowDetail(self.questID, entry) end)
@@ -703,7 +679,7 @@ local GROUPS = {
 
 function Refresh()
     if not panel or not panel:IsShown() then return end
-    local key = ns:CurrentDungeonKey()
+    local key = panel.key
     if not key then return end
     ReleaseAll()
 
@@ -863,17 +839,18 @@ local function RewardGrid(d, items, y)
     return y + math.ceil(#items / 2) * cellH + 6
 end
 
-function ShowDetail(id, entry)
+function ShowDetail(id, entry, stepOverride)
     local q = Q(id)
     if not q then return end
     selected = id
     local d = panel.Detail
     d:Show()
     Layout()
-    -- For a chain, show the step you're on.
-    local stepID = entry and entry.steps and entry.steps[entry.step or 1] or id
+    -- For a chain: the step you clicked, or the step you're on.
+    local stepID = stepOverride or (entry and entry.steps and entry.steps[entry.step or 1]) or id
     local step = Q(stepID) or q
     local text = ns.QuestText and ns.QuestText[stepID]
+    local inLog = InLog(stepID)
     d.textCount, d.buttonCount = 0, 0
     for _, fs in ipairs(d.texts) do fs:Hide() end
     for _, b in ipairs(d.buttons) do b:Hide() end
@@ -881,24 +858,44 @@ function ShowDetail(id, entry)
     local y = 8
     y = PageText(d, "QuestTitleFont", step[F.NAME], y, 6)
     local info = { ("Level %d"):format(step[F.LEVEL] or 0) }
-    if (step[F.REQ] or 0) > UnitLevel("player") then
+    if inLog then
+        table.insert(info, ReadyToTurnIn(stepID) and "ready to hand in" or "in your log")
+    elseif IsDone(stepID) then
+        table.insert(info, "handed in")
+    elseif (step[F.REQ] or 0) > UnitLevel("player") then
         table.insert(info, ("|cffa00000Requires level %d|r"):format(step[F.REQ]))
     elseif step[F.REQ] then
         table.insert(info, ("requires level %d"):format(step[F.REQ]))
     end
     local line = table.concat(info, " · ")
-    if stepID ~= id then
-        line = line .. "\n" .. ("Step %d of %d toward %s"):format(entry.step or 1, #entry.steps, q[F.NAME])
+    if stepID ~= id and entry and entry.steps then
+        local index = 1
+        for i, sid in ipairs(entry.steps) do if sid == stepID then index = i end end
+        line = line .. "\n" .. ("Step %d of %d toward %s"):format(index, #entry.steps, q[F.NAME])
     end
+    -- Where to go: hand-in when it's in your log, otherwise where it starts.
     local who, mapID, x, yy = StartInfo(step)
+    local verb = "Starts at"
+    if inLog then
+        local tWho, tMap, tx, ty = TurnInInfo(step)
+        if tWho then who, mapID, x, yy, verb = tWho, tMap, tx, ty, "Hand in at" end
+    end
     if who then
         local zone = mapID and C_Map.GetMapInfo(mapID)
-        line = line .. "\n" .. (zone and ("Starts at: %s, %s"):format(who, zone.name) or ("Starts with: %s (inside the dungeon)"):format(who))
+        line = line .. "\n" .. (zone and ("%s: %s, %s"):format(verb, who, zone.name) or ("%s: %s (inside the dungeon)"):format(verb, who))
     end
     y = PageText(d, "QuestFontNormalSmall", line, y, 10)
 
     -- Objectives, then the quest's own story text, as in the quest log's details.
-    y = PageText(d, "QuestFont", FillText(text and text[2] ~= "" and text[2] or step[F.TEXT] or ""), y, 12)
+    y = PageText(d, "QuestFont", FillText(text and text[2] ~= "" and text[2] or step[F.TEXT] or ""), y, 6)
+    if inLog and C_QuestLog.GetQuestObjectives then
+        local lines = {}
+        for _, obj in ipairs(C_QuestLog.GetQuestObjectives(stepID) or {}) do
+            if obj.text and obj.text ~= "" then table.insert(lines, "- " .. obj.text) end
+        end
+        if #lines > 0 then y = PageText(d, "QuestFont", table.concat(lines, "\n"), y, 6) end
+    end
+    y = y + 6
     if text and text[1] ~= "" then
         y = PageText(d, "QuestTitleFont", QUEST_DESCRIPTION or "Description", y, 4)
         y = PageText(d, "QuestFont", FillText(text[1]), y, 12)
@@ -926,11 +923,12 @@ function ShowDetail(id, entry)
     d.Page:SetHeight(y + 8)
     d.Scroll:SetVerticalScroll(0)
 
-    d.MapButton.target = mapID and { mapID = mapID, x = x, y = yy, title = step[F.NAME], who = who } or nil
+    d.MapButton.target = mapID and { mapID = mapID, x = x, y = yy, title = step[F.NAME],
+        who = ("%s: %s"):format(inLog and "Hand in" or "Pick up", who or "?") } or nil
     d.MapButton:SetEnabled(d.MapButton.target ~= nil)
 end
 
-ns.ShowQuestDetail = function(id, entry) ShowDetail(id, entry) end -- used by tools/test_addon.py
+ns.ShowQuestDetail = function(id, entry, step) ShowDetail(id, entry, step) end -- used by tools/test_addon.py
 
 local function CreateDetail(parent)
     local d = CreateFrame("Frame", nil, parent)
@@ -1043,7 +1041,13 @@ local function CreateFrames()
     strip.Log:SetScript("OnClick", function() SetTab("log") end)
     strip.Dungeon = CreateTabButton(strip, "")
     strip.Dungeon:SetPoint("LEFT", strip.Log, "RIGHT", 4, 0)
-    strip.Dungeon:SetScript("OnClick", function() SetTab("dungeon") end)
+    strip.Dungeon:SetScript("OnClick", function()
+        if panel.key and not ns:IsDungeonMapOpen() then
+            ns:OpenDungeonMap(panel.key) -- back from a "Show on map" zone map
+        else
+            SetTab("dungeon")
+        end
+    end)
     strip:Hide()
 
     panel = CreateFrame("Frame", "BeestersDungeonMapsQuests", host)
@@ -1083,20 +1087,34 @@ end
 function ns:ShowDungeonQuests(key)
     if not ns.db.questPanel then return end
     if not panel and not CreateFrames() then return end
+    if panel.key ~= key then
+        panel.Detail:Hide()
+        selected = nil
+    end
+    panel.key = key
     SetTabText(strip.Dungeon, ns.Instances[key] and ns.Instances[key].name or key)
     strip:Show()
-    panel.Detail:Hide()
-    selected = nil
     SetTab("dungeon")
 end
 
-function ns:HideDungeonQuests()
+-- keepForMarker: "Show on map" moved to a zone map; the dungeon's quests stay, so you can
+-- go on reading them. Clicking the dungeon tab brings the dungeon map back.
+function ns:HideDungeonQuests(keepForMarker)
+    if keepForMarker or ns.keepQuestPanel then return end
     if strip then strip:Hide() end
-    if panel then panel:Hide() end
+    if panel then panel:Hide(); panel.key = nil end
 end
 
 function ns:InitQuestPanel()
     if not ns.Quests then return end
+    -- Leaving the marker's zone map for any other map ends the dungeon's quest view.
+    hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
+        if panel and panel.key and not ns:IsDungeonMapOpen() and not ns.keepQuestPanel then
+            local m = ns.questMarker
+            if not (m and m.mapID == WorldMapFrame:GetMapID()) then ns:HideDungeonQuests() end
+        end
+    end)
+    WorldMapFrame:HookScript("OnHide", function() ns.keepQuestPanel = false; ns:HideDungeonQuests() end)
     local events = CreateFrame("Frame")
     for _, event in ipairs({ "QUEST_LOG_UPDATE", "QUEST_ACCEPTED", "QUEST_TURNED_IN", "QUEST_REMOVED",
         "PLAYER_LEVEL_UP", "QUEST_WATCH_LIST_CHANGED", "GET_ITEM_INFO_RECEIVED" }) do
