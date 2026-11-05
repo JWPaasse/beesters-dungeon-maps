@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1
+
+- Fixed: closing the map during a fight could give an "action blocked" error (`SetPassThroughButtons`) after the dungeon map had moved the world map. The addon now lets the game switch the map itself, and doesn't move it during combat.
+- Loot for Kirtonos the Herald and Ras Frostwhisper.
+
 ## 0.2.0
 
 - Dungeon maps. WoW Forever has no maps inside dungeons; the addon now shows one in the Map & Quest Log window:
