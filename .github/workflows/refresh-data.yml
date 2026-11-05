@@ -96,6 +96,12 @@ jobs:
           fi
 
           version=$(grep -m1 '^## Version:' "$toc" | sed 's/## Version: *//' | tr -d '\r')
+          # A new version goes out through its own release (with its changelog) first.
+          # Until that release exists, data updates are committed but not published.
+          if ! gh release view "v${version}" >/dev/null 2>&1; then
+            echo "Version ${version} has no release yet. The data goes out with that release."
+            exit 0
+          fi
           stamp=$(date -u +%Y%m%d%H%M)
           ./tools/package.sh
           tag="v${version}-data.${stamp}"
