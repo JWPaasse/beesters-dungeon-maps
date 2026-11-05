@@ -1,9 +1,18 @@
 name: Release
 
-# When you publish a release on GitHub (Releases > Draft a new release, tag e.g. v0.1.0),
-# this checks the addon, builds the zip, attaches it to the release and uploads it to CurseForge.
-# You can also run it by hand: Actions > Release > Run workflow, and type the release tag.
+# Publishes a new version: checks the addon, builds the zip, makes the GitHub release with the
+# changelog and uploads it to CurseForge.
+#
+# Automatic: when a change on main raises "## Version:" in the TOC to a version that has no
+# release yet, this makes the release itself (tag vX.Y.Z, notes from that version's section in
+# CHANGELOG.md). So releasing is: bump the version, write the changelog, merge to main.
+# By hand: publish a release on GitHub (Releases > Draft a new release), or Actions > Release >
+# Run workflow with the tag; both still work.
 on:
+  push:
+    branches: [main]
+    paths:
+      - "BeestersDungeonMaps/BeestersDungeonMaps.toc"
   release:
     types: [published]
   workflow_dispatch:
@@ -15,40 +24,89 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      # A release builds from its own tag. A manual run builds from the current main branch.
+      # A release builds from its own tag; a push or manual run builds from the branch it ran on.
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.release.tag_name || github.ref }}
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Run checks
-        run: |
-          pip install lupa
-          python3 tools/test_addon.py
-      - name: Build zip and attach it to the release
-        id: build
+
+      - name: Which version?
+        id: version
         env:
           GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
           TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
-          case "$TAG" in v*) ;; *) TAG="v$TAG" ;; esac   # accept "0.1.1" as well as "v0.1.1"
           toc=$(grep -m1 '^## Version:' BeestersDungeonMaps/BeestersDungeonMaps.toc | sed 's/## Version: *//' | tr -d '\r')
+          if [ "$EVENT" = "push" ]; then
+            # Only a new version makes a release; other TOC edits do nothing.
+            if gh release view "v${toc}" >/dev/null 2>&1; then
+              echo "v${toc} is already released. Nothing to do."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            TAG="v${toc}"
+          fi
+          case "$TAG" in v*) ;; *) TAG="v$TAG" ;; esac   # accept "0.1.1" as well as "v0.1.1"
           case "$TAG" in
             "v${toc}"|"v${toc}-"*) ;;
             *) echo "Release tag $TAG does not match the addon version $toc in the TOC file."; exit 1 ;;
           esac
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$toc" >> "$GITHUB_OUTPUT"
+
+      - name: Run checks
+        if: steps.version.outputs.skip != 'true'
+        run: |
+          pip install lupa
+          python3 tools/test_addon.py
+
+      - name: Release notes from the changelog
+        if: steps.version.outputs.skip != 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          python3 - <<'PY' > /tmp/notes.md
+          import os, re
+          text = open("CHANGELOG.md", encoding="utf-8").read()
+          m = re.search(r"^## %s\b[^\n]*\n(.*?)(?=^## |\Z)" % re.escape(os.environ["VERSION"]), text, re.S | re.M)
+          print(m.group(1).strip() if m else "Version " + os.environ["VERSION"])
+          PY
+          cat /tmp/notes.md
+
+      - name: Build the zip and attach it to the release
+        if: steps.version.outputs.skip != 'true'
+        id: build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          TAG: ${{ steps.version.outputs.tag }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
           ./tools/package.sh
-          gh release upload "$TAG" "dist/BeestersDungeonMaps-${toc}.zip" --clobber
-          echo "zip=dist/BeestersDungeonMaps-${toc}.zip" >> "$GITHUB_OUTPUT"
-          gh release view "$TAG" --json body --template '{{.body}}' > /tmp/notes.md || true
+          zip="dist/BeestersDungeonMaps-${VERSION}.zip"
+          if [ "$EVENT" = "push" ]; then
+            gh release create "$TAG" "$zip" --target "$GITHUB_SHA" --title "$VERSION" --notes-file /tmp/notes.md --latest
+          else
+            gh release upload "$TAG" "$zip" --clobber
+            gh release view "$TAG" --json body --template '{{.body}}' > /tmp/notes.md || true
+          fi
+          echo "zip=$zip" >> "$GITHUB_OUTPUT"
+
       - name: Upload to CurseForge
+        if: steps.version.outputs.skip != 'true'
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          TAG: ${{ steps.version.outputs.tag }}
         run: ./tools/upload_curseforge.sh "${{ steps.build.outputs.zip }}" "${TAG#v}" "$(cat /tmp/notes.md 2>/dev/null)"
