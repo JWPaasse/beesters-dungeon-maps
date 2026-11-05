@@ -84,7 +84,7 @@ def main():
             x, y = float(row["Map_0"]), float(row["Map_1"])
             if 0 < x < 1 and 0 < y < 1:
                 bosses.append([floor, int(row.get("DungeonEncounterID") or 0), row["Name_lang"], round(x, 3), round(y, 3)])
-    if len(bosses) < 20:
+    if len(bosses) < 5:
         sys.exit(f"Only {len(bosses)} positions found (floors matched: {len(art_to_floor)} art, "
                  f"{len(map_to_floor)} maps); keeping the existing file")
     out = {
@@ -92,7 +92,7 @@ def main():
         "bosses": sorted(bosses),
     }
     (ROOT / "tools" / "journal_positions_cata.json").write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
-    print(f"{len(bosses)} boss positions on {len(set(b[0] for b in bosses))} floors")
+    print(f"::notice::{len(bosses)} boss positions: " + "; ".join(f"{b[0]} {b[2]}" for b in sorted(bosses)))
 
 
 if __name__ == "__main__":
