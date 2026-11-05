@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2
+
+- Quest chains that WoW Forever changed at launch or that QuestieDB doesn't link yet, taken from Wowhead's quest pages and comments:
+  - Ruins of Lordaeron: The Wrath of Rath'mael needs Rear Guard Patrol, The New Plague needs A Recipe For Death, and Unending Torment is one chain of five
+  - City of Dalaran: An Alarming Request (Alliance) and Blood in the Streets (Horde) come first
+  - Excavation Site: Wetlands: Open the Maw needs Dragonmaw Rumors, Horrors in the Highland needs Rethiel the Greenwarden's chain, Highland Hides needs Young Crocolisk Skins, and three quests have their follow-up linked
+
 ## 0.2.1
 
 - Fixed: closing the map during a fight could give an "action blocked" error (`SetPassThroughButtons`) after the dungeon map had moved the world map. The addon now lets the game switch the map itself, and doesn't move it during combat.
