@@ -549,7 +549,10 @@ function ns:OpenDungeonMap(key, floor)
     local onZone = info and info.mapType >= Enum.UIMapType.Zone
     if not (onZone and ns:MapShowsDungeon(mapID, key)) then
         local zone = ns:EntranceMapFor(key)
-        if zone and zone ~= mapID then
+        -- Changing the map from addon code in combat makes the game's own quest pins call a
+        -- function that's locked in combat (ADDON_ACTION_BLOCKED). In combat the dungeon map
+        -- opens over whatever map is showing; the top bar catches up after the fight.
+        if zone and zone ~= mapID and not InCombatLockdown() then
             opening = true
             WorldMapFrame:SetMapID(zone)
             opening = false

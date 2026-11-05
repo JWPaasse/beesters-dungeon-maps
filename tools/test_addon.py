@@ -105,6 +105,7 @@ C_Map = {
     GetMapArtLayers = function(id) if id == 279 then return { {} } end return nil end,
 }
 function IsInInstance() return false, "none" end
+function InCombatLockdown() return inCombat == true end
 function GetInstanceInfo() return "Wailing Caverns", "party", 1, "Normal", 5, 0, false, 43 end
 C_Texture = { GetAtlasInfo = function(atlas) return nil end }
 C_AddOns = { GetAddOnMetadata = function() return "0.1.0-test" end }
@@ -315,6 +316,16 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local rfcPins = 0
         for _, b in ipairs(view.BossButtons) do if b:IsShown() then rfcPins = rfcPins + 1 end end
         check("Ragefire Chasm shows all 4 classic bosses (placed in game)", rfcPins == 4)
+        ns:OpenDungeonMap("wc")
+
+        -- In combat the addon must not change the map itself (ADDON_ACTION_BLOCKED).
+        ns:CloseDungeonMap(true)
+        WorldMapFrame.mapID = 1414
+        inCombat = true
+        ns:OpenDungeonMap("wc")
+        check("in combat, opening a dungeon map leaves the map where it is", WorldMapFrame:GetMapID() == 1414 and ns:IsDungeonMapOpen())
+        ns:CloseDungeonMap(true)
+        inCombat = false
         ns:OpenDungeonMap("wc")
 
         WorldMapFrame:SetMapID(1415)

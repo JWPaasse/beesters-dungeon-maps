@@ -211,7 +211,23 @@ function MarkerMixin:OnMouseLeave()
     GameTooltip:Hide()
 end
 
+local markerAfterCombat
+local combatWatcher = CreateFrame("Frame")
+combatWatcher:SetScript("OnEvent", function(self)
+    self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+    local m = markerAfterCombat
+    markerAfterCombat = nil
+    if m and WorldMapFrame:IsShown() then ns:ShowQuestMarker(m.mapID, m.x, m.y, m.title, m.who) end
+end)
+
 function ns:ShowQuestMarker(mapID, x, y, title, who)
+    -- No map changes from addon code in combat (see OpenDungeonMap); show it when the fight ends.
+    if InCombatLockdown() and WorldMapFrame:GetMapID() ~= mapID then
+        markerAfterCombat = { mapID = mapID, x = x, y = y, title = title, who = who }
+        combatWatcher:RegisterEvent("PLAYER_REGEN_ENABLED")
+        ns:Print("In combat: the map will move there as soon as the fight is over.")
+        return
+    end
     ns.questMarker = { mapID = mapID, x = x, y = y, title = title, who = who }
     ns.keepQuestPanel = true -- the dungeon's quest list stays open next to the zone map
     if WorldMapFrame:GetMapID() == mapID then
