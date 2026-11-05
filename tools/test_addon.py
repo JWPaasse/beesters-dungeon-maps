@@ -301,6 +301,9 @@ def main():
         end
         check("clicking a boss opens its loot", panel:IsShown() and rows > 0)
         check("loot shows only Uncommon or better", not lowQuality)
+        local function contains(list, x) for _, v in ipairs(list or {}) do if v == x then return true end end end
+        check("Charlga Razorflank's loot has the Pronged Reaver", contains(ns.BossLoot[4421], 6692))
+        check("a rare's shared drop counts as boss loot (Haunting Blade, Lordaeron Captain)", contains(ns.BossLoot[255699], 6641))
         -- Hovering a boss shows its portrait in the tooltip.
         local inserted, portraitID = nil, nil
         GameTooltip_InsertFrame = function(tooltip, frame) inserted = frame end
@@ -312,8 +315,8 @@ def main():
         panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
         local order = {}
         for _, e in ipairs(panel.shown) do table.insert(order, e[1] .. ":" .. e[2]) end
-        check("loot (Bind on Pickup only) grouped: weapons, armour, trinkets, then recipes by profession, then other",
-            table.concat(order, " ") == "gear:30 gear:43 gear:22 gear:42 recipe:38 recipe:34 other:15 other:27")
+        check("loot (Bind on Equip too) grouped: weapons, armour, trinkets, then recipes by profession, then other",
+            table.concat(order, " ") == "gear:150 gear:30 gear:43 gear:22 gear:42 recipe:38 recipe:34 other:15 other:27")
 
         -- Placing a boss yourself: shift-drag a listed boss onto the map.
         ns:OpenDungeonMap("scholo")
