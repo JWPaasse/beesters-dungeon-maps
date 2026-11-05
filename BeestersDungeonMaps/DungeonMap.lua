@@ -13,7 +13,7 @@ local _, ns = ...
 
 local view            -- the frame that covers the map picture
 local current = {}    -- key, floor, zoneMapID
-local opening = false -- true while we change the map ourselves
+local pendingMap      -- { mapID, after, keepQuests } while we wait for the map to switch
 
 local MAP_W, MAP_H = 1002, 668 -- classic map tiles: 4 x 3 tiles of 256, this much is shown
 local SKULL_ATLAS = "DungeonSkull"
@@ -532,45 +532,85 @@ local function SetCanvasShown(shown)
     if child then child:SetShown(shown) end
 end
 
+-- Change the world map the way the game itself does. Calling WorldMapFrame:SetMapID (or
+-- ShowUIPanel) from an addon taints the map: later, in combat, the game's own quest pins then
+-- trip over a locked function (ADDON_ACTION_BLOCKED ... SetPassThroughButtons), even when you
+-- just close the map. C_Map.OpenWorldMap asks the game to do it (WORLD_MAP_OPEN): the map's
+-- own code opens and switches it, so nothing of ours sticks to the map. That function is
+-- restricted, so in combat we don't move the map at all and use the map that's showing.
+-- after() runs once the map is there.
+local function FinishPending(p)
+    if pendingMap ~= p then return end
+    pendingMap = nil
+    if p.keepQuests then ns.keepQuestPanel = true end
+    ns:CloseDungeonMap(false)
+    ns.keepQuestPanel = false
+    if p.after then p.after() end
+end
+
+local function OnTarget(mapID)
+    return WorldMapFrame:IsShown() and (not mapID or WorldMapFrame:GetMapID() == mapID)
+end
+
+function ns:GoToMap(mapID, after, keepQuests)
+    if OnTarget(mapID) or (InCombatLockdown() and WorldMapFrame:IsShown()) then
+        if after then after() end
+        return
+    end
+    if InCombatLockdown() then return end -- map closed and in combat: nothing we can safely do
+    local p = { mapID = mapID, after = after, keepQuests = keepQuests }
+    pendingMap = p
+    if C_Map.OpenWorldMap then
+        C_Map.OpenWorldMap(mapID)
+    else
+        p.direct = true
+    end
+    -- The switch may happen right away, a frame later, or not at all (already on that map,
+    -- or the game didn't let it through). Then fall back to switching the map ourselves.
+    C_Timer.After(0, function()
+        if pendingMap ~= p then return end
+        if not OnTarget(mapID) and not InCombatLockdown() then
+            if not WorldMapFrame:IsShown() then ShowUIPanel(WorldMapFrame) end
+            if mapID and WorldMapFrame:GetMapID() ~= mapID then WorldMapFrame:SetMapID(mapID) end
+        end
+        if pendingMap == p and OnTarget(mapID) then FinishPending(p) end
+        pendingMap = nil
+    end)
+end
+
 function ns:OpenDungeonMap(key, floor)
     if not (ns.DungeonMaps and ns.DungeonMaps[key]) then
         ns:Print(("No map for %s yet."):format(ns.Instances[key] and ns.Instances[key].name or key))
         return
     end
-    if not WorldMapFrame:IsShown() then
-        ShowUIPanel(WorldMapFrame)
-    end
     if not view then CreateView() end
 
     -- Stay on the current map when it shows this dungeon's entrance; otherwise go to the
     -- entrance's zone, so the top bar reads World > Kalimdor > Durotar > Ragefire Chasm.
-    local mapID = WorldMapFrame:GetMapID()
+    local target
+    local mapID = WorldMapFrame:IsShown() and WorldMapFrame:GetMapID()
     local info = mapID and C_Map.GetMapInfo(mapID)
     local onZone = info and info.mapType >= Enum.UIMapType.Zone
-    if not (onZone and ns:MapShowsDungeon(mapID, key)) then
-        local zone = ns:EntranceMapFor(key)
-        -- Changing the map from addon code in combat makes the game's own quest pins call a
-        -- function that's locked in combat (ADDON_ACTION_BLOCKED). In combat the dungeon map
-        -- opens over whatever map is showing; the top bar catches up after the fight.
-        if zone and zone ~= mapID and not InCombatLockdown() then
-            opening = true
-            WorldMapFrame:SetMapID(zone)
-            opening = false
-        end
+    if onZone and ns:MapShowsDungeon(mapID, key) then
+        target = mapID
+    else
+        target = ns:EntranceMapFor(key) or mapID or nil
     end
 
-    if key == "dme" or key == "dmn" or key == "dmw" then
-        ns.db.lastDireMaulWing = key
-    end
-    current.key = key
-    current.zoneMapID = WorldMapFrame:GetMapID()
-    SetCanvasShown(false)
-    view:Show()
-    ShowFloor(floor or 1)
-    if WorldMapFrame.NavBar and WorldMapFrame.NavBar.Refresh then
-        WorldMapFrame.NavBar:Refresh()
-    end
-    if ns.ShowDungeonQuests then ns:ShowDungeonQuests(key) end
+    ns:GoToMap(target, function()
+        if key == "dme" or key == "dmn" or key == "dmw" then
+            ns.db.lastDireMaulWing = key
+        end
+        current.key = key
+        current.zoneMapID = WorldMapFrame:GetMapID()
+        SetCanvasShown(false)
+        view:Show()
+        ShowFloor(floor or 1)
+        if WorldMapFrame.NavBar and WorldMapFrame.NavBar.Refresh then
+            WorldMapFrame.NavBar:Refresh()
+        end
+        if ns.ShowDungeonQuests then ns:ShowDungeonQuests(key) end
+    end)
 end
 
 function ns:CloseDungeonMap(refreshNavBar)
@@ -652,7 +692,12 @@ function ns:InitDungeonMap()
 
     -- Any map change we didn't make ourselves closes the dungeon map.
     hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
-        if not opening then ns:CloseDungeonMap(false) end
+        local p = pendingMap
+        if p and p.mapID and WorldMapFrame:GetMapID() == p.mapID then
+            FinishPending(p)
+        elseif not p then
+            ns:CloseDungeonMap(false)
+        end
     end)
     local navBar = WorldMapFrame.NavBar
     if navBar then
@@ -669,7 +714,7 @@ function ns:InitDungeonMap()
         local key = CurrentInstanceKey()
         if key and ns.DungeonMaps[key] then
             C_Timer.After(0, function()
-                if WorldMapFrame:IsShown() and not ns:IsDungeonMapOpen() then
+                if WorldMapFrame:IsShown() and not ns:IsDungeonMapOpen() and not pendingMap then
                     ns:OpenDungeonMap(key)
                 end
             end)

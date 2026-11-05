@@ -221,7 +221,7 @@ combatWatcher:SetScript("OnEvent", function(self)
 end)
 
 function ns:ShowQuestMarker(mapID, x, y, title, who)
-    -- No map changes from addon code in combat (see OpenDungeonMap); show it when the fight ends.
+    -- The map isn't moved in combat (see ns:GoToMap); it moves when the fight ends.
     if InCombatLockdown() and WorldMapFrame:GetMapID() ~= mapID then
         markerAfterCombat = { mapID = mapID, x = x, y = y, title = title, who = who }
         combatWatcher:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -229,14 +229,14 @@ function ns:ShowQuestMarker(mapID, x, y, title, who)
         return
     end
     ns.questMarker = { mapID = mapID, x = x, y = y, title = title, who = who }
-    ns.keepQuestPanel = true -- the dungeon's quest list stays open next to the zone map
     if WorldMapFrame:GetMapID() == mapID then
+        ns.keepQuestPanel = true -- the dungeon's quest list stays open next to the zone map
         ns:CloseDungeonMap(true)
+        ns.keepQuestPanel = false
         ns:RefreshMapPins()
     else
-        WorldMapFrame:SetMapID(mapID) -- closes the dungeon map and redraws the pins
+        ns:GoToMap(mapID, function() ns:RefreshMapPins() end, true)
     end
-    ns.keepQuestPanel = false
 end
 
 function ns:ClearQuestMarker()

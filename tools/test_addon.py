@@ -142,8 +142,19 @@ WorldMapFrame.NavBar = {
     GoToMap = function(self, mapID) WorldMapFrame:SetMapID(mapID) end,
 }
 WorldMapFrame.OnMapChanged = function(self) self.NavBar:Refresh() end
+-- The game's own map switch (C_Map.OpenWorldMap fires WORLD_MAP_OPEN, the map's code does
+-- ShowUIPanel + SetMapID). Any SetMapID outside it comes from addon code and taints the map.
+local gameSwitching = false
+addonSetMapID = 0
 WorldMapFrame.SetMapID = function(self, mapID)
+    if not gameSwitching then addonSetMapID = addonSetMapID + 1 end
     if mapID ~= self.mapID then self.mapID = mapID; self:OnMapChanged() end
+end
+C_Map.OpenWorldMap = function(mapID)
+    gameSwitching = true
+    WorldMapFrame:Show()
+    if mapID then WorldMapFrame:SetMapID(mapID) end
+    gameSwitching = false
 end
 -- Quest log: Ragefire Chasm's quests for a Horde character (5722 handed in, 5723 in the log).
 QuestScrollFrame = CreateFrame("ScrollFrame")
@@ -318,7 +329,8 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("Ragefire Chasm shows all 4 classic bosses (placed in game)", rfcPins == 4)
         ns:OpenDungeonMap("wc")
 
-        -- In combat the addon must not change the map itself (ADDON_ACTION_BLOCKED).
+        -- The addon never switches the map itself (that taints it: ADDON_ACTION_BLOCKED in combat).
+        check("the addon only changes the map through the game's own map switch", addonSetMapID == 0)
         ns:CloseDungeonMap(true)
         WorldMapFrame.mapID = 1414
         inCombat = true
@@ -399,7 +411,9 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("detail page opens for a chain step" .. (ok and "" or (": " .. tostring(err))), ok)
         check("detail page has quest text for Ragefire Chasm quests", ns.QuestText and ns.QuestText[5725] ~= nil)
         -- Show on map keeps the dungeon's quests open; the dungeon tab brings the map back.
+        local before = addonSetMapID
         ns:ShowQuestMarker(1454, 0.5, 0.5, "Hidden Enemies", "Pick up: Thrall")
+        check("Show on map moves the map through the game's own map switch", addonSetMapID == before and WorldMapFrame:GetMapID() == 1454)
         check("Show on map keeps the dungeon quest tab open", qp:IsShown() and BeestersDungeonMapsQuestTabs:IsShown()
             and not ns:IsDungeonMapOpen())
         BeestersDungeonMapsQuestTabs.Dungeon.scripts.OnClick()
