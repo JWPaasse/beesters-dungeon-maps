@@ -218,7 +218,7 @@ def main():
         WorldMapFrame.mapID = 1414 -- Kalimdor
         ns:OpenDungeonMap("wc")
         check("entrance pin opens Wailing Caverns", ns:IsDungeonMapOpen() and ns:CurrentDungeonKey() == "wc")
-        check("map moved to The Barrens for the top bar", WorldMapFrame:GetMapID() == 1414 or WorldMapFrame:GetMapID() == 1413)
+        check("opened from Kalimdor, the top bar goes through The Barrens", WorldMapFrame:GetMapID() == 1413)
         check("game's map picture hidden under the dungeon map", WorldMapFrame.ScrollContainer.Child:IsShown() == false)
         local view = BeestersDungeonMapsView
         local pins = 0

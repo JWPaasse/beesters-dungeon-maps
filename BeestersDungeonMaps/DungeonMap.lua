@@ -391,7 +391,9 @@ function ns:OpenDungeonMap(key, floor)
     -- Stay on the current map when it shows this dungeon's entrance; otherwise go to the
     -- entrance's zone, so the top bar reads World > Kalimdor > Durotar > Ragefire Chasm.
     local mapID = WorldMapFrame:GetMapID()
-    if not ns:MapShowsDungeon(mapID, key) then
+    local info = mapID and C_Map.GetMapInfo(mapID)
+    local onZone = info and info.mapType >= Enum.UIMapType.Zone
+    if not (onZone and ns:MapShowsDungeon(mapID, key)) then
         local zone = ns:EntranceMapFor(key)
         if zone and zone ~= mapID then
             opening = true
