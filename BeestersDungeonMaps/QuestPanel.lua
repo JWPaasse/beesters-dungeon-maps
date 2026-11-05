@@ -727,7 +727,7 @@ end
 ----------------------------------------------------------------------
 
 local INK = { 0.18, 0.12, 0.06 }
-local FADED_INK = { 0.45, 0.33, 0.20 } -- secondary lines (level, where): lighter brown, still readable
+local FADED_INK = { 0.36, 0.26, 0.15 } -- secondary lines (level, where): lighter brown, still readable
 
 -- Quest text placeholders: $N name, $C class, $R race, $B new line, $Gmale:female;
 local function FillText(text)
