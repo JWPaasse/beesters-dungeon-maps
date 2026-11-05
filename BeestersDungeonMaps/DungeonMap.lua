@@ -417,6 +417,7 @@ function ns:CloseDungeonMap(refreshNavBar)
     if not ns:IsDungeonMapOpen() then return end
     view:Hide()
     current.key = nil
+    current.zoneMapID = nil
     SetCanvasShown(true)
     if refreshNavBar and WorldMapFrame.NavBar and WorldMapFrame.NavBar.Refresh then
         WorldMapFrame.NavBar:Refresh()
@@ -456,8 +457,8 @@ end
 
 local function DecorateNavBar(navBar)
     if not ns.db or not ns.db.dungeonsInTopBar or not NavBar_AddButton then return end
-    local mapID = WorldMapFrame:GetMapID()
-    local listFunc = function() return DungeonMenuList(current.zoneMapID or mapID) end
+    -- Read the map when the list opens, not when the bar was built.
+    local listFunc = function() return DungeonMenuList(WorldMapFrame:GetMapID()) end
 
     if ns:IsDungeonMapOpen() then
         NavBar_AddButton(navBar, {
@@ -466,7 +467,7 @@ local function DecorateNavBar(navBar)
             OnClick = function() end,
             listFunc = function() return DungeonMenuList(current.zoneMapID) end,
         })
-    elseif #DungeonMenuList(mapID) > 0 then
+    elseif #DungeonMenuList(WorldMapFrame:GetMapID()) > 0 then
         NavBar_AddButton(navBar, {
             name = DUNGEONS or "Dungeons",
             OnClick = function(button)

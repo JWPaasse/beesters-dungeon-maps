@@ -231,9 +231,17 @@ def main():
         WorldMapFrame:SetMapID(1415)
         check("changing the map closes the dungeon map", not ns:IsDungeonMapOpen() and WorldMapFrame.ScrollContainer.Child:IsShown())
 
+        -- Open a dungeon somewhere else first: the Dungeons list must follow the map you're on.
+        ns:OpenDungeonMap("stocks")
+        ns:CloseDungeonMap(true)
         WorldMapFrame.mapID = 1413
         WorldMapFrame.NavBar:Refresh()
         check("top bar on The Barrens offers a Dungeons button", navButtons[#navButtons] and navButtons[#navButtons].name == "Dungeons")
+        local barrensList = navButtons[#navButtons].listFunc()
+        local names = {}
+        for _, e in ipairs(barrensList) do names[e.id] = true end
+        check("Dungeons on The Barrens lists the Barrens dungeons, not the last one opened",
+            names.wc and names.rfk and names.rfd and not names.stocks)
 
         ns:OpenDungeonMap("dal")
         check("Dalaran opens (Santiago's map, two floors)", ns:IsDungeonMapOpen() and #ns.DungeonMaps.dal.floors == 2)
