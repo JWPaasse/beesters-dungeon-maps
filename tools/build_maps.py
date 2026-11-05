@@ -11,7 +11,8 @@
   (tools/journal_positions.json), plus Cataclysm Classic's journal for the original bosses of
   dungeons that were rebuilt later (tools/journal_positions_cata.json, made by
   tools/fetch_cata_positions.py), plus Wowhead's map coordinates for a few more
-  (tools/wowhead_positions.json). Matched to the game's own boss list in the addon.
+  (tools/wowhead_positions.json), and positions players placed in game
+  (tools/placed_positions.json). Matched to the game's own boss list in the addon.
 
 Writes BeestersDungeonMaps/Data/Maps.lua.
 """
@@ -68,7 +69,7 @@ def main():
     def norm(name):
         return "".join(ch for ch in name.lower() if ch.isalpha())
 
-    for extra in ("journal_positions_cata.json", "wowhead_positions.json"):
+    for extra in ("journal_positions_cata.json", "wowhead_positions.json", "placed_positions.json"):
         extra_file = ROOT / "tools" / extra
         if not extra_file.exists():
             continue

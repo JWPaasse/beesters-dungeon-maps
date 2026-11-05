@@ -1,0 +1,33 @@
+{
+ "_source": "Boss positions placed in game by players (shift-drag on the dungeon map), read from their SavedVariables. Used for bosses no other source has.",
+ "bosses": [
+  [
+   "rfc|1",
+   2732,
+   "Oggleflint",
+   0.562,
+   0.377
+  ],
+  [
+   "rfc|1",
+   2733,
+   "Taragaman the Hungerer",
+   0.408,
+   0.576
+  ],
+  [
+   "rfc|1",
+   2734,
+   "Jergosh the Invoker",
+   0.342,
+   0.816
+  ],
+  [
+   "rfc|1",
+   2735,
+   "Bazzalan",
+   0.415,
+   0.868
+  ]
+ ]
+}

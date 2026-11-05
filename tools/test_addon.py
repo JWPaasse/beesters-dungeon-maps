@@ -272,8 +272,9 @@ def main():
         check("loot shows only Uncommon or better", not lowQuality)
 
         -- Placing a boss yourself: shift-drag a listed boss onto the map.
-        ns:OpenDungeonMap("rfc")
+        ns:OpenDungeonMap("stocks")
         local row = view.ListRows[1]
+        local placedName = row.boss.name
         view.Art.GetRect = function() return 100, 100, 600, 400 end
         view.Art.GetEffectiveScale = function() return 1 end
         shiftDown = true
@@ -296,12 +297,16 @@ function UnitFactionGroup() return "Horde" end
 function UnitClass() return "Warrior", "WARRIOR", 1 end
 function UnitLevel() return 14 end
 function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
-        local placed = ns.db.bossPositions and ns.db.bossPositions.rfc and ns.db.bossPositions.rfc.Oggleflint
+        local placed = ns.db.bossPositions and ns.db.bossPositions.stocks and ns.db.bossPositions.stocks[placedName]
         check("shift-dragging a listed boss onto the map places it", placed and placed[1] == 1
             and math.abs(placed[2] - 0.583) < 0.01 and math.abs(placed[3] - 0.625) < 0.01)
         local shownPins = 0
         for _, b in ipairs(view.BossButtons) do if b:IsShown() then shownPins = shownPins + 1 end end
         check("the placed boss now shows as a pin", shownPins == 1)
+        ns:OpenDungeonMap("rfc")
+        local rfcPins = 0
+        for _, b in ipairs(view.BossButtons) do if b:IsShown() then rfcPins = rfcPins + 1 end end
+        check("Ragefire Chasm shows all 4 classic bosses (placed in game)", rfcPins == 4)
         ns:OpenDungeonMap("wc")
 
         WorldMapFrame:SetMapID(1415)
