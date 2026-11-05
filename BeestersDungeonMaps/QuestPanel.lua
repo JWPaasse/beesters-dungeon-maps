@@ -131,6 +131,45 @@ local function StartInfo(q)
     end
 end
 
+-- Where a quest is handed in: name, uiMapID, x, y.
+local function TurnInInfo(q)
+    for _, id in ipairs(q[F.END_NPC] or {}) do
+        local npc = ns.NPCs and ns.NPCs[id]
+        if npc then
+            local where = npc[6]
+            return npc[1], where and where[1], where and where[2], where and where[3]
+        end
+    end
+    for _, id in ipairs(q[F.END_OBJ] or {}) do
+        local obj = ns.Objects and ns.Objects[id]
+        if obj then
+            local where = obj[2]
+            return obj[1], where and where[1], where and where[2], where and where[3]
+        end
+    end
+end
+
+-- Show a quest step on its zone map: where to hand it in when it's in your log,
+-- otherwise where to pick it up.
+local function ShowStepOnMap(stepID)
+    local q = Q(stepID)
+    if not q then return end
+    local who, mapID, x, y
+    local verb
+    if InLog(stepID) then
+        who, mapID, x, y = TurnInInfo(q)
+        verb = "Hand in"
+    else
+        who, mapID, x, y = StartInfo(q)
+        verb = "Pick up"
+    end
+    if mapID then
+        ns:ShowQuestMarker(mapID, x, y, q[F.NAME], ("%s: %s"):format(verb, who or "?"))
+    else
+        ns:Print(("%s: %s – no map spot known (it may be inside a dungeon)."):format(q[F.NAME], who or "?"))
+    end
+end
+
 ----------------------------------------------------------------------
 -- Building the list
 ----------------------------------------------------------------------
@@ -476,7 +515,7 @@ local function SetStepIcon(st, state)
     end
 end
 
-local function AddStepLine(y, indent, text, state, r, g, b, onClick, last)
+local function AddStepLine(y, indent, text, state, r, g, b, onClick, last, hint)
     local st = Acquire("step")
     st:ClearAllPoints()
     st:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", indent, -y)
@@ -487,6 +526,13 @@ local function AddStepLine(y, indent, text, state, r, g, b, onClick, last)
     SetStepIcon(st, state)
     st.Line:SetShown(not last and state ~= "open" and state ~= "closed")
     st:SetScript("OnClick", onClick)
+    st.hint = hint
+    st:SetScript("OnEnter", hint and function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(self.hint, GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
+        GameTooltip:Show()
+    end or nil)
+    st:SetScript("OnLeave", hint and function() GameTooltip:Hide() end or nil)
     local height = math.max(st.Label:GetStringHeight() or 12, 12) + 4
     st:SetHeight(height)
     return y + height
@@ -509,8 +555,9 @@ local function AddChain(y, entry)
         if sq then
             local last = i == #steps
             local name = ("%d. %s"):format(i, sq[F.NAME])
+            local showMap = function() ShowStepOnMap(stepID) end
             if i < (entry.step or 1) then
-                y = AddStepLine(y, 40, name, "done", 0.55, 0.55, 0.55, nil, last)
+                y = AddStepLine(y, 40, name, "done", 0.55, 0.55, 0.55, showMap, last, "<Click to show where it was picked up>")
             elseif i == (entry.step or 1) then
                 local where
                 if InLog(stepID) then
@@ -520,9 +567,8 @@ local function AddChain(y, entry)
                     local zone = mapID and C_Map.GetMapInfo(mapID)
                     if who then where = (" – %s%s"):format(who, zone and (", " .. zone.name) or "") end
                 end
-                y = AddStepLine(y, 40, name .. (where or ""), "current", 1, 1, 1, function()
-                    ShowDetail(entry.id, entry)
-                end, last)
+                y = AddStepLine(y, 40, name .. (where or ""), "current", 1, 1, 1, showMap, last,
+                    InLog(stepID) and "<Click to show where to hand it in>" or "<Click to show where to pick it up>")
                 -- The step's progress, right under it.
                 if InLog(stepID) and C_QuestLog.GetQuestObjectives then
                     for _, obj in ipairs(C_QuestLog.GetQuestObjectives(stepID) or {}) do
@@ -543,7 +589,7 @@ local function AddChain(y, entry)
                     end
                 end
             else
-                y = AddStepLine(y, 40, name, "todo", 0.6, 0.6, 0.6, nil, last)
+                y = AddStepLine(y, 40, name, "todo", 0.6, 0.6, 0.6, showMap, last, "<Click to show where to pick it up>")
             end
         end
     end
@@ -772,9 +818,19 @@ local function RewardButton(d, itemID, count, x, y)
         end)
         d.buttons[d.buttonCount] = b
     end
-    b.itemID = itemID
+    b.itemID, b.count = itemID, count
+    d.FillReward(b)
+    b:ClearAllPoints()
+    b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", x, -y)
+    b:Show()
+end
+
+-- Name, colour and border of a reward; called again when the item's data arrives.
+local function FillReward(b)
+    local itemID = b.itemID
     local name, _, quality, _, _, _, _, _, _, icon = (C_Item and C_Item.GetItemInfo or GetItemInfo)(itemID)
     if not name and C_Item and C_Item.RequestLoadItemDataByID then C_Item.RequestLoadItemDataByID(itemID) end
+    b.waiting = not name
     if type(b.Icon) == "table" then b.Icon:SetTexture(icon or (C_Item and C_Item.GetItemIconByID and C_Item.GetItemIconByID(itemID)) or 134400) end
     if type(b.Name) == "table" then
         b.Name:SetText(name or (SEARCH_LOADING_TEXT or "Loading..."))
@@ -782,24 +838,29 @@ local function RewardButton(d, itemID, count, x, y)
         if color then b.Name:SetTextColor(color.r, color.g, color.b) else b.Name:SetTextColor(1, 1, 1) end
     end
     if type(b.Count) == "table" then
-        b.Count:SetText(count and count > 1 and count or "")
-        b.Count:SetShown(count and count > 1)
+        b.Count:SetText(b.count and b.count > 1 and b.count or "")
+        b.Count:SetShown(b.count and b.count > 1)
     end
-    if type(b.IconBorder) == "table" and SetItemButtonQuality then pcall(SetItemButtonQuality, b, quality, itemID) end
-    b:ClearAllPoints()
-    b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", x, -y)
-    b:Show()
+    if quality and type(b.IconBorder) == "table" and SetItemButtonQuality then pcall(SetItemButtonQuality, b, quality, itemID) end
 end
 
+-- Rewards two per row, like the quest details; the buttons are scaled to fit.
+local REWARD_W, REWARD_H = 147, 41
 local function RewardGrid(d, items, y)
-    local width = d.Page:GetWidth()
-    local columns = width >= 320 and 2 or 1
+    local width = d.Page:GetWidth() - 20
+    local scale = math.min(1, (width / 2 - 4) / REWARD_W)
+    local cellW, cellH = REWARD_W * scale + 4, REWARD_H * scale + 4
     for i, pair in ipairs(items) do
-        local col = (i - 1) % columns
-        local row = math.floor((i - 1) / columns)
-        RewardButton(d, pair[1], pair[2], 10 + col * 152, y + row * 44)
+        local col = (i - 1) % 2
+        local row = math.floor((i - 1) / 2)
+        RewardButton(d, pair[1], pair[2], 0, 0)
+        local b = d.buttons[d.buttonCount]
+        b:SetScale(scale)
+        b:ClearAllPoints()
+        -- Offsets are in the button's own (scaled) units.
+        b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", (10 + col * cellW) / scale, -(y + row * cellH) / scale)
     end
-    return y + math.ceil(#items / columns) * 44 + 6
+    return y + math.ceil(#items / 2) * cellH + 6
 end
 
 function ShowDetail(id, entry)
@@ -878,6 +939,7 @@ local function CreateDetail(parent)
     d:Hide()
     d:EnableMouse(true)
     d.texts, d.buttons, d.textCount, d.buttonCount = {}, {}, 0, 0
+    d.FillReward = FillReward
     -- The parchment of the game's own quest details.
     local bg = d:CreateTexture(nil, "BACKGROUND")
     bg:SetAllPoints()
@@ -885,6 +947,14 @@ local function CreateDetail(parent)
         bg:SetAtlas("QuestDetailsBackgrounds")
     else
         bg:SetTexture("Interface\\QuestFrame\\QuestBG")
+    end
+
+    -- The same border the game puts around its quest details.
+    local okBorder, border = pcall(CreateFrame, "Frame", nil, d, "QuestLogBorderFrameTemplate")
+    if okBorder and border then
+        border:SetPoint("TOPLEFT", -3, 4)
+        border:SetPoint("BOTTOMRIGHT", 3, -3)
+        d.Border = border
     end
 
     local ok, scroll = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", d, "UIPanelScrollFrameTemplate")
@@ -898,12 +968,13 @@ local function CreateDetail(parent)
 
     d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
     d.Close:SetPoint("TOPRIGHT", 0, 0)
-    d.Close:SetFrameLevel(scroll:GetFrameLevel() + 5)
+    d.Close:SetFrameLevel(scroll:GetFrameLevel() + 10)
     d.Close:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
 
     d.MapButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     d.MapButton:SetSize(110, 22)
     d.MapButton:SetPoint("BOTTOMRIGHT", -6, 5)
+    d.MapButton:SetFrameLevel(scroll:GetFrameLevel() + 10)
     d.MapButton:SetText("Show on map")
     d.MapButton:SetScript("OnClick", function(self)
         local t = self.target
@@ -1028,11 +1099,22 @@ function ns:InitQuestPanel()
     if not ns.Quests then return end
     local events = CreateFrame("Frame")
     for _, event in ipairs({ "QUEST_LOG_UPDATE", "QUEST_ACCEPTED", "QUEST_TURNED_IN", "QUEST_REMOVED",
-        "PLAYER_LEVEL_UP", "QUEST_WATCH_LIST_CHANGED" }) do
+        "PLAYER_LEVEL_UP", "QUEST_WATCH_LIST_CHANGED", "GET_ITEM_INFO_RECEIVED" }) do
         pcall(events.RegisterEvent, events, event)
     end
     local pending = false
-    events:SetScript("OnEvent", function()
+    events:SetScript("OnEvent", function(_, event)
+        if event == "GET_ITEM_INFO_RECEIVED" then
+            -- Reward names arrive a moment after the page opens; fill them in.
+            local d = panel and panel.Detail
+            if d and d:IsShown() then
+                for i = 1, d.buttonCount do
+                    local b = d.buttons[i]
+                    if b and b.waiting then FillReward(b) end
+                end
+            end
+            return
+        end
         if pending or not (panel and panel:IsShown()) then return end
         pending = true
         C_Timer.After(0.2, function() pending = false; Refresh() end)
