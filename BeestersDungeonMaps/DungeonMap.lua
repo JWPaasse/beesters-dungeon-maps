@@ -122,6 +122,7 @@ end
 -- missing a few seconds later is asked for again the next time its list is drawn.
 local requested = {}
 local retryScheduled = false
+local ShowItemTooltip -- below, with the loot rows
 local attempts = {}
 local function GaveUp(itemID) return (attempts[itemID] or 0) >= 3 end
 local function RequestItem(itemID)
@@ -299,6 +300,41 @@ local function ShowBossTooltip(owner, boss, total)
     GameTooltip:Show()
 end
 
+-- The game's item tooltip needs the server's data. While that hasn't come (or for items the
+-- server never sends) it would say "Retrieving item information" for good, so show what the
+-- addon knows instead: name, binding, slot and type. The real tooltip replaces it as soon as
+-- the data arrives.
+ShowItemTooltip = function(owner, itemID)
+    owner.waitingTooltip = nil
+    GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
+    local getInfo = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    local known = ns.LootItems and ns.LootItems[itemID]
+    if (getInfo and getInfo(itemID)) or not known then
+        GameTooltip:SetItemByID(itemID)
+        GameTooltip:Show()
+        return
+    end
+    RequestItem(itemID)
+    local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[known[2]]
+    GameTooltip:SetText(known[1], color and color.r or 1, color and color.g or 1, color and color.b or 1)
+    if known[3] == 1 then
+        GameTooltip:AddLine(ITEM_BIND_ON_PICKUP or "Binds when picked up", 1, 1, 1)
+    elseif known[3] == 2 then
+        GameTooltip:AddLine(ITEM_BIND_ON_EQUIP or "Binds when equipped", 1, 1, 1)
+    end
+    local getInstant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
+    if getInstant then
+        local _, _, subType, equipLoc = getInstant(itemID)
+        local slot = equipLoc and equipLoc ~= "" and _G[equipLoc]
+        if slot or subType then
+            GameTooltip:AddDoubleLine(slot or "", subType or "", 1, 1, 1, 1, 1, 1)
+        end
+    end
+    GameTooltip:AddLine("The game hasn't sent this item's details yet.", 0.6, 0.6, 0.6, true)
+    GameTooltip:Show()
+    owner.waitingTooltip = itemID
+end
+
 local function AcquireRow(panel, index)
     local row = panel.Rows[index]
     if row then return row end
@@ -312,11 +348,7 @@ local function AcquireRow(panel, index)
     row.Name:SetPoint("RIGHT")
     row.Name:SetJustifyH("LEFT")
     row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
-    row:SetScript("OnEnter", function(self)
-        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetItemByID(self.itemID)
-        GameTooltip:Show()
-    end)
+    row:SetScript("OnEnter", function(self) ShowItemTooltip(self, self.itemID) end)
     row:SetScript("OnLeave", function() GameTooltip:Hide() end)
     row:SetScript("OnClick", function(self)
         if HandleModifiedItemClick then HandleModifiedItemClick(self.link) end
@@ -428,8 +460,13 @@ local function RefreshOpenLoot()
         itemListener.pending = false
         RefreshLootPanel()
         local t = tooltipBoss
-        if t and GameTooltip:IsShown() and GameTooltip:GetOwner() == t.owner then
+        local owner = GameTooltip:IsShown() and GameTooltip:GetOwner()
+        if t and owner == t.owner then
             ShowBossTooltip(t.owner, t.boss, t.total)
+        elseif owner and type(owner.waitingTooltip) == "number" then
+            local id = owner.waitingTooltip
+            owner.waitingTooltip = nil
+            ShowItemTooltip(owner, id)
         end
     end)
 end

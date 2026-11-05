@@ -310,6 +310,12 @@ def main():
         panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
         check("an item the game hasn't loaded yet shows from the addon's own data",
             panel.shown[1] and panel.shown[1][2] == 6692 and ns.LootItems[6692][1] == "Pronged Reaver")
+        local tipText
+        local realSetText = GameTooltip.SetText
+        GameTooltip.SetText = function(_, text) tipText = text end
+        panel.Rows[1].scripts.OnEnter(panel.Rows[1])
+        GameTooltip.SetText = realSetText
+        check("hovering an item the game hasn't loaded shows the addon's own tooltip", tipText == "Pronged Reaver")
         C_Item.GetItemInfo = realInfo
         check("a rare's shared drop counts as boss loot (Haunting Blade, Lordaeron Captain)", contains(ns.BossLoot[255699], 6641))
         -- Hovering a boss shows its portrait in the tooltip.
