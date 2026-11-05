@@ -150,6 +150,7 @@ WorldMapFrame.ScrollContainer = CreateFrame("Frame")
 WorldMapFrame.ScrollContainer.Child = CreateFrame("Frame")
 WorldMapFrame.NavBar = {
     Refresh = function(self) navButtons = {} end,
+    navList = { CreateFrame("Button") }, -- the game's own crumbs (World ... zone)
     GoToMap = function(self, mapID) WorldMapFrame:SetMapID(mapID) end,
 }
 WorldMapFrame.OnMapChanged = function(self) self.NavBar:Refresh() end
@@ -280,8 +281,10 @@ def main():
         local pins = 0
         for _, b in ipairs(view.BossButtons) do if b:IsShown() then pins = pins + 1 end end
         check("Wailing Caverns shows all 8 bosses as pins (Journal positions)", pins == 8)
-        check("top bar ends with Wailing Caverns", navButtons[#navButtons] and navButtons[#navButtons].name == "Wailing Caverns")
-        local menu = navButtons[#navButtons].listFunc()
+        local crumb = ns.DungeonCrumb
+        check("top bar ends with Wailing Caverns", crumb and crumb.name == "Wailing Caverns")
+        check("the addon never adds buttons to the game's own top bar (taint)", #navButtons == 0)
+        local menu = crumb.listFunc()
         check("its menu lists the other Barrens dungeons", #menu >= 3)
 
         -- Loot: click a boss, see only Uncommon+ items.
@@ -372,8 +375,8 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:CloseDungeonMap(true)
         WorldMapFrame.mapID = 1413
         WorldMapFrame.NavBar:Refresh()
-        check("top bar on The Barrens offers a Dungeons button", navButtons[#navButtons] and navButtons[#navButtons].name == "Dungeons")
-        local barrensList = navButtons[#navButtons].listFunc()
+        check("top bar on The Barrens offers a Dungeons button", ns.DungeonCrumb.name == "Dungeons")
+        local barrensList = ns.DungeonCrumb.listFunc()
         local names = {}
         for _, e in ipairs(barrensList) do names[e.id] = true end
         check("Dungeons on The Barrens lists the Barrens dungeons, not the last one opened",

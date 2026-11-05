@@ -750,9 +750,7 @@ function ns:OpenDungeonMap(key, floor)
         SetCanvasShown(false)
         view:Show()
         ShowFloor(floor or 1)
-        if WorldMapFrame.NavBar and WorldMapFrame.NavBar.Refresh then
-            WorldMapFrame.NavBar:Refresh()
-        end
+        if ns.UpdateDungeonCrumb then ns:UpdateDungeonCrumb() end
         if ns.ShowDungeonQuests then ns:ShowDungeonQuests(key) end
     end)
 end
@@ -765,9 +763,7 @@ function ns:CloseDungeonMap(refreshNavBar)
     current.key = nil
     current.zoneMapID = nil
     SetCanvasShown(true)
-    if refreshNavBar and WorldMapFrame.NavBar and WorldMapFrame.NavBar.Refresh then
-        WorldMapFrame.NavBar:Refresh()
-    end
+    if refreshNavBar and ns.UpdateDungeonCrumb then ns:UpdateDungeonCrumb() end
 end
 
 -- Which of our dungeons is the player in right now?
@@ -801,30 +797,80 @@ local function DungeonMenuList(mapID)
     return list
 end
 
-local function DecorateNavBar(navBar)
-    if not ns.db or not ns.db.dungeonsInTopBar or not NavBar_AddButton then return end
-    -- Read the map when the list opens, not when the bar was built.
-    local listFunc = function() return DungeonMenuList(WorldMapFrame:GetMapID()) end
-
-    if ns:IsDungeonMapOpen() then
-        NavBar_AddButton(navBar, {
-            name = ns.Instances[current.key].name,
-            id = current.key,
-            OnClick = function() end,
-            listFunc = function() return DungeonMenuList(current.zoneMapID) end,
-        })
-    elseif #DungeonMenuList(WorldMapFrame:GetMapID()) > 0 then
-        NavBar_AddButton(navBar, {
-            name = DUNGEONS or "Dungeons",
-            OnClick = function(button)
-                -- The crumb itself opens its list, like the arrow next to it.
-                if button.MenuArrowButton and button.MenuArrowButton.OpenMenu then
-                    button.MenuArrowButton:OpenMenu()
-                end
-            end,
-            listFunc = listFunc,
-        })
+-- Our crumb is a button of our own, made from the game's crumb template but never part of the
+-- bar's own list. Adding it with NavBar_AddButton would hand the bar a button whose click
+-- handler was set up by addon code; when the bar later reuses that button for a zone, clicking
+-- it switches the map "as the addon", and in combat that trips ADDON_ACTION_BLOCKED.
+local crumb
+local function GetCrumb(navBar)
+    if crumb then return crumb end
+    crumb = CreateFrame("Button", nil, navBar, "NavButtonTemplate")
+    crumb:SetScript("OnShow", nil) -- the template's OnShow would wire the menu to the bar's list
+    crumb:RegisterForClicks("LeftButtonUp")
+    crumb:SetScript("OnClick", function(self)
+        local arrow = rawget(self, "MenuArrowButton")
+        if type(arrow) == "table" and arrow.OpenMenu then arrow:OpenMenu() end
+    end)
+    local arrow = rawget(crumb, "MenuArrowButton")
+    if type(arrow) == "table" and arrow.SetupMenu then
+        arrow:SetupMenu(function(_, rootDescription)
+            for _, entry in ipairs(crumb.listFunc and crumb.listFunc() or {}) do
+                rootDescription:CreateButton(entry.text, function() entry.func(nil, entry.id) end)
+            end
+        end)
+        arrow:Show()
     end
+    crumb:Hide()
+    ns.DungeonCrumb = crumb -- read by tools/test_addon.py
+    return crumb
+end
+
+local DecorateNavBar
+function ns:UpdateDungeonCrumb()
+    if WorldMapFrame.NavBar then DecorateNavBar(WorldMapFrame.NavBar) end
+end
+
+DecorateNavBar = function(navBar)
+    if crumb then crumb:Hide() end
+    local list = navBar.navList
+    local last = type(list) == "table" and list[#list]
+    if not last then return end
+    -- The zone's crumb as the game left it: the current map, selected and not clickable.
+    local lastSel = rawget(last, "selected")
+    if type(lastSel) == "table" then lastSel:Show() end
+    last:Disable()
+    if not ns.db or not ns.db.dungeonsInTopBar then return end
+
+    local name, listFunc, isCurrent
+    if ns:IsDungeonMapOpen() then
+        name, isCurrent = ns.Instances[current.key].name, true
+        listFunc = function() return DungeonMenuList(current.zoneMapID) end
+    elseif #DungeonMenuList(WorldMapFrame:GetMapID()) > 0 then
+        name = DUNGEONS or "Dungeons"
+        -- Read the map when the list opens, not when the bar was built.
+        listFunc = function() return DungeonMenuList(WorldMapFrame:GetMapID()) end
+    else
+        return
+    end
+
+    local c = GetCrumb(navBar)
+    c.name, c.listFunc = name, listFunc
+    c:SetText(name)
+    local label = rawget(c, "text")
+    c:SetWidth((type(label) == "table" and label:GetStringWidth() or 60) + 53)
+    c:ClearAllPoints()
+    c:SetPoint("LEFT", last, "RIGHT", tonumber(rawget(last, "xoffset")) or 0, 0)
+    c:SetFrameLevel(last:GetFrameLevel() + 1)
+    -- Like the bar's own last crumb: the dungeon you're looking at is "selected"; the zone
+    -- before it becomes clickable again (its click is the game's own, so it stays clean).
+    local sel = rawget(c, "selected")
+    if type(sel) == "table" then sel:SetShown(isCurrent) end
+    if isCurrent then c:Disable() else c:Enable() end
+    if isCurrent then
+        if type(lastSel) == "table" then lastSel:Hide() end
+        last:Enable()
+    end
+    c:Show()
 end
 
 ----------------------------------------------------------------------
