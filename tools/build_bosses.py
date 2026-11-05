@@ -155,7 +155,12 @@ def main():
             nid = match_npc(row["Name_lang"], areas)
             if nid is None:
                 unmatched.append(f"{info['name']}: {row['Name_lang']}")
-            entries.append((int(row["ID"]), row["Name_lang"], nid))
+            # Where the encounter's name differs from the creature's (instances.json,
+            # encounterCreatures), show the creature's name: that's the one players see.
+            name = row["Name_lang"]
+            if nid is not None and norm(name) in aliases:
+                name = npcs[nid][N_NAME]
+            entries.append((int(row["ID"]), name, nid))
         bosses[info["key"]] = entries
 
     loot = boss_only_loot(bosses, droppers)
