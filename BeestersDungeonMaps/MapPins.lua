@@ -71,6 +71,11 @@ end
 BeestersDungeonMapsEntrancePinMixin = CreateFromMixins(MapCanvasPinMixin)
 local PinMixin = BeestersDungeonMapsEntrancePinMixin
 
+-- The map calls SetPassThroughButtons on clickable pins whenever it changes. That function is
+-- locked in combat, so changing the map in combat gave "ADDON_ACTION_BLOCKED". Our pins don't
+-- pass clicks through, so they skip the call (the same fix HandyNotes uses).
+function PinMixin:SetPassThroughButtons() end
+
 -- Called by the world map (MapCanvasMixin:AcquirePin) when it creates a new pin.
 function PinMixin:OnLoad()
     -- The dungeon entrance layer sits above the big city and area badges (Orgrimmar on Durotar).
@@ -175,6 +180,7 @@ end
 local MARKER_TEMPLATE = "BeestersDungeonMapsMarkerPinTemplate"
 BeestersDungeonMapsMarkerPinMixin = CreateFromMixins(MapCanvasPinMixin)
 local MarkerMixin = BeestersDungeonMapsMarkerPinMixin
+function MarkerMixin:SetPassThroughButtons() end
 
 function MarkerMixin:OnLoad()
     self:UseFrameLevelType("PIN_FRAME_LEVEL_SUPER_TRACKED_QUEST")
