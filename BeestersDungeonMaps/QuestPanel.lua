@@ -727,6 +727,7 @@ end
 ----------------------------------------------------------------------
 
 local INK = { 0.18, 0.12, 0.06 }
+local FADED_INK = { 0.45, 0.33, 0.20 } -- secondary lines (level, where): lighter brown, still readable
 
 -- Quest text placeholders: $N name, $C class, $R race, $B new line, $Gmale:female;
 local function FillText(text)
@@ -748,7 +749,7 @@ local function MoneyText(copper)
     return (g > 0 and (g .. "g ") or "") .. (s > 0 and (s .. "s ") or "") .. (c > 0 and (c .. "c") or "")
 end
 
-local function PageText(d, font, text, y, gap)
+local function PageText(d, font, text, y, gap, ink)
     d.textCount = d.textCount + 1
     local fs = d.texts[d.textCount]
     if not fs then
@@ -757,7 +758,8 @@ local function PageText(d, font, text, y, gap)
         d.texts[d.textCount] = fs
     end
     fs:SetFontObject(font)
-    fs:SetTextColor(INK[1], INK[2], INK[3])
+    ink = ink or INK
+    fs:SetTextColor(ink[1], ink[2], ink[3])
     fs:ClearAllPoints()
     fs:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 10, -y)
     fs:SetWidth(d.Page:GetWidth() - 20)
@@ -863,7 +865,7 @@ function ShowDetail(id, entry, stepOverride)
     elseif IsDone(stepID) then
         table.insert(info, "handed in")
     elseif (step[F.REQ] or 0) > UnitLevel("player") then
-        table.insert(info, ("|cffa00000Requires level %d|r"):format(step[F.REQ]))
+        table.insert(info, ("|cffb00000Requires level %d|r"):format(step[F.REQ]))
     elseif step[F.REQ] then
         table.insert(info, ("requires level %d"):format(step[F.REQ]))
     end
@@ -884,7 +886,7 @@ function ShowDetail(id, entry, stepOverride)
         local zone = mapID and C_Map.GetMapInfo(mapID)
         line = line .. "\n" .. (zone and ("%s: %s, %s"):format(verb, who, zone.name) or ("%s: %s (inside the dungeon)"):format(verb, who))
     end
-    y = PageText(d, "QuestFontNormalSmall", line, y, 10)
+    y = PageText(d, "QuestFontNormalSmall", line, y, 10, FADED_INK)
 
     -- Objectives, then the quest's own story text, as in the quest log's details.
     y = PageText(d, "QuestFont", FillText(text and text[2] ~= "" and text[2] or step[F.TEXT] or ""), y, 6)
@@ -964,15 +966,16 @@ local function CreateDetail(parent)
     d.Page:SetSize(200, 10)
     scroll:SetScrollChild(d.Page)
 
+    -- On the border's corner and above it (the border's filigree used to cover it).
     d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
-    d.Close:SetPoint("TOPRIGHT", 0, 0)
-    d.Close:SetFrameLevel(scroll:GetFrameLevel() + 10)
+    d.Close:SetPoint("TOPRIGHT", 5, 6)
+    d.Close:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
     d.Close:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
 
     d.MapButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     d.MapButton:SetSize(110, 22)
     d.MapButton:SetPoint("BOTTOMRIGHT", -6, 5)
-    d.MapButton:SetFrameLevel(scroll:GetFrameLevel() + 10)
+    d.MapButton:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
     d.MapButton:SetText("Show on map")
     d.MapButton:SetScript("OnClick", function(self)
         local t = self.target
