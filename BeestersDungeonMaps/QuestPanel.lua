@@ -16,6 +16,7 @@
 local _, ns = ...
 
 local panel        -- content (list + detail pane)
+local RaiseAboveQuestDetails -- defined with the tabs
 local strip        -- tab bar
 local selected     -- questID shown in the detail pane
 local tab = "dungeon"
@@ -1110,6 +1111,24 @@ end
 -- Frames
 ----------------------------------------------------------------------
 
+-- A quest opened in the Quest Log tab keeps the game's own details (and their rewards) open
+-- underneath. The dungeon tab goes on top of all of it; the game's details are left as they
+-- were, so the Quest Log tab shows them again when you switch back.
+RaiseAboveQuestDetails = function()
+    if not panel then return end
+    local top = QuestMapFrame and QuestMapFrame:GetFrameLevel() or 0
+    local details = QuestMapFrame and rawget(QuestMapFrame, "DetailsFrame")
+    if type(details) == "table" and details.GetChildren then
+        top = math.max(top, details:GetFrameLevel())
+        for _, child in ipairs({ details:GetChildren() }) do
+            if child.GetFrameLevel then top = math.max(top, child:GetFrameLevel()) end
+        end
+    end
+    local level = math.min(top + 50, 9000)
+    if panel:GetFrameLevel() < level then panel:SetFrameLevel(level) end
+    if strip and strip:GetFrameLevel() < level + 10 then strip:SetFrameLevel(level + 10) end
+end
+
 local function SetTab(which)
     tab = which
     if strip then
@@ -1119,6 +1138,7 @@ local function SetTab(which)
         strip.Dungeon:SetNormalFontObject(which == "dungeon" and "GameFontHighlight" or "GameFontNormal")
     end
     if panel then
+        if which == "dungeon" then RaiseAboveQuestDetails() end
         panel:SetShown(which == "dungeon")
         if which == "dungeon" then Layout(); Refresh() end
     end
