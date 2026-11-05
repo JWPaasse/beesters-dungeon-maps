@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.6
+
+- Fuller loot tables: classic bosses' loot now comes from the Classic database's own loot tables, with drop chances. Dungeon set pieces are back (Scholomance, Stratholme, Blackrock Spire), world drops stay out.
+- Every listed item has a tooltip, even when the game server doesn't send the item: WoW Forever's own tooltip from Wowhead, or one built from the classic item stats (marked as such).
+- Dungeon maps open on a floor with bosses (Scholomance no longer opens on its empty entrance level); the floor menu shows how many bosses are on each floor.
+- Share button in the quest details, next to "Show on map".
+- Fixed: hovering a boss inside a dungeon could give an error (the boss portrait).
+- Loot tables, item data and tooltips now update themselves daily.
+
 ## 0.2.5
 
 - Fixed: clicking a place in the map's top bar during a fight could give an "action blocked" error. The Dungeons button in the top bar is now a separate button of the addon's own.
