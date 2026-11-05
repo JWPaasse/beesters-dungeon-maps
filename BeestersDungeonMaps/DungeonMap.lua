@@ -91,92 +91,25 @@ end
 
 local MIN_QUALITY = 2 -- Uncommon and better
 
+local BIND_ON_PICKUP = 1
+
+-- name, link, quality, icon, bindType (1 = Bind on Pickup)
 local function ItemInfo(itemID)
-    if C_Item and C_Item.GetItemInfo then
-        local name, link, quality, _, _, _, _, _, _, icon = C_Item.GetItemInfo(itemID)
-        return name, link, quality, icon
-    elseif GetItemInfo then
-        local name, link, quality, _, _, _, _, _, _, icon = GetItemInfo(itemID)
-        return name, link, quality, icon
-    end
+    local getInfo = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not getInfo then return end
+    local name, link, quality, _, _, _, _, _, _, icon, _, _, _, bindType = getInfo(itemID)
+    return name, link, quality, icon, bindType
 end
 
 local function RequestItem(itemID)
     if C_Item and C_Item.RequestLoadItemDataByID then C_Item.RequestLoadItemDataByID(itemID) end
 end
 
--- The boss's picture, drawn the way the Dungeon Journal draws its creature buttons: a round
--- portrait of the creature's model in the journal's ring. Bosses new in WoW Forever have no known
--- model ID; for those the game draws the creature itself, when it knows it.
-local portrait
-local function GetPortrait()
-    if portrait then return portrait end
-    portrait = CreateFrame("Frame", nil, UIParent)
-    portrait:SetSize(80, 76)
-    portrait.Creature = portrait:CreateTexture(nil, "BACKGROUND", nil, 6)
-    portrait.Creature:SetSize(52, 52)
-    portrait.Creature:SetPoint("CENTER")
-    portrait.Mask = portrait:CreateMaskTexture()
-    portrait.Mask:SetTexture("Interface\\CharacterFrame\\TempPortraitAlphaMask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
-    portrait.Mask:SetAllPoints(portrait.Creature)
-    portrait.Creature:AddMaskTexture(portrait.Mask)
-    portrait.Model = CreateFrame("PlayerModel", nil, portrait)
-    portrait.Model:SetSize(50, 50)
-    portrait.Model:SetPoint("CENTER")
-    portrait.Ring = portrait:CreateTexture(nil, "ARTWORK")
-    portrait.Ring:SetTexture("Interface\\EncounterJournal\\UI-EncounterJournalTextures")
-    portrait.Ring:SetTexCoord(0.50585938, 0.63085938, 0.02246094, 0.08203125)
-    portrait.Ring:SetAllPoints()
-    portrait:RegisterEvent("PORTRAITS_UPDATED")
-    portrait:SetScript("OnEvent", function(self)
-        if self:IsShown() and self.displayID then SetPortraitTextureFromCreatureDisplayID(self.Creature, self.displayID) end
-    end)
-    return portrait
-end
-
-local function ShowPortrait(tooltip, boss)
-    local displayID = boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
-    if not GameTooltip_InsertFrame or not (displayID or boss.npcID) then return end
-    local p = GetPortrait()
-    p.displayID = displayID
-    if displayID and SetPortraitTextureFromCreatureDisplayID then
-        p.Model:Hide()
-        p.Creature:Show()
-        SetPortraitTextureFromCreatureDisplayID(p.Creature, displayID)
-    else
-        p.Creature:Hide()
-        p.Model:Show()
-        p.Model:ClearModel()
-        p.Model:SetCreature(boss.npcID)
-        p.Model:SetPortraitZoom(1)
-    end
-    GameTooltip_InsertFrame(tooltip, p, 4)
-end
-
-local function ShowBossTooltip(owner, boss, total)
-    GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
-    GameTooltip:SetText(boss.name, 1, 1, 1)
-    GameTooltip:AddLine(("Boss %d of %d"):format(boss.order, total), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-    ShowPortrait(GameTooltip, boss)
-    if boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID] then
-        GameTooltip:AddLine("<Click to see loot>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
-    end
-    if boss.custom then
-        GameTooltip:AddLine("Placed by you. Shift-right-click to undo.", 0.6, 0.6, 0.6, true)
-    elseif not boss.x then
-        GameTooltip:AddLine("Shift-drag onto the map to place this boss.", 0.6, 0.6, 0.6, true)
-    end
-    GameTooltip:Show()
-end
-
 ----------------------------------------------------------------------
--- Loot panel: opens when you click a boss. Hover an item for its game tooltip,
--- shift-click to link it in chat, ctrl-click to try it on.
--- Grouped like this: Gear (weapons, then off-hands, armour from head to feet, then
--- necklaces, rings and trinkets), Recipes (by profession), Other.
+-- Loot: Bind on Pickup, Uncommon and better, grouped: Gear (weapons, then off-hands, armour from head to feet, then necklaces,
+-- rings and trinkets), Recipes (by profession), Other. Shown in the boss's tooltip on
+-- mouse-over; a click opens it as a panel that stays, so you can hover the items.
 ----------------------------------------------------------------------
-
-local lootPanel
 
 local SLOT_ORDER = {
     INVTYPE_WEAPON = 1, INVTYPE_2HWEAPON = 1, INVTYPE_WEAPONMAINHAND = 1, INVTYPE_WEAPONOFFHAND = 1,
@@ -188,6 +121,11 @@ local SLOT_ORDER = {
     INVTYPE_NECK = 30, INVTYPE_FINGER = 31, INVTYPE_TRINKET = 32,
 }
 local RECIPE_CLASS = (Enum and Enum.ItemClass and Enum.ItemClass.Recipe) or 9
+local SECTIONS = {
+    { key = "gear", title = "Gear" },
+    { key = "recipe", title = "Recipes" },
+    { key = "other", title = "Other" },
+}
 
 local function ItemKind(itemID)
     local getInstant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
@@ -196,6 +134,112 @@ local function ItemKind(itemID)
     if classID == RECIPE_CLASS then return "recipe", subType or "" end
     if equipLoc and SLOT_ORDER[equipLoc] then return "gear", SLOT_ORDER[equipLoc] end
     return "other"
+end
+
+-- { gear = {items}, recipe = {...}, other = {...} } sorted, and whether item names are still loading.
+local function LootGroups(boss)
+    local loot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID] or {}
+    local groups = { gear = {}, recipe = {}, other = {} }
+    local waiting = false
+    for _, itemID in ipairs(loot) do
+        local name, link, quality, icon, bindType = ItemInfo(itemID)
+        if not name then
+            waiting = true
+            RequestItem(itemID)
+        elseif (quality or 0) >= MIN_QUALITY and bindType == BIND_ON_PICKUP then
+            local kind, sortKey = ItemKind(itemID)
+            table.insert(groups[kind], { id = itemID, name = name, link = link, quality = quality, icon = icon, sortKey = sortKey })
+        end
+    end
+    for _, list in pairs(groups) do
+        table.sort(list, function(a, b)
+            if a.sortKey ~= b.sortKey and a.sortKey and b.sortKey then return a.sortKey < b.sortKey end
+            return a.name < b.name
+        end)
+    end
+    return groups, waiting
+end
+
+-- Walks the groups in display order: onHeader(text, isProfession), onItem(item, sectionKey).
+local function ForEachLoot(groups, onHeader, onItem)
+    for _, section in ipairs(SECTIONS) do
+        local list = groups[section.key]
+        if #list > 0 then
+            onHeader(section.title, false)
+            local profession
+            for _, item in ipairs(list) do
+                if section.key == "recipe" and item.sortKey ~= profession then
+                    profession = item.sortKey
+                    if profession ~= "" then onHeader(profession, true) end
+                end
+                onItem(item, section.key)
+            end
+        end
+    end
+end
+
+-- The boss's picture: the game's still portrait of the creature's model (the same picture
+-- the Dungeon Journal uses), nothing around it. Model IDs: tools/boss_models.json.
+local portrait
+local function ShowPortrait(tooltip, boss)
+    local displayID = boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
+    if not (displayID and GameTooltip_InsertFrame and SetPortraitTextureFromCreatureDisplayID) then return end
+    if not portrait then
+        portrait = CreateFrame("Frame", nil, UIParent)
+        portrait:SetSize(64, 64)
+        portrait.Image = portrait:CreateTexture(nil, "ARTWORK")
+        portrait.Image:SetAllPoints()
+        portrait:RegisterEvent("PORTRAITS_UPDATED")
+        portrait:SetScript("OnEvent", function(self)
+            if self:IsShown() and self.displayID then SetPortraitTextureFromCreatureDisplayID(self.Image, self.displayID) end
+        end)
+    end
+    portrait.displayID = displayID
+    SetPortraitTextureFromCreatureDisplayID(portrait.Image, displayID)
+    GameTooltip_InsertFrame(tooltip, portrait, 4)
+end
+
+local lootPanel
+local tooltipBoss -- the boss whose tooltip is showing (refreshed when item names arrive)
+
+local function ShowBossTooltip(owner, boss, total)
+    tooltipBoss = { owner = owner, boss = boss, total = total }
+    GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
+    GameTooltip:SetText(boss.name, 1, 1, 1)
+    GameTooltip:AddLine(("Boss %d of %d"):format(boss.order, total), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+    ShowPortrait(GameTooltip, boss)
+    local hasLoot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID]
+    local panelOpen = lootPanel and lootPanel:IsShown() and lootPanel.boss == boss
+    if hasLoot and not panelOpen then
+        local groups, waiting = LootGroups(boss)
+        local any = false
+        ForEachLoot(groups, function(text, isProfession)
+            if isProfession then
+                GameTooltip:AddLine("  " .. text, 0.6, 0.6, 0.6)
+            else
+                GameTooltip:AddLine(" ")
+                GameTooltip:AddLine(text, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+            end
+        end, function(item)
+            any = true
+            local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality]
+            GameTooltip:AddLine(("|T%s:16|t %s"):format(item.icon or 134400, item.name),
+                color and color.r or 1, color and color.g or 1, color and color.b or 1)
+        end)
+        if waiting and not any then
+            GameTooltip:AddLine(SEARCH_LOADING_TEXT or "Loading...", 0.6, 0.6, 0.6)
+        end
+        if any then
+            GameTooltip:AddLine(" ")
+            GameTooltip:AddLine("<Click to keep the loot open>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
+        end
+    end
+    if boss.custom then
+        GameTooltip:AddLine("Placed by you. Shift-right-click to undo.", 0.6, 0.6, 0.6, true)
+    elseif not boss.x then
+        GameTooltip:AddLine("Shift-drag onto the map to place this boss.", 0.6, 0.6, 0.6, true)
+    end
+    GameTooltip:Show()
 end
 
 local function AcquireRow(panel, index)
@@ -239,31 +283,13 @@ local function RefreshLootPanel()
     local panel = lootPanel
     if not panel or not panel:IsShown() then return end
     local boss = panel.boss
-    local loot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID] or {}
     panel.Title:SetText(boss.name)
-
-    local groups = { gear = {}, recipe = {}, other = {} }
-    local waiting = false
-    for _, itemID in ipairs(loot) do
-        local name, link, quality, icon = ItemInfo(itemID)
-        if not name then
-            waiting = true
-            RequestItem(itemID)
-        elseif (quality or 0) >= MIN_QUALITY then
-            local kind, sortKey = ItemKind(itemID)
-            table.insert(groups[kind], { id = itemID, name = name, link = link, quality = quality, icon = icon, sortKey = sortKey })
-        end
-    end
-    for _, list in pairs(groups) do
-        table.sort(list, function(a, b)
-            if a.sortKey ~= b.sortKey and a.sortKey and b.sortKey then return a.sortKey < b.sortKey end
-            return a.name < b.name
-        end)
-    end
+    local groups, waiting = LootGroups(boss)
 
     local y, rowIndex, headerIndex = 32, 0, 0
     panel.shown = {} -- { section, itemID } in display order (read by tools/test_addon.py)
-    local function Header(text, sub)
+    ForEachLoot(groups, function(text, sub)
+        if not sub and headerIndex > 0 then y = y + 4 end
         headerIndex = headerIndex + 1
         local h = AcquireHeader(panel, headerIndex, sub)
         h:SetText(text)
@@ -271,43 +297,25 @@ local function RefreshLootPanel()
         h:SetPoint("TOPLEFT", sub and 16 or 12, -(y + (sub and 2 or 4)))
         h:Show()
         y = y + (sub and 16 or 20)
-    end
-    local sections = {
-        { key = "gear", title = "Gear" },
-        { key = "recipe", title = "Recipes" },
-        { key = "other", title = "Other" },
-    }
-    for _, section in ipairs(sections) do
-        local list = groups[section.key]
-        if #list > 0 then
-            Header(section.title)
-            local profession
-            for _, item in ipairs(list) do
-                if section.key == "recipe" and item.sortKey ~= profession then
-                    profession = item.sortKey
-                    if profession ~= "" then Header(profession, true) end
-                end
-                rowIndex = rowIndex + 1
-                local row = AcquireRow(panel, rowIndex)
-                row.itemID, row.link = item.id, item.link
-                table.insert(panel.shown, { section.key, item.id })
-                row.Icon:SetTexture(item.icon)
-                row.Name:SetText(item.name)
-                local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality]
-                if color then row.Name:SetTextColor(color.r, color.g, color.b) end
-                row:ClearAllPoints()
-                row:SetPoint("TOPLEFT", 12, -y)
-                row:Show()
-                y = y + 22
-            end
-            y = y + 4
-        end
-    end
+    end, function(item, sectionKey)
+        rowIndex = rowIndex + 1
+        local row = AcquireRow(panel, rowIndex)
+        row.itemID, row.link = item.id, item.link
+        table.insert(panel.shown, { sectionKey, item.id })
+        row.Icon:SetTexture(item.icon)
+        row.Name:SetText(item.name)
+        local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality]
+        if color then row.Name:SetTextColor(color.r, color.g, color.b) end
+        row:ClearAllPoints()
+        row:SetPoint("TOPLEFT", 12, -y)
+        row:Show()
+        y = y + 22
+    end)
     for i = rowIndex + 1, #panel.Rows do panel.Rows[i]:Hide() end
     for i = headerIndex + 1, #panel.Headers do panel.Headers[i]:Hide() end
     panel.Empty:SetShown(rowIndex == 0)
-    panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Uncommon or better loot known.")
-    panel:SetHeight(rowIndex == 0 and 66 or y + 8)
+    panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Bind on Pickup loot of Uncommon or better known.")
+    panel:SetHeight(rowIndex == 0 and 66 or y + 12)
 end
 
 local function CreateLootPanel(parent)
@@ -341,6 +349,7 @@ end
 
 local function ToggleLoot(owner, boss)
     if not lootPanel then lootPanel = CreateLootPanel(view) end
+    GameTooltip:Hide()
     if lootPanel:IsShown() and lootPanel.boss == boss then
         lootPanel:Hide()
         return
@@ -357,12 +366,16 @@ end
 local itemListener = CreateFrame("Frame")
 itemListener:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 itemListener:SetScript("OnEvent", function()
-    if lootPanel and lootPanel:IsShown() then
-        if not itemListener.pending then
-            itemListener.pending = true
-            C_Timer.After(0.1, function() itemListener.pending = false; RefreshLootPanel() end)
+    if itemListener.pending then return end
+    itemListener.pending = true
+    C_Timer.After(0.1, function()
+        itemListener.pending = false
+        RefreshLootPanel()
+        local t = tooltipBoss
+        if t and GameTooltip:IsShown() and GameTooltip:GetOwner() == t.owner then
+            ShowBossTooltip(t.owner, t.boss, t.total)
         end
-    end
+    end)
 end)
 
 ----------------------------------------------------------------------

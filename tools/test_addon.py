@@ -56,7 +56,8 @@ function hooksecurefunc(target, name, hook)
     end
 end
 C_Timer = { After = function(_, fn) fn() end }
-C_Item = { GetItemInfo = function(id) return "Item " .. id, "|Hitem:" .. id .. "|h", id % 4, nil, nil, nil, nil, nil, nil, 134400 end }
+-- Quality = id % 4. Bind on Pickup unless the id is a multiple of 100 + 50 (Bind on Equip).
+C_Item = { GetItemInfo = function(id) return "Item " .. id, "|Hitem:" .. id .. "|h", id % 4, nil, nil, nil, nil, nil, nil, 134400, nil, nil, nil, (id % 100 == 50) and 2 or 1 end }
 -- Item kinds by the last digit: 0-1 weapon, 2 trinket, 3 head, 4/8 recipe (Tailoring/Alchemy), others misc.
 C_Item.GetItemInfoInstant = function(id)
     local d = id % 10
@@ -304,11 +305,11 @@ def main():
         mutanus.scripts.OnEnter(mutanus)
         check("hovering a boss shows its portrait", inserted ~= nil and portraitID == ns.BossModels[mutanus.boss.npcID])
         -- Fake loot covering every kind, to check the grouping and order.
-        ns.BossLoot[mutanus.boss.npcID] = { 15, 22, 13, 30, 34, 38, 27, 42, 43 }
+        ns.BossLoot[mutanus.boss.npcID] = { 15, 22, 13, 30, 34, 38, 27, 42, 43, 150 }
         panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
         local order = {}
         for _, e in ipairs(panel.shown) do table.insert(order, e[1] .. ":" .. e[2]) end
-        check("loot grouped: weapons, armour, trinkets, then recipes by profession, then other",
+        check("loot (Bind on Pickup only) grouped: weapons, armour, trinkets, then recipes by profession, then other",
             table.concat(order, " ") == "gear:30 gear:43 gear:22 gear:42 recipe:38 recipe:34 other:15 other:27")
 
         -- Placing a boss yourself: shift-drag a listed boss onto the map.
