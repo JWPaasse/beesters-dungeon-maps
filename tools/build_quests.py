@@ -266,7 +266,7 @@ def main():
     out += ["}", "",
             "-- [questID] = { name, level, requiredLevel, faction ('H'/'A'/nil), objective text,",
             "--   startNpc, startObject, startItem, endNpc, endObject, preAny, preAll, objectiveItems, rewards,",
-            "--   classes, repeatable, followUpOf }",
+            "--   classes, repeatable, followUpOf, objectiveCreatures }",
             "ns.Quests = {"]
     for qid, r in quest_rows.items():
         parts = [
@@ -279,6 +279,7 @@ def main():
             str(r["classes"]) if r["classes"] else "nil",
             "true" if r["repeatable"] else "nil",
             lua_list(r["followUp"]) if r["followUp"] else "nil",
+            lua_list(r["kills"]),
         ]
         out.append(f"    [{qid}] = {{{','.join(parts)}}},")
     out += ["}", "", "-- [npcID] = { name, title, minLevel, maxLevel, rank, {uiMapID, x, y} }", "ns.NPCs = {"]

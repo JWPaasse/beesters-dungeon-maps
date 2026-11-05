@@ -27,7 +27,8 @@ local tab = "dungeon"
 
 local function Q(id) return ns.Quests and ns.Quests[id] end
 local F = { NAME = 1, LEVEL = 2, REQ = 3, FACTION = 4, TEXT = 5, START_NPC = 6, START_OBJ = 7, START_ITEM = 8,
-    END_NPC = 9, END_OBJ = 10, PRE_ANY = 11, PRE_ALL = 12, ITEMS = 13, REWARDS = 14, CLASSES = 15, REPEATABLE = 16 }
+    END_NPC = 9, END_OBJ = 10, PRE_ANY = 11, PRE_ALL = 12, ITEMS = 13, REWARDS = 14, CLASSES = 15, REPEATABLE = 16,
+    KILLS = 18 }
 
 local function IsDone(id)
     return C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted and C_QuestLog.IsQuestFlaggedCompleted(id) or false
@@ -362,6 +363,35 @@ local function QuestTooltip(self)
     GameTooltip:Show()
 end
 
+-- Objectives of a quest that isn't in your log yet, the way the log would show them:
+-- "0/12 Magenta Fungus Cap". QuestieDB has what to collect or kill; the number comes from
+-- the quest text ("Bring 12 Magenta Fungus Caps"), when it says one.
+local function CountFor(text, name)
+    if not text or not name then return nil end
+    local stem = name:lower():sub(1, 5):gsub("%p", "%%%0")
+    return text:lower():match("(%d+)%s+" .. stem)
+end
+
+local function DataObjectives(q)
+    local lines = {}
+    for _, itemID in ipairs(q[F.ITEMS] or {}) do
+        local item = ns.QuestItems and ns.QuestItems[itemID]
+        if item then
+            local n = CountFor(q[F.TEXT], item[1])
+            table.insert(lines, n and ("0/%s %s"):format(n, item[1]) or item[1])
+        end
+    end
+    for _, npcID in ipairs(q[F.KILLS] or {}) do
+        local npc = ns.NPCs and ns.NPCs[npcID]
+        if npc then
+            local n = CountFor(q[F.TEXT], npc[1])
+            table.insert(lines, n and ("0/%s %s slain"):format(n, npc[1]) or (npc[1] .. " slain"))
+        end
+    end
+    if #lines == 0 and q[F.TEXT] then table.insert(lines, q[F.TEXT]) end
+    return lines
+end
+
 local Refresh -- forward
 local ShowDetail
 
@@ -465,7 +495,15 @@ local function AddQuestRow(y, entry, kind)
                 end
             end
         end
-    elseif kind == "available" then
+    else
+        -- Not in your log: what the quest asks, so every quest reads like one in the log.
+        local shown = entry.q
+        if entry.steps and entry.step and entry.steps[entry.step] then shown = Q(entry.steps[entry.step]) or shown end
+        for _, line in ipairs(DataObjectives(shown)) do
+            y = AddObjective(y, line, kind == "done" and 0.5 or nil, kind == "done" and 0.5 or nil, kind == "done" and 0.5 or nil)
+        end
+    end
+    if kind == "available" then
         if entry.steps and #entry.steps > 1 then
             local stepQuest = Q(entry.steps[entry.step])
             if entry.stepInLog then
@@ -479,7 +517,7 @@ local function AddQuestRow(y, entry, kind)
             y = AddObjective(y, ("Requires level %d"):format(current[F.REQ] or 0), 1, 0.25, 0.25)
         end
     end
-    return y + 6
+    return y + 8
 end
 
 local GROUPS = {
