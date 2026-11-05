@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.4
+
+- Quest details show experience and money as reward buttons, like the game's quest log. Experience, money and items come from the game itself whenever it has them, so they match what the game shows you.
+- Boss positions for Ruins of Lordaeron.
+- Boss names as you see them in game: The Baron (was The Butcher), Gelihast, Kirtonos the Herald and Ras Frostwhisper.
+- Fixed: a quest opened in the Quest Log tab left its rewards drawn over the dungeon's quest tab.
+- The quest text frame has a closed border, with "Show on map" underneath it instead of over the text.
+
 ## 0.2.3
 
 - Hovering a boss skull shows the boss's portrait and its loot, grouped into Gear, Recipes and Other. Gear is ordered weapons, off-hands, armour from head to feet, then necklaces, rings and trinkets; recipes are grouped by profession.
