@@ -1,0 +1,44 @@
+name: Loot tooltips (Wowhead)
+
+# Fetches the WoW Forever tooltips of the bosses' loot from Wowhead and commits
+# BeestersDungeonMaps/Data/LootTooltips.lua. Runs when the fetch script changes, or by hand
+# (Actions > Loot tooltips > Run workflow). It never publishes a release.
+
+on:
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Fetch every tooltip again (not only new items)"
+        type: boolean
+        default: false
+  push:
+    paths:
+      - "tools/fetch_loot_tooltips.py"
+      - "tools/wowhead_tooltip.py"
+      - ".github/workflows/loot-tooltips.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Fetch tooltips
+        run: python3 tools/fetch_loot_tooltips.py ${{ inputs.refresh && '--refresh' || '' }}
+      - name: Check the addon still loads
+        run: |
+          pip install lupa
+          python3 tools/test_addon.py
+      - name: Commit
+        run: |
+          git add tools/loot_tooltips.json BeestersDungeonMaps/Data/LootTooltips.lua
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Loot tooltips from Wowhead"
+          git push

@@ -11,6 +11,7 @@
 
 Data\Entrances.lua
 Data\Bosses.lua
+Data\LootTooltips.lua
 Data\Maps.lua
 Data\Quests.lua
 Data\QuestText.lua

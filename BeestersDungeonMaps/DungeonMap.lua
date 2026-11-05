@@ -315,6 +315,23 @@ ShowItemTooltip = function(owner, itemID)
         return
     end
     RequestItem(itemID)
+    owner.waitingTooltip = itemID
+    -- WoW Forever's own tooltip for the item, as Wowhead has it (Data/LootTooltips.lua).
+    local lines = ns.LootTooltips and ns.LootTooltips[itemID]
+    if lines then
+        for i, line in ipairs(lines) do
+            local left, right = line:match("^(.-)\t(.*)$")
+            if i == 1 then
+                GameTooltip:SetText(line, 1, 1, 1)
+            elseif left then
+                GameTooltip:AddDoubleLine(left, right, 1, 1, 1, 1, 1, 1)
+            else
+                GameTooltip:AddLine(line, 1, 1, 1, true)
+            end
+        end
+        GameTooltip:Show()
+        return
+    end
     local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[known[2]]
     GameTooltip:SetText(known[1], color and color.r or 1, color and color.g or 1, color and color.b or 1)
     if known[3] == 1 then
@@ -332,7 +349,6 @@ ShowItemTooltip = function(owner, itemID)
     end
     GameTooltip:AddLine("The game hasn't sent this item's details yet.", 0.6, 0.6, 0.6, true)
     GameTooltip:Show()
-    owner.waitingTooltip = itemID
 end
 
 local function AcquireRow(panel, index)
