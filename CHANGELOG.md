@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3
+
+- Hovering a boss skull shows the boss's portrait and its loot, grouped into Gear, Recipes and Other. Gear is ordered weapons, off-hands, armour from head to feet, then necklaces, rings and trinkets; recipes are grouped by profession.
+- Click the skull to keep the loot open, so you can hover each item for its tooltip.
+- The loot list shows only Bind on Pickup items, Uncommon and better.
+
 ## 0.2.2
 
 - Quest chains that WoW Forever changed at launch or that QuestieDB doesn't link yet, taken from Wowhead's quest pages and comments:
