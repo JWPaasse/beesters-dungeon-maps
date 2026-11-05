@@ -1,0 +1,503 @@
+{
+"_source": "Items new in WoW Forever: name, quality, binding (1 = Bind on Pickup) and inventory type from the client's ItemSparse table, build 1.60.1.70790 (via wago.tools).",
+"items": {
+"209838": [
+"Hypnotic Crystal",
+1,
+1,
+0
+],
+"245675": [
+"Gordok Inner Door Key",
+1,
+1,
+0
+],
+"251360": [
+"Plans: Veteran's Gloves",
+3,
+1,
+0
+],
+"251363": [
+"Plans: Acolyte's Gloves",
+3,
+1,
+0
+],
+"251364": [
+"Plans: Crusader's Gloves",
+3,
+1,
+0
+],
+"251376": [
+"Plans: Guard's Silvered Chain Leggings",
+3,
+1,
+0
+],
+"251378": [
+"Plans: Acolyte's Silvered Chain Leggings",
+3,
+1,
+0
+],
+"251379": [
+"Plans: Crusader's Silvered Chain Leggings",
+3,
+1,
+0
+],
+"251380": [
+"Plans: Veteran's Silvered Chain Helm",
+3,
+1,
+0
+],
+"251381": [
+"Plans: Guard's Silvered Chain Helm",
+3,
+1,
+0
+],
+"251382": [
+"Plans: Protector's Silvered Chain Helm",
+3,
+1,
+0
+],
+"251383": [
+"Plans: Acolyte's Silvered Chain Helm",
+3,
+1,
+0
+],
+"251384": [
+"Plans: Crusader's Silvered Chain Helm",
+3,
+1,
+0
+],
+"251961": [
+"Arcane Mote",
+1,
+4,
+0
+],
+"252455": [
+"Defender's Leather Helm",
+3,
+1,
+1
+],
+"252512": [
+"Brawler's Leather Helm",
+3,
+1,
+1
+],
+"252514": [
+"Stormrider's Leather Helm",
+3,
+1,
+1
+],
+"252515": [
+"Wisdom's Leather Helm",
+3,
+1,
+1
+],
+"252777": [
+"Pattern: Brawler's Leather Gloves",
+3,
+1,
+0
+],
+"252778": [
+"Pattern: Trapper's Leather Gloves",
+3,
+1,
+0
+],
+"252779": [
+"Pattern: Defender's Leather Gloves",
+3,
+1,
+0
+],
+"252780": [
+"Pattern: Totemic Leather Gloves",
+3,
+1,
+0
+],
+"252782": [
+"Pattern: Wisdom's Leather Gloves",
+3,
+1,
+0
+],
+"252798": [
+"Pattern: Brawler's Leather Hood",
+3,
+1,
+0
+],
+"252800": [
+"Pattern: Defender's Leather Hood",
+3,
+1,
+0
+],
+"252801": [
+"Pattern: Totemic Leather Hood",
+3,
+1,
+0
+],
+"252802": [
+"Pattern: Stormrider's Leather Hood",
+3,
+1,
+0
+],
+"252803": [
+"Pattern: Wisdom's Leather Hood",
+3,
+1,
+0
+],
+"252820": [
+"Pattern: Brawler's Leather Legguards",
+3,
+1,
+0
+],
+"252821": [
+"Pattern: Trapper's Leather Legguards",
+3,
+1,
+0
+],
+"252822": [
+"Pattern: Defender's Leather Kilt",
+3,
+1,
+0
+],
+"252823": [
+"Pattern: Totemic Leather Leggings",
+3,
+1,
+0
+],
+"252824": [
+"Pattern: Stormrider's Leather Kilt",
+3,
+1,
+0
+],
+"252825": [
+"Pattern: Wisdom's Leather Leggings",
+3,
+1,
+0
+],
+"253902": [
+"Pattern: Filigreed Pristine Gown",
+3,
+0,
+0
+],
+"253912": [
+"Pattern: Filigreed Shining Gown",
+3,
+0,
+0
+],
+"253938": [
+"Pattern: Filigreed Pristine Leggings",
+3,
+0,
+0
+],
+"253940": [
+"Pattern: Filigreed Silky Leggings",
+3,
+0,
+0
+],
+"253942": [
+"Pattern: Filigreed Flame Leggings",
+3,
+0,
+0
+],
+"253946": [
+"Pattern: Filigreed Pearly Leggings",
+3,
+0,
+0
+],
+"253948": [
+"Pattern: Filigreed Shining Leggings",
+3,
+0,
+0
+],
+"253976": [
+"Pattern: Filigreed Pristine Circlet",
+3,
+0,
+0
+],
+"253978": [
+"Pattern: Filigreed Silky Circlet",
+3,
+0,
+0
+],
+"253982": [
+"Pattern: Filigreed Shadow Circlet",
+3,
+0,
+0
+],
+"253984": [
+"Pattern: Filigreed Pearly Circlet",
+3,
+0,
+0
+],
+"253986": [
+"Pattern: Filigreed Shining Circlet",
+3,
+0,
+0
+],
+"268518": [
+"Head of the Baron",
+1,
+4,
+0
+],
+"270180": [
+"Horrible Rootcore",
+1,
+4,
+0
+],
+"270865": [
+"Titan Relic",
+1,
+1,
+0
+],
+"270866": [
+"Titan Relic",
+1,
+1,
+0
+],
+"272017": [
+"Nefarion's Remit",
+3,
+4,
+0
+],
+"272018": [
+"Overseer's License",
+3,
+4,
+0
+],
+"272019": [
+"Bronzebeard Wedding Contract",
+3,
+4,
+0
+],
+"272020": [
+"Felvine Seed",
+3,
+4,
+0
+],
+"272021": [
+"Ancient Memento",
+3,
+4,
+0
+],
+"272022": [
+"Earthstone Diamond Pinky Ring",
+3,
+4,
+0
+],
+"272023": [
+"Headmaster's Records",
+3,
+4,
+0
+],
+"272024": [
+"Grain Shipment Records",
+3,
+4,
+0
+],
+"273085": [
+"Blueprint: Fermenter",
+2,
+0,
+0
+],
+"273086": [
+"Blueprint: Anvil",
+2,
+0,
+0
+],
+"273087": [
+"Blueprint: Journeyman Campfire",
+2,
+0,
+0
+],
+"273092": [
+"Blueprint: Repair Bot",
+2,
+0,
+0
+],
+"273096": [
+"Blueprint: Tanning Rack",
+2,
+0,
+0
+],
+"273097": [
+"Blueprint: Rock Garden",
+2,
+0,
+0
+],
+"273098": [
+"Blueprint: Field Guide",
+2,
+0,
+0
+],
+"273099": [
+"Blueprint: Spinning Wheel",
+2,
+0,
+0
+],
+"273102": [
+"Blueprint: Cookie's Feast",
+2,
+0,
+0
+],
+"273103": [
+"Blueprint: Arcane Salvager",
+2,
+0,
+0
+],
+"273105": [
+"Blueprint: Toxin Study",
+2,
+0,
+0
+],
+"273106": [
+"Blueprint: Greenhouse",
+2,
+0,
+0
+],
+"273109": [
+"Blueprint: Trapper's Workbench",
+2,
+0,
+0
+],
+"273141": [
+"Blueprint: Fishing Rack",
+2,
+0,
+0
+],
+"274286": [
+"Durgen Dirgehammer's Head",
+1,
+4,
+0
+],
+"274463": [
+"Tattered Note",
+1,
+4,
+0
+],
+"275443": [
+"Highly Toxic Strain",
+1,
+4,
+0
+],
+"277129": [
+"Fragment of the Firelands",
+1,
+4,
+0
+],
+"280438": [
+"Abominable Head",
+1,
+1,
+0
+],
+"285808": [
+"Eye of Blackhand",
+1,
+4,
+0
+],
+"285868": [
+"Eye of Drakkisath",
+1,
+4,
+0
+],
+"285873": [
+"Shattered Pauldron of Rivendare",
+1,
+4,
+0
+],
+"285949": [
+"Blood of Immol'thar",
+1,
+4,
+0
+],
+"285960": [
+"Everfrost Sample",
+1,
+4,
+0
+],
+"285962": [
+"Gandling's Signet Ring",
+1,
+4,
+0
+]
+}
+}

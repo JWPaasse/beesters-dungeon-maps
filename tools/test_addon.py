@@ -303,6 +303,14 @@ def main():
         check("loot shows only Uncommon or better", not lowQuality)
         local function contains(list, x) for _, v in ipairs(list or {}) do if v == x then return true end end end
         check("Charlga Razorflank's loot has the Pronged Reaver", contains(ns.BossLoot[4421], 6692))
+        -- The game hasn't loaded the Pronged Reaver: the addon's own item data fills in.
+        local realInfo = C_Item.GetItemInfo
+        C_Item.GetItemInfo = function(id) if id == 6692 then return nil end return realInfo(id) end
+        ns.BossLoot[mutanus.boss.npcID] = { 6692 }
+        panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
+        check("an item the game hasn't loaded yet shows from the addon's own data",
+            panel.shown[1] and panel.shown[1][2] == 6692 and ns.LootItems[6692][1] == "Pronged Reaver")
+        C_Item.GetItemInfo = realInfo
         check("a rare's shared drop counts as boss loot (Haunting Blade, Lordaeron Captain)", contains(ns.BossLoot[255699], 6641))
         -- Hovering a boss shows its portrait in the tooltip.
         local inserted, portraitID = nil, nil

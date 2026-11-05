@@ -201,6 +201,11 @@ def main():
     if models_file.exists():
         from build_boss_models import models_block
         out += [models_block(json.loads(models_file.read_text(encoding="utf-8"))["models"]), ""]
+    # Name, quality and binding of the loot (tools/loot_items.json, made by tools/build_loot_items.py).
+    items_file = ROOT / "tools" / "loot_items.json"
+    if items_file.exists():
+        from build_loot_items import items_block
+        out += [items_block(json.loads(items_file.read_text(encoding="utf-8"))["items"]), ""]
     out += ["-- [npcID] = { itemID, ... }", "ns.BossLoot = {"]
     for nid in sorted(loot):
         out.append("    [%d] = {%s}," % (nid, ",".join(str(i) for i in loot[nid])))

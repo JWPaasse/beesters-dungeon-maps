@@ -93,11 +93,27 @@ local MIN_QUALITY = 2 -- Uncommon and better
 
 local BIND_ON_PICKUP = 1
 
--- name, link, quality, icon, bindType (1 = Bind on Pickup; nil when the game doesn't say)
+-- name, link, quality, icon, bindType (1 = Bind on Pickup)
+-- Most classic items aren't in the game files: the game has to ask the server for them, and
+-- until it answers there's nothing. So the addon carries name, quality and binding itself
+-- (ns.LootItems); the game's own data is used when it has it (names in your language).
 local function ItemInfo(itemID)
     local getInfo = (C_Item and C_Item.GetItemInfo) or GetItemInfo
-    if not getInfo then return end
-    local name, link, quality, _, _, _, _, _, _, icon, _, _, _, bindType = getInfo(itemID)
+    local name, link, quality, icon, bindType
+    if getInfo then
+        local _
+        name, link, quality, _, _, _, _, _, _, icon, _, _, _, bindType = getInfo(itemID)
+    end
+    local known = ns.LootItems and ns.LootItems[itemID]
+    if not name and known then
+        name, quality, bindType = known[1], known[2], known[3]
+        local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[quality]
+        local hex = color and color.hex or "|cffffffff"
+        link = ("%s|Hitem:%d::::::::::::::|h[%s]|h|r"):format(hex, itemID, name)
+        local getInstant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
+        icon = getInstant and select(5, getInstant(itemID)) or 134400
+    end
+    if known and bindType == nil then bindType = known[3] end
     return name, link, quality, icon, bindType
 end
 
@@ -106,9 +122,13 @@ end
 -- missing a few seconds later is asked for again the next time its list is drawn.
 local requested = {}
 local retryScheduled = false
+local attempts = {}
+local function GaveUp(itemID) return (attempts[itemID] or 0) >= 3 end
 local function RequestItem(itemID)
     local now = GetTime and GetTime() or 0
     if requested[itemID] and now - requested[itemID] < 3 then return end
+    if GaveUp(itemID) then return end -- the server doesn't send it; leave it out
+    attempts[itemID] = (attempts[itemID] or 0) + 1
     requested[itemID] = now
     if Item and Item.CreateFromItemID then
         local item = Item:CreateFromItemID(itemID)
@@ -161,7 +181,9 @@ local function LootGroups(boss)
     local waiting = false
     for _, itemID in ipairs(loot) do
         local name, link, quality, icon, bindType = ItemInfo(itemID)
-        if not name then
+        if not name and GaveUp(itemID) then
+            -- Asked three times and never sent: not an item this server has. Leave it out.
+        elseif not name then
             -- Not loaded yet: list it anyway (its kind and icon are known without the server),
             -- so nothing goes missing while the rest of the list is already there.
             waiting = true
