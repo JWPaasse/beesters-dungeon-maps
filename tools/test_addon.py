@@ -150,7 +150,7 @@ QuestMapFrame = CreateFrame("Frame")
 QuestMapFrame.QuestsFrame = CreateFrame("Frame")
 C_QuestLog = {
     IsQuestFlaggedCompleted = function(id) return id == 5722 end,
-    GetLogIndexForQuestID = function(id) if id == 5723 then return 3 end end,
+    GetLogIndexForQuestID = function(id) if id == 5723 then return 3 elseif id == 5726 then return 4 end end,
     ReadyForTurnIn = function(id) return false end,
     IsComplete = function(id) return false end,
     GetQuestObjectives = function(id) return { { text = "0/8 Ragefire Trogg slain" } } end,
@@ -289,7 +289,7 @@ QuestMapFrame = CreateFrame("Frame")
 QuestMapFrame.QuestsFrame = CreateFrame("Frame")
 C_QuestLog = {
     IsQuestFlaggedCompleted = function(id) return id == 5722 end,
-    GetLogIndexForQuestID = function(id) if id == 5723 then return 3 end end,
+    GetLogIndexForQuestID = function(id) if id == 5723 then return 3 elseif id == 5726 then return 4 end end,
     ReadyForTurnIn = function(id) return false end,
     IsComplete = function(id) return false end,
     GetQuestObjectives = function(id) return { { text = "0/8 Ragefire Trogg slain" } } end,
@@ -355,6 +355,9 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         end
         check("handed-in quest goes to Handed in", has(g.done, 5722) ~= nil)
         check("quest in your log goes to Dungeon quests", has(g.log, 5723) ~= nil)
+        local hidden = has(g.log, 5728) or has(g.available, 5728)
+        check("a chain you've started (step 1 in your log) shows under Dungeon quests",
+            has(g.log, 5728) ~= nil and has(g.log, 5728).step == 1 and #has(g.log, 5728).steps == 3)
         local allianceOnly = false
         for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
         check("no Alliance-only quests for a Horde character", not allianceOnly)

@@ -166,7 +166,13 @@ local function Classify(key)
                 local current = Q(steps[entry.step or 1]) or q
                 entry.canTake = PrereqsDone(current) and not InLog(steps[entry.step or 1])
                 entry.tooLow = (current[F.REQ] or 0) > UnitLevel("player")
-                table.insert(groups.available, entry)
+                -- A chain you've started counts as one of your dungeon quests.
+                if entry.started or entry.stepInLog then
+                    entry.chain = true
+                    table.insert(groups.log, entry)
+                else
+                    table.insert(groups.available, entry)
+                end
             end
         end
     end
@@ -187,8 +193,9 @@ ns.ClassifyDungeonQuests = Classify -- used by tools/test_addon.py
 -- (the round icons). Each falls back to a plain frame if a template is missing.
 ----------------------------------------------------------------------
 
-local pools = { header = {}, title = {}, objective = {} }
-local usedCount = { header = 0, title = 0, objective = 0 }
+local pools = { header = {}, title = {}, objective = {}, step = {} }
+local usedCount = { header = 0, title = 0, objective = 0, step = 0 }
+local chainOpen = {} -- [questID] = true/false; started chains start open
 local collapsed = { done = true } -- "Handed in" starts folded, like the game's collapsed zones
 
 local function DifficultyColor(level)
@@ -321,11 +328,34 @@ local function NewObjective()
     return o
 end
 
+-- Chain trail lines: a small icon and gold text, clearly apart from the white objectives.
+local function NewStep()
+    local st = CreateFrame("Button", nil, panel.Child)
+    st:SetHeight(16)
+    st.Icon = st:CreateTexture(nil, "ARTWORK")
+    st.Icon:SetSize(14, 14)
+    st.Icon:SetPoint("TOPLEFT", 0, 0)
+    st.Label = st:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    st.Label:SetPoint("TOPLEFT", st.Icon, "TOPRIGHT", 4, -1)
+    st.Label:SetJustifyH("LEFT")
+    st.Line = st:CreateTexture(nil, "BACKGROUND")
+    st.Line:SetWidth(1)
+    st.Line:SetColorTexture(0.8, 0.65, 0.3, 0.5)
+    st.Line:SetPoint("TOP", st.Icon, "BOTTOM", 0, 0)
+    st.Line:SetPoint("BOTTOM", st, "BOTTOM", 0, -2)
+    local hl = st:CreateTexture(nil, "HIGHLIGHT")
+    hl:SetPoint("TOPLEFT", st.Label, "TOPLEFT", -2, 1)
+    hl:SetPoint("BOTTOMRIGHT", st.Label, "BOTTOMRIGHT", 2, -1)
+    hl:SetColorTexture(1, 1, 1, 0.08)
+    return st
+end
+
 local function Acquire(kind)
     usedCount[kind] = usedCount[kind] + 1
     local frame = pools[kind][usedCount[kind]]
     if not frame then
-        frame = (kind == "header" and NewHeader()) or (kind == "title" and NewTitle()) or NewObjective()
+        frame = (kind == "header" and NewHeader()) or (kind == "title" and NewTitle())
+            or (kind == "step" and NewStep()) or NewObjective()
         pools[kind][usedCount[kind]] = frame
     end
     frame:Show()
@@ -415,6 +445,94 @@ local function AddObjective(y, text, r, g, b)
     return y + height
 end
 
+local function SetStepIcon(st, state)
+    st.Icon:SetTexCoord(0, 1, 0, 1)
+    if state == "done" then
+        st.Icon:SetTexture("Interface\\RaidFrame\\ReadyCheck-Ready")
+    elseif state == "current" then
+        st.Icon:SetAtlas("QuestNormal")
+    elseif state == "open" or state == "closed" then
+        st.Icon:SetAtlas(state == "open" and "Options_ListExpand_Right_Expanded" or "Options_ListExpand_Right")
+    else
+        st.Icon:SetTexture("Interface\\Buttons\\UI-RadioButton")
+        st.Icon:SetTexCoord(0, 0.25, 0, 1)
+    end
+end
+
+local function AddStepLine(y, indent, text, state, r, g, b, onClick, last)
+    local st = Acquire("step")
+    st:ClearAllPoints()
+    st:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", indent, -y)
+    st:SetWidth(ListWidth() - indent - 20)
+    st.Label:SetWidth(ListWidth() - indent - 40)
+    st.Label:SetText(text)
+    st.Label:SetTextColor(r or NORMAL_FONT_COLOR.r, g or NORMAL_FONT_COLOR.g, b or NORMAL_FONT_COLOR.b)
+    SetStepIcon(st, state)
+    st.Line:SetShown(not last and state ~= "open" and state ~= "closed")
+    st:SetScript("OnClick", onClick)
+    local height = math.max(st.Label:GetStringHeight() or 12, 12) + 4
+    st:SetHeight(height)
+    return y + height
+end
+
+-- The chain as a trail of steps you can fold open: done steps ticked off, the step you're on
+-- with its progress (or where it starts), and the steps still to come.
+local function AddChain(y, entry)
+    local steps = entry.steps
+    local open = chainOpen[entry.id]
+    if open == nil then open = entry.chain and true or false end
+    y = AddStepLine(y, 30, ("Quest chain · step %d of %d"):format(entry.step or 1, #steps),
+        open and "open" or "closed", nil, nil, nil, function()
+            chainOpen[entry.id] = not open
+            panel.Refresh()
+        end, true)
+    if not open then return y end
+    for i, stepID in ipairs(steps) do
+        local sq = Q(stepID)
+        if sq then
+            local last = i == #steps
+            local name = ("%d. %s"):format(i, sq[F.NAME])
+            if i < (entry.step or 1) then
+                y = AddStepLine(y, 40, name, "done", 0.55, 0.55, 0.55, nil, last)
+            elseif i == (entry.step or 1) then
+                local where
+                if InLog(stepID) then
+                    where = " – in your log"
+                else
+                    local who, mapID = StartInfo(sq)
+                    local zone = mapID and C_Map.GetMapInfo(mapID)
+                    if who then where = (" – %s%s"):format(who, zone and (", " .. zone.name) or "") end
+                end
+                y = AddStepLine(y, 40, name .. (where or ""), "current", 1, 1, 1, function()
+                    ShowDetail(entry.id, entry)
+                end, last)
+                -- The step's progress, right under it.
+                if InLog(stepID) and C_QuestLog.GetQuestObjectives then
+                    for _, obj in ipairs(C_QuestLog.GetQuestObjectives(stepID) or {}) do
+                        if obj.text and obj.text ~= "" then
+                            local o = Acquire("objective")
+                            o:ClearAllPoints()
+                            o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 58, -y)
+                            o:SetWidth(ListWidth() - 76)
+                            o.DashText:SetText("-")
+                            o.Label:SetWidth(ListWidth() - 90)
+                            o.Label:SetText(obj.text)
+                            local c = obj.finished and GRAY_FONT_COLOR or HIGHLIGHT_FONT_COLOR
+                            o.Label:SetTextColor(c.r, c.g, c.b)
+                            local h = math.max(o.Label:GetStringHeight() or 12, 12) + 2
+                            o:SetHeight(h)
+                            y = y + h
+                        end
+                    end
+                end
+            else
+                y = AddStepLine(y, 40, name, "todo", 0.6, 0.6, 0.6, nil, last)
+            end
+        end
+    end
+    return y
+end
+
 local function AddQuestRow(y, entry, kind)
     local q = entry.q
     local t = Acquire("title")
@@ -435,7 +553,11 @@ local function AddQuestRow(y, entry, kind)
     -- Icon: the game's round quest button for quests in your log; "!" for ones you can pick up.
     if t.POI then t.POI:Hide() end
     t.Bang:Hide(); t.BangMark:Hide(); t.Badge:SetText("")
-    if kind == "log" and t.POI then
+    if kind == "log" and entry.chain then
+        t.Bang:SetAtlas("UI-QuestPoi-QuestNumber")
+        t.Bang:Show()
+        t.Badge:SetText(("%d/%d"):format(entry.step or 1, #entry.steps))
+    elseif kind == "log" and t.POI then
         t.POI:SetQuestID(entry.id)
         if t.POI.SetStyle and POIButtonUtil then
             t.POI:SetStyle(entry.ready and POIButtonUtil.Style.QuestComplete or POIButtonUtil.Style.QuestInProgress)
@@ -456,8 +578,9 @@ local function AddQuestRow(y, entry, kind)
         end
     end
 
-    t.Box:SetShown(kind == "log")
-    if kind == "log" then
+    local inLog = kind == "log" and not entry.chain
+    t.Box:SetShown(inLog)
+    if inLog then
         SetTracked(t, C_QuestLog.GetQuestWatchType and C_QuestLog.GetQuestWatchType(entry.id) ~= nil)
         t.hint = "<Click to open the quest>"
         t:SetScript("OnClick", function(self)
@@ -482,7 +605,9 @@ local function AddQuestRow(y, entry, kind)
     t:SetHeight(height)
     y = y + height
 
-    if kind == "log" then
+    if entry.steps and #entry.steps > 1 and kind ~= "done" then
+        y = AddChain(y, entry)
+    elseif kind == "log" then
         if entry.ready then
             y = AddObjective(y, QUEST_WATCH_QUEST_READY or "Ready for turn-in")
         elseif C_QuestLog.GetQuestObjectives then
@@ -495,25 +620,13 @@ local function AddQuestRow(y, entry, kind)
         end
     else
         -- Not in your log: what the quest asks, so every quest reads like one in the log.
-        local shown = entry.q
-        if entry.steps and entry.step and entry.steps[entry.step] then shown = Q(entry.steps[entry.step]) or shown end
-        for _, line in ipairs(DataObjectives(shown)) do
+        for _, line in ipairs(DataObjectives(entry.q)) do
             y = AddObjective(y, line, kind == "done" and 0.5 or nil, kind == "done" and 0.5 or nil, kind == "done" and 0.5 or nil)
         end
     end
-    if kind == "available" then
-        if entry.steps and #entry.steps > 1 then
-            local stepQuest = Q(entry.steps[entry.step])
-            if entry.stepInLog then
-                y = AddObjective(y, ("Step %d of %d in your log: %s"):format(entry.step, #entry.steps, stepQuest[F.NAME]))
-            else
-                y = AddObjective(y, ("Starts with: %s"):format(stepQuest[F.NAME]))
-            end
-        end
-        if entry.tooLow then
-            local current = Q(entry.steps and entry.steps[entry.step] or entry.id) or q
-            y = AddObjective(y, ("Requires level %d"):format(current[F.REQ] or 0), 1, 0.25, 0.25)
-        end
+    if kind == "available" and entry.tooLow then
+        local current = Q(entry.steps and entry.steps[entry.step] or entry.id) or q
+        y = AddObjective(y, ("Requires level %d"):format(current[F.REQ] or 0), 1, 0.25, 0.25)
     end
     return y + 8
 end
@@ -576,30 +689,29 @@ function ShowDetail(id, entry)
     local stepID = entry and entry.steps and entry.steps[entry.step or 1] or id
     local step = Q(stepID) or q
     d.Title:SetText(step[F.NAME])
-    local r, g, b = DifficultyColor(step[F.LEVEL])
-    d.Title:SetTextColor(r, g, b)
+    d.Title:SetTextColor(0.18, 0.12, 0.06) -- dark ink, like the quest details
 
     local lines = {}
     local levelLine = ("Level %d"):format(step[F.LEVEL] or 0)
     if (step[F.REQ] or 0) > UnitLevel("player") then
-        levelLine = levelLine .. (" · |cffff4040Requires level %d|r"):format(step[F.REQ])
+        levelLine = levelLine .. (" · |cffa00000Requires level %d|r"):format(step[F.REQ])
     elseif step[F.REQ] then
         levelLine = levelLine .. (" · requires level %d"):format(step[F.REQ])
     end
     table.insert(lines, levelLine)
     if stepID ~= id then
-        table.insert(lines, ("Step %d of %d toward |cffffd100%s|r"):format(entry.step or 1, #entry.steps, q[F.NAME]))
+        table.insert(lines, ("Step %d of %d toward %s"):format(entry.step or 1, #entry.steps, q[F.NAME]))
     end
     local who, mapID, x, y = StartInfo(step)
     if who then
         local zone = mapID and C_Map.GetMapInfo(mapID)
         if zone then
-            table.insert(lines, ("Starts at: |cffffffff%s|r, %s"):format(who, zone.name))
+            table.insert(lines, ("Starts at: %s, %s"):format(who, zone.name))
         else
-            table.insert(lines, ("Starts with: |cffffffff%s|r (inside the dungeon)"):format(who))
+            table.insert(lines, ("Starts with: %s (inside the dungeon)"):format(who))
         end
     end
-    if step[F.TEXT] then table.insert(lines, "|cffffffff" .. step[F.TEXT] .. "|r") end
+    if step[F.TEXT] then table.insert(lines, " "); table.insert(lines, step[F.TEXT]) end
     d.Text:SetText(table.concat(lines, "\n"))
 
     -- Rewards: the dungeon quest's own rewards.
@@ -628,27 +740,33 @@ local function CreateDetail(parent)
     d:SetPoint("BOTTOMLEFT", 0, 0)
     d:SetPoint("BOTTOMRIGHT", 0, 0)
     d:Hide()
-    local line = d:CreateTexture(nil, "ARTWORK")
-    line:SetPoint("TOPLEFT", 4, 0)
-    line:SetPoint("TOPRIGHT", -4, 0)
-    line:SetHeight(1)
-    line:SetColorTexture(0.6, 0.5, 0.3, 0.6)
-    d.Title = d:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+    -- The parchment of the game's own quest details.
+    local bg = d:CreateTexture(nil, "BACKGROUND")
+    bg:SetAllPoints()
+    if C_Texture.GetAtlasInfo("QuestDetailsBackgrounds") then
+        bg:SetAtlas("QuestDetailsBackgrounds")
+    else
+        bg:SetTexture("Interface\\QuestFrame\\QuestBG")
+    end
+    d:EnableMouse(true)
+    d.Title = d:CreateFontString(nil, "ARTWORK", "QuestTitleFont")
     d.Title:SetPoint("TOPLEFT", 8, -8)
     d.Title:SetPoint("RIGHT", -28, 0)
     d.Title:SetJustifyH("LEFT")
     d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
     d.Close:SetPoint("TOPRIGHT", 0, 0)
     d.Close:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
-    d.Text = d:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+    d.Text = d:CreateFontString(nil, "ARTWORK", "QuestFont")
     d.Text:SetPoint("TOPLEFT", d.Title, "BOTTOMLEFT", 0, -6)
     d.Text:SetPoint("RIGHT", -8, 0)
     d.Text:SetJustifyH("LEFT")
     d.Text:SetJustifyV("TOP")
     d.Text:SetSpacing(2)
-    d.RewardsLabel = d:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    d.Text:SetTextColor(0.18, 0.12, 0.06)
+    d.RewardsLabel = d:CreateFontString(nil, "ARTWORK", "QuestFont")
     d.RewardsLabel:SetPoint("BOTTOMLEFT", 8, 30)
     d.RewardsLabel:SetText(REWARDS or "Rewards")
+    d.RewardsLabel:SetTextColor(0.18, 0.12, 0.06)
     d.Rewards = {}
     for i = 1, 6 do
         local b = CreateFrame("Button", nil, d)
