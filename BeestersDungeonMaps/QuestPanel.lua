@@ -238,6 +238,7 @@ ns.ClassifyDungeonQuests = Classify -- used by tools/test_addon.py
 
 local pools = { header = {}, title = {}, objective = {}, step = {} }
 local usedCount = { header = 0, title = 0, objective = 0, step = 0 }
+ns.QuestPanelPools = pools -- used by tools/test_addon.py
 local chainOpen = {} -- [questID] = true when the whole chain is folded open
 local collapsed = { done = true } -- "Handed in" starts folded, like the game's collapsed zones
 
@@ -552,7 +553,6 @@ local function AddChain(y, entry)
             chainOpen[entry.id] = not open
             panel.Refresh()
         end, true)
-    if not open then return y end
     for i, stepID in ipairs(steps) do
         local sq = Q(stepID)
         local current = i == (entry.step or 1)

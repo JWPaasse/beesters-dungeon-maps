@@ -383,6 +383,11 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         end end
         check("a dungeon quest that is a step of a longer chain isn't listed again", not nested)
         check("Leaders of the Fang carries the earlier dungeon quests in its chain", fang and fang.dungeonSteps and next(fang.dungeonSteps) ~= nil)
+        -- A folded chain still shows the step you're on: the fold toggle plus that step.
+        ns:OpenDungeonMap("rfc")
+        local steps = 0
+        for _, f in ipairs(ns.QuestPanelPools.step) do if f:IsShown() then steps = steps + 1 end end
+        check("a folded chain still shows the step you're on", steps >= 2)
         local allianceOnly = false
         for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
         check("no Alliance-only quests for a Horde character", not allianceOnly)
