@@ -101,7 +101,21 @@ local function ItemInfo(itemID)
     return name, link, quality, icon, bindType
 end
 
+-- Ask the server for an item the game doesn't have yet; redraw what's open once it arrives.
+local requested = {}
 local function RequestItem(itemID)
+    if requested[itemID] then return end
+    requested[itemID] = true
+    if Item and Item.CreateFromItemID then
+        local item = Item:CreateFromItemID(itemID)
+        if item and item.ContinueOnItemLoad then
+            item:ContinueOnItemLoad(function()
+                requested[itemID] = nil
+                if ns.OnLootItemLoaded then ns.OnLootItemLoaded() end
+            end)
+            return
+        end
+    end
     if C_Item and C_Item.RequestLoadItemDataByID then C_Item.RequestLoadItemDataByID(itemID) end
 end
 
@@ -144,8 +158,15 @@ local function LootGroups(boss)
     for _, itemID in ipairs(loot) do
         local name, link, quality, icon, bindType = ItemInfo(itemID)
         if not name then
+            -- Not loaded yet: list it anyway (its kind and icon are known without the server),
+            -- so nothing goes missing while the rest of the list is already there.
             waiting = true
             RequestItem(itemID)
+            local getInstant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
+            local instantIcon = getInstant and select(5, getInstant(itemID))
+            local kind, sortKey = ItemKind(itemID)
+            table.insert(groups[kind], { id = itemID, name = SEARCH_LOADING_TEXT or "Loading...", loading = true,
+                icon = instantIcon or 134400, sortKey = sortKey })
         elseif (quality or 0) >= MIN_QUALITY and (bindType == nil or bindType == BIND_ON_PICKUP) then
             local kind, sortKey = ItemKind(itemID)
             table.insert(groups[kind], { id = itemID, name = name, link = link, quality = quality, icon = icon, sortKey = sortKey })
@@ -154,7 +175,9 @@ local function LootGroups(boss)
     for _, list in pairs(groups) do
         table.sort(list, function(a, b)
             if a.sortKey ~= b.sortKey and a.sortKey and b.sortKey then return a.sortKey < b.sortKey end
-            return a.name < b.name
+            if (a.loading or false) ~= (b.loading or false) then return not a.loading end
+            if a.name ~= b.name then return a.name < b.name end
+            return a.id < b.id
         end)
     end
     return groups, waiting
@@ -222,7 +245,7 @@ local function ShowBossTooltip(owner, boss, total)
             end
         end, function(item)
             any = true
-            local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality]
+            local color = item.loading and GRAY_FONT_COLOR or (ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality])
             GameTooltip:AddLine(("|T%s:16|t %s"):format(item.icon or 134400, item.name),
                 color and color.r or 1, color and color.g or 1, color and color.b or 1)
         end)
@@ -304,8 +327,8 @@ local function RefreshLootPanel()
         table.insert(panel.shown, { sectionKey, item.id })
         row.Icon:SetTexture(item.icon)
         row.Name:SetText(item.name)
-        local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality]
-        if color then row.Name:SetTextColor(color.r, color.g, color.b) end
+        local color = item.loading and GRAY_FONT_COLOR or (ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality])
+        if color then row.Name:SetTextColor(color.r, color.g, color.b) else row.Name:SetTextColor(1, 1, 1) end
         row:ClearAllPoints()
         row:SetPoint("TOPLEFT", 12, -y)
         row:Show()
@@ -364,8 +387,7 @@ end
 
 -- Item names arrive from the server a moment later; refresh what's open once they do.
 local itemListener = CreateFrame("Frame")
-itemListener:RegisterEvent("GET_ITEM_INFO_RECEIVED")
-itemListener:SetScript("OnEvent", function()
+local function RefreshOpenLoot()
     if itemListener.pending then return end
     itemListener.pending = true
     C_Timer.After(0.1, function()
@@ -376,7 +398,10 @@ itemListener:SetScript("OnEvent", function()
             ShowBossTooltip(t.owner, t.boss, t.total)
         end
     end)
-end)
+end
+ns.OnLootItemLoaded = RefreshOpenLoot
+itemListener:RegisterEvent("GET_ITEM_INFO_RECEIVED")
+itemListener:SetScript("OnEvent", RefreshOpenLoot)
 
 ----------------------------------------------------------------------
 -- Placing bosses yourself (for bosses no data source has a position for)
