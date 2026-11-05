@@ -1,7 +1,11 @@
 name: Refresh data
 
-# Rebuilds the addon's data from QuestieDB (entrances, quests, loot) and from the WoW Forever
-# client's boss table on wago.tools.
+# Rebuilds all the addon's data, so nothing has to be updated by hand:
+# - QuestieDB: entrances, quests, Forever bosses' loot
+# - the WoW Forever client's boss table (wago.tools)
+# - the CMaNGOS Classic database: quest text, classic bosses' loot with drop chances, item data
+# - Wowhead's WoW Forever item tooltips (new items at once, missing ones weekly, all monthly)
+# and updates the data audit (docs/AUDIT.md).
 # Daily while WoW Forever is new and data changes fast, weekly (Mondays) after DAILY_UNTIL.
 # The workflow runs every day; after the cut-off date it skips every day except Monday.
 # To change the cut-off, edit DAILY_UNTIL below. Manual runs ("Run workflow") always refresh,
@@ -64,10 +68,23 @@ jobs:
           pip install lupa
           python3 tools/build_data.py /tmp/QuestieDB
           python3 tools/build_quests.py /tmp/QuestieDB
-          # Full quest text and rewards from the CMaNGOS Classic database (keeps the old file if it fails).
-          python3 tools/build_quest_text.py --questiedb /tmp/QuestieDB || echo "::warning::Quest text not refreshed"
+          # The CMaNGOS Classic database: quest text, classic boss loot, item data and stats.
+          # Each step keeps the old file if it fails.
+          if python3 tools/get_classicdb.py /tmp/classicdb.sql.gz; then
+            python3 tools/build_quest_text.py /tmp/classicdb.sql.gz --questiedb /tmp/QuestieDB || echo "::warning::Quest text not refreshed"
+            python3 tools/build_classic_loot.py /tmp/classicdb.sql.gz || echo "::warning::Classic boss loot not refreshed"
+          else
+            echo "::warning::Classic database not downloaded; quest text and classic loot kept"
+          fi
           # wago.tools can be briefly unavailable; keep yesterday's bosses rather than failing the run.
-          python3 tools/build_bosses.py /tmp/QuestieDB || echo "::warning::Boss data not refreshed (wago.tools unavailable?)"
+          python3 tools/build_bosses.py /tmp/QuestieDB || python3 tools/build_bosses.py /tmp/QuestieDB --loot-only || echo "::warning::Boss data not refreshed"
+          if [ -f /tmp/classicdb.sql.gz ]; then
+            python3 tools/build_loot_items.py /tmp/classicdb.sql.gz || echo "::warning::Loot item data not refreshed"
+            python3 tools/build_classic_tooltips.py /tmp/classicdb.sql.gz || echo "::warning::Classic tooltips not refreshed"
+          fi
+          # WoW Forever tooltips from Wowhead: new items now, missing ones weekly, known ones monthly.
+          python3 tools/fetch_loot_tooltips.py || echo "::warning::Wowhead tooltips not refreshed"
+          python3 tools/audit.py
 
       - name: Run checks
         if: steps.schedule.outputs.run == 'true'
@@ -78,7 +95,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add BeestersDungeonMaps/Data
+          git add BeestersDungeonMaps/Data tools/*.json docs/AUDIT.md
           if git diff --cached --quiet; then echo "No data changes."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

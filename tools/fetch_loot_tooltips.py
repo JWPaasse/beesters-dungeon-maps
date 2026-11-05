@@ -9,7 +9,13 @@ Wowhead's WoW Forever database (nether.wowhead.com/forever/tooltip/item/ID); ite
 doesn't know get a tooltip made from the Classic database's item stats
 (tools/classic_item_tooltips.json, from tools/build_classic_tooltips.py). Results are cached in tools/loot_tooltips.json; --refresh fetches all
 again. Writes BeestersDungeonMaps/Data/LootTooltips.lua.
+
+Run on a schedule (refresh-data workflow), it keeps itself up to date: new loot items are fetched
+right away, items Wowhead didn't have are asked for again after a week (so a classic-stats
+tooltip gets replaced by WoW Forever's once Wowhead has it), and known ones are fetched again
+after a month (to pick up changes WoW Forever makes to an item).
 """
+import datetime
 import json
 import re
 import sys
@@ -45,16 +51,30 @@ def main():
     loot = BOSSES.read_text(encoding="utf-8").split("ns.BossLoot = {")[1]
     ids = sorted({int(i) for body in re.findall(r"^    \[\d+\] = \{([\d,]+)\}", loot, re.M) for i in body.split(",")})
     cache = json.loads(CACHE.read_text(encoding="utf-8")) if CACHE.exists() and not refresh else {"items": {}, "missing": []}
-    known = set(cache["items"]) | {str(i) for i in cache["missing"]}
+    today = datetime.date.today()
+    checked = cache.setdefault("checked", {})
+    for key in list(cache["items"]) + [str(i) for i in cache["missing"]]:
+        checked.setdefault(key, today.isoformat())  # files from before dates were kept
+
+    def due(key):
+        if key not in checked:
+            return True
+        age = (today - datetime.date.fromisoformat(checked[key])).days
+        return age >= (30 if key in cache["items"] else 7)
+
     fetched = 0
     for item_id in ids:
-        if str(item_id) in known or "--offline" in sys.argv:
+        key = str(item_id)
+        if "--offline" in sys.argv or not due(key):
             continue
         data = fetch(item_id)
         fetched += 1
+        checked[key] = today.isoformat()
         if data and data.get("tooltip"):
-            cache["items"][str(item_id)] = tooltip_lines(data["tooltip"])
-        else:
+            cache["items"][key] = tooltip_lines(data["tooltip"])
+            if item_id in cache["missing"]:
+                cache["missing"].remove(item_id)
+        elif key not in cache["items"] and item_id not in cache["missing"]:
             cache["missing"].append(item_id)
         time.sleep(0.25)
     cache["_source"] = "Wowhead's WoW Forever item tooltips (nether.wowhead.com)."
