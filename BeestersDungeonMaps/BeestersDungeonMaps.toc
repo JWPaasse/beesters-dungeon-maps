@@ -12,8 +12,10 @@
 Data\Entrances.lua
 Data\Bosses.lua
 Data\Maps.lua
+Data\Quests.lua
 Core.lua
 MapPins.lua
 MapPins.xml
 DungeonMap.lua
+QuestPanel.lua
 Options.lua

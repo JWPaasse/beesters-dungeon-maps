@@ -95,8 +95,10 @@ function ns:InitOptions()
     mapsHeader:SetText("Dungeon maps")
     local auto = NewCheckbox(panel, "Open the dungeon map inside dungeons",
         "When you open your map inside a dungeon, show that dungeon's map.", "autoOpenInside", mapsHeader)
-    NewCheckbox(panel, "List dungeons in the map's top bar",
+    local topBar = NewCheckbox(panel, "List dungeons in the map's top bar",
         "Adds a Dungeons button after the zone name (World > Kalimdor > Durotar > Dungeons).", "dungeonsInTopBar", auto)
+    NewCheckbox(panel, "Show the dungeon's quests next to its map",
+        "Adds a tab with the dungeon's quests to the quest list while a dungeon map is open.", "questPanel", topBar)
 
     if Settings and Settings.RegisterCanvasLayoutCategory then
         local category = Settings.RegisterCanvasLayoutCategory(panel, ns.title)

@@ -16,6 +16,7 @@ ns.defaults = {
     entranceSize = 32,
     autoOpenInside = true,
     dungeonsInTopBar = true,
+    questPanel = true,
 }
 
 function ns:Print(message)
@@ -154,4 +155,5 @@ loader:SetScript("OnEvent", function(self, _, loadedName)
     ns:InitOptions()
     ns:InitMapPins()
     ns:InitDungeonMap()
+    ns:InitQuestPanel()
 end)

@@ -10,7 +10,8 @@
 - Boss positions: the retail Dungeon Journal's positions on those same maps
   (tools/journal_positions.json), plus Cataclysm Classic's journal for the original bosses of
   dungeons that were rebuilt later (tools/journal_positions_cata.json, made by
-  tools/fetch_cata_positions.py). Matched to the game's own boss list in the addon.
+  tools/fetch_cata_positions.py), plus Wowhead's map coordinates for a few more
+  (tools/wowhead_positions.json). Matched to the game's own boss list in the addon.
 
 Writes BeestersDungeonMaps/Data/Maps.lua.
 """
@@ -64,12 +65,16 @@ def main():
     tiles = json.loads((ROOT / "tools" / "dungeon_maps.json").read_text(encoding="utf-8"))
     journal = json.loads((ROOT / "tools" / "journal_positions.json").read_text(encoding="utf-8"))["bosses"]
     # Cataclysm's journal fills in the original bosses of dungeons that were rebuilt later.
-    cata_file = ROOT / "tools" / "journal_positions_cata.json"
-    if cata_file.exists():
-        def norm(name):
-            return "".join(ch for ch in name.lower() if ch.isalpha())
-        known = {(b[0].split("|")[0], norm(b[2])) for b in journal} | {(b[0].split("|")[0], b[1]) for b in journal}
-        for b in json.loads(cata_file.read_text(encoding="utf-8"))["bosses"]:
+    def norm(name):
+        return "".join(ch for ch in name.lower() if ch.isalpha())
+
+    for extra in ("journal_positions_cata.json", "wowhead_positions.json"):
+        extra_file = ROOT / "tools" / extra
+        if not extra_file.exists():
+            continue
+        known = {(b[0].split("|")[0], norm(b[2])) for b in journal}
+        known |= {(b[0].split("|")[0], b[1]) for b in journal if b[1]}
+        for b in json.loads(extra_file.read_text(encoding="utf-8"))["bosses"]:
             dungeon = b[0].split("|")[0]
             if (dungeon, norm(b[2])) not in known and (dungeon, b[1]) not in known:
                 journal.append(b)

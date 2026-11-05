@@ -14,4 +14,13 @@
             </Layer>
         </Layers>
     </Frame>
+    <!-- Where a quest starts ("Show on map" in the dungeon quest panel). Same rules as above. -->
+    <Frame name="BeestersDungeonMapsMarkerPinTemplate" mixin="BeestersDungeonMapsMarkerPinMixin" enableMouseMotion="true" virtual="true">
+        <Size x="30" y="30"/>
+        <Layers>
+            <Layer level="OVERLAY">
+                <Texture parentKey="Icon" setAllPoints="true"/>
+            </Layer>
+        </Layers>
+    </Frame>
 </Ui>

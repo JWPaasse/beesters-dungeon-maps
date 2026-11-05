@@ -169,6 +169,57 @@ function PinMixin:OnMouseLeave()
 end
 
 ----------------------------------------------------------------------
+-- Quest start marker ("Show on map" in the dungeon quest panel)
+----------------------------------------------------------------------
+
+local MARKER_TEMPLATE = "BeestersDungeonMapsMarkerPinTemplate"
+BeestersDungeonMapsMarkerPinMixin = CreateFromMixins(MapCanvasPinMixin)
+local MarkerMixin = BeestersDungeonMapsMarkerPinMixin
+
+function MarkerMixin:OnLoad()
+    self:UseFrameLevelType("PIN_FRAME_LEVEL_SUPER_TRACKED_QUEST")
+    self:SetScalingLimits(1, 1.0, 1.2)
+end
+
+function MarkerMixin:OnAcquired(marker, x, y)
+    self.marker = marker
+    self:SetPosition(x, y)
+    self:SetSize(30, 30)
+    if C_Texture.GetAtlasInfo("QuestNormal") then
+        self.Icon:SetAtlas("QuestNormal")
+    else
+        self.Icon:SetTexture("Interface\\GossipFrame\\AvailableQuestIcon")
+    end
+end
+
+function MarkerMixin:OnMouseEnter()
+    local m = self.marker
+    if not m then return end
+    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+    GameTooltip:SetText(m.title, 1, 1, 1)
+    if m.who then GameTooltip:AddLine(m.who, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b) end
+    GameTooltip:Show()
+end
+
+function MarkerMixin:OnMouseLeave()
+    GameTooltip:Hide()
+end
+
+function ns:ShowQuestMarker(mapID, x, y, title, who)
+    ns.questMarker = { mapID = mapID, x = x, y = y, title = title, who = who }
+    if WorldMapFrame:GetMapID() == mapID then
+        ns:CloseDungeonMap(true)
+        ns:RefreshMapPins()
+    else
+        WorldMapFrame:SetMapID(mapID) -- closes the dungeon map and redraws the pins
+    end
+end
+
+function ns:ClearQuestMarker()
+    ns.questMarker = nil
+end
+
+----------------------------------------------------------------------
 -- Data provider
 ----------------------------------------------------------------------
 
@@ -176,6 +227,7 @@ local Provider = CreateFromMixins(MapCanvasDataProviderMixin)
 
 function Provider:RemoveAllData()
     self:GetMap():RemoveAllPinsByTemplate(PIN_TEMPLATE)
+    self:GetMap():RemoveAllPinsByTemplate(MARKER_TEMPLATE)
 end
 
 function Provider:RefreshAllData()
@@ -186,6 +238,11 @@ function Provider:RefreshAllData()
     local mapID = map and map:GetMapID()
     local mapInfo = mapID and C_Map.GetMapInfo(mapID)
     if not db or not mapInfo then return end
+
+    local m = ns.questMarker
+    if m and m.mapID == mapID then
+        map:AcquirePin(MARKER_TEMPLATE, m, m.x, m.y)
+    end
 
     local mapType = mapInfo.mapType
     if mapType == Enum.UIMapType.Cosmic or mapType == Enum.UIMapType.World then return end

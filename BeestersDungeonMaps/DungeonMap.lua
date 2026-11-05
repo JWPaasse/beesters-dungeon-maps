@@ -63,14 +63,17 @@ local function BossesWithPositions(key)
         byName[Normalize(p[5])] = p
     end
     local result = {}
+    local custom = ns.db and ns.db.bossPositions and ns.db.bossPositions[key]
     local list = ns.Bosses and ns.Bosses[key]
     if list then
         for order, boss in ipairs(list) do
             local encounterID, name, npcID = boss[1], boss[2], boss[3]
             local p = byEncounter[encounterID] or byName[Normalize(name)]
+            local mine = custom and custom[name]
+            if mine then p = { mine[1], mine[2], mine[3] } end
             table.insert(result, {
                 order = order, encounterID = encounterID, name = name, npcID = npcID,
-                floor = p and p[1], x = p and p[2], y = p and p[3],
+                floor = p and p[1], x = p and p[2], y = p and p[3], custom = mine and true or nil,
             })
         end
     else
@@ -86,62 +89,211 @@ end
 -- Boss tooltip (name, place in the dungeon, loot)
 ----------------------------------------------------------------------
 
-local pendingTooltipBoss
+local MIN_QUALITY = 2 -- Uncommon and better
+
+local function ItemInfo(itemID)
+    if C_Item and C_Item.GetItemInfo then
+        local name, link, quality, _, _, _, _, _, _, icon = C_Item.GetItemInfo(itemID)
+        return name, link, quality, icon
+    elseif GetItemInfo then
+        local name, link, quality, _, _, _, _, _, _, icon = GetItemInfo(itemID)
+        return name, link, quality, icon
+    end
+end
+
+local function RequestItem(itemID)
+    if C_Item and C_Item.RequestLoadItemDataByID then C_Item.RequestLoadItemDataByID(itemID) end
+end
 
 local function ShowBossTooltip(owner, boss, total)
     GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
     GameTooltip:SetText(boss.name, 1, 1, 1)
     GameTooltip:AddLine(("Boss %d of %d"):format(boss.order, total), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-
-    local loot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID]
-    if loot and #loot > 0 then
-        GameTooltip:AddLine(" ")
-        GameTooltip:AddLine(LOOT or "Loot", NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-        local missing = false
-        local shown = 0
-        for _, itemID in ipairs(loot) do
-            local name, _, quality
-            if C_Item and C_Item.GetItemInfo then
-                name, _, quality = C_Item.GetItemInfo(itemID)
-            elseif GetItemInfo then
-                name, _, quality = GetItemInfo(itemID)
-            end
-            if name then
-                if shown < 14 then
-                    local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[quality or 1]
-                    local r, g, b = 1, 1, 1
-                    if color then r, g, b = color.r, color.g, color.b end
-                    GameTooltip:AddLine(name, r, g, b)
-                end
-                shown = shown + 1
-            else
-                missing = true
-                if C_Item and C_Item.RequestLoadItemDataByID then
-                    C_Item.RequestLoadItemDataByID(itemID)
-                end
-            end
-        end
-        if shown > 14 then
-            GameTooltip:AddLine(("and %d more"):format(shown - 14), 0.6, 0.6, 0.6)
-        end
-        if missing then
-            GameTooltip:AddLine(SEARCH_LOADING_TEXT or "Loading...", 0.6, 0.6, 0.6)
-            pendingTooltipBoss = { owner = owner, boss = boss, total = total }
-        end
+    if boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID] then
+        GameTooltip:AddLine("<Click to see loot>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
+    end
+    if boss.custom then
+        GameTooltip:AddLine("Placed by you. Shift-right-click to undo.", 0.6, 0.6, 0.6, true)
+    elseif not boss.x then
+        GameTooltip:AddLine("Shift-drag onto the map to place this boss.", 0.6, 0.6, 0.6, true)
     end
     GameTooltip:Show()
 end
 
--- Item names arrive from the server a moment later; refresh the open tooltip once they do.
+----------------------------------------------------------------------
+-- Loot panel: opens when you click a boss. Hover an item for its game tooltip,
+-- shift-click to link it in chat, ctrl-click to try it on.
+----------------------------------------------------------------------
+
+local lootPanel
+
+local function RefreshLootPanel()
+    local panel = lootPanel
+    if not panel or not panel:IsShown() then return end
+    local boss = panel.boss
+    local loot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID] or {}
+    panel.Title:SetText(boss.name)
+    local index, waiting = 0, false
+    for _, itemID in ipairs(loot) do
+        local name, link, quality, icon = ItemInfo(itemID)
+        if not name then
+            waiting = true
+            RequestItem(itemID)
+        elseif (quality or 0) >= MIN_QUALITY then
+            index = index + 1
+            local row = panel.Rows[index]
+            if not row then
+                row = CreateFrame("Button", nil, panel)
+                row:SetSize(230, 22)
+                row.Icon = row:CreateTexture(nil, "ARTWORK")
+                row.Icon:SetSize(20, 20)
+                row.Icon:SetPoint("LEFT")
+                row.Name = row:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+                row.Name:SetPoint("LEFT", row.Icon, "RIGHT", 6, 0)
+                row.Name:SetPoint("RIGHT")
+                row.Name:SetJustifyH("LEFT")
+                row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
+                row:SetScript("OnEnter", function(self)
+                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+                    GameTooltip:SetItemByID(self.itemID)
+                    GameTooltip:Show()
+                end)
+                row:SetScript("OnLeave", function() GameTooltip:Hide() end)
+                row:SetScript("OnClick", function(self)
+                    if HandleModifiedItemClick then HandleModifiedItemClick(self.link) end
+                end)
+                panel.Rows[index] = row
+            end
+            row.itemID, row.link = itemID, link
+            row.Icon:SetTexture(icon)
+            local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[quality]
+            row.Name:SetText(name)
+            if color then row.Name:SetTextColor(color.r, color.g, color.b) end
+            row:ClearAllPoints()
+            row:SetPoint("TOPLEFT", 12, -30 - (index - 1) * 22)
+            row:Show()
+        end
+    end
+    for i = index + 1, #panel.Rows do panel.Rows[i]:Hide() end
+    panel.Empty:SetShown(index == 0)
+    panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Uncommon or better loot known.")
+    panel:SetHeight(44 + math.max(index, 1) * 22)
+end
+
+local function CreateLootPanel(parent)
+    local panel = CreateFrame("Frame", "BeestersDungeonMapsLoot", parent, BackdropTemplateMixin and "BackdropTemplate")
+    panel:SetSize(254, 100)
+    panel:SetFrameStrata("DIALOG")
+    panel:EnableMouse(true)
+    if panel.SetBackdrop then
+        panel:SetBackdrop({
+            bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+            edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+            tile = true, tileSize = 16, edgeSize = 16,
+            insets = { left = 4, right = 4, top = 4, bottom = 4 },
+        })
+        panel:SetBackdropColor(0.05, 0.05, 0.05, 0.92)
+        panel:SetBackdropBorderColor(0.6, 0.6, 0.6, 1)
+    end
+    panel.Title = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+    panel.Title:SetPoint("TOPLEFT", 12, -10)
+    panel.Title:SetPoint("RIGHT", -30, 0)
+    panel.Title:SetJustifyH("LEFT")
+    panel.Close = CreateFrame("Button", nil, panel, "UIPanelCloseButton")
+    panel.Close:SetPoint("TOPRIGHT", 2, 2)
+    panel.Empty = panel:CreateFontString(nil, "ARTWORK", "GameFontDisableSmall")
+    panel.Empty:SetPoint("TOPLEFT", 12, -34)
+    panel.Rows = {}
+    panel:Hide()
+    return panel
+end
+
+local function ToggleLoot(owner, boss)
+    if not lootPanel then lootPanel = CreateLootPanel(view) end
+    if lootPanel:IsShown() and lootPanel.boss == boss then
+        lootPanel:Hide()
+        return
+    end
+    lootPanel.boss = boss
+    lootPanel:ClearAllPoints()
+    lootPanel:SetPoint("TOPLEFT", owner, "TOPRIGHT", 6, 0)
+    lootPanel:SetClampedToScreen(true)
+    lootPanel:Show()
+    RefreshLootPanel()
+end
+
+-- Item names arrive from the server a moment later; refresh what's open once they do.
 local itemListener = CreateFrame("Frame")
 itemListener:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 itemListener:SetScript("OnEvent", function()
-    local p = pendingTooltipBoss
-    if p and GameTooltip:IsShown() and GameTooltip:GetOwner() == p.owner then
-        pendingTooltipBoss = nil
-        ShowBossTooltip(p.owner, p.boss, p.total)
+    if lootPanel and lootPanel:IsShown() then
+        if not itemListener.pending then
+            itemListener.pending = true
+            C_Timer.After(0.1, function() itemListener.pending = false; RefreshLootPanel() end)
+        end
     end
 end)
+
+----------------------------------------------------------------------
+-- Placing bosses yourself (for bosses no data source has a position for)
+----------------------------------------------------------------------
+
+local ShowFloor -- defined below
+
+local function SaveCustomPosition(boss, x, y)
+    ns.db.bossPositions = ns.db.bossPositions or {}
+    local list = ns.db.bossPositions[current.key] or {}
+    ns.db.bossPositions[current.key] = list
+    list[boss.name] = { current.floor, math.floor(x * 1000 + 0.5) / 1000, math.floor(y * 1000 + 0.5) / 1000 }
+end
+
+local function CursorOnArt()
+    local left, bottom, width, height = view.Art:GetRect()
+    if not left then return end
+    local scale = view.Art:GetEffectiveScale()
+    local cx, cy = GetCursorPosition()
+    cx, cy = cx / scale, cy / scale
+    local x, y = (cx - left) / width, (bottom + height - cy) / height
+    if x < 0 or x > 1 or y < 0 or y > 1 then return end
+    return x, y
+end
+
+local function StartPlacing(self)
+    if not IsShiftKeyDown() then return end
+    self.placing = true
+    SetCursor("Interface\\Cursor\\UI-Cursor-Move")
+end
+
+local function StopPlacing(self)
+    if not self.placing then return end
+    self.placing = false
+    ResetCursor()
+    local x, y = CursorOnArt()
+    if x then
+        SaveCustomPosition(self.boss, x, y)
+        ShowFloor(current.floor)
+    end
+end
+
+local function BossClick(self, button)
+    if button == "RightButton" and IsShiftKeyDown() and self.boss.custom then
+        local list = ns.db.bossPositions and ns.db.bossPositions[current.key]
+        if list then list[self.boss.name] = nil end
+        ShowFloor(current.floor)
+    elseif button == "LeftButton" and not IsShiftKeyDown() then
+        ToggleLoot(self, self.boss)
+    end
+end
+
+local function SetupBossFrame(frame)
+    frame:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+    frame:RegisterForDrag("LeftButton")
+    frame:SetScript("OnDragStart", StartPlacing)
+    frame:SetScript("OnDragStop", StopPlacing)
+    frame:SetScript("OnClick", BossClick)
+    frame:SetScript("OnEnter", function(self) ShowBossTooltip(self, self.boss, self.total) end)
+    frame:SetScript("OnLeave", function() GameTooltip:Hide() end)
+end
 
 ----------------------------------------------------------------------
 -- The view
@@ -159,12 +311,14 @@ local function CreateBossButton(parent)
     end
     button.Highlight = button:CreateTexture(nil, "HIGHLIGHT")
     button.Highlight:SetAllPoints()
-    button.Highlight:SetTexture(button.Icon:GetTexture())
-    if button.Icon:GetAtlas() then button.Highlight:SetAtlas(button.Icon:GetAtlas()) end
+    if C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(SKULL_ATLAS) then
+        button.Highlight:SetAtlas(SKULL_ATLAS)
+    else
+        button.Highlight:SetTexture(SKULL_FALLBACK)
+    end
     button.Highlight:SetBlendMode("ADD")
     button.Highlight:SetAlpha(0.4)
-    button:SetScript("OnEnter", function(self) ShowBossTooltip(self, self.boss, self.total) end)
-    button:SetScript("OnLeave", function() pendingTooltipBoss = nil; GameTooltip:Hide() end)
+    SetupBossFrame(button)
     return button
 end
 
@@ -182,8 +336,7 @@ local function CreateListRow(parent)
     row.Text = row:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
     row.Text:SetPoint("LEFT", row.Icon, "RIGHT", 4, 0)
     row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
-    row:SetScript("OnEnter", function(self) ShowBossTooltip(self, self.boss, self.total) end)
-    row:SetScript("OnLeave", function() pendingTooltipBoss = nil; GameTooltip:Hide() end)
+    SetupBossFrame(row)
     return row
 end
 
@@ -218,7 +371,8 @@ local function Layout()
     end
 end
 
-local function ShowFloor(index)
+function ShowFloor(index)
+    if lootPanel then lootPanel:Hide() end
     local map = ns.DungeonMaps[current.key]
     current.floor = index
     local floor = map.floors[index]
@@ -413,11 +567,14 @@ function ns:OpenDungeonMap(key, floor)
     if WorldMapFrame.NavBar and WorldMapFrame.NavBar.Refresh then
         WorldMapFrame.NavBar:Refresh()
     end
+    if ns.ShowDungeonQuests then ns:ShowDungeonQuests(key) end
 end
 
 function ns:CloseDungeonMap(refreshNavBar)
     if not ns:IsDungeonMapOpen() then return end
     view:Hide()
+    if lootPanel then lootPanel:Hide() end
+    if ns.HideDungeonQuests then ns:HideDungeonQuests() end
     current.key = nil
     current.zoneMapID = nil
     SetCanvasShown(true)
@@ -517,6 +674,7 @@ function ns:InitDungeonMap()
     end)
     WorldMapFrame:HookScript("OnHide", function()
         ns:CloseDungeonMap(false)
+        if ns.ClearQuestMarker then ns:ClearQuestMarker() end
     end)
     ns.dungeonMapActive = true
 end

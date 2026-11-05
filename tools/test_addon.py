@@ -32,6 +32,8 @@ local function anything()
             f = function(s) return s._shown end
         elseif key == "HookScript" or key == "SetScript" then
             f = function(s, event, fn) local sc = rawget(s, "scripts") or {}; rawset(s, "scripts", sc); sc[event] = fn end
+        elseif key == "CreateFontString" or key == "CreateTexture" then
+            f = function() return anything() end
         elseif key == "GetAtlas" or key == "GetTexture" then
             f = function() return nil end
         else
@@ -52,6 +54,14 @@ function hooksecurefunc(target, name, hook)
     end
 end
 C_Timer = { After = function(_, fn) fn() end }
+C_Item = { GetItemInfo = function(id) return "Item " .. id, "|Hitem:" .. id .. "|h", id % 4, nil, nil, nil, nil, nil, nil, 134400 end }
+ITEM_QUALITY_COLORS = { [0] = { r = .6, g = .6, b = .6 }, { r = 1, g = 1, b = 1 }, { r = .1, g = 1, b = 0 }, { r = 0, g = .4, b = 1 }, { r = .6, g = .2, b = 1 } }
+shiftDown = false
+
+function IsShiftKeyDown() return shiftDown end
+function SetCursor() end
+function ResetCursor() end
+function GetCursorPosition() return 450, 250 end
 function ShowUIPanel(frame) frame:Show() end
 navButtons = {}
 function NavBar_AddButton(navBar, data) table.insert(navButtons, data) end
@@ -130,6 +140,22 @@ WorldMapFrame.OnMapChanged = function(self) self.NavBar:Refresh() end
 WorldMapFrame.SetMapID = function(self, mapID)
     if mapID ~= self.mapID then self.mapID = mapID; self:OnMapChanged() end
 end
+-- Quest log: Ragefire Chasm's quests for a Horde character (5722 handed in, 5723 in the log).
+QuestScrollFrame = CreateFrame("ScrollFrame")
+QuestMapFrame = CreateFrame("Frame")
+QuestMapFrame.QuestsFrame = CreateFrame("Frame")
+C_QuestLog = {
+    IsQuestFlaggedCompleted = function(id) return id == 5722 end,
+    GetLogIndexForQuestID = function(id) if id == 5723 then return 3 end end,
+    ReadyForTurnIn = function(id) return false end,
+    IsComplete = function(id) return false end,
+    GetQuestObjectives = function(id) return { { text = "0/8 Ragefire Trogg slain" } } end,
+    GetQuestWatchType = function() return nil end,
+}
+function UnitFactionGroup() return "Horde" end
+function UnitClass() return "Warrior", "WARRIOR", 1 end
+function UnitLevel() return 14 end
+function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
 """
 
 def main():
@@ -228,6 +254,54 @@ def main():
         local menu = navButtons[#navButtons].listFunc()
         check("its menu lists the other Barrens dungeons", #menu >= 3)
 
+        -- Loot: click a boss, see only Uncommon+ items.
+        local mutanus
+        for _, b in ipairs(view.BossButtons) do if b:IsShown() and b.boss.name == "Mutanus the Devourer" then mutanus = b end end
+        mutanus.scripts.OnClick(mutanus, "LeftButton")
+        local panel = BeestersDungeonMapsLoot
+        local rows, lowQuality = 0, false
+        for _, r in ipairs(panel.Rows) do
+            if r:IsShown() then
+                rows = rows + 1
+                if r.itemID % 4 < 2 then lowQuality = true end
+            end
+        end
+        check("clicking a boss opens its loot", panel:IsShown() and rows > 0)
+        check("loot shows only Uncommon or better", not lowQuality)
+
+        -- Placing a boss yourself: shift-drag a listed boss onto the map.
+        ns:OpenDungeonMap("rfc")
+        local row = view.ListRows[1]
+        view.Art.GetRect = function() return 100, 100, 600, 400 end
+        view.Art.GetEffectiveScale = function() return 1 end
+        shiftDown = true
+        row.scripts.OnDragStart(row)
+        row.scripts.OnDragStop(row)
+        shiftDown = false
+-- Quest log: Ragefire Chasm's quests for a Horde character (5722 handed in, 5723 in the log).
+QuestScrollFrame = CreateFrame("ScrollFrame")
+QuestMapFrame = CreateFrame("Frame")
+QuestMapFrame.QuestsFrame = CreateFrame("Frame")
+C_QuestLog = {
+    IsQuestFlaggedCompleted = function(id) return id == 5722 end,
+    GetLogIndexForQuestID = function(id) if id == 5723 then return 3 end end,
+    ReadyForTurnIn = function(id) return false end,
+    IsComplete = function(id) return false end,
+    GetQuestObjectives = function(id) return { { text = "0/8 Ragefire Trogg slain" } } end,
+    GetQuestWatchType = function() return nil end,
+}
+function UnitFactionGroup() return "Horde" end
+function UnitClass() return "Warrior", "WARRIOR", 1 end
+function UnitLevel() return 14 end
+function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
+        local placed = ns.db.bossPositions and ns.db.bossPositions.rfc and ns.db.bossPositions.rfc.Oggleflint
+        check("shift-dragging a listed boss onto the map places it", placed and placed[1] == 1
+            and math.abs(placed[2] - 0.583) < 0.01 and math.abs(placed[3] - 0.625) < 0.01)
+        local shownPins = 0
+        for _, b in ipairs(view.BossButtons) do if b:IsShown() then shownPins = shownPins + 1 end end
+        check("the placed boss now shows as a pin", shownPins == 1)
+        ns:OpenDungeonMap("wc")
+
         WorldMapFrame:SetMapID(1415)
         check("changing the map closes the dungeon map", not ns:IsDungeonMapOpen() and WorldMapFrame.ScrollContainer.Child:IsShown())
 
@@ -255,6 +329,31 @@ def main():
         local smPins = 0
         for _, b in ipairs(view.BossButtons) do if b:IsShown() then smPins = smPins + 1 end end
         ns:CloseDungeonMap(true)
+
+        -- Quest panel
+        ns:OpenDungeonMap("rfc")
+        local qp = BeestersDungeonMapsQuests
+        check("dungeon quest tab opens with the dungeon map", qp and qp:IsShown() and BeestersDungeonMapsQuestTabs:IsShown())
+        local texts = {}
+        for _, child in ipairs({}) do end
+        local rowsShown = 0
+        local function collect(frame) end
+        local g = ns.ClassifyDungeonQuests("rfc")
+        local function has(list, id) for _, e in ipairs(list) do if e.id == id then return e end end end
+        print("rfc groups: log " .. #g.log .. ", available " .. #g.available .. ", inside " .. #g.inside .. ", done " .. #g.done)
+        for _, name in ipairs({ "log", "available", "inside", "done" }) do
+            for _, e in ipairs(g[name]) do print("  " .. name, e.id, e.q[1], e.q[4] or "-", e.steps and #e.steps or "", e.tooLow and "too low" or "") end
+        end
+        check("handed-in quest goes to Handed in", has(g.done, 5722) ~= nil)
+        check("quest in your log goes to Dungeon quests", has(g.log, 5723) ~= nil)
+        local allianceOnly = false
+        for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
+        check("no Alliance-only quests for a Horde character", not allianceOnly)
+        local used = 0
+        for _, r in ipairs({ qp.Child }) do used = used + 1 end
+        check("quest list has rows", qp.Child ~= nil)
+        ns:CloseDungeonMap(true)
+        check("quest tab closes with the dungeon map", not qp:IsShown() and not BeestersDungeonMapsQuestTabs:IsShown())
 
         IsInInstance = function() return true, "party" end
         GetInstanceInfo = function() return "Ragefire Chasm", "party", 1, "Normal", 5, 0, false, 389 end

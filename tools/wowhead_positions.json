@@ -1,0 +1,61 @@
+{
+ "_source": "Wowhead (retail) map coordinates for NPCs that still exist in today's game, on the same classic dungeon map images (zone/floor checked against the Journal's floors). Averaged where Wowhead lists several spawn points. Collected 2026-11-05.",
+ "bosses": [
+  [
+   "brd|2",
+   0,
+   "Princess Moira Bronzebeard",
+   0.925,
+   0.113
+  ],
+  [
+   "brs|6",
+   0,
+   "Pyroguard Emberseer",
+   0.306,
+   0.271
+  ],
+  [
+   "bfd|1",
+   0,
+   "Gelihast",
+   0.542,
+   0.568
+  ],
+  [
+   "sm|1",
+   0,
+   "Interrogator Vishas",
+   0.717,
+   0.606
+  ],
+  [
+   "sm|1",
+   0,
+   "Bloodmage Thalnos",
+   0.245,
+   0.518
+  ],
+  [
+   "sm|2",
+   0,
+   "Houndmaster Loksey",
+   0.302,
+   0.846
+  ],
+  [
+   "sm|3",
+   0,
+   "Herod",
+   0.785,
+   0.118
+  ],
+  [
+   "sm|4",
+   0,
+   "High Inquisitor Fairbanks",
+   0.555,
+   0.25
+  ]
+ ]
+}
