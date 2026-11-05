@@ -278,7 +278,7 @@ def main():
         check("loot shows only Uncommon or better", not lowQuality)
 
         -- Placing a boss yourself: shift-drag a listed boss onto the map.
-        ns:OpenDungeonMap("stocks")
+        ns:OpenDungeonMap("scholo")
         local row = view.ListRows[1]
         local placedName = row.boss.name
         view.Art.GetRect = function() return 100, 100, 600, 400 end
@@ -306,7 +306,7 @@ function UnitName() return "Beester" end
 function UnitRace() return "Orc" end
 function UnitSex() return 2 end
 function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
-        local placed = ns.db.bossPositions and ns.db.bossPositions.stocks and ns.db.bossPositions.stocks[placedName]
+        local placed = ns.db.bossPositions and ns.db.bossPositions.scholo and ns.db.bossPositions.scholo[placedName]
         check("shift-dragging a listed boss onto the map places it", placed and placed[1] == 1
             and math.abs(placed[2] - 0.583) < 0.01 and math.abs(placed[3] - 0.625) < 0.01)
         local shownPins = 0
@@ -332,7 +332,7 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("changing the map closes the dungeon map", not ns:IsDungeonMapOpen() and WorldMapFrame.ScrollContainer.Child:IsShown())
 
         -- Open a dungeon somewhere else first: the Dungeons list must follow the map you're on.
-        ns:OpenDungeonMap("stocks")
+        ns:OpenDungeonMap("scholo")
         ns:CloseDungeonMap(true)
         WorldMapFrame.mapID = 1413
         WorldMapFrame.NavBar:Refresh()
