@@ -1063,8 +1063,14 @@ local function CreateDetail(parent)
     d:EnableMouse(true)
     d.texts, d.buttons, d.textCount, d.buttonCount = {}, {}, 0, 0
     d.FillReward = FillReward
+    -- The text sits in its own box (parchment and border, closed at the bottom); the
+    -- "Show on map" button goes underneath it, outside the border.
+    local box = CreateFrame("Frame", nil, d)
+    box:SetPoint("TOPLEFT", 0, 0)
+    box:SetPoint("BOTTOMRIGHT", 0, 30)
+    d.Box = box
     -- The parchment of the game's own quest details.
-    local bg = d:CreateTexture(nil, "BACKGROUND")
+    local bg = box:CreateTexture(nil, "BACKGROUND")
     bg:SetAllPoints()
     if C_Texture.GetAtlasInfo("QuestDetailsBackgrounds") then
         bg:SetAtlas("QuestDetailsBackgrounds")
@@ -1073,17 +1079,17 @@ local function CreateDetail(parent)
     end
 
     -- The same border the game puts around its quest details.
-    local okBorder, border = pcall(CreateFrame, "Frame", nil, d, "QuestLogBorderFrameTemplate")
+    local okBorder, border = pcall(CreateFrame, "Frame", nil, box, "QuestLogBorderFrameTemplate")
     if okBorder and border then
         border:SetPoint("TOPLEFT", -3, 4)
         border:SetPoint("BOTTOMRIGHT", 3, -3)
         d.Border = border
     end
 
-    local ok, scroll = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", d, "UIPanelScrollFrameTemplate")
-    if not ok then scroll = CreateFrame("ScrollFrame", nil, d) end
+    local ok, scroll = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", box, "UIPanelScrollFrameTemplate")
+    if not ok then scroll = CreateFrame("ScrollFrame", nil, box) end
     scroll:SetPoint("TOPLEFT", 0, -4)
-    scroll:SetPoint("BOTTOMRIGHT", -24, 32)
+    scroll:SetPoint("BOTTOMRIGHT", -24, 4)
     d.Scroll = scroll
     d.Page = CreateFrame("Frame", nil, scroll)
     d.Page:SetSize(200, 10)
@@ -1097,7 +1103,7 @@ local function CreateDetail(parent)
 
     d.MapButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     d.MapButton:SetSize(110, 22)
-    d.MapButton:SetPoint("BOTTOMRIGHT", -6, 5)
+    d.MapButton:SetPoint("BOTTOMRIGHT", 0, 2)
     d.MapButton:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
     d.MapButton:SetText("Show on map")
     d.MapButton:SetScript("OnClick", function(self)
