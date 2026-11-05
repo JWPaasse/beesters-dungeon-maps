@@ -7006,9 +7006,1209 @@
 "|cffffd100Item Level 1|r",
 "Quest Item",
 "Unique"
+],
+"414": [
+"|cffffffffDalaran Sharp|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 234 health over 21 sec. Must remain seated while eating.|r|r"
+],
+"422": [
+"|cffffffffDwarven Mild|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 531 health over 24 sec. Must remain seated while eating.|r|r"
+],
+"730": [
+"|cffffffffMurloc Eye|r",
+"|cffffd100Item Level 11|r",
+"Crafting Reagent"
+],
+"765": [
+"|cffffffffSilverleaf|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"770": [
+"|cff9d9d9dPointy Crocolisk Tooth|r",
+"|cffffd100Item Level 1|r"
+],
+"785": [
+"|cffffffffMageroyal|r",
+"|cffffd100Item Level 10|r",
+"Crafting Reagent"
+],
+"858": [
+"|cffffffffLesser Healing Potion|r",
+"|cffffd100Item Level 13|r",
+"Requires Level 3",
+"|cff1eff00Use: |cff1eff00Restores 140 to 180 health.|r (2 Min Cooldown)|r"
+],
+"929": [
+"|cffffffffHealing Potion|r",
+"|cffffd100Item Level 22|r",
+"Requires Level 12",
+"|cff1eff00Use: |cff1eff00Restores 280 to 360 health.|r (2 Min Cooldown)|r"
+],
+"1015": [
+"|cffffffffLean Wolf Flank|r",
+"|cffffd100Item Level 19|r",
+"Crafting Reagent"
+],
+"1074": [
+"|cff9d9d9dHard Spider Leg Tip|r",
+"|cffffd100Item Level 1|r"
+],
+"1179": [
+"|cffffffffIce Cold Milk|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 437 mana over 21 sec. Must remain seated while drinking.|r|r"
+],
+"1205": [
+"|cffffffffMelon Juice|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 835 mana over 24 sec. Must remain seated while drinking.|r|r"
+],
+"1210": [
+"|cff1eff00Shadowgem|r",
+"|cffffd100Item Level 20|r",
+"Crafting Reagent"
+],
+"1468": [
+"|cffffffffMurloc Fin|r",
+"|cffffd100Item Level 16|r",
+"Crafting Reagent"
+],
+"1470": [
+"|cffffffffMurloc Skin Bag|r",
+"|cffffd100Item Level 25|r",
+"Unique",
+"10 Slot Bag"
+],
+"1520": [
+"|cff9d9d9dTroll Sweat|r",
+"|cffffd100Item Level 1|r"
+],
+"1645": [
+"|cffffffffMoonberry Juice|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: |cff1eff00Restores 1915 mana over 30 sec. Must remain seated while drinking.|r|r"
+],
+"1708": [
+"|cffffffffSweet Nectar|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: |cff1eff00Restores 1345 mana over 27 sec. Must remain seated while drinking.|r|r"
+],
+"2287": [
+"|cffffffffHaunch of Meat|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 234 health over 21 sec. Must remain seated while eating.|r|r"
+],
+"2295": [
+"|cff9d9d9dLarge Boar Tusk|r",
+"|cffffd100Item Level 1|r"
+],
+"2447": [
+"|cffffffffPeacebloom|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"2449": [
+"|cffffffffEarthroot|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"2450": [
+"|cffffffffBriarthorn|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2452": [
+"|cffffffffSwiftthistle|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2453": [
+"|cffffffffBruiseweed|r",
+"|cffffd100Item Level 20|r",
+"Crafting Reagent"
+],
+"2589": [
+"|cffffffffLinen Cloth|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"2592": [
+"|cffffffffWool Cloth|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2608": [
+"|cff9d9d9dThreshadon Ambergris|r",
+"|cffffd100Item Level 10|r"
+],
+"2677": [
+"|cffffffffBoar Ribs|r",
+"|cffffd100Item Level 14|r",
+"Crafting Reagent"
+],
+"2770": [
+"|cffffffffCopper Ore|r",
+"|cffffd100Item Level 10|r",
+"Crafting Reagent"
+],
+"2771": [
+"|cffffffffTin Ore|r",
+"|cffffd100Item Level 20|r",
+"Crafting Reagent"
+],
+"2836": [
+"|cffffffffCoarse Stone|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2909": [
+"|cffffffffRed Wool Bandana|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"3010": [
+"|cff9d9d9dFine Sand|r",
+"|cffffd100Item Level 1|r"
+],
+"3172": [
+"|cffffffffBoar Intestines|r",
+"|cffffd100Item Level 10|r",
+"Crafting Reagent"
+],
+"3301": [
+"|cff9d9d9dSharp Canine|r",
+"|cffffd100Item Level 1|r"
+],
+"3402": [
+"|cff9d9d9dSoft Patch of Fur|r",
+"|cffffd100Item Level 1|r"
+],
+"3403": [
+"|cff9d9d9dIvory Boar Tusk|r",
+"|cffffd100Item Level 1|r"
+],
+"3712": [
+"|cffffffffTurtle Meat|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"3770": [
+"|cffffffffMutton Chop|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 531 health over 24 sec. Must remain seated while eating.|r|r"
+],
+"3771": [
+"|cffffffffWild Hog Shank|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: |cff1eff00Restores 841 health over 27 sec. Must remain seated while eating.|r|r"
+],
+"3857": [
+"|cffffffffCoal|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"3928": [
+"|cffffffffSuperior Healing Potion|r",
+"|cffffd100Item Level 45|r",
+"|cff1eff00<Random enchantment>|r",
+"Requires Level 35",
+"|cff1eff00Use: |cff1eff00Restores 700 to 900 health.|r (2 Min Cooldown)|r"
+],
+"4306": [
+"|cffffffffSilk Cloth|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"4337": [
+"|cffffffffThick Spider's Silk|r",
+"|cffffd100Item Level 35|r",
+"Crafting Reagent"
+],
+"4338": [
+"|cffffffffMageweave Cloth|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"4415": [
+"|cff0070ddSchematic: Craftsman's Monocle|r",
+"|cffffd100Item Level 37|r",
+"Requires |cffffffffEngineering|r (185)",
+"|cff1eff00Use: Teaches you how to make a Craftsman's Monocle.|r",
+"|cff1eff00Craftsman's Monocle|r",
+"|cffffd100Item Level 37|r",
+"Binds when equipped",
+"Head\t|cffffffffCloth|r",
+"40 Armor",
+"+15 Intellect",
+"Durability 45 / 45",
+"Requires Level 32",
+"Requires |cffffffffEngineering|r (185)"
+],
+"4460": [
+"|cff9d9d9dRipped Wing Webbing|r",
+"|cffffd100Item Level 1|r"
+],
+"4537": [
+"|cffffffffTel'Abim Banana|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 234 health over 21 sec. Must remain seated while eating.|r|r"
+],
+"4538": [
+"|cffffffffSnapvine Watermelon|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 531 health over 24 sec. Must remain seated while eating.|r|r"
+],
+"4539": [
+"|cffffffffGoldenbark Apple|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: |cff1eff00Restores 841 health over 27 sec. Must remain seated while eating.|r|r"
+],
+"4541": [
+"|cffffffffFreshly Baked Bread|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 234 health over 21 sec. Must remain seated while eating.|r|r"
+],
+"4542": [
+"|cffffffffMoist Cornbread|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 531 health over 24 sec. Must remain seated while eating.|r|r"
+],
+"4552": [
+"|cff9d9d9dSmooth Stone Chip|r",
+"|cffffd100Item Level 1|r"
+],
+"4553": [
+"|cff9d9d9dJagged Piece of Stone|r",
+"|cffffd100Item Level 1|r"
+],
+"4554": [
+"|cff9d9d9dShiny Polished Stone|r",
+"|cffffd100Item Level 1|r"
+],
+"4555": [
+"|cff9d9d9dThick Scaly Tail|r",
+"|cffffd100Item Level 1|r"
+],
+"4556": [
+"|cff9d9d9dSpeckled Shell Fragment|r",
+"|cffffd100Item Level 1|r"
+],
+"4557": [
+"|cff9d9d9dFiery Gland|r",
+"|cffffd100Item Level 1|r"
+],
+"4583": [
+"|cff9d9d9dThick Furry Mane|r",
+"|cffffd100Item Level 1|r"
+],
+"4584": [
+"|cff9d9d9dLarge Trophy Paw|r",
+"|cffffd100Item Level 1|r"
+],
+"4585": [
+"|cff9d9d9dDripping Spider Mandible|r",
+"|cffffd100Item Level 1|r"
+],
+"4595": [
+"|cffffffffJunglevine Wine|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: |cff1eff00A strong alcoholic beverage.|r|r"
+],
+"4599": [
+"|cffffffffCured Ham Steak|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: |cff1eff00Restores 1338 health over 30 sec. Must remain seated while eating.|r|r"
+],
+"4601": [
+"|cffffffffSoft Banana Bread|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: |cff1eff00Restores 1338 health over 30 sec. Must remain seated while eating.|r|r"
+],
+"4603": [
+"|cffffffffRaw Spotted Yellowtail|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: |cff1eff00Restores 841 health over 27 sec. Must remain seated while eating.|r|r",
+"Crafting Reagent"
+],
+"4605": [
+"|cffffffffRed-speckled Mushroom|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 234 health over 21 sec. Must remain seated while eating.|r|r"
+],
+"4606": [
+"|cffffffffSpongy Morel|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 531 health over 24 sec. Must remain seated while eating.|r|r"
+],
+"4607": [
+"|cffffffffDelicious Cave Mold|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: |cff1eff00Restores 841 health over 27 sec. Must remain seated while eating.|r|r"
+],
+"4787": [
+"|cff9d9d9dBurning Pitch|r",
+"|cffffd100Item Level 1|r"
+],
+"4791": [
+"|cffffffffEnchanted Water|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: |cff1eff00Restores 1345 mana over 27 sec. Must remain seated while drinking.|r|r"
+],
+"5125": [
+"|cff9d9d9dCharged Scale|r",
+"|cffffd100Item Level 1|r"
+],
+"5128": [
+"|cff9d9d9dShed Lizard Skin|r",
+"|cffffd100Item Level 1|r"
+],
+"5442": [
+"|cffffffffHead of Arugal|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"5470": [
+"|cffffffffThunder Lizard Tail|r",
+"|cffffd100Item Level 22|r",
+"Crafting Reagent"
+],
+"5516": [
+"|cff9d9d9dThreshadon Fang|r",
+"|cffffd100Item Level 16|r",
+"One-Hand\t|cffffffffDagger|r",
+"5 - 10 Damage\tSpeed 1.50",
+"(5.00 damage per second)",
+"Durability 35 / 35",
+"Requires Level 11"
+],
+"5523": [
+"|cffffffffSmall Barnacled Clam|r",
+"|cffffd100Item Level 10|r",
+"|cff1eff00<Right Click to Open>|r"
+],
+"5524": [
+"|cffffffffThick-shelled Clam|r",
+"|cffffd100Item Level 20|r",
+"|cff1eff00<Right Click to Open>|r"
+],
+"5569": [
+"|cff9d9d9dSeaweed|r",
+"|cffffd100Item Level 20|r"
+],
+"5635": [
+"|cffffffffSharp Claw|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"5637": [
+"|cffffffffLarge Fang|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"5784": [
+"|cffffffffSlimy Murloc Scale|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"5805": [
+"|cffffffffHeart of Zeal|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"5825": [
+"|cffffffffTreshala's Pendant|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"5952": [
+"|cffffffffCorrupted Brain Stem|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6149": [
+"|cffffffffGreater Mana Potion|r",
+"|cffffd100Item Level 41|r",
+"Requires Level 31",
+"|cff1eff00Use: |cff1eff00Restores 700 to 900 mana.|r (2 Min Cooldown)|r"
+],
+"6181": [
+"|cffffffffFetish of Hakkar|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6289": [
+"|cffffffffRaw Longjaw Mud Snapper|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 59 health over 18 sec. Must remain seated while eating.|r|r",
+"Crafting Reagent"
+],
+"6308": [
+"|cffffffffRaw Bristle Whisker Catfish|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 234 health over 21 sec. Must remain seated while eating.|r|r",
+"Crafting Reagent"
+],
+"6361": [
+"|cffffffffRaw Rainbow Fin Albacore|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: |cff1eff00Restores 59 health over 18 sec. Must remain seated while eating.|r|r",
+"Crafting Reagent"
+],
+"6443": [
+"|cffffffffDeviate Hide|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6444": [
+"|cff9d9d9dForked Tongue|r",
+"|cffffd100Item Level 1|r"
+],
+"6446": [
+"|cff1eff00Snakeskin Bag|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Unique",
+"10 Slot Bag"
+],
+"6470": [
+"|cffffffffDeviate Scale|r",
+"|cffffd100Item Level 1|r",
+"Crafting Reagent"
+],
+"6471": [
+"|cffffffffPerfect Deviate Scale|r",
+"|cffffd100Item Level 1|r",
+"Crafting Reagent"
+],
+"6530": [
+"|cffffffffNightcrawlers|r",
+"|cffffd100Item Level 20|r",
+"Requires |cffffffffFishing|r (50)",
+"|cff1eff00Use: |cff1eff00When applied to your fishing pole, increases Fishing by 50 for 10 min.|r|r"
+],
+"6826": [
+"|cff9d9d9dBrilliant Scale|r",
+"|cffffd100Item Level 1|r"
+],
+"6841": [
+"|cffffffffVial of Phlogiston|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6893": [
+"|cffffffffWorkshop Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"7070": [
+"|cffffffffElemental Water|r",
+"|cffffd100Item Level 25|r",
+"Crafting Reagent"
+],
+"7072": [
+"|cffffffffNaga Scale|r",
+"|cffffd100Item Level 25|r",
+"Crafting Reagent"
+],
+"7079": [
+"|cffffffffGlobe of Water|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"7080": [
+"|cff1eff00Essence of Water|r",
+"|cffffd100Item Level 55|r",
+"Crafting Reagent"
+],
+"7912": [
+"|cffffffffSolid Stone|r",
+"|cffffd100Item Level 35|r",
+"Crafting Reagent"
+],
+"7972": [
+"|cffffffffIchor of Undeath|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"7973": [
+"|cffffffffBig-mouth Clam|r",
+"|cffffd100Item Level 40|r",
+"|cff1eff00<Right Click to Open>|r"
+],
+"8146": [
+"|cffffffffWicked Claw|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"8150": [
+"|cffffffffDeeprock Salt|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"8151": [
+"|cffffffffFlask of Mojo|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"8152": [
+"|cffffffffFlask of Big Mojo|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"8623": [
+"|cff1eff00OOX-17/TN Distress Beacon|r",
+"|cffffd100Item Level 43|r",
+"Binds when picked up",
+"Unique",
+"|cffffffffThis Item Begins a Quest|r",
+"Requires Level 43"
+],
+"8766": [
+"|cffffffffMorning Glory Dew|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: |cff1eff00Restores 2821 mana over 30 sec. Must remain seated while drinking.|r|r"
+],
+"8932": [
+"|cffffffffAlterac Swiss|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: |cff1eff00Restores 2065 health over 30 sec. Must remain seated while eating.|r|r"
+],
+"8948": [
+"|cffffffffDried King Bolete|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: |cff1eff00Restores 2065 health over 30 sec. Must remain seated while eating.|r|r"
+],
+"9242": [
+"|cff9d9d9dAncient Tablet|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00<Right Click to Read>|r"
+],
+"9299": [
+"|cffffffffThermaplugg's Safe Combination|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"9308": [
+"|cffffffffGrime-Encrusted Object|r",
+"|cffffd100Item Level 1|r",
+"|cffffd100\"Caked grime obscures the true identity of this object.\"|r"
+],
+"9309": [
+"|cffffffffRobo-mechanical Guts|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9327": [
+"|cff1eff00Security DELTA Data Access Card|r",
+"|cffffd100Item Level 1|r",
+"Unique",
+"Requires |cffffffffEngineering|r (1)"
+],
+"9451": [
+"|cffffffffBubbling Water|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: |cff1eff00Restores 835 mana over 24 sec. Must remain seated while drinking.|r|r"
+],
+"9523": [
+"|cffffffffTroll Temper|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9738": [
+"|cffffffffGem of Cobrahn|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"10285": [
+"|cffffffffShadow Silk|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"10286": [
+"|cffffffffHeart of the Wild|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"10330": [
+"|cff0070ddScarlet Leggings|r",
+"|cffffd100Item Level 44|r",
+"Binds when picked up",
+"Legs\t|cffffffffMail|r",
+"236 Armor",
+"+21 Strength",
+"+10 Stamina",
+"Durability 90 / 90",
+"Requires Level 39",
+"|cffffd100|cffffd100Chain of the Scarlet Crusade|r (0/6)|r|cff9d9d9dScarlet Belt|r",
+"|cff9d9d9dScarlet Boots|r",
+"|cff9d9d9dScarlet Chestpiece|r",
+"|cff9d9d9dScarlet Gauntlets|r",
+"|cff9d9d9dScarlet Leggings|r",
+"|cff9d9d9dScarlet Wristguards|r",
+"|cff9d9d9d(2) Set : +10 Shadow Resistance.|r",
+"|cff9d9d9d(3) Set : +30 Attack Power against Undead.|r",
+"|cff9d9d9d(4) Set : Taking damage has a 15% chance to grant Enraging Light for 10 sec, causing your melee attacks to deal 20 Holy damage. Deals 3 times as much damage to Undead. (Proc chance: 15%, 15s cooldown)|r",
+"|cff9d9d9d(5) Set : Improves your chance to hit by 1.0%.|r",
+"|cff9d9d9d(6) Set : Taking damage while at or below 20% health grants you a shield, absorbing 480 damage for 10 sec. This effect can only trigger once every 4 min. (4m cooldown)|r"
+],
+"10660": [
+"|cffffffffFirst Mosh'aru Tablet|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"10663": [
+"|cffffffffEssence of Hakkar|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cff1eff00Use: |cff1eff00Use to fill the Egg of Hakkar.|r|r"
+],
+"11078": [
+"|cffffffffRelic Coffer Key|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: |cff1eff00Opens a Black Vault Relic Coffer Door.|r|r"
+],
+"11129": [
+"|cffffffffEssence of the Elements|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"11140": [
+"|cffffffffPrison Cell Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"Various runes and etchings cover the surface of the key.\"|r"
+],
+"11312": [
+"|cffffffffLost Thunderbrew Recipe|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"11370": [
+"|cffffffffDark Iron Ore|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"11446": [
+"|cffffffffA Crumpled Up Note|r",
+"|cffffd100Item Level 50|r",
+"Binds when picked up",
+"Unique",
+"|cffffffffThis Item Begins a Quest|r",
+"Requires Level 50"
+],
+"11468": [
+"|cffffffffDark Iron Fanny Pack|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"12203": [
+"|cffffffffRed Wolf Meat|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"12205": [
+"|cffffffffWhite Spider Meat|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"12208": [
+"|cffffffffTender Wolf Meat|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"12219": [
+"|cffffffffUnadorned Seal of Ascension|r",
+"|cffffd100Item Level 1|r",
+"Unique",
+"|cffffd100\"Three empty sockets cover the face.\"|r"
+],
+"12382": [
+"|cff1eff00Key to the City|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"Master Key to the City of Stratholme\"|r"
+],
+"12662": [
+"|cff1eff00Demonic Rune|r",
+"|cffffd100Item Level 50|r",
+"Binds when picked up",
+"|cff1eff00Use: |cff1eff00Restores 900 to 1500 mana at the cost of 600 to 1000 life.|r (2 Min Cooldown)|r",
+"Crafting Reagent"
+],
+"12712": [
+"|cffffffffWarosh's Mojo|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"12735": [
+"|cff1eff00Frayed Abomination Stitching|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"12753": [
+"|cff1eff00Skin of Shadow|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"12808": [
+"|cff1eff00Essence of Undeath|r",
+"|cffffd100Item Level 55|r",
+"Crafting Reagent"
+],
+"12811": [
+"|cff1eff00Righteous Orb|r",
+"|cffffd100Item Level 60|r",
+"Crafting Reagent"
+],
+"12841": [
+"|cffffffffInvader's Scourgestone|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"12843": [
+"|cff1eff00Corruptor's Scourgestone|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"13174": [
+"|cffffffffPlagued Flesh Sample|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"13250": [
+"|cffffffffHead of Balnazzar|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffffffThis Item Begins a Quest|r",
+"Requires Level 55"
+],
+"13444": [
+"|cffffffffMajor Mana Potion|r",
+"|cffffd100Item Level 59|r",
+"Requires Level 49",
+"|cff1eff00Use: |cff1eff00Restores 1350 to 2250 mana.|r (2 Min Cooldown)|r"
+],
+"13446": [
+"|cffffffffMajor Healing Potion|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: |cff1eff00Restores 1050 to 1750 health.|r (2 Min Cooldown)|r"
+],
+"13509": [
+"|cff1eff00Clutch of Foresight|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Unique",
+"Requires Level 55",
+"|cff1eff00Use: |cff1eff00Counters the enemy's spellcast, preventing any spell from that school of magic from being cast for 10 sec. Generates a high amount of threat.|r (1 Min Cooldown)|r"
+],
+"13523": [
+"|cffffffffBlood of Innocents|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"The blood is still fresh.\"|r"
+],
+"14047": [
+"|cffffffffRunecloth|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"14227": [
+"|cffffffffIronweb Spider Silk|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"15412": [
+"|cffffffffGreen Dragonscale|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"16250": [
+"|cff1eff00Formula: Enchant Weapon - Superior Striking|r",
+"|cffffd100Item Level 60|r",
+"Requires |cffffffffEnchanting|r (300)",
+"|cff1eff00Use: Teaches you how to permanently enchant a weapon to do 5 additional damage.|r",
+"|cff1eff00|cff1eff00Permanently enchant a Melee Weapon to do 5 additional points of damage.|r|r"
+],
+"16684": [
+"|cff0070ddMagister's Gloves|r",
+"|cffffd100Item Level 59|r",
+"Binds when equipped",
+"Hands\t|cffffffffCloth|r",
+"52 Armor",
+"+8 Stamina",
+"+14 Intellect",
+"+14 Spirit",
+"Durability 30 / 30",
+"Requires Level 54",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 7.|r",
+"|cffffd100|cffffd100Magister's Regalia|r (0/8)|r|cff9d9d9dMagister's Belt|r",
+"|cff9d9d9dMagister's Bindings|r",
+"|cff9d9d9dMagister's Crown|r",
+"|cff9d9d9dMagister's Gloves|r",
+"|cff9d9d9dMagister's Leggings|r",
+"|cff9d9d9dMagister's Mantle|r",
+"|cff9d9d9dMagister's Robes|r",
+"|cff9d9d9dMagister's Boots|r",
+"|cff9d9d9d(2) Set : +8 All Resistances.|r",
+"|cff9d9d9d(3) Set : Increases damage and healing done by magical spells and effects by up to 18.|r",
+"|cff9d9d9d(4) Set : When struck in combat has a 2% chance of freezing the attacker in place for 3 sec. Can only occur once every 60 sec. (Proc chance: 2%, 1m cooldown)|r",
+"|cff9d9d9d(5) Set : Your spellcasts have a 5% chance to energize you for 200 mana. (Proc chance: 5%)|r",
+"|cff9d9d9d(6) Set : Restores 8 mana per 5 sec.|r"
+],
+"16689": [
+"|cff0070ddMagister's Mantle|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Shoulder\t|cffffffffCloth|r",
+"64 Armor",
+"+6 Stamina",
+"+22 Intellect",
+"Durability 50 / 50",
+"Requires Level 55",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 8.|r",
+"|cffffd100|cffffd100Magister's Regalia|r (0/8)|r|cff9d9d9dMagister's Belt|r",
+"|cff9d9d9dMagister's Bindings|r",
+"|cff9d9d9dMagister's Crown|r",
+"|cff9d9d9dMagister's Gloves|r",
+"|cff9d9d9dMagister's Leggings|r",
+"|cff9d9d9dMagister's Mantle|r",
+"|cff9d9d9dMagister's Robes|r",
+"|cff9d9d9dMagister's Boots|r",
+"|cff9d9d9d(2) Set : +8 All Resistances.|r",
+"|cff9d9d9d(3) Set : Increases damage and healing done by magical spells and effects by up to 18.|r",
+"|cff9d9d9d(4) Set : When struck in combat has a 2% chance of freezing the attacker in place for 3 sec. Can only occur once every 60 sec. (Proc chance: 2%, 1m cooldown)|r",
+"|cff9d9d9d(5) Set : Your spellcasts have a 5% chance to energize you for 200 mana. (Proc chance: 5%)|r",
+"|cff9d9d9d(6) Set : Restores 8 mana per 5 sec.|r"
+],
+"16705": [
+"|cff0070ddDreadmist Wraps|r",
+"|cffffd100Item Level 59|r",
+"Binds when equipped",
+"Hands\t|cffffffffCloth|r",
+"52 Armor",
+"+13 Stamina",
+"+9 Intellect",
+"+14 Spirit",
+"Durability 30 / 30",
+"Requires Level 54",
+"|cff1eff00Equip: Improves your chance to hit by 1.0%.|r",
+"|cffffd100|cffffd100Dreadmist Raiment|r (0/8)|r|cff9d9d9dDreadmist Belt|r",
+"|cff9d9d9dDreadmist Bracers|r",
+"|cff9d9d9dDreadmist Leggings|r",
+"|cff9d9d9dDreadmist Mantle|r",
+"|cff9d9d9dDreadmist Robe|r",
+"|cff9d9d9dDreadmist Sandals|r",
+"|cff9d9d9dDreadmist Mask|r",
+"|cff9d9d9dDreadmist Wraps|r",
+"|cff9d9d9d(2) Set : +8 All Resistances.|r",
+"|cff9d9d9d(3) Set : Increases damage and healing done by magical spells and effects by up to 18.|r",
+"|cff9d9d9d(4) Set : When struck in combat has a 2% chance of causing the attacker to flee in terror for 2 sec. Can only occur once every 60 sec. (Proc chance: 2%, 1m cooldown)|r",
+"|cff9d9d9d(5) Set : Your spellcasts have a 5% chance to heal you for 270 to 330. (Proc chance: 5%)|r",
+"|cff9d9d9d(6) Set : Restores 8 mana per 5 sec.|r"
+],
+"16710": [
+"|cff0070ddShadowcraft Bracers|r",
+"|cffffd100Item Level 57|r",
+"Binds when equipped",
+"Wrist\t|cffffffffLeather|r",
+"71 Armor",
+"+15 Agility",
+"+7 Stamina",
+"Durability 35 / 35",
+"Requires Level 52",
+"|cffffd100|cffffd100Shadowcraft Armor|r (0/8)|r|cff9d9d9dShadowcraft Belt|r",
+"|cff9d9d9dShadowcraft Boots|r",
+"|cff9d9d9dShadowcraft Bracers|r",
+"|cff9d9d9dShadowcraft Tunic|r",
+"|cff9d9d9dShadowcraft Spaulders|r",
+"|cff9d9d9dShadowcraft Pants|r",
+"|cff9d9d9dShadowcraft Gloves|r",
+"|cff9d9d9dShadowcraft Cap|r",
+"|cff9d9d9d(2) Set : +8 All Resistances.|r",
+"|cff9d9d9d(3) Set : +30 Attack Power.|r",
+"|cff9d9d9d(4) Set : When struck in combat, has a 5% chance to remove a Snare effect from yourself. Can only occur once every 60 sec. (Proc chance: 5%, 1m cooldown)|r",
+"|cff9d9d9d(5) Set : Chance on melee attack to restore 20 Energy.|r",
+"|cff9d9d9d(6) Set : Restores 15 health per 5 sec.|r"
+],
+"16716": [
+"|cff0070ddWildheart Belt|r",
+"|cffffd100Item Level 58|r",
+"Binds when equipped",
+"Waist\t|cffffffffLeather|r",
+"93 Armor",
+"+9 Stamina",
+"+17 Intellect",
+"+10 Spirit",
+"Durability 35 / 35",
+"Requires Level 53",
+"|cff1eff00Equip: Increases healing done by up to 11 and damage done by up to 4 for all magical spells and effects.|r",
+"|cffffd100|cffffd100Wildheart Raiment|r (0/8)|r|cff9d9d9dWildheart Belt|r",
+"|cff9d9d9dWildheart Boots|r",
+"|cff9d9d9dWildheart Bracers|r",
+"|cff9d9d9dWildheart Cowl|r",
+"|cff9d9d9dWildheart Vest|r",
+"|cff9d9d9dWildheart Spaulders|r",
+"|cff9d9d9dWildheart Kilt|r",
+"|cff9d9d9dWildheart Gloves|r",
+"|cff9d9d9d(2) Set : +8 All Resistances.|r",
+"|cff9d9d9d(3) Set : Increases damage and healing done by magical spells and effects by up to 18.|r",
+"|cff9d9d9d(3) Set : +30 Attack Power.|r",
+"|cff9d9d9d(4) Set : When struck in combat, has a 5% chance to increase your movement speed by 10% for 8 sec. Can only occur once every 60 sec. (Proc chance: 5%, 1m cooldown)|r",
+"|cff9d9d9d(5) Set : Chance on spellcast to restore 200 Mana, on melee attack to regenerate 20 Energy over 5 sec, and when struck by a melee attack to generate 10 Rage.|r",
+"|cff9d9d9d(6) Set : Restores 8 mana per 5 sec.|r"
+],
+"16717": [
+"|cff0070ddWildheart Gloves|r",
+"|cffffd100Item Level 59|r",
+"Binds when equipped",
+"Hands\t|cffffffffLeather|r",
+"105 Armor",
+"+9 Intellect",
+"+21 Spirit",
+"Durability 35 / 35",
+"Requires Level 54",
+"|cff1eff00Equip: Increases healing done by up to 11 and damage done by up to 4 for all magical spells and effects.|r",
+"|cffffd100|cffffd100Wildheart Raiment|r (0/8)|r|cff9d9d9dWildheart Belt|r",
+"|cff9d9d9dWildheart Boots|r",
+"|cff9d9d9dWildheart Bracers|r",
+"|cff9d9d9dWildheart Cowl|r",
+"|cff9d9d9dWildheart Vest|r",
+"|cff9d9d9dWildheart Spaulders|r",
+"|cff9d9d9dWildheart Kilt|r",
+"|cff9d9d9dWildheart Gloves|r",
+"|cff9d9d9d(2) Set : +8 All Resistances.|r",
+"|cff9d9d9d(3) Set : Increases damage and healing done by magical spells and effects by up to 18.|r",
+"|cff9d9d9d(3) Set : +30 Attack Power.|r",
+"|cff9d9d9d(4) Set : When struck in combat, has a 5% chance to increase your movement speed by 10% for 8 sec. Can only occur once every 60 sec. (Proc chance: 5%, 1m cooldown)|r",
+"|cff9d9d9d(5) Set : Chance on spellcast to restore 200 Mana, on melee attack to regenerate 20 Energy over 5 sec, and when struck by a melee attack to generate 10 Rage.|r",
+"|cff9d9d9d(6) Set : Restores 8 mana per 5 sec.|r"
+],
+"16722": [
+"|cff0070ddLightforge Bracers|r",
+"|cffffd100Item Level 57|r",
+"Binds when equipped",
+"Wrist\t|cffffffffPlate|r",
+"261 Armor",
+"+8 Strength",
+"+5 Agility",
+"+10 Stamina",
+"+7 Intellect",
+"Durability 45 / 45",
+"Requires Level 52",
+"|cffffd100|cffffd100Lightforge Armor|r (0/8)|r|cff9d9d9dLightforge Belt|r",
+"|cff9d9d9dLightforge Boots|r",
+"|cff9d9d9dLightforge Bracers|r",
+"|cff9d9d9dLightforge Breastplate|r",
+"|cff9d9d9dLightforge Gauntlets|r",
+"|cff9d9d9dLightforge Legplates|r",
+"|cff9d9d9dLightforge Spaulders|r",
+"|cff9d9d9dLightforge Helm|r",
+"|cff9d9d9d(2) Set : +8 All Resistances.|r",
+"|cff9d9d9d(3) Set : Increases damage and healing done by magical spells and effects by up to 18.|r",
+"|cff9d9d9d(4) Set : When struck by a harmful spell, has a 7% chance of Silencing the caster for 3 sec. Can only occur once every 60 sec. (Proc chance: 7%, 1m cooldown)|r",
+"|cff9d9d9d(5) Set : Chance on melee autoattack and spellcast to increase your damage and healing done by magical spells and effects by up to 65 for 10 sec.|r",
+"|cff9d9d9d(6) Set : Restores 8 mana per 5 sec.|r"
+],
+"16786": [
+"|cffffffffBlack Dragonspawn Eye|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"17057": [
+"|cffffffffShiny Fish Scales|r",
+"|cffffd100Item Level 1|r"
+],
+"17058": [
+"|cffffffffFish Oil|r",
+"|cffffd100Item Level 1|r"
+],
+"17684": [
+"|cffffffffTheradric Crystal Carving|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"17747": [
+"|cffffffffRazorlash Root|r",
+"|cffffd100Item Level 50|r",
+"Requires Level 40",
+"|cff1eff00Use: |cff1eff00Restores 600 health and mana over 10 sec.|r (2 Min Cooldown)|r"
+],
+"17966": [
+"|cff1eff00Onyxia Hide Backpack|r",
+"|cffffd100Item Level 55|r",
+"Binds when picked up",
+"18 Slot Bag"
+],
+"18249": [
+"|cffffffffCrescent Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"18250": [
+"|cff1eff00Gordok Shackle Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"Used with Gordok ogre shackles.\"|r"
+],
+"18255": [
+"|cffffffffRunn Tum Tuber|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: |cff1eff00Restores 1338 health over 30 sec. Must remain seated while eating.|r|r"
+],
+"18332": [
+"|cff1eff00Libram of Rapidity|r",
+"|cffffd100Item Level 50|r",
+"Unique",
+"Requires Level 50",
+"|cffffd100\"Dark runes skitter across the surface.\"|r",
+"|cff1eff00<Right Click to Read>|r"
+],
+"18333": [
+"|cff1eff00Libram of Focus|r",
+"|cffffd100Item Level 50|r",
+"Unique",
+"Requires Level 50",
+"|cffffd100\"Dark runes skitter across the surface.\"|r",
+"|cff1eff00<Right Click to Read>|r"
+],
+"18334": [
+"|cff1eff00Libram of Protection|r",
+"|cffffd100Item Level 50|r",
+"Unique",
+"Requires Level 50",
+"|cffffd100\"Dark runes skitter across the surface.\"|r",
+"|cff1eff00<Right Click to Read>|r"
+],
+"18335": [
+"|cff0070ddPristine Black Diamond|r",
+"|cffffd100Item Level 1|r",
+"Crafting Reagent"
+],
+"18640": [
+"|cffffffffHappy Fun Rock|r",
+"|cffffd100Item Level 1|r",
+"Unique (4)",
+"|cff1eff00Use: |cff1eff00Throw rock to a friendly target. If they have free room in their pack they will catch it!|r|r"
+],
+"18945": [
+"|cffffffffDark Iron Residue|r",
+"|cffffd100Item Level 1|r"
+],
+"19268": [
+"|cff0070ddAce of Elementals|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: |cff1eff00Combine the Ace through Eight of Elementals to complete the set.|r|r"
+],
+"20520": [
+"|cff1eff00Dark Rune|r",
+"|cffffd100Item Level 55|r",
+"|cff1eff00Use: |cff1eff00Restores 900 to 1500 mana at the cost of 600 to 1000 life.|r (2 Min Cooldown)|r",
+"Crafting Reagent"
+],
+"21525": [
+"|cff1eff00Green Winter Hat|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Head\t|cffffffffCloth|r",
+"2 Armor"
+],
+"21982": [
+"|cffffffffOgre Warbeads|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"21984": [
+"|cffffffffLeft Piece of Lord Valthalak's Amulet|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cff1eff00Use: |cff1eff00Recombines the left, right and top pieces of Lord Valthalak's Amulet into one whole.|r|r",
+"|cffffd100\"The evil trapped within this fragment seems to be growing stronger...\"|r"
+],
+"22046": [
+"|cffffffffRight Piece of Lord Valthalak's Amulet|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cff1eff00Use: |cff1eff00Recombines the left, right and top pieces of Lord Valthalak's Amulet into one whole.|r|r",
+"|cffffd100\"This section of the amulet vibrates with a palpable fervor to be rejoined with its sibling pieces.\"|r"
+],
+"22138": [
+"|cffffffffBlackrock Bracer|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"|cffffd100\"Crudely crafted, mostly from dark iron, these bracers exhibit trace amounts of a shiny metal.\"|r"
+],
+"22525": [
+"|cffffffffCrypt Fiend Parts|r",
+"|cffffd100Item Level 1|r"
+],
+"22526": [
+"|cffffffffBone Fragments|r",
+"|cffffd100Item Level 1|r"
+],
+"22527": [
+"|cffffffffCore of Elements|r",
+"|cffffd100Item Level 1|r"
+],
+"22528": [
+"|cffffffffDark Iron Scraps|r",
+"|cffffd100Item Level 1|r"
+],
+"22529": [
+"|cffffffffSavage Frond|r",
+"|cffffd100Item Level 1|r"
 ]
 },
 "missing": [
+2662,
+2663,
+9243,
 9379,
 9413,
 9418,
@@ -7032,12 +8232,27 @@
 10766,
 10767,
 10768,
+10795,
+10796,
+10797,
 10798,
 10799,
 10800,
 10806,
 10807,
 10808,
+10828,
+10829,
+10833,
+10835,
+10836,
+10837,
+10838,
+10842,
+10843,
+10844,
+10845,
+10846,
 11086,
 11623,
 11624,
@@ -7046,11 +8261,13 @@
 11627,
 11628,
 11629,
+11630,
 11631,
 11632,
 11669,
 11684,
 11735,
+11742,
 11744,
 11745,
 11746,
@@ -7095,6 +8312,11 @@
 11934,
 11935,
 12103,
+12243,
+12463,
+12464,
+12465,
+12466,
 12553,
 12554,
 12556,
@@ -7108,6 +8330,7 @@
 12626,
 12651,
 12653,
+12654,
 12709,
 12791,
 12793,
@@ -7176,6 +8399,7 @@
 13374,
 13375,
 13376,
+13377,
 13378,
 13379,
 13380,
@@ -7207,6 +8431,8 @@
 13408,
 13409,
 13505,
+13508,
+13514,
 13515,
 13524,
 13525,
@@ -7227,6 +8453,7 @@
 13938,
 13944,
 13951,
+13952,
 13953,
 13954,
 13955,
@@ -7238,6 +8465,12 @@
 13969,
 13983,
 14024,
+14340,
+14487,
+14502,
+14503,
+14522,
+14525,
 14528,
 14531,
 14537,
@@ -7249,9 +8482,42 @@
 14548,
 14576,
 14577,
+14611,
+14612,
+14614,
+14615,
+14616,
+14620,
+14621,
+14622,
+14623,
+14624,
+14626,
+14629,
+14631,
+14632,
+14633,
+14636,
+14637,
+14638,
+14640,
+14641,
+16900,
+16908,
+16914,
+16921,
+16929,
+16939,
+16947,
+16955,
+16963,
 17064,
+17067,
 17068,
 17075,
+17078,
+17713,
+17714,
 17717,
 17718,
 17719,
@@ -7282,6 +8548,7 @@
 18102,
 18103,
 18104,
+18205,
 18301,
 18302,
 18305,
@@ -7355,6 +8622,11 @@
 18484,
 18485,
 18490,
+18493,
+18494,
+18496,
+18497,
+18498,
 18502,
 18503,
 18505,
@@ -7367,11 +8639,20 @@
 18525,
 18526,
 18527,
+18680,
+18681,
+18682,
+18683,
+18684,
 18686,
 18689,
 18690,
 18691,
 18692,
+18693,
+18694,
+18695,
+18696,
 18716,
 18717,
 18718,
@@ -7395,6 +8676,7 @@
 18755,
 18756,
 18757,
+18813,
 22204,
 22207,
 22208,
@@ -7442,7 +8724,9 @@
 22411,
 22412,
 22433,
-23198
+23198,
+23200,
+23201
 ],
 "_source": "Wowhead's WoW Forever item tooltips (nether.wowhead.com)."
 }
