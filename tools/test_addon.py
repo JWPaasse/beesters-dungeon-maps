@@ -375,6 +375,14 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local hidden = has(g.log, 5728) or has(g.available, 5728)
         check("a chain you've started (step 1 in your log) shows under Dungeon quests",
             has(g.log, 5728) ~= nil and has(g.log, 5728).step == 1 and #has(g.log, 5728).steps == 3)
+        local wc = ns.ClassifyDungeonQuests("wc")
+        local listed, nested, fang = {}, false, nil
+        for _, list in ipairs({ wc.log, wc.available }) do for _, e in ipairs(list) do listed[e.id] = true if e.q[1]:find("Leaders of the Fang") then fang = e end end end
+        for _, list in ipairs({ wc.log, wc.available }) do for _, e in ipairs(list) do
+            for i = 1, #(e.steps or {}) - 1 do if listed[e.steps[i]] then nested = true end end
+        end end
+        check("a dungeon quest that is a step of a longer chain isn't listed again", not nested)
+        check("Leaders of the Fang carries the earlier dungeon quests in its chain", fang and fang.dungeonSteps and next(fang.dungeonSteps) ~= nil)
         local allianceOnly = false
         for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
         check("no Alliance-only quests for a Horde character", not allianceOnly)

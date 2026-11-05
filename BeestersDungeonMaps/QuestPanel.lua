@@ -194,6 +194,31 @@ local function Classify(key)
             end
         end
     end
+    -- One block per chain: a dungeon quest that is an earlier step of a longer chain in this
+    -- list (Hamuul Runetotem on the way to Leaders of the Fang) is shown inside that chain.
+    local partOf = {}
+    for _, group in ipairs({ groups.log, groups.available }) do
+        for _, entry in ipairs(group) do
+            if entry.steps and #entry.steps > 1 then
+                for i = 1, #entry.steps - 1 do
+                    local step = entry.steps[i]
+                    if seen[step] and not IsDone(step) then
+                        partOf[step] = true
+                        entry.dungeonSteps = entry.dungeonSteps or {}
+                        entry.dungeonSteps[step] = true
+                    end
+                end
+            end
+        end
+    end
+    for _, key in ipairs({ "log", "available", "inside" }) do
+        local kept = {}
+        for _, entry in ipairs(groups[key]) do
+            if not partOf[entry.id] then table.insert(kept, entry) end
+        end
+        groups[key] = kept
+    end
+
     local function byLevel(a, b)
         if (a.q[F.LEVEL] or 0) ~= (b.q[F.LEVEL] or 0) then return (a.q[F.LEVEL] or 0) < (b.q[F.LEVEL] or 0) end
         return a.q[F.NAME] < b.q[F.NAME]
@@ -534,6 +559,9 @@ local function AddChain(y, entry)
         if sq and (open or current) then
             local last = i == #steps or not open
             local name = ("%d. %s"):format(i, sq[F.NAME])
+            if entry.dungeonSteps and entry.dungeonSteps[stepID] then
+                name = ("%s (%s)"):format(name, LFG_TYPE_DUNGEON or "Dungeon")
+            end
             local showStep = function() ShowDetail(entry.id, entry, stepID) end
             if i < (entry.step or 1) then
                 y = AddStepLine(y, 40, name, "done", 0.55, 0.55, 0.55, showStep, last, "<Click for details>")
