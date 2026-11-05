@@ -102,10 +102,14 @@ local function ItemInfo(itemID)
 end
 
 -- Ask the server for an item the game doesn't have yet; redraw what's open once it arrives.
+-- A request can get lost (the server answers a limited number at once), so an item still
+-- missing a few seconds later is asked for again the next time its list is drawn.
 local requested = {}
+local retryScheduled = false
 local function RequestItem(itemID)
-    if requested[itemID] then return end
-    requested[itemID] = true
+    local now = GetTime and GetTime() or 0
+    if requested[itemID] and now - requested[itemID] < 3 then return end
+    requested[itemID] = now
     if Item and Item.CreateFromItemID then
         local item = Item:CreateFromItemID(itemID)
         if item and item.ContinueOnItemLoad then
@@ -178,6 +182,14 @@ local function LootGroups(boss)
             if (a.loading or false) ~= (b.loading or false) then return not a.loading end
             if a.name ~= b.name then return a.name < b.name end
             return a.id < b.id
+        end)
+    end
+    if waiting and not retryScheduled and C_Timer then
+        -- Look again in a few seconds: redraws what's open and asks again for what's missing.
+        retryScheduled = true
+        C_Timer.After(3, function()
+            retryScheduled = false
+            if ns.OnLootItemLoaded then ns.OnLootItemLoaded() end
         end)
     end
     return groups, waiting
