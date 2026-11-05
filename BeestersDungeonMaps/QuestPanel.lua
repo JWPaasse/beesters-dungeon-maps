@@ -221,30 +221,23 @@ local function NewHeader()
         h.Label = h:CreateFontString(nil, "ARTWORK", "GameFontHighlightMedium")
         h.Label:SetPoint("LEFT", 8, 0)
     end
-    -- Our own behaviour instead of the quest log's (which expects a quest log header index).
-    h:SetScript("OnMouseDown", nil)
-    h:SetScript("OnEnter", nil)
-    h:SetScript("OnLeave", nil)
-    h:SetScript("OnClick", function(self)
+    -- The header's own scripts stay (hover highlight); only what a click does is ours.
+    local function Toggle(self)
         collapsed[self.group] = not collapsed[self.group]
         PlaySound(SOUNDKIT and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON or 856)
         panel.Refresh()
-    end)
-    if h.Collapse then
-        h.Collapse:SetScript("OnClick", function() h:GetScript("OnClick")(h) end)
-        h.Collapse:SetScript("OnEnter", nil)
-        h.Collapse:SetScript("OnLeave", nil)
+    end
+    if native and h.SetClickHandler then
+        h:SetClickHandler(function(self, button) if button == "LeftButton" then Toggle(self) end end)
+    else
+        h:SetScript("OnClick", Toggle)
     end
     return h
 end
 
 local function SetHeaderCollapsed(h, isCollapsed)
-    local b = h.Collapse
-    if not b then return end
-    if b.UpdateCollapsedState then
-        pcall(b.UpdateCollapsedState, b, isCollapsed)
-    elseif b.Icon and b.Icon.SetAtlas then
-        b.Icon:SetAtlas(isCollapsed and "campaign_headericon_closed" or "campaign_headericon_open", true)
+    if ListHeaderMixin and ListHeaderMixin.UpdateCollapsedState and h.GetCollapseButton then
+        pcall(ListHeaderMixin.UpdateCollapsedState, h, isCollapsed)
     end
 end
 
@@ -289,8 +282,7 @@ local function NewTitle()
         t.Box:SetPoint("TOPRIGHT", -2, 2)
     end
     t.Box:EnableMouse(true)
-    t.Box:SetScript("OnMouseUp", nil)
-    t.Box:SetScript("OnClick", nil)
+    if t.Box:HasScript("OnClick") then t.Box:SetScript("OnClick", nil) end
     t.Box:SetScript("OnMouseDown", function(self)
         local id = self:GetParent().questID
         if not id then return end
