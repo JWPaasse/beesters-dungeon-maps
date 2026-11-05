@@ -159,6 +159,9 @@ C_QuestLog = {
 function UnitFactionGroup() return "Horde" end
 function UnitClass() return "Warrior", "WARRIOR", 1 end
 function UnitLevel() return 14 end
+function UnitName() return "Beester" end
+function UnitRace() return "Orc" end
+function UnitSex() return 2 end
 function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
 """
 
@@ -298,6 +301,9 @@ C_QuestLog = {
 function UnitFactionGroup() return "Horde" end
 function UnitClass() return "Warrior", "WARRIOR", 1 end
 function UnitLevel() return 14 end
+function UnitName() return "Beester" end
+function UnitRace() return "Orc" end
+function UnitSex() return 2 end
 function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local placed = ns.db.bossPositions and ns.db.bossPositions.stocks and ns.db.bossPositions.stocks[placedName]
         check("shift-dragging a listed boss onto the map places it", placed and placed[1] == 1
@@ -361,6 +367,13 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local allianceOnly = false
         for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
         check("no Alliance-only quests for a Horde character", not allianceOnly)
+        -- Detail page with the Classic database's text and rewards (The Power to Destroy...).
+        local ok, err = pcall(ns.ShowQuestDetail, 5725)
+        check("detail page opens for a quest with choice rewards" .. (ok and "" or (": " .. tostring(err))), ok and qp.Detail:IsShown())
+        local entry = has(g.log, 5728)
+        ok, err = pcall(ns.ShowQuestDetail, 5728, entry)
+        check("detail page opens for a chain step" .. (ok and "" or (": " .. tostring(err))), ok)
+        check("detail page has quest text for Ragefire Chasm quests", ns.QuestText and ns.QuestText[5725] ~= nil)
         local used = 0
         for _, r in ipairs({ qp.Child }) do used = used + 1 end
         check("quest list has rows", qp.Child ~= nil)

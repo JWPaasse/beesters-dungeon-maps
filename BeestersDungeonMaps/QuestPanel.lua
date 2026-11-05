@@ -397,8 +397,25 @@ local function CountFor(text, name)
     return text:lower():match("(%d+)%s+" .. stem)
 end
 
-local function DataObjectives(q)
+local function DataObjectives(q, id)
     local lines = {}
+    -- Exact goals and counts from the Classic database when it has the quest.
+    local text = ns.QuestText and id and ns.QuestText[id]
+    if text and text[6] and #text[6] > 0 then
+        for _, goal in ipairs(text[6]) do
+            local goalID, count, isItem = goal[1], goal[2], goal[3]
+            local name
+            if isItem then
+                local item = ns.QuestItems and ns.QuestItems[goalID]
+                name = (item and item[1]) or ((C_Item and C_Item.GetItemInfo or GetItemInfo)(goalID))
+            else
+                local npc = ns.NPCs and ns.NPCs[goalID]
+                name = npc and (npc[1] .. " slain")
+            end
+            if name then table.insert(lines, ("0/%d %s"):format(count or 1, name)) end
+        end
+        if #lines > 0 then return lines end
+    end
     for _, itemID in ipairs(q[F.ITEMS] or {}) do
         local item = ns.QuestItems and ns.QuestItems[itemID]
         if item then
@@ -620,7 +637,7 @@ local function AddQuestRow(y, entry, kind)
         end
     else
         -- Not in your log: what the quest asks, so every quest reads like one in the log.
-        for _, line in ipairs(DataObjectives(entry.q)) do
+        for _, line in ipairs(DataObjectives(entry.q, entry.id)) do
             y = AddObjective(y, line, kind == "done" and 0.5 or nil, kind == "done" and 0.5 or nil, kind == "done" and 0.5 or nil)
         end
     end
@@ -672,109 +689,77 @@ local function Layout()
     panel.Scroll:ClearAllPoints()
     panel.Scroll:SetPoint("TOPLEFT", 0, -4)
     if panel.Detail:IsShown() then
-        panel.Detail:SetHeight(math.floor(h / 3))
+        panel.Detail:SetHeight(math.floor(h * 0.55))
         panel.Scroll:SetPoint("BOTTOMRIGHT", panel.Detail, "TOPRIGHT", -24, 6)
     else
         panel.Scroll:SetPoint("BOTTOMRIGHT", -24, 4)
     end
     panel.Child:SetWidth(math.max(panel.Scroll:GetWidth(), 50))
-end
-
-function ShowDetail(id, entry)
-    local q = Q(id)
-    if not q then return end
-    selected = id
     local d = panel.Detail
-    -- For a chain, show the step you're on.
-    local stepID = entry and entry.steps and entry.steps[entry.step or 1] or id
-    local step = Q(stepID) or q
-    d.Title:SetText(step[F.NAME])
-    d.Title:SetTextColor(0.18, 0.12, 0.06) -- dark ink, like the quest details
-
-    local lines = {}
-    local levelLine = ("Level %d"):format(step[F.LEVEL] or 0)
-    if (step[F.REQ] or 0) > UnitLevel("player") then
-        levelLine = levelLine .. (" · |cffa00000Requires level %d|r"):format(step[F.REQ])
-    elseif step[F.REQ] then
-        levelLine = levelLine .. (" · requires level %d"):format(step[F.REQ])
-    end
-    table.insert(lines, levelLine)
-    if stepID ~= id then
-        table.insert(lines, ("Step %d of %d toward %s"):format(entry.step or 1, #entry.steps, q[F.NAME]))
-    end
-    local who, mapID, x, y = StartInfo(step)
-    if who then
-        local zone = mapID and C_Map.GetMapInfo(mapID)
-        if zone then
-            table.insert(lines, ("Starts at: %s, %s"):format(who, zone.name))
-        else
-            table.insert(lines, ("Starts with: %s (inside the dungeon)"):format(who))
-        end
-    end
-    if step[F.TEXT] then table.insert(lines, " "); table.insert(lines, step[F.TEXT]) end
-    d.Text:SetText(table.concat(lines, "\n"))
-
-    -- Rewards: the dungeon quest's own rewards.
-    local rewards = q[F.REWARDS] or {}
-    for i, button in ipairs(d.Rewards) do
-        local itemID = rewards[i]
-        if itemID then
-            button.itemID = itemID
-            local icon = (C_Item and C_Item.GetItemIconByID and C_Item.GetItemIconByID(itemID)) or (GetItemIcon and GetItemIcon(itemID))
-            button.Icon:SetTexture(icon or 134400)
-            button:Show()
-        else
-            button:Hide()
-        end
-    end
-    d.RewardsLabel:SetShown(#rewards > 0)
-
-    d.MapButton.target = mapID and { mapID = mapID, x = x, y = y, title = step[F.NAME], who = who } or nil
-    d.MapButton:SetEnabled(d.MapButton.target ~= nil)
-    d:Show()
-    Layout()
+    if d and d.Page then d.Page:SetWidth(math.max(d.Scroll:GetWidth(), 50)) end
 end
 
-local function CreateDetail(parent)
-    local d = CreateFrame("Frame", nil, parent)
-    d:SetPoint("BOTTOMLEFT", 0, 0)
-    d:SetPoint("BOTTOMRIGHT", 0, 0)
-    d:Hide()
-    -- The parchment of the game's own quest details.
-    local bg = d:CreateTexture(nil, "BACKGROUND")
-    bg:SetAllPoints()
-    if C_Texture.GetAtlasInfo("QuestDetailsBackgrounds") then
-        bg:SetAtlas("QuestDetailsBackgrounds")
-    else
-        bg:SetTexture("Interface\\QuestFrame\\QuestBG")
+----------------------------------------------------------------------
+-- Detail page: laid out like the game's quest details (title, objectives, description,
+-- rewards), on the same parchment, scrolling when it's long.
+----------------------------------------------------------------------
+
+local INK = { 0.18, 0.12, 0.06 }
+
+-- Quest text placeholders: $N name, $C class, $R race, $B new line, $Gmale:female;
+local function FillText(text)
+    if not text then return "" end
+    local name = UnitName("player") or ""
+    local class = UnitClass("player") or ""
+    local race = UnitRace and UnitRace("player") or ""
+    local female = UnitSex and UnitSex("player") == 3
+    text = text:gsub("%$[Gg]%s*([^:;]*):([^;]*);", function(male, fem) return female and fem or male end)
+    text = text:gsub("%$[Nn]", name):gsub("%$[Cc]", class:lower()):gsub("%$[Rr]", race)
+    text = text:gsub("%$[Bb]", "\n")
+    return text
+end
+
+local function MoneyText(copper)
+    if GetMoneyString then return GetMoneyString(copper, true) end
+    if C_CurrencyInfo and C_CurrencyInfo.GetCoinTextureString then return C_CurrencyInfo.GetCoinTextureString(copper) end
+    local g, s, c = math.floor(copper / 10000), math.floor(copper / 100) % 100, copper % 100
+    return (g > 0 and (g .. "g ") or "") .. (s > 0 and (s .. "s ") or "") .. (c > 0 and (c .. "c") or "")
+end
+
+local function PageText(d, font, text, y, gap)
+    d.textCount = d.textCount + 1
+    local fs = d.texts[d.textCount]
+    if not fs then
+        fs = d.Page:CreateFontString(nil, "ARTWORK", font)
+        fs:SetJustifyH("LEFT")
+        d.texts[d.textCount] = fs
     end
-    d:EnableMouse(true)
-    d.Title = d:CreateFontString(nil, "ARTWORK", "QuestTitleFont")
-    d.Title:SetPoint("TOPLEFT", 8, -8)
-    d.Title:SetPoint("RIGHT", -28, 0)
-    d.Title:SetJustifyH("LEFT")
-    d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
-    d.Close:SetPoint("TOPRIGHT", 0, 0)
-    d.Close:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
-    d.Text = d:CreateFontString(nil, "ARTWORK", "QuestFont")
-    d.Text:SetPoint("TOPLEFT", d.Title, "BOTTOMLEFT", 0, -6)
-    d.Text:SetPoint("RIGHT", -8, 0)
-    d.Text:SetJustifyH("LEFT")
-    d.Text:SetJustifyV("TOP")
-    d.Text:SetSpacing(2)
-    d.Text:SetTextColor(0.18, 0.12, 0.06)
-    d.RewardsLabel = d:CreateFontString(nil, "ARTWORK", "QuestFont")
-    d.RewardsLabel:SetPoint("BOTTOMLEFT", 8, 30)
-    d.RewardsLabel:SetText(REWARDS or "Rewards")
-    d.RewardsLabel:SetTextColor(0.18, 0.12, 0.06)
-    d.Rewards = {}
-    for i = 1, 6 do
-        local b = CreateFrame("Button", nil, d)
-        b:SetSize(24, 24)
-        b:SetPoint("BOTTOMLEFT", 8 + (i - 1) * 28, 4)
-        b.Icon = b:CreateTexture(nil, "ARTWORK")
-        b.Icon:SetAllPoints()
-        b:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square", "ADD")
+    fs:SetFontObject(font)
+    fs:SetTextColor(INK[1], INK[2], INK[3])
+    fs:ClearAllPoints()
+    fs:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 10, -y)
+    fs:SetWidth(d.Page:GetWidth() - 20)
+    fs:SetText(text)
+    fs:Show()
+    return y + fs:GetStringHeight() + (gap or 8)
+end
+
+local function RewardButton(d, itemID, count, x, y)
+    d.buttonCount = d.buttonCount + 1
+    local b = d.buttons[d.buttonCount]
+    if not b then
+        local ok, made = pcall(CreateFrame, "Button", nil, d.Page, "LargeItemButtonTemplate")
+        b = ok and made or CreateFrame("Button", nil, d.Page)
+        if not ok then
+            b:SetSize(147, 41)
+            b.Icon = b:CreateTexture(nil, "ARTWORK")
+            b.Icon:SetSize(36, 36)
+            b.Icon:SetPoint("LEFT")
+            b.Name = b:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+            b.Name:SetPoint("LEFT", b.Icon, "RIGHT", 6, 0)
+            b.Count = b:CreateFontString(nil, "OVERLAY", "NumberFontNormal")
+            b.Count:SetPoint("BOTTOMRIGHT", b.Icon, "BOTTOMRIGHT", -2, 2)
+        end
         b:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
             GameTooltip:SetItemByID(self.itemID)
@@ -785,11 +770,140 @@ local function CreateDetail(parent)
             local _, link = (C_Item and C_Item.GetItemInfo or GetItemInfo)(self.itemID)
             if link and HandleModifiedItemClick then HandleModifiedItemClick(link) end
         end)
-        d.Rewards[i] = b
+        d.buttons[d.buttonCount] = b
     end
+    b.itemID = itemID
+    local name, _, quality, _, _, _, _, _, _, icon = (C_Item and C_Item.GetItemInfo or GetItemInfo)(itemID)
+    if not name and C_Item and C_Item.RequestLoadItemDataByID then C_Item.RequestLoadItemDataByID(itemID) end
+    if type(b.Icon) == "table" then b.Icon:SetTexture(icon or (C_Item and C_Item.GetItemIconByID and C_Item.GetItemIconByID(itemID)) or 134400) end
+    if type(b.Name) == "table" then
+        b.Name:SetText(name or (SEARCH_LOADING_TEXT or "Loading..."))
+        local color = quality and ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[quality]
+        if color then b.Name:SetTextColor(color.r, color.g, color.b) else b.Name:SetTextColor(1, 1, 1) end
+    end
+    if type(b.Count) == "table" then
+        b.Count:SetText(count and count > 1 and count or "")
+        b.Count:SetShown(count and count > 1)
+    end
+    if type(b.IconBorder) == "table" and SetItemButtonQuality then pcall(SetItemButtonQuality, b, quality, itemID) end
+    b:ClearAllPoints()
+    b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", x, -y)
+    b:Show()
+end
+
+local function RewardGrid(d, items, y)
+    local width = d.Page:GetWidth()
+    local columns = width >= 320 and 2 or 1
+    for i, pair in ipairs(items) do
+        local col = (i - 1) % columns
+        local row = math.floor((i - 1) / columns)
+        RewardButton(d, pair[1], pair[2], 10 + col * 152, y + row * 44)
+    end
+    return y + math.ceil(#items / columns) * 44 + 6
+end
+
+function ShowDetail(id, entry)
+    local q = Q(id)
+    if not q then return end
+    selected = id
+    local d = panel.Detail
+    d:Show()
+    Layout()
+    -- For a chain, show the step you're on.
+    local stepID = entry and entry.steps and entry.steps[entry.step or 1] or id
+    local step = Q(stepID) or q
+    local text = ns.QuestText and ns.QuestText[stepID]
+    d.textCount, d.buttonCount = 0, 0
+    for _, fs in ipairs(d.texts) do fs:Hide() end
+    for _, b in ipairs(d.buttons) do b:Hide() end
+
+    local y = 8
+    y = PageText(d, "QuestTitleFont", step[F.NAME], y, 6)
+    local info = { ("Level %d"):format(step[F.LEVEL] or 0) }
+    if (step[F.REQ] or 0) > UnitLevel("player") then
+        table.insert(info, ("|cffa00000Requires level %d|r"):format(step[F.REQ]))
+    elseif step[F.REQ] then
+        table.insert(info, ("requires level %d"):format(step[F.REQ]))
+    end
+    local line = table.concat(info, " · ")
+    if stepID ~= id then
+        line = line .. "\n" .. ("Step %d of %d toward %s"):format(entry.step or 1, #entry.steps, q[F.NAME])
+    end
+    local who, mapID, x, yy = StartInfo(step)
+    if who then
+        local zone = mapID and C_Map.GetMapInfo(mapID)
+        line = line .. "\n" .. (zone and ("Starts at: %s, %s"):format(who, zone.name) or ("Starts with: %s (inside the dungeon)"):format(who))
+    end
+    y = PageText(d, "QuestFontNormalSmall", line, y, 10)
+
+    -- Objectives, then the quest's own story text, as in the quest log's details.
+    y = PageText(d, "QuestFont", FillText(text and text[2] ~= "" and text[2] or step[F.TEXT] or ""), y, 12)
+    if text and text[1] ~= "" then
+        y = PageText(d, "QuestTitleFont", QUEST_DESCRIPTION or "Description", y, 4)
+        y = PageText(d, "QuestFont", FillText(text[1]), y, 12)
+    end
+
+    -- Rewards: "choose one" items, items you always get, money.
+    local choice = text and text[3] or {}
+    local fixed = text and text[4] or {}
+    if #choice == 0 and #fixed == 0 and not text then
+        for _, itemID in ipairs(step[F.REWARDS] or {}) do table.insert(fixed, { itemID, 1 }) end
+    end
+    local money = text and text[5] or 0
+    if #choice > 0 or #fixed > 0 or money > 0 then
+        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y, 4)
+        if #choice > 0 then
+            y = PageText(d, "QuestFont", REWARD_CHOICES or "You will be able to choose one of these rewards:", y, 4)
+            y = RewardGrid(d, choice, y)
+        end
+        if #fixed > 0 or money > 0 then
+            y = PageText(d, "QuestFont", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", y, 4)
+            if money > 0 then y = PageText(d, "QuestFont", MoneyText(money), y, 6) end
+            if #fixed > 0 then y = RewardGrid(d, fixed, y) end
+        end
+    end
+    d.Page:SetHeight(y + 8)
+    d.Scroll:SetVerticalScroll(0)
+
+    d.MapButton.target = mapID and { mapID = mapID, x = x, y = yy, title = step[F.NAME], who = who } or nil
+    d.MapButton:SetEnabled(d.MapButton.target ~= nil)
+end
+
+ns.ShowQuestDetail = function(id, entry) ShowDetail(id, entry) end -- used by tools/test_addon.py
+
+local function CreateDetail(parent)
+    local d = CreateFrame("Frame", nil, parent)
+    d:SetPoint("BOTTOMLEFT", 0, 0)
+    d:SetPoint("BOTTOMRIGHT", 0, 0)
+    d:Hide()
+    d:EnableMouse(true)
+    d.texts, d.buttons, d.textCount, d.buttonCount = {}, {}, 0, 0
+    -- The parchment of the game's own quest details.
+    local bg = d:CreateTexture(nil, "BACKGROUND")
+    bg:SetAllPoints()
+    if C_Texture.GetAtlasInfo("QuestDetailsBackgrounds") then
+        bg:SetAtlas("QuestDetailsBackgrounds")
+    else
+        bg:SetTexture("Interface\\QuestFrame\\QuestBG")
+    end
+
+    local ok, scroll = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", d, "UIPanelScrollFrameTemplate")
+    if not ok then scroll = CreateFrame("ScrollFrame", nil, d) end
+    scroll:SetPoint("TOPLEFT", 0, -4)
+    scroll:SetPoint("BOTTOMRIGHT", -24, 32)
+    d.Scroll = scroll
+    d.Page = CreateFrame("Frame", nil, scroll)
+    d.Page:SetSize(200, 10)
+    scroll:SetScrollChild(d.Page)
+
+    d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
+    d.Close:SetPoint("TOPRIGHT", 0, 0)
+    d.Close:SetFrameLevel(scroll:GetFrameLevel() + 5)
+    d.Close:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
+
     d.MapButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     d.MapButton:SetSize(110, 22)
-    d.MapButton:SetPoint("BOTTOMRIGHT", -6, 4)
+    d.MapButton:SetPoint("BOTTOMRIGHT", -6, 5)
     d.MapButton:SetText("Show on map")
     d.MapButton:SetScript("OnClick", function(self)
         local t = self.target

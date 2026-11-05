@@ -13,6 +13,7 @@ Data\Entrances.lua
 Data\Bosses.lua
 Data\Maps.lua
 Data\Quests.lua
+Data\QuestText.lua
 Core.lua
 MapPins.lua
 MapPins.xml
