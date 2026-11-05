@@ -1,0 +1,82 @@
+{
+ "_source": "Cataclysm Classic Dungeon Journal, build 4.4.2.60895, via wago.tools (tools/fetch_cata_positions.py).",
+ "bosses": [
+  [
+   "dm|1",
+   1064,
+   "Glubtok",
+   0.365,
+   0.612
+  ],
+  [
+   "dm|1",
+   1065,
+   "Helix Gearbreaker",
+   0.502,
+   0.868
+  ],
+  [
+   "dm|2",
+   1060,
+   "\"Captain\" Cookie",
+   0.605,
+   0.455
+  ],
+  [
+   "dm|2",
+   1062,
+   "Admiral Ripsnarl",
+   0.605,
+   0.388
+  ],
+  [
+   "dm|2",
+   1063,
+   "Foe Reaper 5000",
+   0.125,
+   0.759
+  ],
+  [
+   "dm|2",
+   1081,
+   "Vanessa VanCleef",
+   0.655,
+   0.403
+  ],
+  [
+   "sfk|1",
+   1069,
+   "Baron Ashbury",
+   0.665,
+   0.732
+  ],
+  [
+   "sfk|1",
+   1071,
+   "Commander Springvale",
+   0.28,
+   0.597
+  ],
+  [
+   "sfk|2",
+   1070,
+   "Baron Silverlaine",
+   0.304,
+   0.774
+  ],
+  [
+   "sfk|4",
+   1073,
+   "Lord Walden",
+   0.545,
+   0.537
+  ],
+  [
+   "sfk|6",
+   1072,
+   "Lord Godfrey",
+   0.685,
+   0.335
+  ]
+ ]
+}
