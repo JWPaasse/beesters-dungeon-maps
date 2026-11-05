@@ -6,6 +6,7 @@
   - Ruins of Lordaeron: The Wrath of Rath'mael needs Rear Guard Patrol, The New Plague needs A Recipe For Death, and Unending Torment is one chain of five
   - City of Dalaran: An Alarming Request (Alliance) and Blood in the Streets (Horde) come first
   - Excavation Site: Wetlands: Open the Maw needs Dragonmaw Rumors, Horrors in the Highland needs Rethiel the Greenwarden's chain, Highland Hides needs Young Crocolisk Skins, and three quests have their follow-up linked
+- A quest chain whose first step drops inside the dungeon is listed under "Starts inside" (Unending Torment in Ruins of Lordaeron).
 
 ## 0.2.1
 
