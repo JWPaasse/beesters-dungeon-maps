@@ -7,7 +7,8 @@
 --   Available quests - what you can pick up now (!), chains you've started (step 1/2),
 --                      and quests you're too low for (red "Requires level X")
 --   Starts inside   - quests that start inside the dungeon (blue)
---   Handed in       - hidden until you click "Show handed in"
+--   Handed in       - folded away, like a collapsed zone in the quest log
+-- The rows are the quest log's own templates, so they look and behave like the normal list.
 -- Clicking a quest that isn't in your log opens a detail pane in the lower third: the quest's
 -- text, where it starts, its rewards, and a button that shows the start on the map.
 -- Data: QuestieDB's Forever quests (Data/Quests.lua).
@@ -17,11 +18,8 @@ local _, ns = ...
 local panel        -- content (list + detail pane)
 local strip        -- tab bar
 local selected     -- questID shown in the detail pane
-local showHandedIn = false
 local tab = "dungeon"
 
-local ROW_HEIGHT = 16
-local LIST_INDENT = 22
 
 ----------------------------------------------------------------------
 -- Quest state
@@ -182,10 +180,15 @@ end
 ns.ClassifyDungeonQuests = Classify -- used by tools/test_addon.py
 
 ----------------------------------------------------------------------
--- Rows (pooled)
+-- Rows, built from the game's own quest log templates so they look the same:
+-- QuestLogHeaderTemplate (group bars), QuestLogTitleTemplate (quest titles with the
+-- track checkbox), QuestLogObjectiveTemplate (objective lines) and POIButtonTemplate
+-- (the round icons). Each falls back to a plain frame if a template is missing.
 ----------------------------------------------------------------------
 
-local rows, used = {}, 0
+local pools = { header = {}, title = {}, objective = {} }
+local usedCount = { header = 0, title = 0, objective = 0 }
+local collapsed = { done = true } -- "Handed in" starts folded, like the game's collapsed zones
 
 local function DifficultyColor(level)
     if GetQuestDifficultyColor then
@@ -195,75 +198,158 @@ local function DifficultyColor(level)
     return 1, 0.82, 0
 end
 
-local function AcquireRow()
-    used = used + 1
-    local row = rows[used]
-    if not row then
-        row = CreateFrame("Button", nil, panel.Child)
-        row:SetHeight(ROW_HEIGHT)
-        row.Icon = row:CreateTexture(nil, "ARTWORK")
-        row.Icon:SetSize(16, 16)
-        row.Icon:SetPoint("LEFT", 2, 0)
-        row.Badge = row:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
-        row.Badge:SetPoint("CENTER", row.Icon, "CENTER")
-        row.Text = row:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-        row.Text:SetPoint("LEFT", LIST_INDENT, 0)
-        row.Text:SetPoint("RIGHT", -24, 0)
-        row.Text:SetJustifyH("LEFT")
-        row.Text:SetWordWrap(true)
-        row.Highlight = row:CreateTexture(nil, "HIGHLIGHT")
-        row.Highlight:SetPoint("TOPLEFT", row.Text, "TOPLEFT", -2, 1)
-        row.Highlight:SetPoint("BOTTOMRIGHT", row.Text, "BOTTOMRIGHT", 2, -1)
-        row.Highlight:SetColorTexture(1, 1, 1, 0.08)
-        row.Check = CreateFrame("CheckButton", nil, row, "UICheckButtonTemplate")
-        row.Check:SetSize(20, 20)
-        row.Check:SetPoint("RIGHT", 0, 0)
-        row.Check:SetScript("OnClick", function(self)
-            local id = self:GetParent().questID
-            if self:GetChecked() then
-                if C_QuestLog.AddQuestWatch then C_QuestLog.AddQuestWatch(id) end
-            else
-                if C_QuestLog.RemoveQuestWatch then C_QuestLog.RemoveQuestWatch(id) end
-            end
-        end)
-        row:RegisterForClicks("LeftButtonUp")
-        rows[used] = row
-    end
-    row:Show()
-    row.Icon:Hide()
-    row.Badge:SetText("")
-    row.Check:Hide()
-    row.Highlight:Hide()
-    row:SetScript("OnClick", nil)
-    row:SetScript("OnEnter", nil)
-    row:SetScript("OnLeave", nil)
-    row.questID = nil
-    row.Text:SetFontObject("GameFontNormal")
-    row.Text:SetPoint("LEFT", LIST_INDENT, 0)
-    return row
+-- A template child (parentKey) such as frame.Text; nil when the template doesn't have it.
+local function Part(frame, key)
+    local v = rawget(frame, key)
+    if type(v) == "table" then return v end
+    return false
 end
 
-local function SetIcon(row, atlas)
-    if atlas and C_Texture.GetAtlasInfo(atlas) then
-        row.Icon:SetAtlas(atlas)
-        row.Icon:Show()
+local function TryTemplate(kind, template)
+    local ok, frame = pcall(CreateFrame, kind == "objective" and "Frame" or "Button", nil, panel.Child, template)
+    if ok and frame then return frame, true end
+    return CreateFrame(kind == "objective" and "Frame" or "Button", nil, panel.Child), false
+end
+
+local function NewHeader()
+    local h, native = TryTemplate("header", "QuestLogHeaderTemplate")
+    h.Label = Part(h, "ButtonText")
+    h.Collapse = Part(h, "CollapseButton")
+    if not native or not h.Label then
+        h:SetHeight(22)
+        h.Label = h:CreateFontString(nil, "ARTWORK", "GameFontHighlightMedium")
+        h.Label:SetPoint("LEFT", 8, 0)
+    end
+    -- Our own behaviour instead of the quest log's (which expects a quest log header index).
+    h:SetScript("OnMouseDown", nil)
+    h:SetScript("OnEnter", nil)
+    h:SetScript("OnLeave", nil)
+    h:SetScript("OnClick", function(self)
+        collapsed[self.group] = not collapsed[self.group]
+        PlaySound(SOUNDKIT and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON or 856)
+        panel.Refresh()
+    end)
+    if h.Collapse then
+        h.Collapse:SetScript("OnClick", function() h:GetScript("OnClick")(h) end)
+        h.Collapse:SetScript("OnEnter", nil)
+        h.Collapse:SetScript("OnLeave", nil)
+    end
+    return h
+end
+
+local function SetHeaderCollapsed(h, isCollapsed)
+    local b = h.Collapse
+    if not b then return end
+    if b.UpdateCollapsedState then
+        pcall(b.UpdateCollapsedState, b, isCollapsed)
+    elseif b.Icon and b.Icon.SetAtlas then
+        b.Icon:SetAtlas(isCollapsed and "campaign_headericon_closed" or "campaign_headericon_open", true)
     end
 end
 
-local function Place(row, y, height)
-    row:ClearAllPoints()
-    row:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 6, -y)
-    row:SetPoint("RIGHT", panel.Child, "RIGHT", -4, 0)
-    row:SetHeight(height or ROW_HEIGHT)
-    return y + (height or ROW_HEIGHT)
+local function NewTitle()
+    local t, native = TryTemplate("title", "QuestLogTitleTemplate")
+    t.Label = Part(t, "Text")
+    t.Box = Part(t, "Checkbox")
+    if not native or not t.Label then
+        t:SetHeight(16)
+        t.Label = t:CreateFontString(nil, "ARTWORK", "GameFontNormalLeft")
+        local hl = t:CreateTexture(nil, "HIGHLIGHT")
+        hl:SetAllPoints(t.Label)
+        hl:SetColorTexture(1, 1, 1, 0.08)
+    end
+    for _, key in ipairs({ "TagTexture", "TagText", "TaskIcon", "StorylineTexture" }) do
+        local part = Part(t, key)
+        if part then part:Hide() end
+    end
+    t:SetScript("OnMouseDown", nil)
+    t:SetScript("OnMouseUp", nil)
+    -- Round quest icon, like the quest log's.
+    t.POI = false
+    local ok, poi = pcall(CreateFrame, "Button", nil, t, "POIButtonTemplate")
+    if ok and poi and poi.SetQuestID then
+        t.POI = poi
+        poi:SetPoint("TOPLEFT", t, "TOPLEFT", 4, 3)
+        poi:EnableMouse(false)
+    end
+    -- Our own icon for quests that aren't in your log yet ("!" on the same round button).
+    t.Bang = t:CreateTexture(nil, "OVERLAY")
+    t.Bang:SetSize(24, 24)
+    t.Bang:SetPoint("TOPLEFT", t, "TOPLEFT", 4, 3)
+    t.BangMark = t:CreateTexture(nil, "OVERLAY", nil, 2)
+    t.BangMark:SetSize(13, 13)
+    t.BangMark:SetPoint("CENTER", t.Bang, "CENTER")
+    t.Badge = t:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    t.Badge:SetPoint("CENTER", t.Bang, "CENTER", 0, 0)
+    -- Track checkbox: the template's own box when it has one.
+    if not t.Box then
+        t.Box = CreateFrame("CheckButton", nil, t, "UICheckButtonTemplate")
+        t.Box:SetSize(20, 20)
+        t.Box:SetPoint("TOPRIGHT", -2, 2)
+    end
+    t.Box:EnableMouse(true)
+    t.Box:SetScript("OnMouseUp", nil)
+    t.Box:SetScript("OnClick", nil)
+    t.Box:SetScript("OnMouseDown", function(self)
+        local id = self:GetParent().questID
+        if not id then return end
+        if C_QuestLog.GetQuestWatchType and C_QuestLog.GetQuestWatchType(id) ~= nil then
+            if C_QuestLog.RemoveQuestWatch then C_QuestLog.RemoveQuestWatch(id) end
+        else
+            if C_QuestLog.AddQuestWatch then C_QuestLog.AddQuestWatch(id) end
+        end
+        C_Timer.After(0.1, panel.Refresh)
+    end)
+    return t
 end
 
-local function QuestTitle(entry, core)
+local function SetTracked(t, tracked)
+    local box = t.Box
+    if box.SetChecked then
+        box:SetChecked(tracked)
+    elseif Part(box, "CheckMark") then
+        box.CheckMark:SetShown(tracked)
+    end
+end
+
+local function NewObjective()
+    local o, native = TryTemplate("objective", "QuestLogObjectiveTemplate")
+    o.Label, o.DashText = Part(o, "Text"), Part(o, "Dash")
+    if not native or not o.Label or not o.DashText then
+        o:SetHeight(16)
+        o.Label = o:CreateFontString(nil, "ARTWORK", "ObjectiveFont")
+        o.Label:SetPoint("TOPLEFT", 12, 0)
+        o.DashText = o:CreateFontString(nil, "ARTWORK", "ObjectiveFont")
+        o.DashText:SetPoint("TOPLEFT")
+    end
+    return o
+end
+
+local function Acquire(kind)
+    usedCount[kind] = usedCount[kind] + 1
+    local frame = pools[kind][usedCount[kind]]
+    if not frame then
+        frame = (kind == "header" and NewHeader()) or (kind == "title" and NewTitle()) or NewObjective()
+        pools[kind][usedCount[kind]] = frame
+    end
+    frame:Show()
+    return frame
+end
+
+local function ReleaseAll()
+    for kind, list in pairs(pools) do
+        for i = 1, #list do list[i]:Hide() end
+        usedCount[kind] = 0
+    end
+end
+
+local function ListWidth()
+    return math.max(panel.Child:GetWidth(), 150)
+end
+
+local function QuestTitle(entry)
     local q = entry.q
-    local level = q[F.LEVEL] or 0
-    local text = ("[%d%s] %s"):format(level, core and "+" or "", q[F.NAME])
-    if core then text = text .. " (" .. (LFG_TYPE_DUNGEON or "Dungeon") .. ")" end
-    return text
+    return ("[%d+] %s (%s)"):format(q[F.LEVEL] or 0, q[F.NAME], LFG_TYPE_DUNGEON or "Dungeon")
 end
 
 local function QuestTooltip(self)
@@ -279,136 +365,152 @@ end
 local Refresh -- forward
 local ShowDetail
 
-local function AddHeader(y, text, count)
-    local row = AcquireRow()
-    row.Text:SetFontObject("GameFontHighlightMedium")
-    row.Text:SetPoint("LEFT", 4, 0)
-    row.Text:SetText(("%s |cff888888(%d)|r"):format(text, count))
-    return Place(row, y + 6, 20)
+local function AddHeader(y, group, text, count)
+    local h = Acquire("header")
+    h.group = group
+    h.Label:SetText(("%s (%d)"):format(text, count))
+    h:ClearAllPoints()
+    h:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 1, -y)
+    h:SetWidth(ListWidth() - 2)
+    SetHeaderCollapsed(h, collapsed[group])
+    return y + h:GetHeight() + 4
 end
 
-local function AddObjectiveLines(y, id, ready)
-    local lines = {}
-    if ready then
-        table.insert(lines, "- " .. (QUEST_WATCH_QUEST_READY or "Ready for turn-in"))
-    elseif C_QuestLog.GetQuestObjectives then
-        for _, obj in ipairs(C_QuestLog.GetQuestObjectives(id) or {}) do
-            if obj.text and obj.text ~= "" then table.insert(lines, "- " .. obj.text) end
-        end
-    end
-    for _, line in ipairs(lines) do
-        local row = AcquireRow()
-        row.Text:SetFontObject("GameFontHighlightSmall")
-        row.Text:SetPoint("LEFT", LIST_INDENT + 8, 0)
-        row.Text:SetText(line)
-        y = Place(row, y, 14)
-    end
-    return y
+local function AddObjective(y, text, r, g, b)
+    local o = Acquire("objective")
+    o:ClearAllPoints()
+    o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 32, -y)
+    o:SetWidth(ListWidth() - 50)
+    o.DashText:SetText("-")
+    o.Label:SetText(text)
+    o.Label:SetWidth(ListWidth() - 64)
+    if r then o.Label:SetTextColor(r, g, b) else o.Label:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b) end
+    local height = math.max(o.Label:GetStringHeight() or 12, 12) + 2
+    o:SetHeight(height)
+    return y + height
 end
 
 local function AddQuestRow(y, entry, kind)
     local q = entry.q
-    local row = AcquireRow()
-    row.questID = entry.id
-    row.Highlight:Show()
-    row.Text:SetText(QuestTitle(entry, true))
+    local t = Acquire("title")
+    t.questID = entry.id
+    t:ClearAllPoints()
+    t:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 0, -y)
+    t:SetWidth(ListWidth())
+    t.Label:ClearAllPoints()
+    t.Label:SetPoint("TOPLEFT", t, "TOPLEFT", 31, -1)
+    t.Label:SetWidth(ListWidth() - 60)
+    t.Label:SetText(QuestTitle(entry))
     local r, g, b = DifficultyColor(q[F.LEVEL])
     if kind == "inside" then r, g, b = 0.4, 0.75, 1 end
-    if kind == "done" then r, g, b = 0.5, 0.5, 0.5 end
-    row.Text:SetTextColor(r, g, b)
+    if kind == "done" then r, g, b = 0.6, 0.6, 0.6 end
+    t.Label:SetTextColor(r, g, b)
+    t.r, t.g, t.b = r, g, b
 
+    -- Icon: the game's round quest button for quests in your log; "!" for ones you can pick up.
+    if t.POI then t.POI:Hide() end
+    t.Bang:Hide(); t.BangMark:Hide(); t.Badge:SetText("")
+    if kind == "log" and t.POI then
+        t.POI:SetQuestID(entry.id)
+        if t.POI.SetStyle and POIButtonUtil then
+            t.POI:SetStyle(entry.ready and POIButtonUtil.Style.QuestComplete or POIButtonUtil.Style.QuestInProgress)
+        end
+        if t.POI.UpdateButtonStyle then pcall(t.POI.UpdateButtonStyle, t.POI) end
+        t.POI:Show()
+    elseif kind == "available" or kind == "inside" then
+        local started = entry.steps and #entry.steps > 1 and entry.started
+        if started or (entry.canTake and not entry.tooLow) or kind == "inside" then
+            t.Bang:SetAtlas("UI-QuestPoi-QuestNumber")
+            t.Bang:Show()
+            if started then
+                t.Badge:SetText(("%d/%d"):format(entry.step, #entry.steps))
+            else
+                t.BangMark:SetAtlas("QuestNormal")
+                t.BangMark:Show()
+            end
+        end
+    end
+
+    t.Box:SetShown(kind == "log")
     if kind == "log" then
-        if entry.ready then SetIcon(row, "QuestTurnin") end
-        row.Check:Show()
-        local watched = C_QuestLog.GetQuestWatchType and C_QuestLog.GetQuestWatchType(entry.id) ~= nil
-        row.Check:SetChecked(watched)
-        row.hint = "<Click to open the quest>"
-        row:SetScript("OnClick", function(self)
+        SetTracked(t, C_QuestLog.GetQuestWatchType and C_QuestLog.GetQuestWatchType(entry.id) ~= nil)
+        t.hint = "<Click to open the quest>"
+        t:SetScript("OnClick", function(self)
             if QuestMapFrame_ShowQuestDetails then QuestMapFrame_ShowQuestDetails(self.questID) end
         end)
     else
-        if kind == "available" then
-            if entry.steps and #entry.steps > 1 and entry.started then
-                row.Badge:SetText(("%d/%d"):format(entry.step, #entry.steps))
-            elseif entry.canTake and not entry.tooLow then
-                SetIcon(row, "QuestNormal")
-            end
-        elseif kind == "inside" then
-            SetIcon(row, "QuestNormal")
-        end
-        row.hint = "<Click for details>"
-        row:SetScript("OnClick", function(self) ShowDetail(self.questID, entry) end)
+        t.hint = "<Click for details>"
+        t:SetScript("OnClick", function(self) ShowDetail(self.questID, entry) end)
     end
-    row:SetScript("OnEnter", QuestTooltip)
-    row:SetScript("OnLeave", function() GameTooltip:Hide() end)
-    y = Place(row, y, ROW_HEIGHT + 2)
+    t:SetScript("OnEnter", function(self)
+        self.Label:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+        QuestTooltip(self)
+    end)
+    t:SetScript("OnLeave", function(self)
+        self.Label:SetTextColor(self.r, self.g, self.b)
+        GameTooltip:Hide()
+    end)
+    local height = math.max(t.Label:GetStringHeight() or 14, 14) + 4
+    t:SetHeight(height)
+    y = y + height
 
     if kind == "log" then
-        y = AddObjectiveLines(y, entry.id, entry.ready)
+        if entry.ready then
+            y = AddObjective(y, QUEST_WATCH_QUEST_READY or "Ready for turn-in")
+        elseif C_QuestLog.GetQuestObjectives then
+            for _, obj in ipairs(C_QuestLog.GetQuestObjectives(entry.id) or {}) do
+                if obj.text and obj.text ~= "" then
+                    local c = obj.finished and GRAY_FONT_COLOR
+                    y = AddObjective(y, obj.text, c and c.r, c and c.g, c and c.b)
+                end
+            end
+        end
     elseif kind == "available" then
-        local line
         if entry.steps and #entry.steps > 1 then
             local stepQuest = Q(entry.steps[entry.step])
             if entry.stepInLog then
-                line = ("- Step %d of %d in your log: %s"):format(entry.step, #entry.steps, stepQuest[F.NAME])
+                y = AddObjective(y, ("Step %d of %d in your log: %s"):format(entry.step, #entry.steps, stepQuest[F.NAME]))
             else
-                line = ("- Starts with: %s"):format(stepQuest[F.NAME])
+                y = AddObjective(y, ("Starts with: %s"):format(stepQuest[F.NAME]))
             end
-        end
-        if line then
-            local sub = AcquireRow()
-            sub.Text:SetFontObject("GameFontHighlightSmall")
-            sub.Text:SetPoint("LEFT", LIST_INDENT + 8, 0)
-            sub.Text:SetText(line)
-            y = Place(sub, y, 14)
         end
         if entry.tooLow then
             local current = Q(entry.steps and entry.steps[entry.step] or entry.id) or q
-            local sub = AcquireRow()
-            sub.Text:SetFontObject("GameFontHighlightSmall")
-            sub.Text:SetPoint("LEFT", LIST_INDENT + 8, 0)
-            sub.Text:SetText(("- Requires level %d"):format(current[F.REQ] or 0))
-            sub.Text:SetTextColor(1, 0.25, 0.25)
-            y = Place(sub, y, 14)
+            y = AddObjective(y, ("Requires level %d"):format(current[F.REQ] or 0), 1, 0.25, 0.25)
         end
     end
-    return y + 2
+    return y + 6
 end
+
+local GROUPS = {
+    { key = "log", title = "Dungeon quests" },
+    { key = "available", title = "Available quests" },
+    { key = "inside", title = "Starts inside" },
+    { key = "done", title = "Handed in" },
+}
 
 function Refresh()
     if not panel or not panel:IsShown() then return end
     local key = ns:CurrentDungeonKey()
     if not key then return end
-    for i = 1, used do rows[i]:Hide() end
-    used = 0
+    ReleaseAll()
 
     local groups = Classify(key)
-    local y = 0
-    if #groups.log > 0 then
-        y = AddHeader(y, "Dungeon quests", #groups.log)
-        for _, e in ipairs(groups.log) do y = AddQuestRow(y, e, "log") end
+    local y, any = 4, false
+    for _, group in ipairs(GROUPS) do
+        local list = groups[group.key]
+        if #list > 0 then
+            any = true
+            y = AddHeader(y, group.key, group.title, #list)
+            if not collapsed[group.key] then
+                for _, e in ipairs(list) do y = AddQuestRow(y, e, group.key) end
+            end
+        end
     end
-    if #groups.available > 0 then
-        y = AddHeader(y, "Available quests", #groups.available)
-        for _, e in ipairs(groups.available) do y = AddQuestRow(y, e, "available") end
-    end
-    if #groups.inside > 0 then
-        y = AddHeader(y, "Starts inside", #groups.inside)
-        for _, e in ipairs(groups.inside) do y = AddQuestRow(y, e, "inside") end
-    end
-    if showHandedIn and #groups.done > 0 then
-        y = AddHeader(y, "Handed in", #groups.done)
-        for _, e in ipairs(groups.done) do y = AddQuestRow(y, e, "done") end
-    end
-    if used == 0 then
-        local row = AcquireRow()
-        row.Text:SetFontObject("GameFontDisable")
-        row.Text:SetText(#groups.done > 0 and "You've done every quest here." or "No quests known for this dungeon.")
-        y = Place(row, 10, 20)
+    if not any then
+        y = AddObjective(10, "No quests known for this dungeon.", 0.6, 0.6, 0.6)
     end
     panel.Child:SetHeight(math.max(y + 10, 10))
-    panel.HandedIn:SetText(showHandedIn and "Hide handed in" or ("Show handed in (%d)"):format(#groups.done))
-    panel.HandedIn:SetEnabled(#groups.done > 0)
 end
 
 ----------------------------------------------------------------------
@@ -424,7 +526,7 @@ local function Layout()
         panel.Detail:SetHeight(math.floor(h / 3))
         panel.Scroll:SetPoint("BOTTOMRIGHT", panel.Detail, "TOPRIGHT", -24, 6)
     else
-        panel.Scroll:SetPoint("BOTTOMRIGHT", -24, 30)
+        panel.Scroll:SetPoint("BOTTOMRIGHT", -24, 4)
     end
     panel.Child:SetWidth(math.max(panel.Scroll:GetWidth(), 50))
 end
@@ -487,8 +589,8 @@ end
 
 local function CreateDetail(parent)
     local d = CreateFrame("Frame", nil, parent)
-    d:SetPoint("BOTTOMLEFT", 0, 26)
-    d:SetPoint("BOTTOMRIGHT", 0, 26)
+    d:SetPoint("BOTTOMLEFT", 0, 0)
+    d:SetPoint("BOTTOMRIGHT", 0, 0)
     d:Hide()
     local line = d:CreateTexture(nil, "ARTWORK")
     line:SetPoint("TOPLEFT", 4, 0)
@@ -628,15 +730,8 @@ local function CreateFrames()
     panel.Child:SetSize(200, 10)
     scroll:SetScrollChild(panel.Child)
 
-    panel.HandedIn = CreateFrame("Button", nil, panel, "UIPanelButtonTemplate")
-    panel.HandedIn:SetSize(170, 22)
-    panel.HandedIn:SetPoint("BOTTOMLEFT", 6, 4)
-    panel.HandedIn:SetScript("OnClick", function()
-        showHandedIn = not showHandedIn
-        Refresh()
-    end)
-
     panel.Detail = CreateDetail(panel)
+    panel.Refresh = function() Refresh() end
     panel:SetScript("OnSizeChanged", function() Layout(); Refresh() end)
     panel:Hide()
     return true

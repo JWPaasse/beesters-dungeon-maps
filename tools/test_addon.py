@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ADDON = ROOT / "BeestersDungeonMaps"
 
 FAKE_WOW = r"""
-local NUMBERS = { GetWidth = 100, GetHeight = 50, GetStringWidth = 60, GetFrameLevel = 5 }
+local NUMBERS = { GetWidth = 100, GetHeight = 50, GetStringWidth = 60, GetStringHeight = 14, GetFrameLevel = 5 }
 local function anything()
     local t = { _shown = true }
     return setmetatable(t, { __index = function(self, key)
@@ -114,6 +114,8 @@ SlashCmdList = { OTHERADDON = function() end }
 SLASH_OTHERADDON1 = "/other"
 NORMAL_FONT_COLOR = { r = 1, g = 0.82, b = 0 }
 GREEN_FONT_COLOR = { r = 0.1, g = 1, b = 0.1 }
+HIGHLIGHT_FONT_COLOR = { r = 1, g = 1, b = 1 }
+GRAY_FONT_COLOR = { r = .5, g = .5, b = .5 }
 DEFAULT_CHAT_FRAME = { AddMessage = function(_, msg) print("[chat] " .. msg) end }
 GameTooltip = anything()
 Settings = {
