@@ -12,6 +12,9 @@
 - Entrance icons are bigger by default (32 instead of 24) and are drawn above the big city badges, so Ragefire Chasm now shows on Durotar.
 - New options: open the dungeon map automatically inside dungeons, list dungeons in the map's top bar.
 - `/bdm map` opens the map of the dungeon you're in.
+- Click a boss for its loot: only items that bosses alone drop (one boss or shared between bosses), Uncommon and better. Hover an item for its normal game tooltip; shift-click links it in chat.
+- Shift-drag a boss to place it on the map yourself (for bosses without a known position); shift-right-click undoes it.
+- Dungeon quests: while a dungeon map is open, a tab bar on top of the quest list switches between your quest log and the dungeon's quests: in your log (objectives, ready for turn-in, track checkbox), available (pick up now, chains in progress with their step, too-low quests with the level you need), starts inside, and handed in (behind a button). Click a quest for its text, start, rewards and a "Show on map" button. Data: QuestieDB's Forever quests.
 
 ## 0.1.1
 
