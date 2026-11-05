@@ -400,6 +400,12 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local steps = 0
         for _, f in ipairs(ns.QuestPanelPools.step) do if f:IsShown() then steps = steps + 1 end end
         check("a folded chain still shows the step you're on", steps >= 2)
+        -- WoW Forever's new requirements (tools/quest_prereqs.json) turn these into chains.
+        local rol = ns.ClassifyDungeonQuests("rol")
+        local function find(g, id) for _, list in pairs(g) do for _, e in ipairs(list) do if e.id == id then return e end end end end
+        local rath, torment = find(rol, 92422), find(rol, 97292)
+        check("The Wrath of Rath'mael starts with Rear Guard Patrol", rath and rath.steps and #rath.steps == 3 and rath.steps[1] == 356)
+        check("Unending Torment is one chain of five", torment and torment.steps and #torment.steps == 5 and not find(rol, 97288) and not find(rol, 97291))
         local allianceOnly = false
         for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
         check("no Alliance-only quests for a Horde character", not allianceOnly)

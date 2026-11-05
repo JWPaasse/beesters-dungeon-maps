@@ -5,7 +5,8 @@ Usage:
     python3 tools/build_quests.py /path/to/QuestieDB
 
 Uses QuestieDB's own loader (generator/flavor.lua) so every Forever correction is applied,
-exactly as Questie sees the data in the game. Requires: pip install lupa
+exactly as Questie sees the data in the game. Requirements WoW Forever added that QuestieDB
+doesn't have yet come from tools/quest_prereqs.json. Requires: pip install lupa
 """
 import json
 import os
@@ -91,6 +92,15 @@ def main():
 
     lua = load_questiedb(qdb)
     quests_lua = lua.eval("DB.Quest.entities")
+    # Requirements WoW Forever added that QuestieDB doesn't have yet (tools/quest_prereqs.json).
+    # QuestieDB's own data wins as soon as it has a requirement for the quest.
+    fixes = json.loads((ROOT / "tools" / "quest_prereqs.json").read_text(encoding="utf-8"))["quests"]
+    for qid_text, fix in fixes.items():
+        entity = quests_lua[int(qid_text)]
+        if entity is None:
+            continue
+        if not ids(to_py(entity[Q_PRE_SINGLE])) and not ids(to_py(entity[Q_PRE_GROUP])):
+            entity[Q_PRE_SINGLE] = lua.table(*fix["pre"])
     npcs_lua = lua.eval("DB.Npc.entities")
     items_lua = lua.eval("DB.Item.entities")
     objects_lua = lua.eval("DB.Object.entities")

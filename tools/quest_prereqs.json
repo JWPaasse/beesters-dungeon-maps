@@ -1,0 +1,11 @@
+{
+ "_source": "Quest requirements WoW Forever added or changed that QuestieDB doesn't have yet. Applied by tools/build_quests.py only while QuestieDB has no requirement of its own for the quest. Sources: Wowhead (wowhead.com/forever) quest series and player comments.",
+ "quests": {
+  "92422": {"pre": [99156], "note": "The Wrath of Rath'mael needs Rear Guard Patrol (part 2) since launch (Wowhead comments, 5 Nov 2026)"},
+  "95216": {"pre": [451], "note": "The New Plague needs the A Recipe For Death chain since launch (Wowhead comments, 5 Nov 2026)"},
+  "97289": {"pre": [97288], "note": "Unending Torment, part 2 of 5 (Wowhead series)"},
+  "97290": {"pre": [97289], "note": "Unending Torment, part 3 of 5 (Wowhead series)"},
+  "97291": {"pre": [97290], "note": "Unending Torment, part 4 of 5 (Wowhead series)"},
+  "97292": {"pre": [97291], "note": "Unending Torment, part 5 of 5 (Wowhead series)"}
+ }
+}
