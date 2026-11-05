@@ -868,7 +868,13 @@ DecorateNavBar = function(navBar)
     c:SetWidth((type(label) == "table" and label:GetStringWidth() or 60) + 53)
     c:ClearAllPoints()
     c:SetPoint("LEFT", last, "RIGHT", tonumber(rawget(last, "xoffset")) or 0, 0)
-    c:SetFrameLevel(last:GetFrameLevel() + 1)
+    -- The game stacks each crumb above the one after it, so a crumb's arrow overlaps the next
+    -- one. Ours comes last, so it goes underneath the zone's crumb.
+    local barLevel = navBar.GetFrameLevel and navBar:GetFrameLevel() or 0
+    if last:GetFrameLevel() - 1 <= barLevel then
+        for _, button in ipairs(list) do button:SetFrameLevel(button:GetFrameLevel() + 1) end
+    end
+    c:SetFrameLevel(last:GetFrameLevel() - 1)
     -- Ours is the bar's last crumb now, so it gets the "selected" look; the zone before it
     -- looks and works like any other crumb (its click is the game's own, so it stays clean).
     local sel = rawget(c, "selected")
