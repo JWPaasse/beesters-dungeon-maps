@@ -45,7 +45,8 @@ def latest_cata_build():
             if version.startswith("4.4."):
                 versions.append(version)
     if not versions:
-        sys.exit("No Cataclysm Classic build found on wago.tools")
+        sample = {p: [e.get("version") for e in entries[:3]] for p, entries in list(builds.items())[:12]}
+        sys.exit(f"No Cataclysm Classic build found on wago.tools. Products: {sample}")
     return max(versions, key=lambda v: [int(p) for p in v.split(".")])
 
 
@@ -76,13 +77,16 @@ def main():
 
     bosses = []
     for row in table("JournalEncounter", build):
+        if "Map_0" not in row:
+            sys.exit(f"JournalEncounter columns changed: {list(row)}")
         floor = map_to_floor.get(row.get("UiMapID", ""))
         if floor:
             x, y = float(row["Map_0"]), float(row["Map_1"])
             if 0 < x < 1 and 0 < y < 1:
                 bosses.append([floor, int(row.get("DungeonEncounterID") or 0), row["Name_lang"], round(x, 3), round(y, 3)])
     if len(bosses) < 20:
-        sys.exit(f"Only {len(bosses)} positions found; keeping the existing file")
+        sys.exit(f"Only {len(bosses)} positions found (floors matched: {len(art_to_floor)} art, "
+                 f"{len(map_to_floor)} maps); keeping the existing file")
     out = {
         "_source": f"Cataclysm Classic Dungeon Journal, build {build}, via wago.tools (tools/fetch_cata_positions.py).",
         "bosses": sorted(bosses),
@@ -92,4 +96,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit as e:
+        if e.code not in (None, 0):
+            print(f"::error::{e.code}")
+        raise
+    except Exception as e:  # show the reason in the Actions summary (annotations)
+        print(f"::error::{type(e).__name__}: {e}")
+        raise
