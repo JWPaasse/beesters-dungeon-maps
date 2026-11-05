@@ -1,20 +1,25 @@
 # Changelog
 
-## 0.2.0 (test build)
+## 0.2.0
 
 - Dungeon maps. WoW Forever has no maps inside dungeons; the addon now shows one in the Map & Quest Log window:
   - the classic dungeon maps for all 22 old dungeons and raids (the images are still in the game files, the game just doesn't use them any more)
   - Santiago Reyes's maps for Hall of Thanes, Ruins of Lordaeron, Excavation Site: Wetlands and City of Dalaran (both floors), with his permission
-- Opens by itself when you open your map inside a dungeon, when you click an entrance on the map, or from the map's top bar: World › Kalimdor › Durotar › Dungeons.
-- Boss icons on the map in the game's own skull style, with the boss's place in the dungeon and its loot in the tooltip. Positions come from the Dungeon Journal; bosses without a known position are listed in a corner of the map.
+- The map opens by itself when you open your map inside a dungeon, when you click an entrance on the world map, or from the map's top bar: World › Kalimdor › Durotar › Dungeons.
 - Floor picker for dungeons with several levels (Scarlet Monastery wings, Blackrock Spire, Dire Maul, ...).
 - Right-click the dungeon map, or click a name in the top bar, to go back to the normal map.
-- Entrance icons are bigger by default (32 instead of 24) and are drawn above the big city badges, so Ragefire Chasm now shows on Durotar.
-- New options: open the dungeon map automatically inside dungeons, list dungeons in the map's top bar.
+- Boss skulls on the map for 197 bosses, placed from the Dungeon Journal, Wowhead and the bosses' spawn points in the CMaNGOS Classic database. Bosses without a fixed spot (summoned or event bosses, and the bosses of the new Forever dungeons) are listed in a corner of the map. Shift-drag one onto the map to place it yourself; shift-right-click undoes it.
+- Click a skull for the boss's loot: items only bosses drop (one boss, or shared between bosses), Uncommon and better. Hover an item for its normal tooltip; shift-click links it in chat.
+- Dungeon quests: while a dungeon map is open, a tab above the quest list switches between your quest log and the dungeon's quests, laid out like the normal quest log:
+  - quests in your log and chains you've started, with their objectives
+  - quests you can pick up, quests that start inside, and handed-in quests (folded away)
+  - quest chains show the step you're on; the rest of the chain folds out, and a dungeon quest that is part of a longer chain is shown inside that chain
+  - click a quest or a chain step for its original quest text, level, start, rewards and a "Show on map" button
+  - quest data from QuestieDB, quest text and rewards from the CMaNGOS Classic database
+- Entrance icons are bigger by default (32 instead of 24) and drawn above the big city badges, so Ragefire Chasm now shows on Durotar. Click one to open its dungeon map.
+- New options: open the dungeon map automatically inside dungeons, list dungeons in the map's top bar, show the dungeon quest list.
 - `/bdm map` opens the map of the dungeon you're in.
-- Click a boss for its loot: only items that bosses alone drop (one boss or shared between bosses), Uncommon and better. Hover an item for its normal game tooltip; shift-click links it in chat.
-- Shift-drag a boss to place it on the map yourself (for bosses without a known position); shift-right-click undoes it.
-- Dungeon quests: while a dungeon map is open, a tab bar on top of the quest list switches between your quest log and the dungeon's quests: in your log (objectives, ready for turn-in, track checkbox), available (pick up now, chains in progress with their step, too-low quests with the level you need), starts inside, and handed in (behind a button). Click a quest for its text, start, rewards and a "Show on map" button. Data: QuestieDB's Forever quests.
+- Fixed: "action blocked" errors when the map was open during combat.
 
 ## 0.1.1
 
