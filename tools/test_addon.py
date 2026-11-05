@@ -32,6 +32,8 @@ local function anything()
             f = function(s) return s._shown end
         elseif key == "HookScript" or key == "SetScript" then
             f = function(s, event, fn) local sc = rawget(s, "scripts") or {}; rawset(s, "scripts", sc); sc[event] = fn end
+        elseif key == "GetFontString" then
+            f = function() return nil end
         elseif key == "CreateFontString" or key == "CreateTexture" then
             f = function() return anything() end
         elseif key == "GetAtlas" or key == "GetTexture" then

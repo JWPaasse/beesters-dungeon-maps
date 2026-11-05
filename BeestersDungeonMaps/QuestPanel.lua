@@ -560,13 +560,21 @@ local function SetTab(which)
     end
 end
 
+-- The button gets its own font string: a button whose text is still empty has none yet.
+local function SetTabText(b, text)
+    b.Label:SetText(text)
+    b:SetWidth(math.max(40, b.Label:GetStringWidth() + 20))
+end
+
 local function CreateTabButton(parent, text)
     local b = CreateFrame("Button", nil, parent)
     b:SetHeight(22)
-    b:SetText(text)
+    b.Label = b:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+    b.Label:SetPoint("CENTER", 0, 1)
+    b:SetFontString(b.Label)
     b:SetNormalFontObject("GameFontNormal")
     b:SetHighlightFontObject("GameFontHighlight")
-    b:SetWidth(b:GetFontString():GetStringWidth() + 20)
+    SetTabText(b, text)
     b.Selected = b:CreateTexture(nil, "ARTWORK")
     b.Selected:SetPoint("BOTTOMLEFT", 6, 1)
     b.Selected:SetPoint("BOTTOMRIGHT", -6, 1)
@@ -641,8 +649,7 @@ end
 function ns:ShowDungeonQuests(key)
     if not ns.db.questPanel then return end
     if not panel and not CreateFrames() then return end
-    strip.Dungeon:SetText(ns.Instances[key] and ns.Instances[key].name or key)
-    strip.Dungeon:SetWidth(strip.Dungeon:GetFontString():GetStringWidth() + 20)
+    SetTabText(strip.Dungeon, ns.Instances[key] and ns.Instances[key].name or key)
     strip:Show()
     panel.Detail:Hide()
     selected = nil
