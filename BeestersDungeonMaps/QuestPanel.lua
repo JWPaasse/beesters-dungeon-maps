@@ -184,10 +184,15 @@ local function Classify(key)
                 local current = Q(steps[entry.step or 1]) or q
                 entry.canTake = PrereqsDone(current) and not InLog(steps[entry.step or 1])
                 entry.tooLow = (current[F.REQ] or 0) > UnitLevel("player")
-                -- A chain you've started counts as one of your dungeon quests.
+                -- A chain you've started counts as one of your dungeon quests. One you haven't,
+                -- whose first step starts inside (an item that drops there), starts inside.
+                local first = Q(steps[1])
                 if entry.started or entry.stepInLog then
                     entry.chain = true
                     table.insert(groups.log, entry)
+                elseif #steps > 1 and first and StartsInside(first) then
+                    entry.canTake = PrereqsDone(first)
+                    table.insert(groups.inside, entry)
                 else
                     table.insert(groups.available, entry)
                 end
@@ -197,7 +202,7 @@ local function Classify(key)
     -- One block per chain: a dungeon quest that is an earlier step of a longer chain in this
     -- list (Hamuul Runetotem on the way to Leaders of the Fang) is shown inside that chain.
     local partOf = {}
-    for _, group in ipairs({ groups.log, groups.available }) do
+    for _, group in ipairs({ groups.log, groups.available, groups.inside }) do
         for _, entry in ipairs(group) do
             if entry.steps and #entry.steps > 1 then
                 for i = 1, #entry.steps - 1 do
@@ -572,7 +577,11 @@ local function AddChain(y, entry)
                 else
                     local who, mapID = StartInfo(sq)
                     local zone = mapID and C_Map.GetMapInfo(mapID)
-                    if who then where = (" – %s%s"):format(who, zone and (", " .. zone.name) or "") end
+                    if who and #(sq[F.START_ITEM] or {}) > 0 then
+                        where = (" – starts from %s, which drops inside"):format(who)
+                    elseif who then
+                        where = (" – %s%s"):format(who, zone and (", " .. zone.name) or "")
+                    end
                 end
                 y = AddStepLine(y, 40, name .. (where or ""), "current", 1, 1, 1, showStep, last, "<Click for details>")
                 -- The step's progress, right under it.

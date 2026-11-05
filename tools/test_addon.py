@@ -406,6 +406,8 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local rath, torment = find(rol, 92422), find(rol, 97292)
         check("The Wrath of Rath'mael starts with Rear Guard Patrol", rath and rath.steps and #rath.steps == 3 and rath.steps[1] == 356)
         check("Unending Torment is one chain of five", torment and torment.steps and #torment.steps == 5 and not find(rol, 97288) and not find(rol, 97291))
+        local function inGroup(list, id) for _, e in ipairs(list) do if e.id == id then return true end end end
+        check("Unending Torment starts inside (the head drops in the dungeon)", inGroup(rol.inside, 97292))
         local allianceOnly = false
         for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
         check("no Alliance-only quests for a Horde character", not allianceOnly)
