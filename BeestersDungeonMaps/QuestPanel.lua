@@ -213,7 +213,7 @@ ns.ClassifyDungeonQuests = Classify -- used by tools/test_addon.py
 
 local pools = { header = {}, title = {}, objective = {}, step = {} }
 local usedCount = { header = 0, title = 0, objective = 0, step = 0 }
-local chainOpen = {} -- [questID] = true/false; started chains start open
+local chainOpen = {} -- [questID] = true when the whole chain is folded open
 local collapsed = { done = true } -- "Handed in" starts folded, like the game's collapsed zones
 
 local function DifficultyColor(level)
@@ -517,12 +517,11 @@ local function AddStepLine(y, indent, text, state, r, g, b, onClick, last, hint)
     return y + height
 end
 
--- The chain as a trail of steps you can fold open: done steps ticked off, the step you're on
--- with its progress (or where it starts), and the steps still to come.
+-- The chain as a trail of steps. Folded (the default) it shows only the step you're on with
+-- its progress (or where it starts); unfolded it adds the steps done and the steps to come.
 local function AddChain(y, entry)
     local steps = entry.steps
-    local open = chainOpen[entry.id]
-    if open == nil then open = entry.chain and true or false end
+    local open = chainOpen[entry.id] == true
     y = AddStepLine(y, 30, ("Quest chain · step %d of %d"):format(entry.step or 1, #steps),
         open and "open" or "closed", nil, nil, nil, function()
             chainOpen[entry.id] = not open
@@ -531,8 +530,9 @@ local function AddChain(y, entry)
     if not open then return y end
     for i, stepID in ipairs(steps) do
         local sq = Q(stepID)
-        if sq then
-            local last = i == #steps
+        local current = i == (entry.step or 1)
+        if sq and (open or current) then
+            local last = i == #steps or not open
             local name = ("%d. %s"):format(i, sq[F.NAME])
             local showStep = function() ShowDetail(entry.id, entry, stepID) end
             if i < (entry.step or 1) then
