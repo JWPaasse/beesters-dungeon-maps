@@ -1,11 +1,101 @@
 {
  "_source": "Quest requirements WoW Forever added or changed that QuestieDB doesn't have yet. Applied by tools/build_quests.py only while QuestieDB has no requirement of its own for the quest. Sources: Wowhead (wowhead.com/forever) quest series and player comments.",
  "quests": {
-  "92422": {"pre": [99156], "note": "The Wrath of Rath'mael needs Rear Guard Patrol (part 2) since launch (Wowhead comments, 5 Nov 2026)"},
-  "95216": {"pre": [451], "note": "The New Plague needs the A Recipe For Death chain since launch (Wowhead comments, 5 Nov 2026)"},
-  "97289": {"pre": [97288], "note": "Unending Torment, part 2 of 5 (Wowhead series)"},
-  "97290": {"pre": [97289], "note": "Unending Torment, part 3 of 5 (Wowhead series)"},
-  "97291": {"pre": [97290], "note": "Unending Torment, part 4 of 5 (Wowhead series)"},
-  "97292": {"pre": [97291], "note": "Unending Torment, part 5 of 5 (Wowhead series)"}
+  "92422": {
+   "pre": [
+    99156
+   ],
+   "note": "The Wrath of Rath'mael needs Rear Guard Patrol (part 2) since launch (Wowhead comments, 5 Nov 2026)"
+  },
+  "95216": {
+   "pre": [
+    451
+   ],
+   "note": "The New Plague needs the A Recipe For Death chain since launch (Wowhead comments, 5 Nov 2026)"
+  },
+  "97289": {
+   "pre": [
+    97288
+   ],
+   "note": "Unending Torment, part 2 of 5 (Wowhead series)"
+  },
+  "97290": {
+   "pre": [
+    97289
+   ],
+   "note": "Unending Torment, part 3 of 5 (Wowhead series)"
+  },
+  "97291": {
+   "pre": [
+    97290
+   ],
+   "note": "Unending Torment, part 4 of 5 (Wowhead series)"
+  },
+  "97292": {
+   "pre": [
+    97291
+   ],
+   "note": "Unending Torment, part 5 of 5 (Wowhead series)"
+  },
+  "92457": {
+   "pre": [
+    92432
+   ],
+   "note": "Starving Arcane: the quest giver only offers it after the breadcrumb An Alarming Request (Wowhead comment)"
+  },
+  "92458": {
+   "pre": [
+    92432
+   ],
+   "note": "Heart of Disruption (Alliance): An Alarming Request first (Wowhead series and comment)"
+  },
+  "92459": {
+   "pre": [
+    92458
+   ],
+   "note": "Friend of the Kirin Tor follows Heart of Disruption (Wowhead series)"
+  },
+  "96984": {
+   "pre": [
+    92434
+   ],
+   "note": "Heart of Disruption (Horde): Blood in the Streets first (Wowhead series)"
+  },
+  "97287": {
+   "pre": [
+    96984
+   ],
+   "note": "Shrewd Negotiations follows Heart of Disruption (Wowhead series)"
+  },
+  "95682": {
+   "pre": [
+    95663
+   ],
+   "note": "Open the Maw needs Dragonmaw Rumors (Wowhead series; comments confirm it is required)"
+  },
+  "95809": {
+   "pre": [
+    95647
+   ],
+   "note": "Heartwoven follows Lost in the Thicket Things (Wowhead series)"
+  },
+  "98823": {
+   "pre": [
+    95664
+   ],
+   "note": "Earthen Echo follows Elder Knowledge (Wowhead series)"
+  },
+  "98824": {
+   "pre": [
+    95810
+   ],
+   "note": "Prehistoric Prism follows Lost Relic Carry (Wowhead series)"
+  },
+  "98815": {
+   "pre": [
+    484
+   ],
+   "note": "Highland Hides needs Young Crocolisk Skins (Wowhead comment, warcraft.wiki.gg)"
+  }
  }
 }
