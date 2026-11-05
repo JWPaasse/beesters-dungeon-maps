@@ -17,6 +17,7 @@ local _, ns = ...
 
 local panel        -- content (list + detail pane)
 local RaiseAboveQuestDetails -- defined with the tabs
+local UpdateShareButton -- defined with the detail page
 local strip        -- tab bar
 local selected     -- questID shown in the detail pane
 local tab = "dungeon"
@@ -946,6 +947,23 @@ local function LiveRewards(questID)
     end
 end
 
+-- Share works for a quest in your log that can be shared, while you're in a group.
+UpdateShareButton = function(d, questID)
+    local b = d.ShareButton
+    if not b then return end
+    b.questID = questID
+    local reason
+    if not InLog(questID) then
+        reason = "Pick up this quest to share it."
+    elseif C_QuestLog.IsPushableQuest and not C_QuestLog.IsPushableQuest(questID) then
+        reason = "This quest can't be shared."
+    elseif IsInGroup and not IsInGroup() then
+        reason = "Join a group to share this quest."
+    end
+    b.reason = reason
+    b:SetEnabled(reason == nil)
+end
+
 function ShowDetail(id, entry, stepOverride)
     local q = Q(id)
     if not q then return end
@@ -1051,6 +1069,7 @@ function ShowDetail(id, entry, stepOverride)
     d.MapButton.target = mapID and { mapID = mapID, x = x, y = yy, title = step[F.NAME],
         who = ("%s: %s"):format(inLog and "Hand in" or "Pick up", who or "?") } or nil
     d.MapButton:SetEnabled(d.MapButton.target ~= nil)
+    UpdateShareButton(d, stepID)
 end
 
 ns.ShowQuestDetail = function(id, entry, step) ShowDetail(id, entry, step) end -- used by tools/test_addon.py
@@ -1110,6 +1129,29 @@ local function CreateDetail(parent)
         local t = self.target
         if t then ns:ShowQuestMarker(t.mapID, t.x, t.y, t.title, t.who) end
     end)
+
+    -- Share the quest with your group, like the quest log's Share button.
+    d.ShareButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
+    d.ShareButton:SetSize(80, 22)
+    d.ShareButton:SetPoint("RIGHT", d.MapButton, "LEFT", -4, 0)
+    d.ShareButton:SetFrameLevel(d.MapButton:GetFrameLevel())
+    d.ShareButton:SetText(SHARE_QUEST_ABBREV or "Share")
+    d.ShareButton:SetMotionScriptsWhileDisabled(true)
+    d.ShareButton:SetScript("OnClick", function(self)
+        local index = self.questID and C_QuestLog.GetLogIndexForQuestID(self.questID)
+        if index and QuestLogPushQuest then
+            QuestLogPushQuest(index)
+            if PlaySound and SOUNDKIT then PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN) end
+        end
+    end)
+    d.ShareButton:SetScript("OnEnter", function(self)
+        if self.reason then
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText(self.reason, 1, 1, 1, 1, true)
+            GameTooltip:Show()
+        end
+    end)
+    d.ShareButton:SetScript("OnLeave", function() GameTooltip:Hide() end)
     return d
 end
 
@@ -1268,11 +1310,16 @@ function ns:InitQuestPanel()
     WorldMapFrame:HookScript("OnHide", function() ns.keepQuestPanel = false; ns:HideDungeonQuests() end)
     local events = CreateFrame("Frame")
     for _, event in ipairs({ "QUEST_LOG_UPDATE", "QUEST_ACCEPTED", "QUEST_TURNED_IN", "QUEST_REMOVED",
-        "PLAYER_LEVEL_UP", "QUEST_WATCH_LIST_CHANGED", "GET_ITEM_INFO_RECEIVED", "QUEST_DATA_LOAD_RESULT" }) do
+        "PLAYER_LEVEL_UP", "QUEST_WATCH_LIST_CHANGED", "GET_ITEM_INFO_RECEIVED", "QUEST_DATA_LOAD_RESULT", "GROUP_ROSTER_UPDATE" }) do
         pcall(events.RegisterEvent, events, event)
     end
     local pending = false
     events:SetScript("OnEvent", function(_, event, arg1, arg2)
+        if event == "GROUP_ROSTER_UPDATE" then
+            local d = panel and panel.Detail
+            if d and d:IsShown() and d.current then UpdateShareButton(d, d.current.stepID) end
+            return
+        end
         if event == "QUEST_DATA_LOAD_RESULT" then
             -- The game's reward data for the quest on the page has arrived: redraw it.
             local d = panel and panel.Detail

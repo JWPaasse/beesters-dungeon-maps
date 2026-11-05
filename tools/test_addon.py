@@ -468,6 +468,18 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ok, err = pcall(ns.ShowQuestDetail, 5728, entry)
         check("detail page opens for a chain step" .. (ok and "" or (": " .. tostring(err))), ok)
         check("detail page has quest text for Ragefire Chasm quests", ns.QuestText and ns.QuestText[5725] ~= nil)
+        -- Share: only for a quest in your log, while in a group.
+        local pushed
+        IsInGroup = function() return true end
+        C_QuestLog.IsPushableQuest = function() return true end
+        QuestLogPushQuest = function(index) pushed = index end
+        ns.ShowQuestDetail(5723)
+        local share = qp.Detail.ShareButton
+        share.scripts.OnClick(share)
+        check("Share sends a quest in your log to the group", pushed == 3 and rawget(share, "reason") == nil)
+        ns.ShowQuestDetail(5725)
+        check("Share is off for a quest you don't have", rawget(share, "reason") ~= nil)
+        IsInGroup = function() return false end
         -- Experience: from the data (5725 at its level), and the game's own number when it has one.
         local function special()
             local out = {}
