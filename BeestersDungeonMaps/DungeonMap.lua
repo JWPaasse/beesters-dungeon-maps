@@ -85,6 +85,26 @@ local function BossesWithPositions(key)
     return result
 end
 
+-- How many bosses stand on each floor, and the floor to open on: the first floor unless
+-- it has no bosses (Scholomance's entrance level), then the floor with the most.
+local function BossesPerFloor(key)
+    local counts = {}
+    for _, b in ipairs(BossesWithPositions(key)) do
+        if b.floor then counts[b.floor] = (counts[b.floor] or 0) + 1 end
+    end
+    return counts
+end
+
+local function DefaultFloor(key)
+    local counts = BossesPerFloor(key)
+    if (counts[1] or 0) > 0 then return 1 end
+    local best, most = 1, 0
+    for floor, n in pairs(counts) do
+        if n > most or (n == most and floor < best) then best, most = floor, n end
+    end
+    return best
+end
+
 ----------------------------------------------------------------------
 -- Boss tooltip (name, place in the dungeon, loot)
 ----------------------------------------------------------------------
@@ -753,8 +773,11 @@ local function CreateView()
         dropdown:SetupMenu(function(_, root)
             local map = current.key and ns.DungeonMaps[current.key]
             if not map then return end
+            local counts = BossesPerFloor(current.key)
             for i = 1, #map.floors do
-                root:CreateRadio(FloorName(current.key, i),
+                local n = counts[i] or 0
+                local label = FloorName(current.key, i) .. (n > 0 and ("  |cff9d9d9d(%d %s)|r"):format(n, n == 1 and "boss" or "bosses") or "")
+                root:CreateRadio(label,
                     function() return current.floor == i end,
                     function() ShowFloor(i) end)
             end
@@ -778,6 +801,8 @@ end
 function ns:IsDungeonMapOpen()
     return view ~= nil and view:IsShown()
 end
+
+function ns:CurrentDungeonFloor() return current.floor end
 
 function ns:CurrentDungeonKey()
     return current.key
@@ -861,7 +886,7 @@ function ns:OpenDungeonMap(key, floor)
         current.zoneMapID = WorldMapFrame:GetMapID()
         SetCanvasShown(false)
         view:Show()
-        ShowFloor(floor or 1)
+        ShowFloor(floor or DefaultFloor(key))
         if ns.UpdateDungeonCrumb then ns:UpdateDungeonCrumb() end
         if ns.ShowDungeonQuests then ns:ShowDungeonQuests(key) end
     end)

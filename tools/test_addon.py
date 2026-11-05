@@ -301,6 +301,9 @@ def main():
         end
         check("clicking a boss opens its loot", panel:IsShown() and rows > 0)
         check("loot shows only Uncommon or better", not lowQuality)
+        ns:OpenDungeonMap("scholo")
+        check("Scholomance opens on a floor with bosses, not its empty entrance level", ns:CurrentDungeonFloor() ~= 1)
+        ns:CloseDungeonMap(true)
         local function contains(list, x) for _, v in ipairs(list or {}) do if v == x then return true end end end
         check("Charlga Razorflank's loot has the Pronged Reaver", contains(ns.BossLoot[4421], 6692))
         -- The game hasn't loaded the Pronged Reaver: the addon's own item data fills in.
@@ -332,8 +335,8 @@ def main():
         check("loot (Bind on Pickup only) grouped: weapons, armour, trinkets, then recipes by profession, then other",
             table.concat(order, " ") == "gear:30 gear:43 gear:22 gear:42 recipe:38 recipe:34 other:15 other:27")
 
-        -- Placing a boss yourself: shift-drag a listed boss onto the map.
-        ns:OpenDungeonMap("scholo")
+        -- Placing a boss yourself: shift-drag a listed boss onto the map (on the empty floor 1).
+        ns:OpenDungeonMap("scholo", 1)
         local row = view.ListRows[1]
         local placedName = row.boss.name
         view.Art.GetRect = function() return 100, 100, 600, 400 end
