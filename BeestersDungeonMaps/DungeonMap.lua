@@ -806,6 +806,14 @@ local function GetCrumb(navBar)
     if crumb then return crumb end
     crumb = CreateFrame("Button", nil, navBar, "NavButtonTemplate")
     crumb:SetScript("OnShow", nil) -- the template's OnShow would wire the menu to the bar's list
+    -- The crumb's own art, set again explicitly (same files as the game's crumbs).
+    crumb:SetNormalTexture("Interface\\HelpFrame\\CS_HelpTextures_Tile")
+    crumb:SetPushedTexture("Interface\\HelpFrame\\CS_HelpTextures_Tile")
+    crumb:SetHighlightTexture("Interface\\HelpFrame\\CS_HelpTextures", "ADD")
+    local normal, pushed, highlight = crumb:GetNormalTexture(), crumb:GetPushedTexture(), crumb:GetHighlightTexture()
+    if normal then normal:SetTexCoord(0, 1, 0.0625, 0.12109375); normal:SetHorizTile(true) end
+    if pushed then pushed:SetTexCoord(0, 1, 0.125, 0.18359375); pushed:SetHorizTile(true) end
+    if highlight then highlight:SetTexCoord(0.00195313, 0.25195313, 0.65625, 0.921875) end
     crumb:RegisterForClicks("LeftButtonUp")
     crumb:SetScript("OnClick", function(self)
         local arrow = rawget(self, "MenuArrowButton")
@@ -841,9 +849,9 @@ DecorateNavBar = function(navBar)
     last:Disable()
     if not ns.db or not ns.db.dungeonsInTopBar then return end
 
-    local name, listFunc, isCurrent
+    local name, listFunc
     if ns:IsDungeonMapOpen() then
-        name, isCurrent = ns.Instances[current.key].name, true
+        name = ns.Instances[current.key].name
         listFunc = function() return DungeonMenuList(current.zoneMapID) end
     elseif #DungeonMenuList(WorldMapFrame:GetMapID()) > 0 then
         name = DUNGEONS or "Dungeons"
@@ -861,15 +869,14 @@ DecorateNavBar = function(navBar)
     c:ClearAllPoints()
     c:SetPoint("LEFT", last, "RIGHT", tonumber(rawget(last, "xoffset")) or 0, 0)
     c:SetFrameLevel(last:GetFrameLevel() + 1)
-    -- Like the bar's own last crumb: the dungeon you're looking at is "selected"; the zone
-    -- before it becomes clickable again (its click is the game's own, so it stays clean).
+    -- Ours is the bar's last crumb now, so it gets the "selected" look; the zone before it
+    -- looks and works like any other crumb (its click is the game's own, so it stays clean).
     local sel = rawget(c, "selected")
-    if type(sel) == "table" then sel:SetShown(isCurrent) end
-    if isCurrent then c:Disable() else c:Enable() end
-    if isCurrent then
-        if type(lastSel) == "table" then lastSel:Hide() end
-        last:Enable()
-    end
+    if type(sel) == "table" then sel:Show() end
+    c:Enable()
+    c:SetButtonState("NORMAL")
+    if type(lastSel) == "table" then lastSel:Hide() end
+    last:Enable()
     c:Show()
 end
 
