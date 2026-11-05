@@ -258,12 +258,17 @@ end
 
 -- The boss's picture: the game's still portrait of the creature's model (the same picture
 -- the Dungeon Journal uses), nothing around it. Model IDs: tools/boss_models.json.
+-- The picture sits in a few empty tooltip lines, anchored to the first of them. (Not with
+-- GameTooltip_InsertFrame: that does arithmetic on the tooltip's line height, which inside a
+-- dungeon is a "secret" value the addon may not touch, and it writes into the game's tooltip.)
+local PORTRAIT_LINES = 5 -- blank lines that make room for the 64 px picture
 local portrait
-local function ShowPortrait(tooltip, boss)
+local function ShowPortrait(tooltip, boss, firstLine)
     local displayID = boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
-    if not (displayID and GameTooltip_InsertFrame and SetPortraitTextureFromCreatureDisplayID) then return end
+    if not (displayID and SetPortraitTextureFromCreatureDisplayID) then return end
+    local anchor = _G[tooltip:GetName() .. "TextLeft" .. firstLine]
     if not portrait then
-        portrait = CreateFrame("Frame", nil, UIParent)
+        portrait = CreateFrame("Frame", nil, tooltip)
         portrait:SetSize(64, 64)
         portrait.Image = portrait:CreateTexture(nil, "ARTWORK")
         portrait.Image:SetAllPoints()
@@ -271,10 +276,20 @@ local function ShowPortrait(tooltip, boss)
         portrait:SetScript("OnEvent", function(self)
             if self:IsShown() and self.displayID then SetPortraitTextureFromCreatureDisplayID(self.Image, self.displayID) end
         end)
+        -- Gone as soon as the tooltip shows something else.
+        tooltip:HookScript("OnTooltipCleared", function() portrait:Hide() end)
+        tooltip:HookScript("OnHide", function() portrait:Hide() end)
+    end
+    for _ = 1, PORTRAIT_LINES do tooltip:AddLine(" ") end
+    if not anchor then
+        anchor = _G[tooltip:GetName() .. "TextLeft" .. firstLine]
+        if not anchor then return end
     end
     portrait.displayID = displayID
     SetPortraitTextureFromCreatureDisplayID(portrait.Image, displayID)
-    GameTooltip_InsertFrame(tooltip, portrait, 4)
+    portrait:ClearAllPoints()
+    portrait:SetPoint("TOPLEFT", anchor, "TOPLEFT", 0, -2)
+    portrait:Show()
 end
 
 local lootPanel
@@ -285,7 +300,7 @@ local function ShowBossTooltip(owner, boss, total)
     GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
     GameTooltip:SetText(boss.name, 1, 1, 1)
     GameTooltip:AddLine(("Boss %d of %d"):format(boss.order, total), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-    ShowPortrait(GameTooltip, boss)
+    ShowPortrait(GameTooltip, boss, 3) -- after the name and "Boss x of y"
     local hasLoot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID]
     local panelOpen = lootPanel and lootPanel:IsShown() and lootPanel.boss == boss
     if hasLoot and not panelOpen then

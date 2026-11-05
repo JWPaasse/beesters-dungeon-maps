@@ -325,8 +325,11 @@ def main():
         local inserted, portraitID = nil, nil
         GameTooltip_InsertFrame = function(tooltip, frame) inserted = frame end
         SetPortraitTextureFromCreatureDisplayID = function(texture, displayID) portraitID = displayID end
+        GameTooltip.GetName = function() return "GameTooltip" end
+        GameTooltipTextLeft3 = CreateFrame("Frame")
         mutanus.scripts.OnEnter(mutanus)
-        check("hovering a boss shows its portrait", inserted ~= nil and portraitID == ns.BossModels[mutanus.boss.npcID])
+        check("hovering a boss shows its portrait", portraitID == ns.BossModels[mutanus.boss.npcID])
+        check("the portrait doesn't use GameTooltip_InsertFrame (secret values inside dungeons)", inserted == nil)
         -- Fake loot covering every kind, to check the grouping and order.
         ns.BossLoot[mutanus.boss.npcID] = { 15, 22, 13, 30, 34, 38, 27, 42, 43, 150 }
         panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
