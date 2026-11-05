@@ -57,6 +57,16 @@ function hooksecurefunc(target, name, hook)
 end
 C_Timer = { After = function(_, fn) fn() end }
 C_Item = { GetItemInfo = function(id) return "Item " .. id, "|Hitem:" .. id .. "|h", id % 4, nil, nil, nil, nil, nil, nil, 134400 end }
+-- Item kinds by the last digit: 0-1 weapon, 2 trinket, 3 head, 4/8 recipe (Tailoring/Alchemy), others misc.
+C_Item.GetItemInfoInstant = function(id)
+    local d = id % 10
+    if d <= 1 then return id, "Weapon", "Swords", "INVTYPE_WEAPON", 0, 2, 7 end
+    if d == 2 then return id, "Armor", "Miscellaneous", "INVTYPE_TRINKET", 0, 4, 0 end
+    if d == 3 then return id, "Armor", "Cloth", "INVTYPE_HEAD", 0, 4, 1 end
+    if d == 4 then return id, "Recipe", "Tailoring", "", 0, 9, 2 end
+    if d == 8 then return id, "Recipe", "Alchemy", "", 0, 9, 6 end
+    return id, "Miscellaneous", "Junk", "", 0, 15, 0
+end
 ITEM_QUALITY_COLORS = { [0] = { r = .6, g = .6, b = .6 }, { r = 1, g = 1, b = 1 }, { r = .1, g = 1, b = 0 }, { r = 0, g = .4, b = 1 }, { r = .6, g = .2, b = 1 } }
 shiftDown = false
 
@@ -287,6 +297,19 @@ def main():
         end
         check("clicking a boss opens its loot", panel:IsShown() and rows > 0)
         check("loot shows only Uncommon or better", not lowQuality)
+        -- Hovering a boss shows its portrait in the tooltip.
+        local inserted, portraitID = nil, nil
+        GameTooltip_InsertFrame = function(tooltip, frame) inserted = frame end
+        SetPortraitTextureFromCreatureDisplayID = function(texture, displayID) portraitID = displayID end
+        mutanus.scripts.OnEnter(mutanus)
+        check("hovering a boss shows its portrait", inserted ~= nil and portraitID == ns.BossModels[mutanus.boss.npcID])
+        -- Fake loot covering every kind, to check the grouping and order.
+        ns.BossLoot[mutanus.boss.npcID] = { 15, 22, 13, 30, 34, 38, 27, 42, 43 }
+        panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
+        local order = {}
+        for _, e in ipairs(panel.shown) do table.insert(order, e[1] .. ":" .. e[2]) end
+        check("loot grouped: weapons, armour, trinkets, then recipes by profession, then other",
+            table.concat(order, " ") == "gear:30 gear:43 gear:22 gear:42 recipe:38 recipe:34 other:15 other:27")
 
         -- Placing a boss yourself: shift-drag a listed boss onto the map.
         ns:OpenDungeonMap("scholo")

@@ -105,10 +105,59 @@ local function RequestItem(itemID)
     if C_Item and C_Item.RequestLoadItemDataByID then C_Item.RequestLoadItemDataByID(itemID) end
 end
 
+-- The boss's picture, drawn the way the Dungeon Journal draws its creature buttons: a round
+-- portrait of the creature's model in the journal's ring. Bosses new in WoW Forever have no known
+-- model ID; for those the game draws the creature itself, when it knows it.
+local portrait
+local function GetPortrait()
+    if portrait then return portrait end
+    portrait = CreateFrame("Frame", nil, UIParent)
+    portrait:SetSize(80, 76)
+    portrait.Creature = portrait:CreateTexture(nil, "BACKGROUND", nil, 6)
+    portrait.Creature:SetSize(52, 52)
+    portrait.Creature:SetPoint("CENTER")
+    portrait.Mask = portrait:CreateMaskTexture()
+    portrait.Mask:SetTexture("Interface\\CharacterFrame\\TempPortraitAlphaMask", "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+    portrait.Mask:SetAllPoints(portrait.Creature)
+    portrait.Creature:AddMaskTexture(portrait.Mask)
+    portrait.Model = CreateFrame("PlayerModel", nil, portrait)
+    portrait.Model:SetSize(50, 50)
+    portrait.Model:SetPoint("CENTER")
+    portrait.Ring = portrait:CreateTexture(nil, "ARTWORK")
+    portrait.Ring:SetTexture("Interface\\EncounterJournal\\UI-EncounterJournalTextures")
+    portrait.Ring:SetTexCoord(0.50585938, 0.63085938, 0.02246094, 0.08203125)
+    portrait.Ring:SetAllPoints()
+    portrait:RegisterEvent("PORTRAITS_UPDATED")
+    portrait:SetScript("OnEvent", function(self)
+        if self:IsShown() and self.displayID then SetPortraitTextureFromCreatureDisplayID(self.Creature, self.displayID) end
+    end)
+    return portrait
+end
+
+local function ShowPortrait(tooltip, boss)
+    local displayID = boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
+    if not GameTooltip_InsertFrame or not (displayID or boss.npcID) then return end
+    local p = GetPortrait()
+    p.displayID = displayID
+    if displayID and SetPortraitTextureFromCreatureDisplayID then
+        p.Model:Hide()
+        p.Creature:Show()
+        SetPortraitTextureFromCreatureDisplayID(p.Creature, displayID)
+    else
+        p.Creature:Hide()
+        p.Model:Show()
+        p.Model:ClearModel()
+        p.Model:SetCreature(boss.npcID)
+        p.Model:SetPortraitZoom(1)
+    end
+    GameTooltip_InsertFrame(tooltip, p, 4)
+end
+
 local function ShowBossTooltip(owner, boss, total)
     GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
     GameTooltip:SetText(boss.name, 1, 1, 1)
     GameTooltip:AddLine(("Boss %d of %d"):format(boss.order, total), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+    ShowPortrait(GameTooltip, boss)
     if boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID] then
         GameTooltip:AddLine("<Click to see loot>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
     end
@@ -123,9 +172,68 @@ end
 ----------------------------------------------------------------------
 -- Loot panel: opens when you click a boss. Hover an item for its game tooltip,
 -- shift-click to link it in chat, ctrl-click to try it on.
+-- Grouped like this: Gear (weapons, then off-hands, armour from head to feet, then
+-- necklaces, rings and trinkets), Recipes (by profession), Other.
 ----------------------------------------------------------------------
 
 local lootPanel
+
+local SLOT_ORDER = {
+    INVTYPE_WEAPON = 1, INVTYPE_2HWEAPON = 1, INVTYPE_WEAPONMAINHAND = 1, INVTYPE_WEAPONOFFHAND = 1,
+    INVTYPE_RANGED = 2, INVTYPE_RANGEDRIGHT = 2, INVTYPE_THROWN = 2,
+    INVTYPE_SHIELD = 3, INVTYPE_HOLDABLE = 3, INVTYPE_RELIC = 3,
+    INVTYPE_HEAD = 10, INVTYPE_SHOULDER = 11, INVTYPE_CLOAK = 12, INVTYPE_CHEST = 13, INVTYPE_ROBE = 13,
+    INVTYPE_WRIST = 14, INVTYPE_HAND = 15, INVTYPE_WAIST = 16, INVTYPE_LEGS = 17, INVTYPE_FEET = 18,
+    INVTYPE_BODY = 19, INVTYPE_TABARD = 19,
+    INVTYPE_NECK = 30, INVTYPE_FINGER = 31, INVTYPE_TRINKET = 32,
+}
+local RECIPE_CLASS = (Enum and Enum.ItemClass and Enum.ItemClass.Recipe) or 9
+
+local function ItemKind(itemID)
+    local getInstant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
+    if not getInstant then return "other" end
+    local _, _, subType, equipLoc, _, classID = getInstant(itemID)
+    if classID == RECIPE_CLASS then return "recipe", subType or "" end
+    if equipLoc and SLOT_ORDER[equipLoc] then return "gear", SLOT_ORDER[equipLoc] end
+    return "other"
+end
+
+local function AcquireRow(panel, index)
+    local row = panel.Rows[index]
+    if row then return row end
+    row = CreateFrame("Button", nil, panel)
+    row:SetSize(230, 22)
+    row.Icon = row:CreateTexture(nil, "ARTWORK")
+    row.Icon:SetSize(20, 20)
+    row.Icon:SetPoint("LEFT")
+    row.Name = row:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+    row.Name:SetPoint("LEFT", row.Icon, "RIGHT", 6, 0)
+    row.Name:SetPoint("RIGHT")
+    row.Name:SetJustifyH("LEFT")
+    row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
+    row:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetItemByID(self.itemID)
+        GameTooltip:Show()
+    end)
+    row:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    row:SetScript("OnClick", function(self)
+        if HandleModifiedItemClick then HandleModifiedItemClick(self.link) end
+    end)
+    panel.Rows[index] = row
+    return row
+end
+
+local function AcquireHeader(panel, index, sub)
+    local h = panel.Headers[index]
+    if not h then
+        h = panel:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+        h:SetJustifyH("LEFT")
+        panel.Headers[index] = h
+    end
+    h:SetFontObject(sub and "GameFontDisableSmall" or "GameFontNormalSmall")
+    return h
+end
 
 local function RefreshLootPanel()
     local panel = lootPanel
@@ -133,51 +241,73 @@ local function RefreshLootPanel()
     local boss = panel.boss
     local loot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID] or {}
     panel.Title:SetText(boss.name)
-    local index, waiting = 0, false
+
+    local groups = { gear = {}, recipe = {}, other = {} }
+    local waiting = false
     for _, itemID in ipairs(loot) do
         local name, link, quality, icon = ItemInfo(itemID)
         if not name then
             waiting = true
             RequestItem(itemID)
         elseif (quality or 0) >= MIN_QUALITY then
-            index = index + 1
-            local row = panel.Rows[index]
-            if not row then
-                row = CreateFrame("Button", nil, panel)
-                row:SetSize(230, 22)
-                row.Icon = row:CreateTexture(nil, "ARTWORK")
-                row.Icon:SetSize(20, 20)
-                row.Icon:SetPoint("LEFT")
-                row.Name = row:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-                row.Name:SetPoint("LEFT", row.Icon, "RIGHT", 6, 0)
-                row.Name:SetPoint("RIGHT")
-                row.Name:SetJustifyH("LEFT")
-                row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
-                row:SetScript("OnEnter", function(self)
-                    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-                    GameTooltip:SetItemByID(self.itemID)
-                    GameTooltip:Show()
-                end)
-                row:SetScript("OnLeave", function() GameTooltip:Hide() end)
-                row:SetScript("OnClick", function(self)
-                    if HandleModifiedItemClick then HandleModifiedItemClick(self.link) end
-                end)
-                panel.Rows[index] = row
-            end
-            row.itemID, row.link = itemID, link
-            row.Icon:SetTexture(icon)
-            local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[quality]
-            row.Name:SetText(name)
-            if color then row.Name:SetTextColor(color.r, color.g, color.b) end
-            row:ClearAllPoints()
-            row:SetPoint("TOPLEFT", 12, -30 - (index - 1) * 22)
-            row:Show()
+            local kind, sortKey = ItemKind(itemID)
+            table.insert(groups[kind], { id = itemID, name = name, link = link, quality = quality, icon = icon, sortKey = sortKey })
         end
     end
-    for i = index + 1, #panel.Rows do panel.Rows[i]:Hide() end
-    panel.Empty:SetShown(index == 0)
+    for _, list in pairs(groups) do
+        table.sort(list, function(a, b)
+            if a.sortKey ~= b.sortKey and a.sortKey and b.sortKey then return a.sortKey < b.sortKey end
+            return a.name < b.name
+        end)
+    end
+
+    local y, rowIndex, headerIndex = 32, 0, 0
+    panel.shown = {} -- { section, itemID } in display order (read by tools/test_addon.py)
+    local function Header(text, sub)
+        headerIndex = headerIndex + 1
+        local h = AcquireHeader(panel, headerIndex, sub)
+        h:SetText(text)
+        h:ClearAllPoints()
+        h:SetPoint("TOPLEFT", sub and 16 or 12, -(y + (sub and 2 or 4)))
+        h:Show()
+        y = y + (sub and 16 or 20)
+    end
+    local sections = {
+        { key = "gear", title = "Gear" },
+        { key = "recipe", title = "Recipes" },
+        { key = "other", title = "Other" },
+    }
+    for _, section in ipairs(sections) do
+        local list = groups[section.key]
+        if #list > 0 then
+            Header(section.title)
+            local profession
+            for _, item in ipairs(list) do
+                if section.key == "recipe" and item.sortKey ~= profession then
+                    profession = item.sortKey
+                    if profession ~= "" then Header(profession, true) end
+                end
+                rowIndex = rowIndex + 1
+                local row = AcquireRow(panel, rowIndex)
+                row.itemID, row.link = item.id, item.link
+                table.insert(panel.shown, { section.key, item.id })
+                row.Icon:SetTexture(item.icon)
+                row.Name:SetText(item.name)
+                local color = ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality]
+                if color then row.Name:SetTextColor(color.r, color.g, color.b) end
+                row:ClearAllPoints()
+                row:SetPoint("TOPLEFT", 12, -y)
+                row:Show()
+                y = y + 22
+            end
+            y = y + 4
+        end
+    end
+    for i = rowIndex + 1, #panel.Rows do panel.Rows[i]:Hide() end
+    for i = headerIndex + 1, #panel.Headers do panel.Headers[i]:Hide() end
+    panel.Empty:SetShown(rowIndex == 0)
     panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Uncommon or better loot known.")
-    panel:SetHeight(44 + math.max(index, 1) * 22)
+    panel:SetHeight(rowIndex == 0 and 66 or y + 8)
 end
 
 local function CreateLootPanel(parent)
@@ -204,6 +334,7 @@ local function CreateLootPanel(parent)
     panel.Empty = panel:CreateFontString(nil, "ARTWORK", "GameFontDisableSmall")
     panel.Empty:SetPoint("TOPLEFT", 12, -34)
     panel.Rows = {}
+    panel.Headers = {}
     panel:Hide()
     return panel
 end

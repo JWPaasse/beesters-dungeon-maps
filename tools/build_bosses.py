@@ -172,7 +172,13 @@ def main():
     for key in sorted(bosses):
         parts = ", ".join("{%d,%s,%s}" % (eid, lua_str(name), nid if nid else "nil") for eid, name, nid in bosses[key])
         out.append(f"    [{lua_str(key)}] = {{ {parts} }},")
-    out += ["}", "", "-- [npcID] = { itemID, ... }", "ns.BossLoot = {"]
+    out += ["}", ""]
+    # The bosses' pictures (tools/boss_models.json, made by tools/build_boss_models.py).
+    models_file = ROOT / "tools" / "boss_models.json"
+    if models_file.exists():
+        from build_boss_models import models_block
+        out += [models_block(json.loads(models_file.read_text(encoding="utf-8"))["models"]), ""]
+    out += ["-- [npcID] = { itemID, ... }", "ns.BossLoot = {"]
     for nid in sorted(loot):
         out.append("    [%d] = {%s}," % (nid, ",".join(str(i) for i in loot[nid])))
     out.append("}")
