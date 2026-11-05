@@ -88,7 +88,15 @@ function ns:InitOptions()
     local dungeons = NewCheckbox(panel, "Show dungeon entrances", "Show dungeon entrances on zone and continent maps.", "showDungeons", header)
     local raids = NewCheckbox(panel, "Show raid entrances", "Show raid entrances on zone and continent maps.", "showRaids", dungeons)
     local continents = NewCheckbox(panel, "Also show entrances on continent maps", "Turn off to show entrances only on zone maps.", "showOnContinents", raids)
-    NewSlider(panel, "BeestersDungeonMapsEntranceSizeSlider", "Entrance icon size", "entranceSize", 16, 40, continents)
+    local slider = NewSlider(panel, "BeestersDungeonMapsEntranceSizeSlider", "Entrance icon size", "entranceSize", 16, 48, continents)
+
+    local mapsHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+    mapsHeader:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", -4, -28)
+    mapsHeader:SetText("Dungeon maps")
+    local auto = NewCheckbox(panel, "Open the dungeon map inside dungeons",
+        "When you open your map inside a dungeon, show that dungeon's map.", "autoOpenInside", mapsHeader)
+    NewCheckbox(panel, "List dungeons in the map's top bar",
+        "Adds a Dungeons button after the zone name (World > Kalimdor > Durotar > Dungeons).", "dungeonsInTopBar", auto)
 
     if Settings and Settings.RegisterCanvasLayoutCategory then
         local category = Settings.RegisterCanvasLayoutCategory(panel, ns.title)

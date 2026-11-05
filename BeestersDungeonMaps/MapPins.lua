@@ -73,8 +73,39 @@ local PinMixin = BeestersDungeonMapsEntrancePinMixin
 
 -- Called by the world map (MapCanvasMixin:AcquirePin) when it creates a new pin.
 function PinMixin:OnLoad()
-    self:UseFrameLevelType("PIN_FRAME_LEVEL_AREA_POI")
+    -- The dungeon entrance layer sits above the big city and area badges (Orgrimmar on Durotar).
+    -- Forever's map has this layer (checked in the UIForever simulator, interface 16001).
+    self:UseFrameLevelType("PIN_FRAME_LEVEL_DUNGEON_ENTRANCE")
     self:SetScalingLimits(1, 1.0, 1.2)
+end
+
+function PinMixin:OnMouseDown() end
+function PinMixin:OnMouseUp() end
+
+-- Left click opens the dungeon map. Blackrock Mountain leads to two dungeons: pick one.
+function PinMixin:OnClick(button)
+    local entrance = self.entrance
+    if not entrance then return end
+    if button == "RightButton" then
+        local map = self:GetMap()
+        if map and map.NavigateToParentMap then map:NavigateToParentMap() end
+        return
+    end
+    local keys = {}
+    for _, key in ipairs(entrance[3]) do
+        if ns.DungeonMaps and ns.DungeonMaps[key] then table.insert(keys, key) end
+    end
+    if #keys == 1 then
+        ns:OpenDungeonMap(keys[1])
+    elseif #keys > 1 and MenuUtil and MenuUtil.CreateContextMenu then
+        MenuUtil.CreateContextMenu(self, function(_, root)
+            for _, key in ipairs(keys) do
+                root:CreateButton(ns.Instances[key].name, function() ns:OpenDungeonMap(key) end)
+            end
+        end)
+    elseif #keys > 1 then
+        ns:OpenDungeonMap(keys[1])
+    end
 end
 
 function PinMixin:OnAcquired(entrance, x, y, kind)
@@ -127,6 +158,9 @@ function PinMixin:OnMouseEnter()
             end
         end
     end
+    if ns.DungeonMaps and ns.DungeonMaps[entrance[3][1]] then
+        GameTooltip:AddLine("<Click to open the map>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
+    end
     GameTooltip:Show()
 end
 
@@ -176,6 +210,60 @@ function Provider:RefreshAllData()
                     end
                     map:AcquirePin(PIN_TEMPLATE, entrance, x, y, kind)
                 end
+            end
+        end
+    end
+end
+
+----------------------------------------------------------------------
+-- Lookups used by the dungeon map and the top bar
+----------------------------------------------------------------------
+
+local function LevelOf(key)
+    local levels = ns.Instances[key] and ns.Instances[key].levels or ""
+    return tonumber(levels:match("%d+")) or 99
+end
+
+-- Dungeons whose entrance is on this map (or on a map inside it), lowest level first.
+function ns:DungeonsOnMap(mapID)
+    local info = mapID and C_Map.GetMapInfo(mapID)
+    if not info or info.mapType == Enum.UIMapType.Cosmic or info.mapType == Enum.UIMapType.World then
+        return {}
+    end
+    local found, list = {}, {}
+    for zoneMapID, entrances in pairs(ns.Entrances) do
+        if zoneMapID == mapID or ShowsOn(mapID, zoneMapID) then
+            for _, entrance in ipairs(entrances) do
+                for _, key in ipairs(entrance[3]) do
+                    if not found[key] then
+                        found[key] = true
+                        table.insert(list, key)
+                    end
+                end
+            end
+        end
+    end
+    table.sort(list, function(a, b)
+        local la, lb = LevelOf(a), LevelOf(b)
+        if la ~= lb then return la < lb end
+        return ns.Instances[a].name < ns.Instances[b].name
+    end)
+    return list
+end
+
+function ns:MapShowsDungeon(mapID, key)
+    for _, k in ipairs(ns:DungeonsOnMap(mapID)) do
+        if k == key then return true end
+    end
+    return false
+end
+
+-- The map an entrance of this dungeon is on (a zone or city map).
+function ns:EntranceMapFor(key)
+    for zoneMapID, entrances in pairs(ns.Entrances) do
+        for _, entrance in ipairs(entrances) do
+            for _, k in ipairs(entrance[3]) do
+                if k == key then return zoneMapID end
             end
         end
     end

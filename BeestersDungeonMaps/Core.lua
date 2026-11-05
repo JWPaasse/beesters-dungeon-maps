@@ -13,7 +13,9 @@ ns.defaults = {
     showDungeons = true,
     showRaids = true,
     showOnContinents = true,
-    entranceSize = 24,
+    entranceSize = 32,
+    autoOpenInside = true,
+    dungeonsInTopBar = true,
 }
 
 function ns:Print(message)
@@ -48,7 +50,8 @@ local function PrintStatus()
     local mapID = C_Map.GetBestMapForUnit("player")
     local info = mapID and C_Map.GetMapInfo(mapID)
     ns:Print(("You are on map %s (%s)"):format(tostring(mapID), info and info.name or "unknown"))
-    ns:Print("World map pins: " .. (ns.mapPinsActive and "|cff40ff40active|r" or "|cffff4040not active|r"))
+    ns:Print("World map pins: " .. (ns.mapPinsActive and "|cff40ff40active|r" or "|cffff4040not active|r")
+        .. " · Dungeon maps: " .. (ns.dungeonMapActive and "|cff40ff40active|r" or "|cffff4040not active|r"))
 end
 
 -- Answers the questions the next versions depend on. Run /bdm probe once outside and once
@@ -114,6 +117,9 @@ function ns:InitSlashCommands()
             PrintStatus()
         elseif message == "probe" then
             Probe()
+        elseif message == "map" then
+            local key = ns.CurrentInstanceKey and ns.CurrentInstanceKey()
+            if key then ns:OpenDungeonMap(key) else ns:Print("You are not inside a dungeon. Click an entrance on the map instead.") end
         else
             ns:OpenOptions()
         end
@@ -138,7 +144,14 @@ loader:SetScript("OnEvent", function(self, _, loadedName)
     end
     ns.db = BeestersDungeonMapsDB
 
+    -- 0.2.0: entrance icons became bigger by default (24 was hard to spot on Forever's maps).
+    if (ns.db.settingsVersion or 1) < 2 then
+        if ns.db.entranceSize == 24 then ns.db.entranceSize = ns.defaults.entranceSize end
+        ns.db.settingsVersion = 2
+    end
+
     ns:InitSlashCommands()
     ns:InitOptions()
     ns:InitMapPins()
+    ns:InitDungeonMap()
 end)

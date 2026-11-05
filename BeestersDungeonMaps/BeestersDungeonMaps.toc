@@ -2,7 +2,7 @@
 ## Title: Beester's Dungeon Maps
 ## Notes: Dungeon and raid entrances, dungeon maps and dungeon quests for WoW Forever.
 ## Author: Beester
-## Version: 0.1.1
+## Version: 0.2.0
 ## Category: Map
 ## IconTexture: Interface\AddOns\BeestersDungeonMaps\Media\Logo64
 ## SavedVariables: BeestersDungeonMapsDB
@@ -10,7 +10,10 @@
 ## X-Website: https://github.com/JWPaasse/beesters-dungeon-maps
 
 Data\Entrances.lua
+Data\Bosses.lua
+Data\Maps.lua
 Core.lua
 MapPins.lua
 MapPins.xml
+DungeonMap.lua
 Options.lua

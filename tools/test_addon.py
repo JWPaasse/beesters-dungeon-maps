@@ -13,19 +13,50 @@ ROOT = Path(__file__).resolve().parent.parent
 ADDON = ROOT / "BeestersDungeonMaps"
 
 FAKE_WOW = r"""
+local NUMBERS = { GetWidth = 100, GetHeight = 50, GetStringWidth = 60, GetFrameLevel = 5 }
 local function anything()
-    local t = {}
+    local t = { _shown = true }
     return setmetatable(t, { __index = function(self, key)
-        local f = function() return self end
+        local f
+        if NUMBERS[key] then
+            f = function() return NUMBERS[key] end
+        elseif key == "GetSize" then
+            f = function() return 800, 533 end
+        elseif key == "Show" then
+            f = function(s) s._shown = true end
+        elseif key == "Hide" then
+            f = function(s) s._shown = false end
+        elseif key == "SetShown" then
+            f = function(s, v) s._shown = v and true or false end
+        elseif key == "IsShown" then
+            f = function(s) return s._shown end
+        elseif key == "HookScript" or key == "SetScript" then
+            f = function(s, event, fn) local sc = rawget(s, "scripts") or {}; rawset(s, "scripts", sc); sc[event] = fn end
+        elseif key == "GetAtlas" or key == "GetTexture" then
+            f = function() return nil end
+        else
+            f = function() return self end
+        end
         rawset(self, key, f)
         return f
     end })
 end
 
+function hooksecurefunc(target, name, hook)
+    if type(target) == "string" then target, name, hook = _G, target, name end
+    local original = target[name]
+    target[name] = function(...)
+        local a, b, c, d = original(...)
+        hook(...)
+        return a, b, c, d
+    end
+end
+C_Timer = { After = function(_, fn) fn() end }
+function ShowUIPanel(frame) frame:Show() end
+navButtons = {}
+function NavBar_AddButton(navBar, data) table.insert(navButtons, data) end
 function CreateFrame(kind, name, parent, template)
     local frame = anything()
-    frame.scripts = {}
-    frame.SetScript = function(self, event, fn) self.scripts[event] = fn end
     frame.GetChecked = function() return true end
     frame.Text = anything()
     frame.Low = anything()
@@ -39,7 +70,7 @@ function CreateFromMixins(...)
     for _, mixin in ipairs({ ... }) do for k, v in pairs(mixin) do result[k] = v end end
     return result
 end
-MapCanvasPinMixin = {}
+MapCanvasPinMixin = { GetMap = function(self) return self.owningMap end }
 MapCanvasDataProviderMixin = { GetMap = function(self) return self.owningMap end }
 
 Enum = { UIMapType = { Cosmic = 0, World = 1, Continent = 2, Zone = 3, Dungeon = 4, Micro = 5, Orphan = 6 } }
@@ -70,6 +101,7 @@ function GetBuildInfo() return "1.60.1", "70753", "Nov 4 2026", 16001 end
 SlashCmdList = { OTHERADDON = function() end }
 SLASH_OTHERADDON1 = "/other"
 NORMAL_FONT_COLOR = { r = 1, g = 0.82, b = 0 }
+GREEN_FONT_COLOR = { r = 0.1, g = 1, b = 0.1 }
 DEFAULT_CHAT_FRAME = { AddMessage = function(_, msg) print("[chat] " .. msg) end }
 GameTooltip = anything()
 Settings = {
@@ -79,16 +111,25 @@ Settings = {
 }
 
 acquired = {}
-WorldMapFrame = {
-    providers = {},
-    IsShown = function() return true end,
-    AddDataProvider = function(self, provider) provider.owningMap = self; table.insert(self.providers, provider) end,
-    GetMapID = function(self) return self.mapID end,
-    RemoveAllPinsByTemplate = function() acquired = {} end,
-    AcquirePin = function(self, template, entrance, x, y, kind)
-        table.insert(acquired, { entrance = entrance, x = x, y = y, kind = kind })
-    end,
+WorldMapFrame = CreateFrame("Frame")
+WorldMapFrame.providers = {}
+WorldMapFrame.mapID = 1413
+WorldMapFrame.AddDataProvider = function(self, provider) provider.owningMap = self; table.insert(self.providers, provider) end
+WorldMapFrame.GetMapID = function(self) return self.mapID end
+WorldMapFrame.RemoveAllPinsByTemplate = function() acquired = {} end
+WorldMapFrame.AcquirePin = function(self, template, entrance, x, y, kind)
+    table.insert(acquired, { entrance = entrance, x = x, y = y, kind = kind })
+end
+WorldMapFrame.ScrollContainer = CreateFrame("Frame")
+WorldMapFrame.ScrollContainer.Child = CreateFrame("Frame")
+WorldMapFrame.NavBar = {
+    Refresh = function(self) navButtons = {} end,
+    GoToMap = function(self, mapID) WorldMapFrame:SetMapID(mapID) end,
 }
+WorldMapFrame.OnMapChanged = function(self) self.NavBar:Refresh() end
+WorldMapFrame.SetMapID = function(self, mapID)
+    if mapID ~= self.mapID then self.mapID = mapID; self:OnMapChanged() end
+end
 """
 
 def main():
@@ -130,6 +171,7 @@ def main():
         local provider = WorldMapFrame.providers[1]
         local function pinsOn(mapID)
             WorldMapFrame.mapID = mapID
+            WorldMapFrame.IsShown = function() return true end
             provider:RefreshAllData()
             return #acquired
         end
@@ -153,12 +195,72 @@ def main():
         pin.SetPosition = function() end
         pin.SetSize = function() end
         pin.UseFrameLevelType = function() end
+        pin.owningMap = WorldMapFrame
         pin.SetScalingLimits = function() end
         pin:OnLoad()
         pin:OnAcquired(ns.Entrances[1427][1], 0.5, 0.5, "dungeon")
         pin:OnMouseEnter()
         pin:OnMouseLeave()
         check("pin and tooltip code runs (Blackrock Mountain, 2 dungeons)", true)
+
+        -- Dungeon maps
+        ns:InitDungeonMap()
+        local mapCount = 0
+        for _ in pairs(ns.DungeonMaps) do mapCount = mapCount + 1 end
+        check("26 dungeon maps (22 classic, 4 by Santiago Reyes)", mapCount == 26)
+        local missingMaps = {}
+        for key in pairs(ns.Instances) do if not ns.DungeonMaps[key] then table.insert(missingMaps, key) end end
+        check("every dungeon in the list has a map", #missingMaps == 0)
+        check("every instance map ID points to a dungeon map", (function()
+            for _, key in pairs(ns.InstanceByMap) do if not ns.DungeonMaps[key] then return false end end
+            return true end)())
+
+        WorldMapFrame.mapID = 1414 -- Kalimdor
+        ns:OpenDungeonMap("wc")
+        check("entrance pin opens Wailing Caverns", ns:IsDungeonMapOpen() and ns:CurrentDungeonKey() == "wc")
+        check("map moved to The Barrens for the top bar", WorldMapFrame:GetMapID() == 1414 or WorldMapFrame:GetMapID() == 1413)
+        check("game's map picture hidden under the dungeon map", WorldMapFrame.ScrollContainer.Child:IsShown() == false)
+        local view = BeestersDungeonMapsView
+        local pins = 0
+        for _, b in ipairs(view.BossButtons) do if b:IsShown() then pins = pins + 1 end end
+        check("Wailing Caverns shows all 8 bosses as pins (Journal positions)", pins == 8)
+        check("top bar ends with Wailing Caverns", navButtons[#navButtons] and navButtons[#navButtons].name == "Wailing Caverns")
+        local menu = navButtons[#navButtons].listFunc()
+        check("its menu lists the other Barrens dungeons", #menu >= 3)
+
+        WorldMapFrame:SetMapID(1415)
+        check("changing the map closes the dungeon map", not ns:IsDungeonMapOpen() and WorldMapFrame.ScrollContainer.Child:IsShown())
+
+        WorldMapFrame.mapID = 1413
+        WorldMapFrame.NavBar:Refresh()
+        check("top bar on The Barrens offers a Dungeons button", navButtons[#navButtons] and navButtons[#navButtons].name == "Dungeons")
+
+        ns:OpenDungeonMap("dal")
+        check("Dalaran opens (Santiago's map, two floors)", ns:IsDungeonMapOpen() and #ns.DungeonMaps.dal.floors == 2)
+        local rows = 0
+        for _, r in ipairs(view.ListRows) do if r:IsShown() then rows = rows + 1 end end
+        check("Dalaran's bosses without a position are listed", rows > 0)
+        WorldMapFrame.NavBar:GoToMap(WorldMapFrame:GetMapID())
+        check("clicking the current zone in the top bar closes the dungeon map", not ns:IsDungeonMapOpen())
+
+        ns:OpenDungeonMap("sm")
+        local smPins = 0
+        for _, b in ipairs(view.BossButtons) do if b:IsShown() then smPins = smPins + 1 end end
+        ns:CloseDungeonMap(true)
+
+        IsInInstance = function() return true, "party" end
+        GetInstanceInfo = function() return "Ragefire Chasm", "party", 1, "Normal", 5, 0, false, 389 end
+        WorldMapFrame.scripts.OnShow()
+        check("opening the map inside Ragefire Chasm shows its map", ns:CurrentDungeonKey() == "rfc")
+        WorldMapFrame.scripts.OnHide()
+        check("closing the map closes the dungeon map", not ns:IsDungeonMapOpen())
+        IsInInstance = function() return false, "none" end
+
+        local pinFrame = CreateFromMixins(BeestersDungeonMapsEntrancePinMixin)
+        pinFrame.entrance = ns.Entrances[1413][2]
+        pinFrame:OnClick("LeftButton")
+        check("clicking an entrance pin opens that dungeon", ns:CurrentDungeonKey() == "wc")
+        ns:CloseDungeonMap(true)
 
         SlashCmdList.BEESTERSDUNGEONMAPS("status")
         SlashCmdList.BEESTERSDUNGEONMAPS("probe")

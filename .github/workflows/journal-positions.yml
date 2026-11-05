@@ -1,0 +1,38 @@
+name: Boss positions (Cataclysm journal)
+
+# Fetches the original dungeon bosses' map positions from the Cataclysm Classic Dungeon Journal
+# on wago.tools, rebuilds the dungeon map data and commits it. Runs when the fetch script
+# changes, or by hand (Actions > Boss positions > Run workflow). It never publishes a release.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/fetch_cata_positions.py"
+      - ".github/workflows/journal-positions.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Fetch positions and rebuild map data
+        run: |
+          pip install numpy pillow lupa
+          python3 tools/fetch_cata_positions.py
+          python3 tools/build_maps.py
+          python3 tools/test_addon.py
+      - name: Commit
+        run: |
+          git add tools/journal_positions_cata.json BeestersDungeonMaps/Data/Maps.lua
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Boss positions from the Cataclysm Classic journal"
+          git push

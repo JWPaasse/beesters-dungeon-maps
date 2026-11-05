@@ -8,13 +8,15 @@ It is built to look and feel like the game's own interface: it uses the world ma
 
 ## Status
 
-**Version 0.1.1 (test build):** dungeon and raid entrance pins on zone and continent maps, with tooltips, plus an options panel.
+**Version 0.2.0 (test build):**
+- Dungeon and raid entrance pins on zone and continent maps, with tooltips.
+- Dungeon maps inside the game's Map & Quest Log window, for every dungeon and raid: the classic maps that are still in the game files, and Santiago Reyes's maps for the new Forever dungeons.
+- Boss icons with each boss's loot.
+- Open a dungeon map by clicking its entrance, from the map's top bar (World › Kalimdor › Durotar › Dungeons), or just open your map inside the dungeon.
 
 Coming next:
-- Dungeon maps (Classic's own maps for the old dungeons, Santiago Reyes's maps for the new ones)
-- Boss pins on dungeon maps
 - The dungeon quest panel and quest details
-- Browsing dungeons from the map's breadcrumb menus
+- Bosses you've killed this run, crossed out
 
 ## Installing
 
@@ -28,7 +30,9 @@ To update: delete the old `BeestersDungeonMaps` folder, then unzip the new one. 
 
 ## Using it
 
-- Open your world map: dungeon and raid entrances show on zone and continent maps. Hover one for its level range.
+- Open your world map: dungeon and raid entrances show on zone and continent maps. Hover one for its level range, click it to open the dungeon's map.
+- Inside a dungeon, just open your map. `/bdm map` does the same.
+- Right-click a dungeon map to go back to the normal map.
 - `/bdm` opens the options. If another addon already uses `/bdm`, use `/beesterdm`.
 - `/bdm status` prints the game version, the data version and the map you are on. Handy when reporting a problem.
 - `/bdm probe` prints what the game supports (map frames, icons, dungeon map art). Run it once outside and once inside a dungeon when reporting map problems.
@@ -43,7 +47,9 @@ Beester's Dungeon Maps does not need Questie and does not read Questie while you
 - Dungeon quests, lead-in chains, quest givers, quest items and reward items: QuestieDB's Forever data with all its corrections applied, through QuestieDB's own loader (`tools/build_quests.py` → `BeestersDungeonMaps/Data/Quests.lua`). Not shown in game yet; the quest panel comes next.
 - Dungeon bosses and their order: the WoW Forever client's own DungeonEncounter table, read from [wago.tools](https://wago.tools) (`tools/build_bosses.py` → `BeestersDungeonMaps/Data/Bosses.lua`), with each boss's loot from QuestieDB. Not shown in game yet; boss pins come with the dungeon maps.
 - Instance list and level ranges: `tools/instances.json` (our own). New Forever dungeons missing from QuestieDB are listed there.
-- Dungeon maps for the new Forever dungeons: Santiago Reyes (watermarked, used with permission). Coming in a later version.
+- Dungeon maps for the old dungeons: the classic dungeon map images that still ship in the WoW Forever client. The addon only refers to them by file ID; it doesn't include them. List in `tools/dungeon_maps.json`.
+- Dungeon maps for the new Forever dungeons: Santiago Reyes (Atlas de Azeroth: Forever), watermarked, used with permission. `tools/build_maps.py` turns them into game textures.
+- Boss positions: the Dungeon Journal's map positions for the same map images, from retail (`tools/journal_positions.json`) and from Cataclysm Classic for the original bosses of dungeons that were rebuilt later (`tools/fetch_cata_positions.py`).
 
 World of Warcraft and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. This addon is not made or endorsed by Blizzard.
 
@@ -53,6 +59,7 @@ World of Warcraft and Blizzard Entertainment are trademarks or registered tradem
 python3 tools/build_data.py /path/to/QuestieDB   # rebuild entrance data
 python3 tools/build_quests.py /path/to/QuestieDB # rebuild quest data (needs lupa)
 python3 tools/build_bosses.py /path/to/QuestieDB # rebuild bosses (fetches wago.tools; or pass a CSV)
+python3 tools/build_maps.py                      # rebuild dungeon map data and textures (needs numpy, pillow)
 pip install lupa && python3 tools/test_addon.py  # run the checks
 ./tools/package.sh                               # build the zip into dist/
 ```

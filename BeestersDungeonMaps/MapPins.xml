@@ -3,9 +3,10 @@
         Map pin template. No <Scripts> here on purpose: the world map calls the mixin's
         OnLoad, OnMouseEnter and OnMouseLeave itself, and it refuses pins whose template sets
         OnEnter/OnLeave scripts (assertion in MapCanvasMixin:AcquirePin).
-        enableMouseMotion lets the map hook up hovering; clicks pass through to the map.
+        enableMouseMotion lets the map hook up hovering; enableMouseClicks makes the map call
+        the mixin's OnClick (left click opens the dungeon map, right click zooms out as usual).
     -->
-    <Frame name="BeestersDungeonMapsEntrancePinTemplate" mixin="BeestersDungeonMapsEntrancePinMixin" enableMouseMotion="true" virtual="true">
+    <Frame name="BeestersDungeonMapsEntrancePinTemplate" mixin="BeestersDungeonMapsEntrancePinMixin" enableMouseMotion="true" enableMouseClicks="true" virtual="true">
         <Size x="24" y="24"/>
         <Layers>
             <Layer level="ARTWORK">
