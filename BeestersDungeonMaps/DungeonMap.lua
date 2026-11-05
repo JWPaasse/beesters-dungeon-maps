@@ -91,12 +91,14 @@ end
 
 local MIN_QUALITY = 2 -- Uncommon and better
 
--- name, link, quality, icon
+local BIND_ON_PICKUP = 1
+
+-- name, link, quality, icon, bindType (1 = Bind on Pickup; nil when the game doesn't say)
 local function ItemInfo(itemID)
     local getInfo = (C_Item and C_Item.GetItemInfo) or GetItemInfo
     if not getInfo then return end
-    local name, link, quality, _, _, _, _, _, _, icon = getInfo(itemID)
-    return name, link, quality, icon
+    local name, link, quality, _, _, _, _, _, _, icon, _, _, _, bindType = getInfo(itemID)
+    return name, link, quality, icon, bindType
 end
 
 local function RequestItem(itemID)
@@ -104,7 +106,7 @@ local function RequestItem(itemID)
 end
 
 ----------------------------------------------------------------------
--- Loot: what only bosses drop (tools/build_bosses.py), Uncommon and better, grouped: Gear (weapons, then off-hands, armour from head to feet, then necklaces,
+-- Loot: what only bosses drop (tools/build_bosses.py), Bind on Pickup, Uncommon and better, grouped: Gear (weapons, then off-hands, armour from head to feet, then necklaces,
 -- rings and trinkets), Recipes (by profession), Other. Shown in the boss's tooltip on
 -- mouse-over; a click opens it as a panel that stays, so you can hover the items.
 ----------------------------------------------------------------------
@@ -140,11 +142,11 @@ local function LootGroups(boss)
     local groups = { gear = {}, recipe = {}, other = {} }
     local waiting = false
     for _, itemID in ipairs(loot) do
-        local name, link, quality, icon = ItemInfo(itemID)
+        local name, link, quality, icon, bindType = ItemInfo(itemID)
         if not name then
             waiting = true
             RequestItem(itemID)
-        elseif (quality or 0) >= MIN_QUALITY then
+        elseif (quality or 0) >= MIN_QUALITY and (bindType == nil or bindType == BIND_ON_PICKUP) then
             local kind, sortKey = ItemKind(itemID)
             table.insert(groups[kind], { id = itemID, name = name, link = link, quality = quality, icon = icon, sortKey = sortKey })
         end
@@ -312,7 +314,7 @@ local function RefreshLootPanel()
     for i = rowIndex + 1, #panel.Rows do panel.Rows[i]:Hide() end
     for i = headerIndex + 1, #panel.Headers do panel.Headers[i]:Hide() end
     panel.Empty:SetShown(rowIndex == 0)
-    panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Uncommon or better loot known.")
+    panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Bind on Pickup loot of Uncommon or better known.")
     panel:SetHeight(rowIndex == 0 and 66 or y + 12)
 end
 

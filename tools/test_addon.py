@@ -315,8 +315,8 @@ def main():
         panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
         local order = {}
         for _, e in ipairs(panel.shown) do table.insert(order, e[1] .. ":" .. e[2]) end
-        check("loot (Bind on Equip too) grouped: weapons, armour, trinkets, then recipes by profession, then other",
-            table.concat(order, " ") == "gear:150 gear:30 gear:43 gear:22 gear:42 recipe:38 recipe:34 other:15 other:27")
+        check("loot (Bind on Pickup only) grouped: weapons, armour, trinkets, then recipes by profession, then other",
+            table.concat(order, " ") == "gear:30 gear:43 gear:22 gear:42 recipe:38 recipe:34 other:15 other:27")
 
         -- Placing a boss yourself: shift-drag a listed boss onto the map.
         ns:OpenDungeonMap("scholo")
