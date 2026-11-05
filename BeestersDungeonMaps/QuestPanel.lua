@@ -252,6 +252,9 @@ local function NewTitle()
         hl:SetAllPoints(t.Label)
         hl:SetColorTexture(1, 1, 1, 0.08)
     end
+    -- The template's glow is switched by its own hover script; ours does the same.
+    t.Glow = Part(t, "HighlightTexture")
+    if t.Glow then t.Glow:Hide() end
     for _, key in ipairs({ "TagTexture", "TagText", "TaskIcon", "StorylineTexture" }) do
         local part = Part(t, key)
         if part then part:Hide() end
@@ -464,12 +467,15 @@ local function AddQuestRow(y, entry, kind)
         t.hint = "<Click for details>"
         t:SetScript("OnClick", function(self) ShowDetail(self.questID, entry) end)
     end
+    if t.Glow then t.Glow:Hide() end
     t:SetScript("OnEnter", function(self)
         self.Label:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+        if self.Glow then self.Glow:Show() end
         QuestTooltip(self)
     end)
     t:SetScript("OnLeave", function(self)
         self.Label:SetTextColor(self.r, self.g, self.b)
+        if self.Glow then self.Glow:Hide() end
         GameTooltip:Hide()
     end)
     local height = math.max(t.Label:GetStringHeight() or 14, 14) + 4
