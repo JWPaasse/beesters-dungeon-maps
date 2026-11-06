@@ -157,3 +157,41 @@ loader:SetScript("OnEvent", function(self, _, loadedName)
     ns:InitDungeonMap()
     ns:InitQuestPanel()
 end)
+
+-- Item tooltips with the game's comparison tooltips ("Currently equipped"). Those hang off
+-- GameTooltip; when a row is left, hidden or reused quickly they could stay on screen, so
+-- they're cleared explicitly every time.
+local function HideComparison()
+    if GameTooltip_HideShoppingTooltips then pcall(GameTooltip_HideShoppingTooltips, GameTooltip) end
+    for _, name in ipairs({ "ShoppingTooltip1", "ShoppingTooltip2" }) do
+        local tip = _G[name]
+        if tip and tip.Hide then tip:Hide() end
+    end
+end
+
+function ns:ShowItemByID(owner, itemID)
+    HideComparison()
+    GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
+    GameTooltip:SetItemByID(itemID)
+    GameTooltip:Show()
+end
+
+-- Hide the tooltip (and its comparisons) if it belongs to owner, or to any frame when owner is nil.
+function ns:HideItemTooltip(owner)
+    local current = GameTooltip:IsShown() and GameTooltip:GetOwner()
+    if owner == nil or current == owner then GameTooltip:Hide() end
+    HideComparison()
+end
+
+-- When a panel closes under the mouse, its rows get no OnLeave: drop a tooltip they own.
+function ns:HideTooltipWithin(frame)
+    local current = GameTooltip:IsShown() and GameTooltip:GetOwner()
+    while current do
+        if current == frame then
+            GameTooltip:Hide()
+            HideComparison()
+            return
+        end
+        current = current.GetParent and current:GetParent()
+    end
+end

@@ -341,12 +341,12 @@ end
 -- the data arrives.
 ShowItemTooltip = function(owner, itemID)
     owner.waitingTooltip = nil
+    ns:HideItemTooltip(nil) -- clears comparisons left from the previous item
     GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
     local getInfo = (C_Item and C_Item.GetItemInfo) or GetItemInfo
     local known = ns.LootItems and ns.LootItems[itemID]
     if (getInfo and getInfo(itemID)) or not known then
-        GameTooltip:SetItemByID(itemID)
-        GameTooltip:Show()
+        ns:ShowItemByID(owner, itemID)
         return
     end
     RequestItem(itemID)
@@ -400,7 +400,7 @@ local function AcquireRow(panel, index)
     row.Name:SetJustifyH("LEFT")
     row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
     row:SetScript("OnEnter", function(self) ShowItemTooltip(self, self.itemID) end)
-    row:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    row:SetScript("OnLeave", function(self) ns:HideItemTooltip(self) end)
     row:SetScript("OnClick", function(self)
         if HandleModifiedItemClick then HandleModifiedItemClick(self.link) end
     end)
@@ -483,6 +483,7 @@ local function CreateLootPanel(parent)
     panel.Empty:SetPoint("TOPLEFT", 12, -34)
     panel.Rows = {}
     panel.Headers = {}
+    panel:SetScript("OnHide", function(self) ns:HideTooltipWithin(self) end)
     panel:Hide()
     return panel
 end

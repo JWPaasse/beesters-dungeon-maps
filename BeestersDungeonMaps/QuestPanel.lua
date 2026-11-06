@@ -878,15 +878,16 @@ local function RewardButton(d, itemID, count, x, y)
             b.Count:SetPoint("BOTTOMRIGHT", b.Icon, "BOTTOMRIGHT", -2, 2)
         end
         b:SetScript("OnEnter", function(self)
-            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
             if self.special then
+                ns:HideItemTooltip(nil)
+                GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
                 GameTooltip:SetText(self.special.tooltip, HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+                GameTooltip:Show()
             else
-                GameTooltip:SetItemByID(self.itemID)
+                ns:ShowItemByID(self, self.itemID)
             end
-            GameTooltip:Show()
         end)
-        b:SetScript("OnLeave", function() GameTooltip:Hide() end)
+        b:SetScript("OnLeave", function(self) ns:HideItemTooltip(self) end)
         b:SetScript("OnClick", function(self)
             if self.special then return end
             local _, link = (C_Item and C_Item.GetItemInfo or GetItemInfo)(self.itemID)
@@ -1133,6 +1134,7 @@ local function CreateDetail(parent)
     d:SetPoint("BOTTOMLEFT", 0, 0)
     d:SetPoint("BOTTOMRIGHT", 0, 0)
     d:Hide()
+    d:SetScript("OnHide", function(self) ns:HideTooltipWithin(self) end)
     d:EnableMouse(true)
     d.texts, d.buttons, d.textCount, d.buttonCount = {}, {}, 0, 0
     d.FillReward = FillReward

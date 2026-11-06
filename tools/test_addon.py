@@ -318,6 +318,10 @@ def main():
         GameTooltip.SetText = function(_, text) tipText = text end
         panel.Rows[1].scripts.OnEnter(panel.Rows[1])
         GameTooltip.SetText = realSetText
+        local comparisonHidden = false
+        ShoppingTooltip1 = CreateFrame("Frame"); ShoppingTooltip1.Hide = function() comparisonHidden = true end
+        panel.Rows[1].scripts.OnLeave(panel.Rows[1])
+        check("leaving a loot item also hides the 'currently equipped' comparison", comparisonHidden)
         check("hovering an item the game hasn't loaded shows WoW Forever's tooltip from the addon's data", tipText and tipText:find("Pronged Reaver"))
         C_Item.GetItemInfo = realInfo
         check("a rare's shared drop counts as boss loot (Haunting Blade, Lordaeron Captain)", contains(ns.BossLoot[255699], 6641))
