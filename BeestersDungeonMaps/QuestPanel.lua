@@ -317,6 +317,7 @@ local function NewTitle()
         local part = Part(t, key)
         if part then part:Hide() end
     end
+    t.Tag = t:CreateFontString(nil, "ARTWORK", "GameFontNormalLeft")
     t:SetScript("OnMouseDown", nil)
     t:SetScript("OnMouseUp", nil)
     -- Round quest icon, like the quest log's.
@@ -424,10 +425,12 @@ local function ListWidth()
     return math.max(panel.Child:GetWidth(), 150)
 end
 
+-- "[26] The Book of Ur", like the quest log; "(Dungeon)" goes to the right as its tag.
 local function QuestTitle(entry)
     local q = entry.q
-    return ("[%d+] %s (%s)"):format(q[F.LEVEL] or 0, q[F.NAME], LFG_TYPE_DUNGEON or "Dungeon")
+    return ("[%d] %s"):format(q[F.LEVEL] or 0, q[F.NAME])
 end
+local DUNGEON_TAG = ("(%s)"):format(LFG_TYPE_DUNGEON or "Dungeon")
 
 local function QuestTooltip(self)
     local q = Q(self.questID)
@@ -498,6 +501,7 @@ local SPACING = {
     quest = { header = 4, quest = -3 },
 }
 local previous = "none" -- what the last thing in the list was
+local TITLE_LEFT = 4    -- WoW Forever's quest log pads quest rows 4 in (titleFrameLeftPadding)
 local objectiveGap = 3  -- gap before the next objective line (3 under a title, then 2)
 
 local function Space(y, kind)
@@ -523,7 +527,7 @@ local function AddObjective(y, text, r, g, b, noDash)
     objectiveGap = 2
     local o = Acquire("objective")
     o:ClearAllPoints()
-    o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 31, -y)
+    o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", TITLE_LEFT + 31, -y)
     o:SetWidth(ListWidth() - 45)
     o.DashText:SetText(noDash and "" or (QUEST_DASH or "- "))
     o.Label:SetText(text)
@@ -553,7 +557,7 @@ local function AddStepLine(y, indent, text, state, r, g, b, onClick, last, hint)
     objectiveGap = 2
     local st = Acquire("step")
     st:ClearAllPoints()
-    st:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", indent, -y)
+    st:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", TITLE_LEFT + indent, -y)
     st:SetWidth(ListWidth() - indent - 20)
     st.Label:SetWidth(ListWidth() - indent - 40)
     st.Label:SetText(text)
@@ -615,7 +619,7 @@ local function AddChain(y, entry)
                         if obj.text and obj.text ~= "" then
                             local o = Acquire("objective")
                             o:ClearAllPoints()
-                            o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 58, -y)
+                            o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", TITLE_LEFT + 58, -y)
                             o:SetWidth(ListWidth() - 76)
                             o.DashText:SetText("-")
                             o.Label:SetWidth(ListWidth() - 90)
@@ -643,17 +647,24 @@ local function AddQuestRow(y, entry, kind)
     local t = Acquire("title")
     t.questID = entry.id
     t:ClearAllPoints()
-    t:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 0, -y)
-    t:SetWidth(math.min(290, ListWidth()))
+    t:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", TITLE_LEFT, -y)
+    t:SetWidth(math.min(290, ListWidth() - TITLE_LEFT))
     t.Label:ClearAllPoints()
     t.Label:SetPoint("TOPLEFT", t, "TOPLEFT", 31, -8)
-    t.Label:SetWidth(ListWidth() - 60)
     t.Label:SetText(QuestTitle(entry))
     local r, g, b = DifficultyColor(q[F.LEVEL])
     if kind == "inside" then r, g, b = 0.4, 0.75, 1 end
     if kind == "done" then r, g, b = 0.6, 0.6, 0.6 end
     t.Label:SetTextColor(r, g, b)
     t.r, t.g, t.b = r, g, b
+    -- "(Dungeon)" on the right, in front of the track box, as the quest log tags it.
+    local tag = t.Tag
+    tag:SetText(DUNGEON_TAG)
+    tag:SetTextColor(r, g, b)
+    tag:ClearAllPoints()
+    tag:SetPoint("TOPRIGHT", t, "TOPRIGHT", -26, -8)
+    tag:Show()
+    t.Label:SetPoint("RIGHT", tag, "LEFT", -4, 0)
 
     -- Icon: the game's round quest button for quests in your log; "!" for ones you can pick up.
     if t.POI then t.POI:Hide() end
@@ -696,11 +707,13 @@ local function AddQuestRow(y, entry, kind)
     if t.Glow then t.Glow:Hide() end
     t:SetScript("OnEnter", function(self)
         self.Label:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
+        self.Tag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
         if self.Glow then self.Glow:Show() end
         QuestTooltip(self)
     end)
     t:SetScript("OnLeave", function(self)
         self.Label:SetTextColor(self.r, self.g, self.b)
+        self.Tag:SetTextColor(self.r, self.g, self.b)
         if self.Glow then self.Glow:Hide() end
         GameTooltip:Hide()
     end)
@@ -789,12 +802,12 @@ local function Layout()
     if not panel then return end
     local h = panel:GetHeight()
     panel.Scroll:ClearAllPoints()
-    panel.Scroll:SetPoint("TOPLEFT", 0, -4)
+    panel.Scroll:SetPoint("TOPLEFT", 0, 0)
     if panel.Detail:IsShown() then
         panel.Detail:SetHeight(math.floor(h * 0.55))
-        panel.Scroll:SetPoint("BOTTOMRIGHT", panel.Detail, "TOPRIGHT", -24, 6)
+        panel.Scroll:SetPoint("BOTTOMRIGHT", panel.Detail, "TOPRIGHT", 0, 14)
     else
-        panel.Scroll:SetPoint("BOTTOMRIGHT", -24, 4)
+        panel.Scroll:SetPoint("BOTTOMRIGHT", 0, 0)
     end
     panel.Child:SetWidth(math.max(panel.Scroll:GetWidth(), 50))
     local d = panel.Detail
@@ -1215,6 +1228,7 @@ RaiseAboveQuestDetails = function()
     end
     local level = math.min(top + 50, 9000)
     if panel:GetFrameLevel() < level then panel:SetFrameLevel(level) end
+    if panel.Border then panel.Border:SetFrameLevel(panel:GetFrameLevel() + 20) end
     if strip and strip:GetFrameLevel() < level + 10 then strip:SetFrameLevel(level + 10) end
 end
 
@@ -1300,9 +1314,30 @@ local function CreateFrames()
         bg:SetColorTexture(0.08, 0.06, 0.04, 0.97)
     end
 
-    local ok, scroll = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestScroll", panel, "UIPanelScrollFrameTemplate")
-    if not ok then scroll = CreateFrame("ScrollFrame", nil, panel) end
+    -- The same scroll frame as the quest log's, with its scroll bar in the same place (just
+    -- outside the list, 8 to the right), so ours covers the game's exactly.
+    local scroll = CreateFrame("ScrollFrame", "BeestersDungeonMapsQuestScroll", panel)
+    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 2, -4
+    if not (ScrollFrame_OnLoad and pcall(ScrollFrame_OnLoad, scroll)) then
+        scroll:Hide()
+        local ok, made = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestScrollOld", panel, "UIPanelScrollFrameTemplate")
+        scroll = ok and made or CreateFrame("ScrollFrame", nil, panel)
+    end
     panel.Scroll = scroll
+    -- The quest log's frame around the list: gold border, filigree on top, shadow at the bottom.
+    local okBorder, border = pcall(CreateFrame, "Frame", nil, panel, "QuestLogBorderFrameTemplate")
+    if okBorder and border then
+        border:ClearAllPoints()
+        border:SetPoint("TOPLEFT", scroll, "TOPLEFT", -3, 7)
+        border:SetPoint("BOTTOMRIGHT", scroll, "BOTTOMRIGHT", 3, -6)
+        local shadow = border:CreateTexture(nil, "BACKGROUND")
+        if C_Texture.GetAtlasInfo("questlog-frame-gradient-bottom") then
+            shadow:SetAtlas("questlog-frame-gradient-bottom", true)
+            shadow:SetPoint("BOTTOM", 0, 4)
+        end
+        border:SetFrameLevel(panel:GetFrameLevel() + 20)
+        panel.Border = border
+    end
     panel.Child = CreateFrame("Frame", nil, scroll)
     panel.Child:SetSize(200, 10)
     scroll:SetScrollChild(panel.Child)
