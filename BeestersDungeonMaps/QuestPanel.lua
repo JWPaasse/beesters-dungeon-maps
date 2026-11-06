@@ -324,13 +324,13 @@ local function NewTitle()
     local ok, poi = pcall(CreateFrame, "Button", nil, t, "POIButtonTemplate")
     if ok and poi and poi.SetQuestID then
         t.POI = poi
-        poi:SetPoint("TOPLEFT", t, "TOPLEFT", 4, 3)
+        poi:SetPoint("TOPLEFT", t, "TOPLEFT", 6, -4)
         poi:EnableMouse(false)
     end
     -- Our own icon for quests that aren't in your log yet ("!" on the same round button).
     t.Bang = t:CreateTexture(nil, "OVERLAY")
     t.Bang:SetSize(24, 24)
-    t.Bang:SetPoint("TOPLEFT", t, "TOPLEFT", 4, 3)
+    t.Bang:SetPoint("TOPLEFT", t, "TOPLEFT", 6, -4)
     t.BangMark = t:CreateTexture(nil, "OVERLAY", nil, 2)
     t.BangMark:SetSize(13, 13)
     t.BangMark:SetPoint("CENTER", t.Bang, "CENTER")
@@ -340,7 +340,7 @@ local function NewTitle()
     if not t.Box then
         t.Box = CreateFrame("CheckButton", nil, t, "UICheckButtonTemplate")
         t.Box:SetSize(20, 20)
-        t.Box:SetPoint("TOPRIGHT", -2, 2)
+        t.Box:SetPoint("TOPRIGHT", 0, -8)
     end
     t.Box:EnableMouse(true)
     if t.Box:HasScript("OnClick") then t.Box:SetScript("OnClick", nil) end
@@ -488,27 +488,48 @@ end
 local Refresh -- forward
 local ShowDetail
 
-local function AddHeader(y, group, text, count)
-    local h = Acquire("header")
-    h.group = group
-    h.Label:SetText(("%s (%d)"):format(text, count))
-    h:ClearAllPoints()
-    h:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 1, -y)
-    h:SetWidth(ListWidth() - 2)
-    SetHeaderCollapsed(h, collapsed[group])
-    return y + h:GetHeight() + 4
+-- Spacing as the game's quest log lays it out (QuestMapFrame.lua, QuestLogQuests_* and its
+-- spacing pairs): first header 8 from the top, header to header 6, header to quest 2,
+-- quest to quest -3, quest to header 4. Headers sit 9 in; quest text 31 in and 8 down;
+-- objectives under the text, 3 below it and 2 apart; 6 extra under each quest (its icon).
+local SPACING = {
+    none = { header = 8, quest = 8 },
+    header = { header = 6, quest = 2 },
+    quest = { header = 4, quest = -3 },
+}
+local previous = "none" -- what the last thing in the list was
+local objectiveGap = 3  -- gap before the next objective line (3 under a title, then 2)
+
+local function Space(y, kind)
+    local gap = SPACING[previous][kind]
+    previous = kind
+    return y + gap
 end
 
-local function AddObjective(y, text, r, g, b)
+local function AddHeader(y, group, text, count)
+    y = Space(y, "header")
+    local h = Acquire("header")
+    h.group = group
+    h.Label:SetText(count and ("%s (%d)"):format(text, count) or text)
+    h:ClearAllPoints()
+    h:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 9, -y)
+    h:SetWidth(math.min(289, ListWidth() - 11))
+    SetHeaderCollapsed(h, collapsed[group])
+    return y + h:GetHeight()
+end
+
+local function AddObjective(y, text, r, g, b, noDash)
+    y = y + objectiveGap
+    objectiveGap = 2
     local o = Acquire("objective")
     o:ClearAllPoints()
-    o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 32, -y)
-    o:SetWidth(ListWidth() - 50)
-    o.DashText:SetText("-")
+    o:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 31, -y)
+    o:SetWidth(ListWidth() - 45)
+    o.DashText:SetText(noDash and "" or (QUEST_DASH or "- "))
     o.Label:SetText(text)
-    o.Label:SetWidth(ListWidth() - 64)
+    o.Label:SetWidth(math.min(205, ListWidth() - 60))
     if r then o.Label:SetTextColor(r, g, b) else o.Label:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b) end
-    local height = math.max(o.Label:GetStringHeight() or 12, 12) + 2
+    local height = math.max(o.Label:GetStringHeight() or 12, 12)
     o:SetHeight(height)
     return y + height
 end
@@ -528,6 +549,8 @@ local function SetStepIcon(st, state)
 end
 
 local function AddStepLine(y, indent, text, state, r, g, b, onClick, last, hint)
+    y = y + objectiveGap - 1 -- step lines are a little taller than objective lines
+    objectiveGap = 2
     local st = Acquire("step")
     st:ClearAllPoints()
     st:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", indent, -y)
@@ -615,13 +638,15 @@ end
 
 local function AddQuestRow(y, entry, kind)
     local q = entry.q
+    y = Space(y, "quest")
+    local rowTop = y
     local t = Acquire("title")
     t.questID = entry.id
     t:ClearAllPoints()
     t:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", 0, -y)
-    t:SetWidth(ListWidth())
+    t:SetWidth(math.min(290, ListWidth()))
     t.Label:ClearAllPoints()
-    t.Label:SetPoint("TOPLEFT", t, "TOPLEFT", 31, -1)
+    t.Label:SetPoint("TOPLEFT", t, "TOPLEFT", 31, -8)
     t.Label:SetWidth(ListWidth() - 60)
     t.Label:SetText(QuestTitle(entry))
     local r, g, b = DifficultyColor(q[F.LEVEL])
@@ -679,9 +704,8 @@ local function AddQuestRow(y, entry, kind)
         if self.Glow then self.Glow:Hide() end
         GameTooltip:Hide()
     end)
-    local height = math.max(t.Label:GetStringHeight() or 14, 14) + 4
-    t:SetHeight(height)
-    y = y + height
+    y = y + 8 + math.max(t.Label:GetStringHeight() or 12, 12)
+    objectiveGap = 3
 
     if entry.steps and #entry.steps > 1 and kind ~= "done" then
         y = AddChain(y, entry)
@@ -706,7 +730,9 @@ local function AddQuestRow(y, entry, kind)
         local current = Q(entry.steps and entry.steps[entry.step] or entry.id) or q
         y = AddObjective(y, ("Requires level %d"):format(current[F.REQ] or 0), 1, 0.25, 0.25)
     end
-    return y + 8
+    y = y + 6 -- room for the round icon, as in the quest log
+    t:SetHeight(y - rowTop)
+    return y
 end
 
 local GROUPS = {
@@ -723,7 +749,21 @@ function Refresh()
     ReleaseAll()
 
     local groups = Classify(key)
-    local y, any = 4, false
+    local y, any = 0, false
+    previous = "none"
+    -- Everything handed in: say so, above the handed-in list.
+    if #groups.log + #groups.available + #groups.inside == 0 and #groups.done > 0 then
+        any = true
+        y = AddHeader(y, "log", GROUPS[1].title)
+        previous = "quest"
+        objectiveGap = 8
+        y = AddObjective(y, "|TInterface\\RaidFrame\\ReadyCheck-Ready:14:14:0:0|t You've completed all the quests in this dungeon.",
+            GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b, true)
+        panel.allDone = true
+        y = y + 6
+    else
+        panel.allDone = false
+    end
     for _, group in ipairs(GROUPS) do
         local list = groups[group.key]
         if #list > 0 then
@@ -735,7 +775,8 @@ function Refresh()
         end
     end
     if not any then
-        y = AddObjective(10, "No quests known for this dungeon.", 0.6, 0.6, 0.6)
+        objectiveGap = 10
+        y = AddObjective(0, "No quests known for this dungeon.", 0.6, 0.6, 0.6, true)
     end
     panel.Child:SetHeight(math.max(y + 10, 10))
 end
