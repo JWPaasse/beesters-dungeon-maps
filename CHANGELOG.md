@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.8
+
+- Horde/Alliance toggle on the dungeon quest tab: starts on your own faction, click to see the other side's quests.
+- Quests you can't take yet show a greyed-out "!", so every quest has its icon in the same place.
+
 ## 0.2.7
 
 - Boss pins are now the boss's portrait in a gold ring, with a small skull in the corner.
