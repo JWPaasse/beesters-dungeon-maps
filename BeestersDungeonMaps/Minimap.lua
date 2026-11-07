@@ -245,10 +245,15 @@ end
 local function Layout()
     local level = UnitLevel("player") or 1
     local mine, all = ns:DungeonList(level)
+    local suggest = ns.db.suggestDungeons ~= false
+    if not suggest then mine = {} end
     list.Range:SetText(("%s %d–%d"):format(LEVEL or "Level", math.max(1, level - LEVEL_RANGE), level + LEVEL_RANGE))
+    list.Title:SetShown(suggest)
+    list.Range:SetShown(suggest)
+    list.Divider:SetShown(suggest)
 
     -- Pinned: yours.
-    local y = 30
+    local y = suggest and 30 or -4 -- without it, "All dungeons and raids" heads the list
     for i, e in ipairs(mine) do
         local row = list.Mine[i] or NewRow(list)
         list.Mine[i] = row
@@ -259,7 +264,7 @@ local function Layout()
         y = y + ROW_HEIGHT
     end
     for i = #mine + 1, #list.Mine do list.Mine[i]:Hide() end
-    if #mine == 0 then y = y + 4 end
+    if suggest and #mine == 0 then y = y + 4 end
 
     list.Divider:ClearAllPoints()
     list.Divider:SetPoint("TOPLEFT", 12, -(y + 6))

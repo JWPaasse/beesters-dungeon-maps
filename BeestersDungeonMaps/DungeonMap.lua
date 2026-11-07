@@ -108,6 +108,37 @@ end
 -- Where a group starts: the City of Dalaran run begins in The Underbelly (its second map).
 local START_FLOOR = { dal = 2 }
 
+-- Inside a dungeon the game no longer says which level you're on, but the subzone name under
+-- the minimap does. Known subzones per floor; others are learned (below) and matched by name.
+local SUBZONE_FLOORS = {
+    dal = { ["Dalaran"] = 1, ["City of Dalaran"] = 1, ["The Underbelly"] = 2 },
+}
+
+-- The floor you're standing on, when it can be told from the subzone; nil otherwise.
+local function FloorHere(key)
+    local subzone = GetSubZoneText and GetSubZoneText() or ""
+    if subzone == "" then subzone = GetMinimapZoneText and GetMinimapZoneText() or "" end
+    if subzone == "" then return nil end
+    local known = SUBZONE_FLOORS[key] and SUBZONE_FLOORS[key][subzone]
+    if known then return known end
+    local learned = ns.db.subzoneFloors and ns.db.subzoneFloors[key] and ns.db.subzoneFloors[key][subzone]
+    if learned then return learned end
+    local map = ns.DungeonMaps[key]
+    for i = 1, map and #map.floors or 0 do
+        if FloorName(key, i) == subzone then return i end
+    end
+end
+
+-- Switching floors by hand inside the dungeon teaches the addon which floor this subzone is on.
+local function LearnFloorHere(key, floor)
+    if not (ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key) then return end
+    local subzone = GetSubZoneText and GetSubZoneText() or ""
+    if subzone == "" or (SUBZONE_FLOORS[key] and SUBZONE_FLOORS[key][subzone]) then return end
+    ns.db.subzoneFloors = ns.db.subzoneFloors or {}
+    ns.db.subzoneFloors[key] = ns.db.subzoneFloors[key] or {}
+    ns.db.subzoneFloors[key][subzone] = floor
+end
+
 local function DefaultFloor(key)
     if START_FLOOR[key] then return START_FLOOR[key] end
     local counts = BossesPerFloor(key)
@@ -922,7 +953,7 @@ local function CreateView()
                 local label = FloorName(current.key, i) .. (n > 0 and ("  |cff9d9d9d(%d %s)|r"):format(n, n == 1 and "boss" or "bosses") or "")
                 root:CreateRadio(label,
                     function() return current.floor == i end,
-                    function() ShowFloor(i) end)
+                    function() LearnFloorHere(current.key, i); ShowFloor(i) end)
             end
         end)
     else
@@ -1054,7 +1085,9 @@ function ns:OpenDungeonMap(key, floor)
             ns.db.lastDireMaulWing = key
         end
         current.key = key
-        current.floor = floor or DefaultFloor(key) -- before Show: its layout reads the floor
+        -- Inside this dungeon: the level you're on. Otherwise where a group starts.
+        local here = ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key and FloorHere(key)
+        current.floor = floor or here or DefaultFloor(key) -- before Show: its layout reads the floor
         current.zoneMapID = WorldMapFrame:GetMapID()
         SetCanvasShown(false)
         view:Show()
@@ -1250,6 +1283,14 @@ function ns:InitDungeonMap()
                 end
             end)
         end
+    end)
+    -- Walking to another level with the map open turns the page, like the game's own maps.
+    local zoneWatcher = CreateFrame("Frame")
+    for _, event in ipairs({ "ZONE_CHANGED", "ZONE_CHANGED_INDOORS" }) do pcall(zoneWatcher.RegisterEvent, zoneWatcher, event) end
+    zoneWatcher:SetScript("OnEvent", function()
+        if not (ns:IsDungeonMapOpen() and current.key and CurrentInstanceKey() == current.key) then return end
+        local here = FloorHere(current.key)
+        if here and here ~= current.floor then ShowFloor(here) end
     end)
     WorldMapFrame:HookScript("OnHide", function()
         ns:CloseDungeonMap(false)

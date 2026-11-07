@@ -18,6 +18,7 @@ ns.defaults = {
     dungeonsInTopBar = true,
     questPanel = true,
     minimapButton = true,
+    suggestDungeons = true,
 }
 
 function ns:Print(message)

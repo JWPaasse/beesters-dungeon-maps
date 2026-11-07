@@ -103,8 +103,10 @@ function ns:InitOptions()
     local minimapHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
     minimapHeader:SetPoint("TOPLEFT", quests, "BOTTOMLEFT", 0, -16)
     minimapHeader:SetText(MINIMAP_LABEL or "Minimap")
-    NewCheckbox(panel, "Show the minimap button",
+    local minimapButton = NewCheckbox(panel, "Show the minimap button",
         "A button on the minimap that lists every dungeon and raid, yours on top. The list also opens with /bdm list.", "minimapButton", minimapHeader)
+    NewCheckbox(panel, "List the dungeons for your level on top",
+        "Pins the dungeons within 5 levels of yours above the full list. Turn off to see only the full list.", "suggestDungeons", minimapButton)
 
     if Settings and Settings.RegisterCanvasLayoutCategory then
         local category = Settings.RegisterCanvasLayoutCategory(panel, ns.title)
@@ -115,7 +117,19 @@ function ns:InitOptions()
     end
 end
 
+-- The game's Settings window can't be opened by an addon during combat: open it afterwards.
+local afterCombat = CreateFrame("Frame")
+afterCombat:SetScript("OnEvent", function(self)
+    self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+    ns:OpenOptions()
+end)
+
 function ns:OpenOptions()
+    if InCombatLockdown() then
+        afterCombat:RegisterEvent("PLAYER_REGEN_ENABLED")
+        ns:Print("The options open when combat ends.")
+        return
+    end
     if ns.settingsCategory and Settings and Settings.OpenToCategory then
         Settings.OpenToCategory(ns.settingsCategory:GetID())
     elseif InterfaceOptionsFrame_OpenToCategory then

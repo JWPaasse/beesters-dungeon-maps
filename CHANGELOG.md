@@ -5,6 +5,9 @@
 - Minimap button: click it for a list of every dungeon and raid, with the ones for your level (within 5 levels) pinned on top and the rest in a scroll list by level band. Levels are coloured by difficulty for you. Click a dungeon to open its map; a "coming soon" one opens its zone. Drag the button to move it; right-click for options, where you can also hide it. `/bdm list` opens the list too.
 - Clicking a dungeon during combat opens its map as soon as the fight ends (the game doesn't let addons open the map in combat).
 - Fixed: an error when a dungeon map opened right after a dungeon with more floors.
+- Inside a dungeon, its map opens on the level you're on, and turns the page when you walk to another level (told by the subzone name under the minimap). City of Dalaran is known; in other multi-level dungeons the addon learns it the first time you switch floors by hand in a spot.
+- New option: "List the dungeons for your level on top", to turn that part of the list off.
+- Fixed: right-clicking the minimap button (or `/bdm`) during combat caused an error. The options now open when combat ends.
 
 ## 1.0.1
 

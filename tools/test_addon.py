@@ -614,6 +614,33 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("clicking the button opens the list", BeestersDungeonMapsList:IsShown())
         SlashCmdList.BEESTERSDUNGEONMAPS("list")
         check("/bdm list closes it again", not BeestersDungeonMapsList:IsShown())
+        BeestersDungeonMapsList:Hide()
+        ns.db.suggestDungeons = false
+        ns:ToggleDungeonList(ns.MinimapButton)
+        check("with suggestions off, the list has no 'for your level' part", not BeestersDungeonMapsList.Title:IsShown())
+        BeestersDungeonMapsList:Hide()
+        ns.db.suggestDungeons = true
+        -- Inside Dalaran the map opens on the level you're on, told by the subzone.
+        local inInst, instInfo, subzone = IsInInstance, GetInstanceInfo, "Dalaran"
+        IsInInstance = function() return true, "party" end
+        GetInstanceInfo = function() return "City of Dalaran", "party", 1, "Normal", 5, 0, false, 2959 end
+        GetSubZoneText = function() return subzone end
+        ns:OpenDungeonMap("dal")
+        check("inside Dalaran, upstairs: the city level opens", ns:CurrentDungeonFloor() == 1)
+        ns:CloseDungeonMap(true)
+        subzone = "The Underbelly"
+        ns:OpenDungeonMap("dal")
+        check("inside Dalaran, in the Underbelly: the Underbelly opens", ns:CurrentDungeonFloor() == 2)
+        ns:CloseDungeonMap(true)
+        IsInInstance, GetInstanceInfo = inInst, instInfo
+        ns:OpenDungeonMap("dal")
+        check("outside, Dalaran still opens on the Underbelly", ns:CurrentDungeonFloor() == 2)
+        ns:CloseDungeonMap(true)
+        -- Options during combat wait for the fight to end (the Settings window is protected).
+        inCombat = true
+        check("options in combat don't error", pcall(function() ns:OpenOptions() end))
+        inCombat = false
+
         ns.db.minimapButton = false
         ns:UpdateMinimapButton()
         check("the button can be hidden", not ns.MinimapButton:IsShown())
