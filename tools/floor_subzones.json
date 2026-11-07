@@ -1,0 +1,8909 @@
+{
+ "_source": "WoW Forever client tables, build 1.60.1.70862 (via wago.tools).",
+ "errors": {
+  "UiMapGroupMember": "HTTP Error 400: Bad Request"
+ },
+ "instances": {
+  "bfd": {
+   "area": 719,
+   "name": "Blackfathom Deeps",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "",
+     "ID": "29128",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "317",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29129",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "318",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29130",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "319",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29131",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "320",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29132",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "321",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29133",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "322",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29134",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "323",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29135",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "324",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29136",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "325",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29137",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "326",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29138",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "327",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29139",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "328",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29140",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "329",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29141",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "330",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29142",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "332",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29143",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "333",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "Blackfathom Deeps",
+     "ID": "29144",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "719"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29145",
+     "WMOID": "726",
+     "NameSetID": "1",
+     "WMOGroupID": "331",
+     "AreaTableID": "719"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    },
+    {
+     "floor": 3,
+     "uimaps": []
+    }
+   ]
+  },
+  "brd": {
+   "area": 1584,
+   "name": "Blackrock Depths",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    }
+   ]
+  },
+  "brs": {
+   "area": 1583,
+   "name": "Blackrock Spire",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    },
+    {
+     "floor": 3,
+     "uimaps": []
+    },
+    {
+     "floor": 4,
+     "uimaps": []
+    },
+    {
+     "floor": 5,
+     "uimaps": []
+    },
+    {
+     "floor": 6,
+     "uimaps": []
+    },
+    {
+     "floor": 7,
+     "uimaps": []
+    }
+   ]
+  },
+  "dal": {
+   "area": 16544,
+   "name": "City of Dalaran",
+   "subzones": [
+    {
+     "id": 16558,
+     "name": "Dalaran",
+     "depth": 0
+    },
+    {
+     "id": 16559,
+     "name": "Fel Grove",
+     "depth": 0
+    }
+   ],
+   "wmo_areas": [],
+   "floors": []
+  },
+  "dm": {
+   "area": 1581,
+   "name": "The Deadmines",
+   "subzones": [
+    {
+     "id": 1582,
+     "name": "Ironclad Cove",
+     "depth": 0
+    }
+   ],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "The Deadmines",
+     "ID": "11754",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11755",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "193",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11756",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "194",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11757",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "195",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11758",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "196",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11759",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "197",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11760",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "198",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11761",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "199",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11762",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "200",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11763",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "201",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11764",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "202",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11765",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "203",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11766",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "204",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11767",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "205",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11768",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "206",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11769",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "207",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11770",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "208",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11771",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "209",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11772",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "210",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11773",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "211",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11774",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "212",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11775",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "213",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Goblin Foundry",
+     "ID": "11776",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "214",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11778",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "216",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11779",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "217",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11780",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "218",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11781",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "219",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11783",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "221",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11786",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "224",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11787",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "225",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11788",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "226",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11789",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "227",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11790",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "228",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11795",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "233",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11798",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "236",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11801",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "239",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11802",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "240",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11803",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "241",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11804",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "242",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11805",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "243",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11806",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "244",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "11807",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "245",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Mast Room",
+     "ID": "11808",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "246",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "The Deadmines",
+     "ID": "11809",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11810",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "247",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11811",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "248",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11812",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "249",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11813",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "250",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11814",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "251",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11815",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "252",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11816",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "253",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11817",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "254",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "11818",
+     "WMOID": "501",
+     "NameSetID": "0",
+     "WMOGroupID": "255",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "26104",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "12510",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Ironclad Cove",
+     "ID": "26105",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "12511",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29089",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "172",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29090",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "173",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29091",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "174",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Defias Hideout",
+     "ID": "29092",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "175",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29093",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "178",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29094",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "181",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Defias Hideout",
+     "ID": "29095",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "182",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29096",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "183",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29097",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "184",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29098",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "185",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29099",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "187",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29100",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "188",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29101",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "189",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29102",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "190",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29103",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "191",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29104",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "192",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "The Deadmines",
+     "ID": "29105",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29106",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "155",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29107",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "156",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29108",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "157",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29109",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "158",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29110",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "159",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29111",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "160",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29112",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "162",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29113",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "163",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29114",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "164",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29115",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "165",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29116",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "166",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29117",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "167",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29118",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "168",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29119",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "169",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29120",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "170",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29121",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "171",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29122",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "186",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29123",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "161",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Defias Hideout",
+     "ID": "29124",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "176",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Defias Hideout",
+     "ID": "29125",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "177",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Defias Hideout",
+     "ID": "29126",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "179",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "Defias Hideout",
+     "ID": "29127",
+     "WMOID": "499",
+     "NameSetID": "1",
+     "WMOGroupID": "180",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "The Deadmines",
+     "ID": "29453",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29454",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "256",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29455",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "257",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29456",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "258",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29457",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "259",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29458",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "260",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29459",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "261",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "29460",
+     "WMOID": "814",
+     "NameSetID": "1",
+     "WMOGroupID": "262",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "55036",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "31384",
+     "AreaTableID": "1581"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "55103",
+     "WMOID": "500",
+     "NameSetID": "0",
+     "WMOGroupID": "31416",
+     "AreaTableID": "1581"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    }
+   ]
+  },
+  "dme": {
+   "area": 10026,
+   "name": null,
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": []
+  },
+  "dmn": {
+   "area": 10022,
+   "name": null,
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": []
+  },
+  "dmw": {
+   "area": 10023,
+   "name": null,
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": []
+  },
+  "exc": {
+   "area": 16732,
+   "name": "Excavation Site: Wetlands",
+   "subzones": [
+    {
+     "id": 16877,
+     "name": "Lost Marsh",
+     "depth": 0
+    },
+    {
+     "id": 16878,
+     "name": "Stalker's Thicket",
+     "depth": 0
+    },
+    {
+     "id": 16879,
+     "name": "Site of the Guardian",
+     "depth": 0
+    },
+    {
+     "id": 16880,
+     "name": "Lost Dig Site",
+     "depth": 0
+    }
+   ],
+   "wmo_areas": [],
+   "floors": []
+  },
+  "gnomer": {
+   "area": 721,
+   "name": "Gnomeregan",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "Gnomeregan",
+     "ID": "12799",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12800",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1075",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12801",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1076",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12802",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1077",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "12803",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1078",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "12804",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1079",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "12805",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1080",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12806",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1081",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12807",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1082",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "12808",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1083",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "12809",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1084",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "12811",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1086",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Loading Room",
+     "ID": "12812",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1087",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12813",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1088",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12814",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1089",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12815",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1090",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12816",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1091",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12817",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1092",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12818",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1093",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12819",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1094",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "12824",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1099",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12826",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1101",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12827",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1102",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "12828",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "1103",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Gnomeregan",
+     "ID": "20669",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "7195",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "20670",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "7196",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Train Depot",
+     "ID": "20671",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "7197",
+     "AreaTableID": "721"
+    },
+    {
+     "AreaName_lang": "Workshop Entrance",
+     "ID": "20672",
+     "WMOID": "1220",
+     "NameSetID": "0",
+     "WMOGroupID": "7198",
+     "AreaTableID": "721"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    },
+    {
+     "floor": 3,
+     "uimaps": []
+    },
+    {
+     "floor": 4,
+     "uimaps": []
+    }
+   ]
+  },
+  "hot": {
+   "area": 16919,
+   "name": "The Hall of Thanes",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": []
+  },
+  "mara": {
+   "area": 2100,
+   "name": "Maraudon",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "Maraudon",
+     "ID": "34087",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34089",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15855",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34090",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15856",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34091",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15857",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34092",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15858",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34093",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15859",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34094",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15860",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34095",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15861",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34098",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15864",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34100",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15866",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34109",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15875",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34110",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15876",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34111",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15877",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34112",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15878",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34113",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15879",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34114",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15880",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34115",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15881",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34116",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15882",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34119",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15885",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34120",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15886",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34121",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15887",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34122",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15888",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34123",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15889",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34124",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15890",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34125",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15891",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34126",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15892",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34127",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15893",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34128",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15894",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34129",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15895",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34130",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15896",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34131",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15897",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "34132",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "15898",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "35648",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "19030",
+     "AreaTableID": "2100"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "35649",
+     "WMOID": "1376",
+     "NameSetID": "1",
+     "WMOGroupID": "19031",
+     "AreaTableID": "2100"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    }
+   ]
+  },
+  "ony": {
+   "area": 2159,
+   "name": "Onyxia's Lair",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "Onyxia's Lair",
+     "ID": "33113",
+     "WMOID": "2332",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "2159"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33114",
+     "WMOID": "2332",
+     "NameSetID": "1",
+     "WMOGroupID": "13546",
+     "AreaTableID": "2159"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33115",
+     "WMOID": "2332",
+     "NameSetID": "1",
+     "WMOGroupID": "13547",
+     "AreaTableID": "2159"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33116",
+     "WMOID": "2332",
+     "NameSetID": "1",
+     "WMOGroupID": "13548",
+     "AreaTableID": "2159"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33117",
+     "WMOID": "2332",
+     "NameSetID": "1",
+     "WMOGroupID": "13549",
+     "AreaTableID": "2159"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33118",
+     "WMOID": "2332",
+     "NameSetID": "1",
+     "WMOGroupID": "13550",
+     "AreaTableID": "2159"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  },
+  "rfc": {
+   "area": 2437,
+   "name": "Ragefire Chasm",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  },
+  "rfd": {
+   "area": 722,
+   "name": "Razorfen Downs",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "Razorfen Downs",
+     "ID": "14053",
+     "WMOID": "1055",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14054",
+     "WMOID": "1055",
+     "NameSetID": "0",
+     "WMOGroupID": "2217",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14055",
+     "WMOID": "1055",
+     "NameSetID": "0",
+     "WMOGroupID": "2218",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14065",
+     "WMOID": "1055",
+     "NameSetID": "0",
+     "WMOGroupID": "2228",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14067",
+     "WMOID": "1055",
+     "NameSetID": "0",
+     "WMOGroupID": "2230",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15883",
+     "WMOID": "1055",
+     "NameSetID": "0",
+     "WMOGroupID": "3877",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "Razorfen Downs",
+     "ID": "33918",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "-1",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33919",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5911",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "Spiral of Thorns",
+     "ID": "33920",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5912",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33921",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5913",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "Spiral of Thorns",
+     "ID": "33922",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5914",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "The Bone Pile",
+     "ID": "33923",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5915",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "The Caller's Chamber",
+     "ID": "33924",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5916",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "The Murder Pens",
+     "ID": "33925",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5917",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "The Murder Pens",
+     "ID": "33926",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5918",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33927",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5919",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33928",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5920",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33929",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5921",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33930",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5922",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "Spiral of Thorns",
+     "ID": "33931",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5923",
+     "AreaTableID": "722"
+    },
+    {
+     "AreaName_lang": "Spiral of Thorns",
+     "ID": "33932",
+     "WMOID": "1356",
+     "NameSetID": "2",
+     "WMOGroupID": "5924",
+     "AreaTableID": "722"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  },
+  "rfk": {
+   "area": 491,
+   "name": "Razorfen Kraul",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "",
+     "ID": "14068",
+     "WMOID": "1115",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14069",
+     "WMOID": "1115",
+     "NameSetID": "0",
+     "WMOGroupID": "2231",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14070",
+     "WMOID": "1115",
+     "NameSetID": "0",
+     "WMOGroupID": "2232",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14071",
+     "WMOID": "1115",
+     "NameSetID": "0",
+     "WMOGroupID": "2233",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "14072",
+     "WMOID": "1115",
+     "NameSetID": "0",
+     "WMOGroupID": "2234",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "Razorfen Kraul",
+     "ID": "33100",
+     "WMOID": "1115",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33101",
+     "WMOID": "1115",
+     "NameSetID": "1",
+     "WMOGroupID": "2231",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33102",
+     "WMOID": "1115",
+     "NameSetID": "1",
+     "WMOGroupID": "2232",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33103",
+     "WMOID": "1115",
+     "NameSetID": "1",
+     "WMOGroupID": "2233",
+     "AreaTableID": "491"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33104",
+     "WMOID": "1115",
+     "NameSetID": "1",
+     "WMOGroupID": "2234",
+     "AreaTableID": "491"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  },
+  "rol": {
+   "area": 16611,
+   "name": "Ruins of Lordaeron",
+   "subzones": [
+    {
+     "id": 16612,
+     "name": "King's Alley",
+     "depth": 0
+    },
+    {
+     "id": 16614,
+     "name": "Lordaeron Graveyard",
+     "depth": 0
+    },
+    {
+     "id": 16615,
+     "name": "Lordamere Overlook",
+     "depth": 0
+    },
+    {
+     "id": 16617,
+     "name": "Market Street",
+     "depth": 0
+    }
+   ],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145795",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "-1",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "145796",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3062",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145797",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3064",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145798",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3065",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145799",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3066",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145800",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3067",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145801",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3068",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145802",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3069",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145803",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3070",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145804",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3071",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145805",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3072",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145806",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3073",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145807",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3074",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145808",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3075",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145809",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3076",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145810",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3077",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145811",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3078",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145812",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3079",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145813",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3080",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145814",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3081",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145815",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3082",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145816",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3083",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145817",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3084",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145818",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3085",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145819",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3086",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145820",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3087",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145821",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3088",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145822",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3089",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145823",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3090",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145824",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3091",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145825",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3092",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145826",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3093",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145827",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3094",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145828",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3095",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145829",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3096",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145830",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3097",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145831",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3098",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145832",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3099",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145833",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3100",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145834",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3101",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145835",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3102",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145836",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3103",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145837",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3104",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145838",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3105",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145839",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3106",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145840",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3107",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145841",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3108",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145842",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3109",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145843",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3110",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145844",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3111",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145845",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3112",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145846",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3113",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145847",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3114",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145848",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3115",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145849",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3116",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145850",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3117",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145851",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3118",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145852",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3119",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145853",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3120",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145854",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3121",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145855",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3122",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145856",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3123",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145857",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3124",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145858",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3125",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145859",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3126",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145860",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3127",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145861",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3129",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145862",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3130",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145863",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3131",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145864",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3132",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145865",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3133",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145866",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3134",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145867",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3135",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145868",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3136",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145869",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3137",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145870",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3138",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145871",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3139",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145872",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3140",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145873",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3141",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145874",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3142",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145875",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3143",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145876",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3144",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145877",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3145",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145878",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3146",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145879",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3147",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145880",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3148",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145881",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3149",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145882",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3150",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145883",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3151",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145884",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3152",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145885",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3153",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145886",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3154",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145887",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3155",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145888",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3156",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145889",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3157",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145890",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3158",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145891",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3159",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145892",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3160",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145893",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3161",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "145894",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3162",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145895",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3163",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145896",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3164",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145897",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3165",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145898",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3166",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145899",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3167",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145900",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3168",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145901",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3169",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145902",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3170",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145903",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3171",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145904",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3172",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145905",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3173",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145906",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3174",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "145907",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3175",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "145908",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3176",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "145909",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3177",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "145910",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3178",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145911",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3179",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145912",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3180",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145913",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3181",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145914",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3182",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145915",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3183",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145916",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3184",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145917",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3185",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145918",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3186",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145919",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3187",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145920",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3188",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145921",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3189",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145922",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3190",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145923",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3191",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145924",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3192",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145925",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3193",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145926",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3194",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "145927",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3199",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "145928",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3200",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "145929",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3201",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "145930",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3202",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "145931",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3203",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "145932",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3204",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "145933",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3205",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145934",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3206",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145935",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3207",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145936",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3208",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145937",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3209",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145938",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3210",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145939",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3211",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145940",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3212",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145941",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3213",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "145942",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3218",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145943",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3219",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145944",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3220",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "145945",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3221",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "145946",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3222",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "145947",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3223",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "145948",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3224",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "145949",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3225",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145950",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3226",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145951",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3227",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "145952",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "3228",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145953",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6589",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145954",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6590",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145955",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6591",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145956",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6592",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145957",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6593",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145958",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6594",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145959",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6595",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "145960",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6596",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145961",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6597",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "145962",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6598",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145963",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6599",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145964",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6600",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145965",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6601",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145966",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6602",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145967",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6603",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145968",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6604",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145969",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6605",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145970",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6606",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "145971",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6607",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "145972",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6608",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145973",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6609",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145974",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6610",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145975",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6611",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145976",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6612",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145977",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6613",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145978",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6614",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145979",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6615",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145980",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6616",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "145981",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6617",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "145982",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6618",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145983",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6619",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145984",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6620",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145985",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6621",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145986",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6622",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145987",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6623",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145988",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6624",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145989",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6625",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145990",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6626",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "145991",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6627",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "145992",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "6628",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145993",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7727",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145994",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7728",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145995",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7729",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145996",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7730",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145997",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7731",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145998",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7732",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "145999",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7733",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146000",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7734",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146001",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "7735",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146002",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26322",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146003",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26323",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146004",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26324",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146005",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26340",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146006",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26352",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146007",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26353",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146008",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26357",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146009",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26358",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146010",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "26359",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146011",
+     "WMOID": "1150",
+     "NameSetID": "3",
+     "WMOGroupID": "31123",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146218",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "-1",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "146219",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82417",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146220",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82418",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146221",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82419",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146222",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82420",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146223",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82421",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146224",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82422",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146225",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82423",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146226",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82424",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146227",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82425",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146228",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82426",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146229",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82427",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146230",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82428",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146231",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82429",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146232",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82430",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146233",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82431",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146234",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82432",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146235",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82433",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146236",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82434",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146237",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82435",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146238",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82436",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146239",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82437",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146240",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82438",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146241",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82439",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146242",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82440",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146243",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82441",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146244",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82442",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146245",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82443",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146246",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82444",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146247",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82445",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146248",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82446",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146249",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82447",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146250",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82448",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146251",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82449",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146252",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82450",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146253",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82451",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146254",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82452",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146255",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82453",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146256",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82454",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146257",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82455",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146258",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82456",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146259",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82457",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146260",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82458",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146261",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82459",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146262",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82460",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146263",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82461",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146264",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82462",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146265",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82463",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146266",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82464",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146267",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82465",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146268",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82466",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146269",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82467",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146270",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82468",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146271",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82469",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146272",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82470",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146273",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82471",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146274",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82472",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146275",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82473",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146276",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82474",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146277",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82475",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146278",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82476",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146279",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82477",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146280",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82478",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146281",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82479",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146282",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82480",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146283",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82481",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146284",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82482",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146285",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82483",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146286",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82484",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146287",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82485",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146288",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82486",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146289",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82487",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146290",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82488",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146291",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82489",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146292",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82490",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146293",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82491",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146294",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82492",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146295",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82493",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146296",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82494",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Sewers",
+     "ID": "146297",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82495",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146298",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82496",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146299",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82497",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146300",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82498",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146301",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82499",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146302",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82500",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146303",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82501",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146304",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82502",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146305",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82503",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146306",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82504",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146307",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82505",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146308",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82506",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146309",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82507",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "146310",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82508",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "146311",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82509",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146312",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82510",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146313",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82511",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146314",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82512",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146315",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82513",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146316",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82514",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "146317",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82515",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "146318",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82516",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "146319",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82517",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "146320",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82518",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "146321",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82519",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "146322",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82520",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Royal Quarter",
+     "ID": "146323",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82521",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146324",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82522",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146325",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82523",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146326",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82524",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146327",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82525",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146328",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82526",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146329",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82527",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146330",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82528",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "146331",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82529",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "146332",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82530",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "146333",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82531",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146334",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82532",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146335",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82533",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Ruins of Lordaeron",
+     "ID": "146336",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82534",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146337",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82535",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146338",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82536",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146339",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82537",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146340",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82538",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146341",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82539",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146342",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82540",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146343",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82541",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146344",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82542",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146345",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82543",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146346",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82544",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146347",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82545",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "146348",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82546",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "146349",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82547",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146350",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82548",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146351",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82549",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146352",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82550",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146353",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82551",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146354",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82552",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146355",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82553",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146356",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82554",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146357",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82555",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146358",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82556",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "146359",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82557",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "146360",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82558",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "146361",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82559",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146362",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82560",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146363",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82561",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146364",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82562",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146365",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82563",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146366",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82564",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146367",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82565",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146368",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82566",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146369",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82567",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146370",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82568",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "War Quarter",
+     "ID": "146371",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82569",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146372",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82570",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146373",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82571",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146374",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82572",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146375",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82573",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146376",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82574",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146377",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82575",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146378",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82576",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146379",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82577",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "146380",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82578",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "146381",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82579",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146382",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82580",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146383",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82581",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146384",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82582",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146385",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82583",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146386",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82584",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146387",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82585",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146388",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82586",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146389",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82587",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Rogues' Quarter",
+     "ID": "146390",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82588",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146391",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82589",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146392",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82590",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146393",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82591",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146394",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82592",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146395",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82593",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146396",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82594",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146397",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82595",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146398",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82596",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146399",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82597",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Magic Quarter",
+     "ID": "146400",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82598",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146401",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82599",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146402",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82600",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146403",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82601",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146404",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82602",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146405",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82603",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146406",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82604",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146407",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82605",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146408",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82606",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146409",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82607",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Canals",
+     "ID": "146410",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82608",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146411",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82609",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146412",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82610",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146413",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82611",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146414",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82612",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146415",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82613",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146416",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82614",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146417",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82615",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146418",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82616",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146419",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82617",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "The Apothecarium",
+     "ID": "146420",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82618",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146421",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82619",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146422",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82620",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146423",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82621",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "Trade Quarter",
+     "ID": "146424",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82622",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146425",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82623",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146426",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82624",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146427",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82625",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146428",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82626",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146429",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82627",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146430",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82628",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146431",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82629",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146432",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82630",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146433",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82631",
+     "AreaTableID": "16611"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "146434",
+     "WMOID": "20736",
+     "NameSetID": "2",
+     "WMOGroupID": "82632",
+     "AreaTableID": "16611"
+    }
+   ],
+   "floors": []
+  },
+  "scholo": {
+   "area": 2057,
+   "name": "Scholomance",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "",
+     "ID": "32548",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17870",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "Barov Family Vault",
+     "ID": "32549",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17471",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "Scholomance",
+     "ID": "32550",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32555",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17294",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "Hall of the Damned",
+     "ID": "32565",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17304",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "Hall of Secrets",
+     "ID": "32566",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17305",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "The Coven ",
+     "ID": "32567",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17306",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "The Shadow Vault",
+     "ID": "32568",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17307",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "Vault of the Ravenian",
+     "ID": "32569",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17308",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32572",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17311",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "The Reliquary",
+     "ID": "32573",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17312",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "Chamber of Summoning",
+     "ID": "32574",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17313",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32575",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17314",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "The Viewing Room",
+     "ID": "32576",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17315",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "The Great Ossuary",
+     "ID": "32577",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17316",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32578",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17317",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "The Laboratory",
+     "ID": "32579",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17318",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32580",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17319",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "Headmaster's Study",
+     "ID": "32581",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17320",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32582",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17321",
+     "AreaTableID": "2057"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32584",
+     "WMOID": "3293",
+     "NameSetID": "1",
+     "WMOGroupID": "17323",
+     "AreaTableID": "2057"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    },
+    {
+     "floor": 3,
+     "uimaps": []
+    },
+    {
+     "floor": 4,
+     "uimaps": []
+    }
+   ]
+  },
+  "sfk": {
+   "area": 209,
+   "name": "Shadowfang Keep",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "Shadowfang Keep",
+     "ID": "13071",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13072",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1338",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13073",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1339",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13074",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1340",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13075",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1341",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13077",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1343",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13078",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1344",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13079",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1345",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13080",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1346",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13081",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1347",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13082",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1348",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13083",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1349",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13084",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1350",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13085",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1351",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13086",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1352",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13087",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1353",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13088",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1354",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13089",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1355",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13090",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1356",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13091",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1357",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13092",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1358",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13093",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1359",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13094",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1360",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13095",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1361",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13096",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1362",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13097",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1363",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13098",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1364",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13099",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1365",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13100",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1366",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13101",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1367",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13102",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1368",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13103",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1369",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13104",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1370",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13105",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1371",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13106",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1372",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13107",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1373",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13108",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1374",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13109",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1375",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13110",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1376",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13111",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1377",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13113",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1379",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13114",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1380",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13115",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1381",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13116",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1382",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13117",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1383",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13118",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1384",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13119",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1385",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13120",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1386",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13121",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1387",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13122",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1388",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13123",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1389",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13124",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1390",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13125",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1391",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13126",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1392",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13127",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1393",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13128",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1394",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13129",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1395",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13130",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1396",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13131",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1397",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13132",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1398",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13133",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1399",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13134",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1400",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13135",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1401",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13136",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1402",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13137",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1403",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13138",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1404",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13139",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1405",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13140",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1406",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13141",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1407",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13142",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1408",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13143",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1409",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13144",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1410",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13145",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1411",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "13146",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "1412",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17576",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "5542",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17577",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "5543",
+     "AreaTableID": "209"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17578",
+     "WMOID": "689",
+     "NameSetID": "0",
+     "WMOGroupID": "5544",
+     "AreaTableID": "209"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    },
+    {
+     "floor": 3,
+     "uimaps": []
+    },
+    {
+     "floor": 4,
+     "uimaps": []
+    },
+    {
+     "floor": 5,
+     "uimaps": []
+    },
+    {
+     "floor": 6,
+     "uimaps": []
+    },
+    {
+     "floor": 7,
+     "uimaps": []
+    }
+   ]
+  },
+  "sm": {
+   "area": 796,
+   "name": "Scarlet Monastery",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    },
+    {
+     "floor": 3,
+     "uimaps": []
+    },
+    {
+     "floor": 4,
+     "uimaps": []
+    }
+   ]
+  },
+  "st": {
+   "area": 1477,
+   "name": "The Temple of Atal'Hakkar",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "The Temple of Atal'Hakkar",
+     "ID": "17141",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17142",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5127",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Chamber of Blood",
+     "ID": "17144",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5129",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Broken Hall",
+     "ID": "17145",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5130",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17146",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5131",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17147",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5132",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17149",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5134",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17150",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5135",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17151",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5136",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17152",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5137",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17153",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5138",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17154",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5139",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Butchery",
+     "ID": "17155",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5140",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Ritual",
+     "ID": "17156",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5141",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17157",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5142",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17158",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5143",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17159",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5144",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17160",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5145",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17161",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5146",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17162",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5147",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17163",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5148",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Faces",
+     "ID": "17164",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5149",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17165",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5150",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17166",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5151",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17167",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5152",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17168",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5153",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17169",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5154",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "17170",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5155",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "17171",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5156",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17172",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5157",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17173",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5158",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17174",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5159",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17175",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5160",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Den of the Unholy",
+     "ID": "17176",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5161",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "17177",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5162",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "17178",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "5163",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Temple of Atal'Hakkar",
+     "ID": "17205",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17206",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5190",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17207",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5191",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17208",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5192",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17209",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5193",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17210",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5194",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17211",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5195",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17212",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5196",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17213",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5197",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17214",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5198",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17215",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5199",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17216",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5200",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17218",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5202",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17219",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5203",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17220",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5204",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17221",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5205",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Sanctum of the Fallen God",
+     "ID": "17222",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5206",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17223",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5207",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17224",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5208",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Lair of the Chosen",
+     "ID": "17225",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5209",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17226",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5210",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Pit of Sacrifice",
+     "ID": "17227",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5211",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17228",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5212",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17229",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5213",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17230",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5214",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17231",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5215",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17232",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5216",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17233",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5217",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17234",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5218",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17237",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5221",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17238",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5222",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17239",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5223",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17240",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5224",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17241",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5225",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17242",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5226",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17243",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5227",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17244",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5228",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17245",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5229",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17246",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5230",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17247",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5231",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17248",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5232",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17249",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5233",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17250",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5234",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17251",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5235",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17252",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5236",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17253",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5237",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17254",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5238",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17255",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5239",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17256",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5240",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17257",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5241",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17258",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5242",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17259",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5243",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17260",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5244",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17261",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5245",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17262",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5246",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17263",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5247",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17264",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5248",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17265",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5249",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17266",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5250",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17267",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5251",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17268",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5252",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17269",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5253",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17270",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5254",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17271",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5255",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17272",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5256",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17273",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5257",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of the Cursed",
+     "ID": "17274",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5258",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17275",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5259",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Chamber of the Dreamer",
+     "ID": "17276",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5260",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Pit of Refuse",
+     "ID": "17277",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5261",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17279",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5263",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17280",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5264",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17281",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5265",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17282",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5266",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17283",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5267",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17284",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5268",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17285",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5269",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17286",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5270",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17287",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5271",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17288",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5272",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17289",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5273",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17290",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5274",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17291",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5275",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17292",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5276",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17293",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5277",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17294",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5278",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17295",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5279",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17296",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5280",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17297",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5281",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17298",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5282",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17299",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5283",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17300",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5284",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17301",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5285",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17302",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5286",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17303",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5287",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17304",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5288",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17305",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5289",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17306",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5290",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17307",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5291",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17308",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5292",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17309",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5293",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17310",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5294",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17311",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5295",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17312",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5296",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17313",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5297",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17314",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5298",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17315",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5299",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17316",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5300",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17317",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5301",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17318",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5302",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17319",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5303",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17320",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5304",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17321",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5305",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17322",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5306",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17323",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5307",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17324",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5308",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17325",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5309",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17326",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5310",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Serpents",
+     "ID": "17327",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5311",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17328",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5312",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17329",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5313",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17330",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5314",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "17331",
+     "WMOID": "1330",
+     "NameSetID": "0",
+     "WMOGroupID": "5315",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "18624",
+     "WMOID": "1329",
+     "NameSetID": "0",
+     "WMOGroupID": "6173",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Temple of Atal'Hakkar",
+     "ID": "88370",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "-1",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88371",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5127",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Chamber of Blood",
+     "ID": "88372",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5129",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Broken Hall",
+     "ID": "88373",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5130",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88374",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5131",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88375",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5132",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88376",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5134",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88377",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5135",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88378",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5136",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88379",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5137",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88380",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5138",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88381",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5139",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "The Butchery",
+     "ID": "88382",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5140",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Ritual",
+     "ID": "88383",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5141",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88384",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5142",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88385",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5143",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88386",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5144",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88387",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5145",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88388",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5146",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88389",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5147",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88390",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5148",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Masks",
+     "ID": "88391",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5149",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88392",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5150",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88393",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5151",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88394",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5152",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88395",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5153",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88396",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5154",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "88397",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5155",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "88398",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5156",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88399",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5157",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88400",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5158",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88401",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5159",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88402",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5160",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Den of the Caller",
+     "ID": "88403",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5161",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "88404",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5162",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "Hall of Bones",
+     "ID": "88405",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "5163",
+     "AreaTableID": "1477"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "88406",
+     "WMOID": "1329",
+     "NameSetID": "2",
+     "WMOGroupID": "6173",
+     "AreaTableID": "1477"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  },
+  "stocks": {
+   "area": 717,
+   "name": "The Stockade",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  },
+  "strat": {
+   "area": 2017,
+   "name": "Stratholme",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "Stratholme",
+     "ID": "32375",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Market Row",
+     "ID": "32376",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17737",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Market Row",
+     "ID": "32377",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17738",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32378",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17739",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32379",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17740",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Festival Lane",
+     "ID": "32380",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17741",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Festival Lane",
+     "ID": "32381",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17742",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Festival Lane",
+     "ID": "32382",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17743",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32383",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17744",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "King's Square",
+     "ID": "32384",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17745",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32385",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17746",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32386",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17747",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32387",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17748",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32388",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17749",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32389",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17750",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32390",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17751",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32391",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17752",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32392",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17753",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32393",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17754",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32394",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17755",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32395",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17756",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32396",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17757",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32397",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17758",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32398",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17759",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32399",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17760",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Slaughter Square",
+     "ID": "32400",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17761",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32401",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17762",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Gauntlet",
+     "ID": "32402",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17763",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Gauntlet",
+     "ID": "32403",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17764",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Gauntlet",
+     "ID": "32404",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17765",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Gauntlet",
+     "ID": "32405",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17766",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Gauntlet",
+     "ID": "32406",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17767",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Gauntlet",
+     "ID": "32407",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17768",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32408",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17769",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32409",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17770",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32410",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17771",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32411",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17772",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32412",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17773",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32413",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17774",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32414",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17775",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32415",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17776",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32416",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17777",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32417",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17778",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Crusaders' Square",
+     "ID": "32418",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17779",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32419",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17780",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Market Row",
+     "ID": "32420",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17781",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Alonsus Chapel",
+     "ID": "32421",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17782",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32422",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17783",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32423",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17784",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32424",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17785",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32425",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17786",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32426",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17787",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32427",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17788",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32428",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17789",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32429",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17790",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Hall of Lights",
+     "ID": "32430",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17791",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32431",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17792",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32432",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17793",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32433",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17794",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32434",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17795",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "King's Square",
+     "ID": "32439",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17800",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32440",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17801",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Elders' Square",
+     "ID": "32441",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17802",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32442",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17803",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32445",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17806",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32446",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17807",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "32447",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17808",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Slaughter House",
+     "ID": "32451",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17812",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Slaughter House",
+     "ID": "32452",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17813",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Slaughter House",
+     "ID": "32453",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17814",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Slaughter House",
+     "ID": "32454",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17815",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Slaughter House",
+     "ID": "32455",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17816",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Hoard",
+     "ID": "32456",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17817",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32457",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17818",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32458",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17819",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32459",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17820",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32460",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17821",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32461",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17822",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32462",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17823",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32463",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17824",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32464",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17825",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Scarlet Bastion",
+     "ID": "32465",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17826",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "The Crimson Throne",
+     "ID": "32466",
+     "WMOID": "3454",
+     "NameSetID": "1",
+     "WMOGroupID": "17827",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "Stratholme",
+     "ID": "33621",
+     "WMOID": "3453",
+     "NameSetID": "1",
+     "WMOGroupID": "-1",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "King's Square",
+     "ID": "33622",
+     "WMOID": "3453",
+     "NameSetID": "1",
+     "WMOGroupID": "17732",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33624",
+     "WMOID": "3453",
+     "NameSetID": "1",
+     "WMOGroupID": "17734",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "33625",
+     "WMOID": "3453",
+     "NameSetID": "1",
+     "WMOGroupID": "17735",
+     "AreaTableID": "2017"
+    },
+    {
+     "AreaName_lang": "King's Square",
+     "ID": "33626",
+     "WMOID": "3453",
+     "NameSetID": "1",
+     "WMOGroupID": "17736",
+     "AreaTableID": "2017"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    }
+   ]
+  },
+  "ulda": {
+   "area": 1337,
+   "name": "Uldaman",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    },
+    {
+     "floor": 2,
+     "uimaps": []
+    }
+   ]
+  },
+  "wc": {
+   "area": 718,
+   "name": "Wailing Caverns",
+   "subzones": [],
+   "wmo_areas": [
+    {
+     "AreaName_lang": "The Wailing Caverns",
+     "ID": "15270",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "-1",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15271",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3314",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15272",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3315",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15273",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3316",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15274",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3317",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15275",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3318",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15276",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3319",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15277",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3320",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15278",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3321",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15279",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3322",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15280",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3323",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15281",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3324",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15282",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3325",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15283",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3326",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "",
+     "ID": "15284",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3327",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "Cavern of Mists",
+     "ID": "15285",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3328",
+     "AreaTableID": "718"
+    },
+    {
+     "AreaName_lang": "Cavern of Mists",
+     "ID": "15287",
+     "WMOID": "1069",
+     "NameSetID": "0",
+     "WMOGroupID": "3330",
+     "AreaTableID": "718"
+    }
+   ],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  },
+  "zf": {
+   "area": 1176,
+   "name": "Zul'Farrak",
+   "subzones": [],
+   "wmo_areas": [],
+   "floors": [
+    {
+     "floor": 1,
+     "uimaps": []
+    }
+   ]
+  }
+ }
+}
