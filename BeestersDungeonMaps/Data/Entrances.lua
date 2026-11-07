@@ -60,3 +60,14 @@ ns.Entrances = {
     [1455] = { { 0.2760, 0.4780, { "hot" } } },
     [1458] = { { 0.7250, 0.1130, { "rol" } } },
 }
+
+-- Not in the data yet: { name, kind, levels, zone name, size }
+ns.ComingSoon = {
+    { name = "The Drowned City", kind = "dungeon", levels = "35–40", zone = "Stranglethorn Vale" },
+    { name = "Krol'dok Stronghold", kind = "dungeon", levels = "40–45", zone = "Riverglades" },
+    { name = "Alcaz Prison", kind = "dungeon", levels = "48–53", zone = "Dustwallow Marsh" },
+    { name = "Blackmaw Hold", kind = "dungeon", levels = "55–60", zone = "Azshara" },
+    { name = "Shaper's Terrace", kind = "dungeon", levels = "58–60", zone = "Un'Goro Crater" },
+    { name = "Barrow Deeps", kind = "raid", levels = "60", zone = "Mount Hyjal", size = "10 players" },
+    { name = "Hyjal Summit", kind = "raid", levels = "60", zone = "Mount Hyjal", size = "20 players" },
+}

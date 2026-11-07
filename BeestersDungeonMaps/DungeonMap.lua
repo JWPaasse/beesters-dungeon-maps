@@ -118,6 +118,45 @@ local function DefaultFloor(key)
     return best
 end
 
+-- Is the addon's data for this instance still missing a real part? Counts the regular bosses
+-- (rares left out): a "work in progress" instance has no map, or more than a quarter of them
+-- without a place on the map or without loot. Returns nil when the data is complete enough.
+local WIP_SHARE = 0.75
+function ns:InstanceStatus(key)
+    if not (ns.DungeonMaps and ns.DungeonMaps[key]) then
+        return { noMap = true }
+    end
+    local total, placed, withLoot = 0, 0, 0
+    for _, boss in ipairs(BossesWithPositions(key)) do
+        if boss.note ~= "Rare" then
+            total = total + 1
+            if boss.x then placed = placed + 1 end
+            local loot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID]
+            if loot and #loot > 0 then withLoot = withLoot + 1 end
+        end
+    end
+    if total == 0 or placed < total * WIP_SHARE or withLoot < total * WIP_SHARE then
+        return { total = total, placed = placed, withLoot = withLoot }
+    end
+end
+
+local WIP_COLOR = { r = 1, g = 0.5, b = 0.25 } -- the game's orange for warnings
+ns.WIP_COLOR = WIP_COLOR
+
+local function ShowStatusTooltip(owner, status)
+    GameTooltip:SetOwner(owner, "ANCHOR_BOTTOMLEFT")
+    GameTooltip:SetText("Work in progress", WIP_COLOR.r, WIP_COLOR.g, WIP_COLOR.b)
+    if status.noMap then
+        GameTooltip:AddLine("No map for this instance yet.", 1, 1, 1, true)
+    else
+        GameTooltip:AddLine(("Boss positions: %d of %d placed"):format(status.placed, status.total), 1, 1, 1)
+        GameTooltip:AddLine(("Loot: %d of %d bosses"):format(status.withLoot, status.total), 1, 1, 1)
+    end
+    GameTooltip:AddLine("The data for this instance isn't complete yet. Found a mistake? Let us know on CurseForge.",
+        NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, true)
+    GameTooltip:Show()
+end
+
 ----------------------------------------------------------------------
 -- Boss tooltip (name, place in the dungeon, loot)
 ----------------------------------------------------------------------
@@ -806,6 +845,11 @@ function ShowFloor(index)
             view.FloorDropdown:SetText(FloorName(current.key, index))
         end
     end
+    if view.StatusBadge then
+        local status = ns:InstanceStatus(current.key)
+        view.StatusBadge.status = status or false
+        view.StatusBadge:SetShown(status ~= nil)
+    end
     Layout()
 end
 
@@ -888,6 +932,34 @@ local function CreateView()
         end)
     end
     view.FloorDropdown = dropdown
+
+    -- "Work in progress" tag, top right, for instances whose data isn't complete yet.
+    local badge = CreateFrame("Button", nil, view, BackdropTemplateMixin and "BackdropTemplate")
+    badge:SetPoint("TOPRIGHT", -12, -12)
+    badge:SetHeight(24)
+    if badge.SetBackdrop then
+        badge:SetBackdrop({
+            bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+            edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+            tile = true, tileSize = 16, edgeSize = 12,
+            insets = { left = 3, right = 3, top = 3, bottom = 3 },
+        })
+        badge:SetBackdropColor(0, 0, 0, 0.8)
+        badge:SetBackdropBorderColor(WIP_COLOR.r, WIP_COLOR.g, WIP_COLOR.b, 0.9)
+    end
+    badge.Icon = badge:CreateTexture(nil, "ARTWORK")
+    badge.Icon:SetSize(14, 14)
+    badge.Icon:SetPoint("LEFT", 7, 0)
+    badge.Icon:SetTexture("Interface\\DialogFrame\\UI-Dialog-Icon-AlertNew")
+    badge.Text = badge:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
+    badge.Text:SetPoint("LEFT", badge.Icon, "RIGHT", 4, 0)
+    badge.Text:SetTextColor(WIP_COLOR.r, WIP_COLOR.g, WIP_COLOR.b)
+    badge.Text:SetText("Work in progress")
+    badge:SetWidth(badge.Text:GetStringWidth() + 36)
+    badge:SetScript("OnEnter", function(self) if self.status then ShowStatusTooltip(self, self.status) end end)
+    badge:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    badge:Hide()
+    view.StatusBadge = badge
 end
 
 ----------------------------------------------------------------------
@@ -1027,6 +1099,9 @@ local function DungeonMenuList(mapID)
             })
         end
     end
+    for _, instance in ipairs(ns:ComingSoonOnMap(mapID)) do
+        table.insert(list, { text = instance.name .. "  |cff9d9d9d(coming soon)|r", soon = instance })
+    end
     return list
 end
 
@@ -1056,7 +1131,23 @@ local function GetCrumb(navBar)
     if type(arrow) == "table" and arrow.SetupMenu then
         arrow:SetupMenu(function(_, rootDescription)
             for _, entry in ipairs(crumb.listFunc and crumb.listFunc() or {}) do
-                rootDescription:CreateButton(entry.text, function() entry.func(nil, entry.id) end)
+                if entry.soon then
+                    -- Greyed out: known, but the addon has no data for it yet.
+                    local soon = entry.soon
+                    local button = rootDescription:CreateButton(entry.text, function() end)
+                    if button.SetEnabled then button:SetEnabled(false) end
+                    if button.SetTooltip then
+                        button:SetTooltip(function(tooltip)
+                            GameTooltip_SetTitle(tooltip, soon.name)
+                            local kind = soon.kind == "raid" and (RAID or "Raid") or (LFG_TYPE_DUNGEON or "Dungeon")
+                            GameTooltip_AddNormalLine(tooltip, kind .. " · " .. (LEVEL or "Level") .. " " .. soon.levels
+                                .. (soon.size and (" · " .. soon.size) or ""))
+                            GameTooltip_AddHighlightLine(tooltip, "New in WoW Forever. Its map, bosses and loot aren't in the addon yet.", true)
+                        end)
+                    end
+                else
+                    rootDescription:CreateButton(entry.text, function() entry.func(nil, entry.id) end)
+                end
             end
         end)
         arrow:Show()

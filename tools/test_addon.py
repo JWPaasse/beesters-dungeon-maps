@@ -107,6 +107,7 @@ local maps = {
     [1420] = { name = "Tirisfal Glades", mapType = 3, parentMapID = 1415 },
     -- As in the real client: cities hang under the continent, not under their zone.
     [1458] = { name = "Undercity", mapType = 3, parentMapID = 1415 },
+    [1446] = { name = "Un'Goro Crater", mapType = 3, parentMapID = 1414 },
 }
 setmetatable(maps, { __index = function(_, id) return { name = "Zone " .. id, mapType = 3, parentMapID = 0 } end })
 C_Map = {
@@ -114,6 +115,13 @@ C_Map = {
     GetMapRectOnMap = function(child, parent) return 0.4, 0.6, 0.3, 0.5 end,
     GetBestMapForUnit = function() return 1413 end,
     GetMapArtLayers = function(id) if id == 279 then return { {} } end return nil end,
+    GetMapChildrenInfo = function(id, mapType, all)
+        local list = {}
+        for mapID, info in pairs(maps) do
+            if info.mapType == mapType then table.insert(list, { mapID = mapID, name = info.name }) end
+        end
+        return list
+    end,
 }
 function IsInInstance() return false, "none" end
 function InCombatLockdown() return inCombat == true end
@@ -552,6 +560,21 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         pinFrame:OnClick("LeftButton")
         check("clicking an entrance pin opens that dungeon", ns:CurrentDungeonKey() == "wc")
         ns:CloseDungeonMap(true)
+
+        -- Work in progress: complete instances get no badge, thin ones do.
+        check("a complete instance isn't marked work in progress", ns:InstanceStatus("dal") == nil)
+        local rfd = ns:InstanceStatus("rfd")
+        check("an instance with missing bosses is marked work in progress", rfd ~= nil and rfd.placed < rfd.total)
+        check("an instance without a map is marked work in progress", (ns:InstanceStatus("nomap") or {}).noMap == true)
+        ns:OpenDungeonMap("rfd")
+        check("the work-in-progress badge shows on its map", ns:IsDungeonMapOpen() and BeestersDungeonMapsView.StatusBadge:IsShown())
+        ns:OpenDungeonMap("dal")
+        check("the badge stays hidden on a complete map", not BeestersDungeonMapsView.StatusBadge:IsShown())
+        ns:CloseDungeonMap(true)
+        -- Coming soon: instances without data appear greyed out in their zone's Dungeons menu.
+        local soon = ns:ComingSoonOnMap(1446)
+        check("a coming-soon dungeon is found by its zone name", #soon == 1 and soon[1].name == "Shaper's Terrace")
+        check("coming-soon dungeons show on the continent too", #ns:ComingSoonOnMap(1414) >= 1)
 
         SlashCmdList.BEESTERSDUNGEONMAPS("status")
         SlashCmdList.BEESTERSDUNGEONMAPS("probe")

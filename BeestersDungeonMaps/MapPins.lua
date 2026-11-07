@@ -158,6 +158,10 @@ function PinMixin:OnMouseEnter()
             if instance.isNew then
                 GameTooltip:AddLine("New in WoW Forever", 0.31, 0.82, 0.88)
             end
+            if ns.InstanceStatus and ns.DungeonMaps and ns.DungeonMaps[key] and ns:InstanceStatus(key) then
+                local c = ns.WIP_COLOR
+                GameTooltip:AddLine("Work in progress: some data missing", c.r, c.g, c.b)
+            end
             if instance.note then
                 GameTooltip:AddLine(instance.note, 0.8, 0.8, 0.8, true)
             end
@@ -329,6 +333,29 @@ function ns:DungeonsOnMap(mapID)
         if la ~= lb then return la < lb end
         return ns.Instances[a].name < ns.Instances[b].name
     end)
+    return list
+end
+
+-- Instances the addon has no data for yet (ns.ComingSoon), on this map or a map inside it.
+-- They're listed by zone name; the zone's map is looked up once, among all of Azeroth's zones.
+local zoneByName
+function ns:ComingSoonOnMap(mapID)
+    local info = mapID and C_Map.GetMapInfo(mapID)
+    if not (ns.ComingSoon and info) or info.mapType == Enum.UIMapType.Cosmic or info.mapType == Enum.UIMapType.World then
+        return {}
+    end
+    if not zoneByName then
+        zoneByName = {}
+        local zones = C_Map.GetMapChildrenInfo and C_Map.GetMapChildrenInfo(947, Enum.UIMapType.Zone, true) or {}
+        for _, zone in ipairs(zones) do zoneByName[zone.name] = zoneByName[zone.name] or zone.mapID end
+    end
+    local list = {}
+    for _, instance in ipairs(ns.ComingSoon) do
+        local zoneMapID = zoneByName[instance.zone]
+        if zoneMapID and (zoneMapID == mapID or ShowsOn(mapID, zoneMapID)) then
+            table.insert(list, instance)
+        end
+    end
     return list
 end
 

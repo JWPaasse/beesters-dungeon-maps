@@ -45,6 +45,21 @@ def parse_dungeons(path):
     return entries
 
 
+def coming_soon_lines(data, known_names):
+    """Instances the addon has no data for yet, by zone name (looked up in game): shown greyed out."""
+    lines = ["", "-- Not in the data yet: { name, kind, levels, zone name, size }", "ns.ComingSoon = {"]
+    for info in data.get("comingSoon", []):
+        if info["name"] in known_names:
+            continue  # QuestieDB has it now: it's a real instance
+        parts = [f"name = {lua_str(info['name'])}", f"kind = {lua_str(info['kind'])}",
+                 f"levels = {lua_str(info['levels'].replace('-', '–'))}", f"zone = {lua_str(info['zone'])}"]
+        if info.get("size"):
+            parts.append(f"size = {lua_str(info['size'])}")
+        lines.append(f"    {{ {', '.join(parts)} }},")
+    lines.append("}")
+    return lines
+
+
 def main():
     if len(sys.argv) != 2:
         sys.exit(__doc__)
@@ -112,6 +127,8 @@ def main():
         )
         lines.append(f"    [{ui}] = {{ {pins} }},")
     lines.append("}")
+    lines += coming_soon_lines(json.loads((ROOT / "tools" / "instances.json").read_text(encoding="utf-8")),
+                               {info["name"] for info, _ in instances})
     OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     print(f"Wrote {OUT.relative_to(ROOT)}: {len(instances)} instances, {len(entrances)} entrance points, QuestieDB {rev}")

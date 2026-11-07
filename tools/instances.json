@@ -224,13 +224,51 @@
     "Kirtonos": "Kirtonos the Herald",
     "Ras Frostwhisperer": "Ras Frostwhisper"
   },
-  "missing": [
-    "The Drowned City (35-40) - not in QuestieDB yet",
-    "Krol'dok Stronghold (40-45) - not in QuestieDB yet",
-    "Alcaz Prison (48-53) - not in QuestieDB yet",
-    "Blackmaw Hold (55-60) - not in QuestieDB yet",
-    "Shaper's Terrace (58-60) - not in QuestieDB yet",
-    "Barrow Deeps (10-player raid) - not in QuestieDB yet",
-    "Hyjal Summit (20-player raid, Forever version) - not in QuestieDB yet"
-  ]
+  "comingSoon": [
+    {
+      "name": "The Drowned City",
+      "kind": "dungeon",
+      "levels": "35-40",
+      "zone": "Stranglethorn Vale"
+    },
+    {
+      "name": "Krol'dok Stronghold",
+      "kind": "dungeon",
+      "levels": "40-45",
+      "zone": "Riverglades"
+    },
+    {
+      "name": "Alcaz Prison",
+      "kind": "dungeon",
+      "levels": "48-53",
+      "zone": "Dustwallow Marsh"
+    },
+    {
+      "name": "Blackmaw Hold",
+      "kind": "dungeon",
+      "levels": "55-60",
+      "zone": "Azshara"
+    },
+    {
+      "name": "Shaper's Terrace",
+      "kind": "dungeon",
+      "levels": "58-60",
+      "zone": "Un'Goro Crater"
+    },
+    {
+      "name": "Barrow Deeps",
+      "kind": "raid",
+      "levels": "60",
+      "zone": "Mount Hyjal",
+      "size": "10 players"
+    },
+    {
+      "name": "Hyjal Summit",
+      "kind": "raid",
+      "levels": "60",
+      "zone": "Mount Hyjal",
+      "size": "20 players"
+    }
+  ],
+  "_comingSoon": "Instances WoW Forever has that the addon has no data for yet (not in QuestieDB). Listed greyed out as 'coming soon' in the Dungeons menu of their zone; dropped automatically once QuestieDB has them."
 }
