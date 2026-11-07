@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Item tooltips for items the game hasn't loaded yet now use Wowhead's WoW Forever data with Wowhead's permission (credited in the readme). Items Wowhead doesn't have still get a tooltip built from the classic item stats.
+- Item tooltips for items the game hasn't loaded are now built from the classic item stats only (marked "Classic values; WoW Forever may differ"); the addon no longer includes tooltips copied from Wowhead.
 
 ## 0.2.8
 
