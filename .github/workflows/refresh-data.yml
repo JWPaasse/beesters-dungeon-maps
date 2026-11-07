@@ -4,7 +4,7 @@ name: Refresh data
 # - QuestieDB: entrances, quests, Forever bosses' loot
 # - the WoW Forever client's boss table (wago.tools)
 # - the CMaNGOS Classic database: quest text, classic bosses' loot with drop chances, item data
-# - item tooltips built from the Classic database's item stats (Wowhead's are off: tools/fetch_loot_tooltips.py)
+# - the WoW Forever client's own item tables (wago.tools), for the loot tooltips; else classic item stats
 # and updates the data audit (docs/AUDIT.md).
 # Daily while WoW Forever is new and data changes fast, weekly (Mondays) after DAILY_UNTIL.
 # The workflow runs every day; after the cut-off date it skips every day except Monday.
@@ -82,7 +82,9 @@ jobs:
             python3 tools/build_loot_items.py /tmp/classicdb.sql.gz || echo "::warning::Loot item data not refreshed"
             python3 tools/build_classic_tooltips.py /tmp/classicdb.sql.gz || echo "::warning::Classic tooltips not refreshed"
           fi
-          # Item tooltips (classic stats; Wowhead's only if switched on in the script, with permission).
+          # Item tooltips: from the game's own item tables, else classic stats. Keeps the old data if wago.tools is down.
+          python3 tools/fetch_game_items.py || echo "::warning::Game item data not refreshed"
+          python3 tools/build_game_tooltips.py || echo "::warning::Game tooltips not rebuilt"
           python3 tools/fetch_loot_tooltips.py || echo "::warning::Loot tooltips not refreshed"
           python3 tools/audit.py
 

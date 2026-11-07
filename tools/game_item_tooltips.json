@@ -1,0 +1,2972 @@
+{
+"_source": "WoW Forever client tables, build 1.60.1.70862 (via wago.tools)",
+"items": {
+"414": [
+"|cffffffffDalaran Sharp|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
+],
+"422": [
+"|cffffffffDwarven Mild|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
+],
+"730": [
+"|cffffffffMurloc Eye|r",
+"|cffffd100Item Level 11|r",
+"Crafting Reagent"
+],
+"765": [
+"|cffffffffSilverleaf|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"770": [
+"|cff9d9d9dPointy Crocolisk Tooth|r",
+"|cffffd100Item Level 1|r"
+],
+"785": [
+"|cffffffffMageroyal|r",
+"|cffffd100Item Level 10|r",
+"Crafting Reagent"
+],
+"858": [
+"|cffffffffLesser Healing Potion|r",
+"|cffffd100Item Level 13|r",
+"Requires Level 3",
+"|cff1eff00Use: Restores 140 to 180 health. (2 Min Cooldown)|r"
+],
+"929": [
+"|cffffffffHealing Potion|r",
+"|cffffd100Item Level 22|r",
+"Requires Level 12",
+"|cff1eff00Use: Restores 280 to 360 health. (2 Min Cooldown)|r"
+],
+"1015": [
+"|cffffffffLean Wolf Flank|r",
+"|cffffd100Item Level 19|r",
+"Crafting Reagent"
+],
+"1074": [
+"|cff9d9d9dHard Spider Leg Tip|r",
+"|cffffd100Item Level 1|r"
+],
+"1179": [
+"|cffffffffIce Cold Milk|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: Restores 437 mana over 21 sec. Must remain seated while drinking.|r"
+],
+"1205": [
+"|cffffffffMelon Juice|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Restores 835 mana over 24 sec. Must remain seated while drinking.|r"
+],
+"1210": [
+"|cff1eff00Shadowgem|r",
+"|cffffd100Item Level 20|r",
+"Crafting Reagent"
+],
+"1468": [
+"|cffffffffMurloc Fin|r",
+"|cffffd100Item Level 16|r",
+"Crafting Reagent"
+],
+"1470": [
+"|cffffffffMurloc Skin Bag|r",
+"|cffffd100Item Level 25|r",
+"Unique",
+"10 Slot Bag"
+],
+"1520": [
+"|cff9d9d9dTroll Sweat|r",
+"|cffffd100Item Level 1|r"
+],
+"1645": [
+"|cffffffffMoonberry Juice|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: Restores 1915 mana over 30 sec. Must remain seated while drinking.|r"
+],
+"1708": [
+"|cffffffffSweet Nectar|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: Restores 1345 mana over 27 sec. Must remain seated while drinking.|r"
+],
+"2287": [
+"|cffffffffHaunch of Meat|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
+],
+"2295": [
+"|cff9d9d9dLarge Boar Tusk|r",
+"|cffffd100Item Level 1|r"
+],
+"2447": [
+"|cffffffffPeacebloom|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"2449": [
+"|cffffffffEarthroot|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"2450": [
+"|cffffffffBriarthorn|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2452": [
+"|cffffffffSwiftthistle|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2453": [
+"|cffffffffBruiseweed|r",
+"|cffffd100Item Level 20|r",
+"Crafting Reagent"
+],
+"2589": [
+"|cffffffffLinen Cloth|r",
+"|cffffd100Item Level 5|r",
+"Crafting Reagent"
+],
+"2592": [
+"|cffffffffWool Cloth|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2608": [
+"|cff9d9d9dThreshadon Ambergris|r",
+"|cffffd100Item Level 10|r"
+],
+"2677": [
+"|cffffffffBoar Ribs|r",
+"|cffffd100Item Level 14|r",
+"Crafting Reagent"
+],
+"2770": [
+"|cffffffffCopper Ore|r",
+"|cffffd100Item Level 10|r",
+"Crafting Reagent"
+],
+"2771": [
+"|cffffffffTin Ore|r",
+"|cffffd100Item Level 20|r",
+"Crafting Reagent"
+],
+"2836": [
+"|cffffffffCoarse Stone|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"2874": [
+"|cffffffffAn Unsent Letter|r",
+"|cffffd100Item Level 16|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 16",
+"|cffffd100\"A letter found on Edwin VanCleef's person.\"|r"
+],
+"2909": [
+"|cffffffffRed Wool Bandana|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"2926": [
+"|cffffffffHead of Bazil Thredd|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"3010": [
+"|cff9d9d9dFine Sand|r",
+"|cffffd100Item Level 1|r"
+],
+"3172": [
+"|cffffffffBoar Intestines|r",
+"|cffffd100Item Level 10|r",
+"Crafting Reagent"
+],
+"3301": [
+"|cff9d9d9dSharp Canine|r",
+"|cffffd100Item Level 1|r"
+],
+"3402": [
+"|cff9d9d9dSoft Patch of Fur|r",
+"|cffffd100Item Level 1|r"
+],
+"3403": [
+"|cff9d9d9dIvory Boar Tusk|r",
+"|cffffd100Item Level 1|r"
+],
+"3628": [
+"|cffffffffHand of Dextren Ward|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"3630": [
+"|cffffffffHead of Targorr|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"3637": [
+"|cffffffffHead of VanCleef|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"3640": [
+"|cffffffffHead of Deepfury|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"3712": [
+"|cffffffffTurtle Meat|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"3770": [
+"|cffffffffMutton Chop|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
+],
+"3771": [
+"|cffffffffWild Hog Shank|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
+],
+"3857": [
+"|cffffffffCoal|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"3927": [
+"|cffffffffFine Aged Cheddar|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
+],
+"3928": [
+"|cffffffffSuperior Healing Potion|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: Restores 700 to 900 health. (2 Min Cooldown)|r"
+],
+"4306": [
+"|cffffffffSilk Cloth|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"4337": [
+"|cffffffffThick Spider's Silk|r",
+"|cffffd100Item Level 35|r",
+"Crafting Reagent"
+],
+"4338": [
+"|cffffffffMageweave Cloth|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"4411": [
+"|cff1eff00Schematic: Flame Deflector|r",
+"|cffffd100Item Level 25|r",
+"Requires Engineering (125)",
+"|cff1eff00Use: Teaches you how to make a Flame Deflector.|r",
+" ",
+"|cffffffffFlame Deflector|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Absorbs 500 Fire damage. Lasts 1 min. (15 Min Cooldown)|r",
+"5 Charges"
+],
+"4413": [
+"|cff1eff00Schematic: Discombobulator Ray|r",
+"|cffffd100Item Level 32|r",
+"Requires Engineering (160)",
+"|cff1eff00Use: Teaches you how to make a Discombobulator Ray.|r",
+" ",
+"|cffffffffDiscombobulator Ray|r",
+"|cffffd100Item Level 32|r",
+"|cff1eff00Use: Transforms the target into a Leper Gnome, reducing its melee and spell damage by 40 and its movement rate by 20% for 12 sec. (1 Min Cooldown)|r",
+"5 Charges"
+],
+"4415": [
+"|cff0070ddSchematic: Craftsman's Monocle|r",
+"|cffffd100Item Level 37|r",
+"Requires Engineering (185)",
+"|cff1eff00Use: Teaches you how to make a Craftsman's Monocle.|r",
+" ",
+"|cff1eff00Craftsman's Monocle|r",
+"|cffffd100Item Level 37|r",
+"Binds when equipped",
+"Head\tCloth",
+"40 Armor",
+"+15 Intellect",
+"Requires Level 32",
+"Requires Engineering (185)"
+],
+"4460": [
+"|cff9d9d9dRipped Wing Webbing|r",
+"|cffffd100Item Level 1|r"
+],
+"4537": [
+"|cffffffffTel'Abim Banana|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
+],
+"4538": [
+"|cffffffffSnapvine Watermelon|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
+],
+"4539": [
+"|cffffffffGoldenbark Apple|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
+],
+"4541": [
+"|cffffffffFreshly Baked Bread|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
+],
+"4542": [
+"|cffffffffMoist Cornbread|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
+],
+"4552": [
+"|cff9d9d9dSmooth Stone Chip|r",
+"|cffffd100Item Level 1|r"
+],
+"4553": [
+"|cff9d9d9dJagged Piece of Stone|r",
+"|cffffd100Item Level 1|r"
+],
+"4554": [
+"|cff9d9d9dShiny Polished Stone|r",
+"|cffffd100Item Level 1|r"
+],
+"4555": [
+"|cff9d9d9dThick Scaly Tail|r",
+"|cffffd100Item Level 1|r"
+],
+"4556": [
+"|cff9d9d9dSpeckled Shell Fragment|r",
+"|cffffd100Item Level 1|r"
+],
+"4557": [
+"|cff9d9d9dFiery Gland|r",
+"|cffffd100Item Level 1|r"
+],
+"4583": [
+"|cff9d9d9dThick Furry Mane|r",
+"|cffffd100Item Level 1|r"
+],
+"4584": [
+"|cff9d9d9dLarge Trophy Paw|r",
+"|cffffd100Item Level 1|r"
+],
+"4585": [
+"|cff9d9d9dDripping Spider Mandible|r",
+"|cffffd100Item Level 1|r"
+],
+"4595": [
+"|cffffffffJunglevine Wine|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: A strong alcoholic beverage.|r"
+],
+"4599": [
+"|cffffffffCured Ham Steak|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
+],
+"4601": [
+"|cffffffffSoft Banana Bread|r",
+"|cffffd100Item Level 45|r",
+"Requires Level 35",
+"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
+],
+"4603": [
+"|cffffffffRaw Spotted Yellowtail|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent",
+"Requires Level 35",
+"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
+],
+"4605": [
+"|cffffffffRed-speckled Mushroom|r",
+"|cffffd100Item Level 15|r",
+"Requires Level 5",
+"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
+],
+"4606": [
+"|cffffffffSpongy Morel|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
+],
+"4607": [
+"|cffffffffDelicious Cave Mold|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
+],
+"4787": [
+"|cff9d9d9dBurning Pitch|r",
+"|cffffd100Item Level 1|r"
+],
+"4791": [
+"|cffffffffEnchanted Water|r",
+"|cffffd100Item Level 35|r",
+"Requires Level 25",
+"|cff1eff00Use: Restores 1345 mana over 27 sec. Must remain seated while drinking.|r"
+],
+"4808": [
+"|cffffffffWell Stone|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"5120": [
+"|cff9d9d9dLong Tail Hair|r",
+"|cffffd100Item Level 1|r"
+],
+"5125": [
+"|cff9d9d9dCharged Scale|r",
+"|cffffd100Item Level 1|r"
+],
+"5128": [
+"|cff9d9d9dShed Lizard Skin|r",
+"|cffffd100Item Level 1|r"
+],
+"5442": [
+"|cffffffffHead of Arugal|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"5470": [
+"|cffffffffThunder Lizard Tail|r",
+"|cffffd100Item Level 22|r",
+"Crafting Reagent"
+],
+"5516": [
+"|cff9d9d9dThreshadon Fang|r",
+"|cffffd100Item Level 16|r",
+"One-Hand\tDagger",
+"5 - 10 Damage\tSpeed 1.50",
+"(5.0 damage per second)",
+"Requires Level 11"
+],
+"5523": [
+"|cffffffffSmall Barnacled Clam|r",
+"|cffffd100Item Level 10|r",
+"<Right Click to Open>"
+],
+"5524": [
+"|cffffffffThick-shelled Clam|r",
+"|cffffd100Item Level 20|r",
+"<Right Click to Open>"
+],
+"5569": [
+"|cff9d9d9dSeaweed|r",
+"|cffffd100Item Level 20|r"
+],
+"5635": [
+"|cffffffffSharp Claw|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"5637": [
+"|cffffffffLarge Fang|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"5784": [
+"|cffffffffSlimy Murloc Scale|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent"
+],
+"5792": [
+"|cffffffffRazorflank's Medallion|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"5793": [
+"|cffffffffRazorflank's Heart|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"5805": [
+"|cffffffffHeart of Zeal|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"5825": [
+"|cffffffffTreshala's Pendant|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"5871": [
+"|cff9d9d9dLarge Hoof|r",
+"|cffffd100Item Level 1|r"
+],
+"5881": [
+"|cffffffffHead of Kelris|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"5952": [
+"|cffffffffCorrupted Brain Stem|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6149": [
+"|cffffffffGreater Mana Potion|r",
+"|cffffd100Item Level 41|r",
+"Requires Level 31",
+"|cff1eff00Use: Restores 700 to 900 mana. (2 Min Cooldown)|r"
+],
+"6181": [
+"|cffffffffFetish of Hakkar|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6212": [
+"|cffffffffHead of Jammal'an|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"6289": [
+"|cffffffffRaw Longjaw Mud Snapper|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent",
+"Requires Level 5",
+"|cff1eff00Use: Restores 59 health over 18 sec. Must remain seated while eating.|r"
+],
+"6308": [
+"|cffffffffRaw Bristle Whisker Catfish|r",
+"|cffffd100Item Level 25|r",
+"Crafting Reagent",
+"Requires Level 15",
+"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
+],
+"6361": [
+"|cffffffffRaw Rainbow Fin Albacore|r",
+"|cffffd100Item Level 15|r",
+"Crafting Reagent",
+"Requires Level 5",
+"|cff1eff00Use: Restores 59 health over 18 sec. Must remain seated while eating.|r"
+],
+"6443": [
+"|cffffffffDeviate Hide|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6444": [
+"|cff9d9d9dForked Tongue|r",
+"|cffffd100Item Level 1|r"
+],
+"6470": [
+"|cffffffffDeviate Scale|r",
+"|cffffd100Item Level 1|r",
+"Crafting Reagent"
+],
+"6471": [
+"|cffffffffPerfect Deviate Scale|r",
+"|cffffd100Item Level 1|r",
+"Crafting Reagent"
+],
+"6530": [
+"|cffffffffNightcrawlers|r",
+"|cffffd100Item Level 20|r",
+"Requires Fishing (50)",
+"|cff1eff00Use: When applied to your fishing pole, increases Fishing by 50 for 10 min.|r"
+],
+"6672": [
+"|cff1eff00Schematic: Flash Bomb|r",
+"|cffffd100Item Level 37|r",
+"Requires Engineering (185)",
+"|cff1eff00Use: Teaches you how to make a Flash Bomb.|r",
+" ",
+"|cffffffffFlash Bomb|r",
+"|cffffd100Item Level 37|r",
+"Requires Level 27",
+"|cff1eff00Use: Causes all Beasts in a 5 yard radius to run away for 10 sec. (1 Min Cooldown)|r"
+],
+"6826": [
+"|cff9d9d9dBrilliant Scale|r",
+"|cffffd100Item Level 1|r"
+],
+"6841": [
+"|cffffffffVial of Phlogiston|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"6893": [
+"|cffffffffWorkshop Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"7070": [
+"|cffffffffElemental Water|r",
+"|cffffd100Item Level 25|r",
+"Crafting Reagent"
+],
+"7072": [
+"|cffffffffNaga Scale|r",
+"|cffffd100Item Level 25|r",
+"Crafting Reagent"
+],
+"7079": [
+"|cffffffffGlobe of Water|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"7080": [
+"|cff1eff00Essence of Water|r",
+"|cffffd100Item Level 55|r",
+"Crafting Reagent"
+],
+"7192": [
+"|cff1eff00Schematic: Goblin Rocket Boots|r",
+"|cffffd100Item Level 26|r",
+"Requires Engineering (130)",
+"|cff1eff00Use: Teaches you how to make Goblin Rocket Boots.|r",
+" ",
+"|cff1eff00Goblin Rocket Boots|r",
+"|cffffd100Item Level 45|r",
+"Binds when equipped",
+"Feet\tCloth",
+"41 Armor",
+"|cff1eff00Use: These dangerous looking boots significantly increase your run speed for 20 sec. They are prone to explode however, so use with caution. (5 Min Cooldown)|r"
+],
+"7556": [
+"|cff1eff00Twilight Orb|r",
+"|cffffd100Item Level 40|r",
+"Binds when equipped",
+"Held In Off-hand",
+"Requires Level 35"
+],
+"7560": [
+"|cffffffffSchematic: Gnomish Universal Remote|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Engineering (125)",
+"|cff1eff00Use: Teaches you how to make a Gnomish Universal Remote.|r",
+" ",
+"|cff1eff00Gnomish Universal Remote|r",
+"|cffffd100Item Level 25|r",
+"Binds when equipped",
+"Unique-Equipped",
+"Trinket",
+"Requires Engineering (125)",
+"|cff1eff00Equip: +18 Attack Power against Mechanical units.|r",
+"|cff1eff00Use: Allows control of a mechanical target for a short time. It may not always work and may just root the machine or make it very very angry. Gnomish engineering at its finest. (3 Min Cooldown)|r"
+],
+"7561": [
+"|cffffffffSchematic: Goblin Jumper Cables|r",
+"|cffffd100Item Level 33|r",
+"Binds when picked up",
+"Requires Engineering (165)",
+"|cff1eff00Use: Teaches you how to make Goblin Jumper Cables.|r",
+" ",
+"|cffffffffGoblin Jumper Cables|r",
+"|cffffd100Item Level 33|r",
+"Unique-Equipped",
+"Trinket",
+"Requires Engineering (165)",
+"|cff1eff00Use: Jumper Cables will sometimes be able to shock a dead player back to life. Cannot be used when in combat. (30 Min Cooldown)|r"
+],
+"7670": [
+"|cffffffffShattered Necklace Sapphire|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"7672": [
+"|cffffffffShattered Necklace Power Source|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"7741": [
+"|cffffffffThe Shaft of Tsol|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: Attach to the Gni'kiv Medallion.|r"
+],
+"7742": [
+"|cffffffffSchematic: Gnomish Cloaking Device|r",
+"|cffffd100Item Level 40|r",
+"Binds when picked up",
+"Requires Engineering (200)",
+"|cff1eff00Use: Teaches you how to make a Gnomish Cloaking Device.|r",
+" ",
+"|cffffffffGnomish Cloaking Device|r",
+"|cffffd100Item Level 40|r",
+"Binds when equipped",
+"Unique-Equipped",
+"Trinket",
+"Requires Engineering (200)",
+"|cff1eff00Use: Gives invisibility for 10 sec. (1 Hour Cooldown)|r"
+],
+"7912": [
+"|cffffffffSolid Stone|r",
+"|cffffd100Item Level 35|r",
+"Crafting Reagent"
+],
+"7972": [
+"|cffffffffIchor of Undeath|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"7973": [
+"|cffffffffBig-mouth Clam|r",
+"|cffffd100Item Level 40|r",
+"<Right Click to Open>"
+],
+"8053": [
+"|cffffffffObsidian Power Source|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"8146": [
+"|cffffffffWicked Claw|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"8150": [
+"|cffffffffDeeprock Salt|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"8151": [
+"|cffffffffFlask of Mojo|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"8152": [
+"|cffffffffFlask of Big Mojo|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"8490": [
+"|cffffffffCat Carrier (Siamese)|r",
+"|cffffd100Item Level 20|r",
+"|cff1eff00Use: Teaches you how to summon this companion.|r",
+"Right Click to summon and dismiss your cat."
+],
+"8548": [
+"|cffffffffDivino-matic Rod|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"8623": [
+"|cff1eff00OOX-17/TN Distress Beacon|r",
+"|cffffd100Item Level 43|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 43"
+],
+"8707": [
+"|cffffffffGahz'rilla's Electrified Scale|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"8766": [
+"|cffffffffMorning Glory Dew|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: Restores 2821 mana over 30 sec. Must remain seated while drinking.|r"
+],
+"8932": [
+"|cffffffffAlterac Swiss|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: Restores 2065 health over 30 sec. Must remain seated while eating.|r"
+],
+"8948": [
+"|cffffffffDried King Bolete|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: Restores 2065 health over 30 sec. Must remain seated while eating.|r"
+],
+"9234": [
+"|cffffffffTiara of the Deep|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"9242": [
+"|cff9d9d9dAncient Tablet|r",
+"|cffffd100Item Level 1|r",
+"<Right Click to Read>"
+],
+"9299": [
+"|cffffffffThermaplugg's Safe Combination|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"9308": [
+"|cffffffffGrime-Encrusted Object|r",
+"|cffffd100Item Level 1|r",
+"|cffffd100\"Caked grime obscures the true identity of this object.\"|r"
+],
+"9309": [
+"|cffffffffRobo-mechanical Guts|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9327": [
+"|cff1eff00Security DELTA Data Access Card|r",
+"|cffffd100Item Level 1|r",
+"Unique",
+"Requires Engineering (1)"
+],
+"9451": [
+"|cffffffffBubbling Water|r",
+"|cffffd100Item Level 25|r",
+"Requires Level 15",
+"|cff1eff00Use: Restores 835 mana over 24 sec. Must remain seated while drinking.|r"
+],
+"9471": [
+"|cffffffffNekrum's Medallion|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9523": [
+"|cffffffffTroll Temper|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9738": [
+"|cffffffffGem of Cobrahn|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9739": [
+"|cffffffffGem of Anacondra|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9740": [
+"|cffffffffGem of Pythas|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"9741": [
+"|cffffffffGem of Serpentis|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"10285": [
+"|cffffffffShadow Silk|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"10286": [
+"|cffffffffHeart of the Wild|r",
+"|cffffd100Item Level 45|r",
+"Crafting Reagent"
+],
+"10420": [
+"|cffffffffSkull of the Coldbringer|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"10441": [
+"|cffffffffGlowing Shard|r",
+"|cffffd100Item Level 15|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 15"
+],
+"10660": [
+"|cffffffffFirst Mosh'aru Tablet|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"10661": [
+"|cffffffffSecond Mosh'aru Tablet|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"10663": [
+"|cffffffffEssence of Hakkar|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cff1eff00Use: Use to fill the Egg of Hakkar.|r"
+],
+"10999": [
+"|cffffffffIronfel|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"Etched into the face of the hammer are the letters: F.F.F.\"|r"
+],
+"11078": [
+"|cffffffffRelic Coffer Key|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: Opens a Black Vault Relic Coffer Door.|r"
+],
+"11126": [
+"|cffffffffTablet of Kurniya|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"Runes filled with liquid fire dance across the tablet.\"|r"
+],
+"11129": [
+"|cffffffffEssence of the Elements|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"11140": [
+"|cffffffffPrison Cell Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"Various runes and etchings cover the surface of the key.\"|r"
+],
+"11207": [
+"|cff1eff00Formula: Enchant Weapon - Fiery Weapon|r",
+"|cffffd100Item Level 53|r",
+"Requires Enchanting (265)",
+"|cff1eff00Use: Teaches you how to permanently enchant a weapon to regularly blast its target with fire.|r",
+"Permanently enchant a melee weapon to often strike for 40 additional fire damage."
+],
+"11230": [
+"|cffffffffEncased Fiery Essence|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"The fiery essence of Bael'Gar wrapped tightly inside black dragonflight molt.\"|r"
+],
+"11268": [
+"|cffffffffHead of Argelmach|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"The dark, pale skin feels like clay.\"|r"
+],
+"11312": [
+"|cffffffffLost Thunderbrew Recipe|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"11370": [
+"|cffffffffDark Iron Ore|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"11391": [
+"|cff9d9d9dSpined Bat Wing|r",
+"|cffffd100Item Level 1|r"
+],
+"11392": [
+"|cff9d9d9dSevered Bat Claw|r",
+"|cffffd100Item Level 1|r"
+],
+"11393": [
+"|cff9d9d9dSmall Bat Skull|r",
+"|cffffd100Item Level 1|r"
+],
+"11394": [
+"|cff9d9d9dBat Heart|r",
+"|cffffd100Item Level 1|r"
+],
+"11446": [
+"|cffffffffA Crumpled Up Note|r",
+"|cffffd100Item Level 50|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 50"
+],
+"11464": [
+"|cffffffffMarshal Windsor's Lost Information|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"-General Angerforge\"|r"
+],
+"11465": [
+"|cffffffffMarshal Windsor's Lost Information|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"-Golem Lord Argelmach\"|r"
+],
+"11468": [
+"|cffffffffDark Iron Fanny Pack|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"11813": [
+"|cff1eff00Formula: Smoking Heart of the Mountain|r",
+"|cffffd100Item Level 53|r",
+"Requires Enchanting (265)",
+"|cff1eff00Use: Teaches you how to make a smoking heart of the mountain.|r"
+],
+"11827": [
+"|cff1eff00Schematic: Lil' Smoky|r",
+"|cffffd100Item Level 40|r",
+"Binds when picked up",
+"Requires Engineering (205)",
+"|cff1eff00Use: Teaches you how to make your own Lil' Smoky robot.|r",
+" ",
+"|cffffffffLil' Smoky|r",
+"|cffffd100Item Level 41|r",
+"|cff1eff00Use: Teaches you how to summon this companion.|r",
+"Right Click to summon and dismiss your robot."
+],
+"11828": [
+"|cff1eff00Schematic: Pet Bombling|r",
+"|cffffd100Item Level 41|r",
+"Binds when picked up",
+"Requires Engineering (205)",
+"|cff1eff00Use: Teaches you how to make a Pet Bombling.|r",
+" ",
+"|cffffffffPet Bombling|r",
+"|cffffd100Item Level 41|r",
+"|cff1eff00Use: Teaches you how to summon this companion.|r",
+"Right Click to summon and dismiss your bomb."
+],
+"11840": [
+"|cffffffffMaster Builder's Shirt|r",
+"|cffffd100Item Level 55|r",
+"Binds when picked up",
+"Shirt"
+],
+"12033": [
+"|cffffffffThaurissan Family Jewels|r",
+"|cffffd100Item Level 60|r",
+"Locked"
+],
+"12203": [
+"|cffffffffRed Wolf Meat|r",
+"|cffffd100Item Level 30|r",
+"Crafting Reagent"
+],
+"12205": [
+"|cffffffffWhite Spider Meat|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"12208": [
+"|cffffffffTender Wolf Meat|r",
+"|cffffd100Item Level 40|r",
+"Crafting Reagent"
+],
+"12219": [
+"|cffffffffUnadorned Seal of Ascension|r",
+"|cffffd100Item Level 1|r",
+"Unique",
+"|cffffd100\"Three empty sockets cover the face.\"|r"
+],
+"12335": [
+"|cff1eff00Gemstone of Smolderthorn|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"12336": [
+"|cff1eff00Gemstone of Spirestone|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"12337": [
+"|cff1eff00Gemstone of Bloodaxe|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"12382": [
+"|cff1eff00Key to the City|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"Master Key to the City of Stratholme\"|r"
+],
+"12534": [
+"|cffffffffOmokk's Head|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cff1eff00Use: At Urok's Tribute Pile, combine Omokk's Head with the Roughshod Pike.|r"
+],
+"12630": [
+"|cffffffffHead of Rend Blackhand|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"Sickening, bloody, foulness.\"|r"
+],
+"12662": [
+"|cff1eff00Demonic Rune|r",
+"|cffffd100Item Level 50|r",
+"Binds when picked up",
+"Crafting Reagent",
+"|cff1eff00Use: Restores 900 to 1500 mana at the cost of 600 to 1000 life. (2 Min Cooldown)|r"
+],
+"12712": [
+"|cffffffffWarosh's Mojo|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"12728": [
+"|cffa335eePattern: Invulnerable Mail|r",
+"|cffffd100Item Level 63|r",
+"Requires Leatherworking (295)",
+"|cff1eff00Use: Teaches you how to make Invulnerable Mail.|r",
+" ",
+"|cffa335eeInvulnerable Mail|r",
+"|cffffd100Item Level 63|r",
+"Binds when equipped",
+"Chest\tMail",
+"404 Armor",
+"+20 Stamina",
+"Requires Level 57",
+"|cff1eff00Equip: When struck in combat has a 5% chance to make you invulnerable to melee damage for 3 sec. This effect can only occur once every 10 sec.|r"
+],
+"12735": [
+"|cff1eff00Frayed Abomination Stitching|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"12753": [
+"|cff1eff00Skin of Shadow|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"12780": [
+"|cffffffffGeneral Drakkisath's Command|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 55"
+],
+"12808": [
+"|cff1eff00Essence of Undeath|r",
+"|cffffd100Item Level 55|r",
+"Crafting Reagent"
+],
+"12811": [
+"|cff1eff00Righteous Orb|r",
+"|cffffd100Item Level 60|r",
+"Crafting Reagent"
+],
+"12833": [
+"|cff0070ddPlans: Hammer of the Titans|r",
+"|cffffd100Item Level 63|r",
+"Requires Blacksmithing (300)",
+"|cff1eff00Use: Teaches you how to make a Hammer of the Titans.|r",
+" ",
+"|cff0070ddHammer of the Titans|r",
+"|cffffd100Item Level 63|r",
+"Binds when equipped",
+"Two-Hand\tMace",
+"163 - 246 Damage\tSpeed 3.80",
+"(53.8 damage per second)",
+"+15 Strength",
+"Requires Level 58",
+"|cff1eff00Chance on hit: Stuns target for 3 sec.|r"
+],
+"12834": [
+"|cff0070ddPlans: Arcanite Champion|r",
+"|cffffd100Item Level 63|r",
+"Requires Blacksmithing (300)",
+"|cff1eff00Use: Teaches you how to make an Arcanite Champion.|r",
+" ",
+"|cff0070ddArcanite Champion|r",
+"|cffffd100Item Level 63|r",
+"Binds when equipped",
+"Two-Hand\tSword",
+"146 - 220 Damage\tSpeed 3.40",
+"(53.8 damage per second)",
+"Requires Level 58",
+"|cff1eff00Chance on hit: Heal yourself for 270 to 450 and increase your Strength by 120 for 30 sec.|r"
+],
+"12835": [
+"|cff0070ddPlans: Annihilator|r",
+"|cffffd100Item Level 63|r",
+"Requires Blacksmithing (300)",
+"|cff1eff00Use: Teaches you how to make an Annihilator.|r",
+" ",
+"|cff0070ddAnnihilator|r",
+"|cffffd100Item Level 63|r",
+"Binds when equipped",
+"Unique-Equipped",
+"One-Hand\tAxe",
+"69 - 129 Damage\tSpeed 2.40",
+"(41.2 damage per second)",
+"Requires Level 58",
+"|cff1eff00Equip: +14 Attack Power.|r",
+"|cff1eff00Chance on hit: Reduces an enemy's armor by 165. Stacks up to 3 times.|r"
+],
+"12837": [
+"|cff0070ddPlans: Masterwork Stormhammer|r",
+"|cffffd100Item Level 63|r",
+"Requires Blacksmithing (300)",
+"|cff1eff00Use: Teaches you how to make a Masterwork Stormhammer.|r",
+" ",
+"|cff0070ddMasterwork Stormhammer|r",
+"|cffffd100Item Level 63|r",
+"Binds when equipped",
+"One-Hand\tMace",
+"46 - 86 Damage\tSpeed 1.60",
+"(41.2 damage per second)",
+"Requires Level 57",
+"|cff1eff00Chance on hit: Blasts up to 3 targets for 105 to 145 Nature damage.|r"
+],
+"12838": [
+"|cff0070ddPlans: Arcanite Reaper|r",
+"|cffffd100Item Level 63|r",
+"Requires Blacksmithing (300)",
+"|cff1eff00Use: Teaches you how to make an Arcanite Reaper.|r",
+" ",
+"|cff0070ddArcanite Reaper|r",
+"|cffffd100Item Level 63|r",
+"Binds when equipped",
+"Two-Hand\tAxe",
+"153 - 256 Damage\tSpeed 3.80",
+"(53.8 damage per second)",
+"+13 Stamina",
+"Requires Level 58",
+"|cff1eff00Equip: +62 Attack Power.|r"
+],
+"12839": [
+"|cff0070ddPlans: Heartseeker|r",
+"|cffffd100Item Level 63|r",
+"Requires Blacksmithing (300)",
+"|cff1eff00Use: Teaches you how to make Heartseeker.|r"
+],
+"12841": [
+"|cffffffffInvader's Scourgestone|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"12843": [
+"|cff1eff00Corruptor's Scourgestone|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up"
+],
+"12847": [
+"|cffffffffSoul Stained Pike|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"13172": [
+"|cffffffffGrimm's Premium Tobacco|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"Bears the mark of Ezra Grimm.\"|r"
+],
+"13174": [
+"|cffffffffPlagued Flesh Sample|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"13250": [
+"|cffffffffHead of Balnazzar|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 55"
+],
+"13251": [
+"|cffffffffHead of Baron Rivendare|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"13335": [
+"|cff0070ddDeathcharger's Reins|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Unique",
+"Requires Level 60",
+"|cff1eff00Use: Teaches you how to summon this mount.|r",
+"Summons and dismisses Baron Rivendare's steed. This is a very fast mount."
+],
+"13352": [
+"|cffffffffVosh'gajin's Snakestone|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"13444": [
+"|cffffffffMajor Mana Potion|r",
+"|cffffd100Item Level 59|r",
+"Requires Level 49",
+"|cff1eff00Use: Restores 1350 to 2250 mana. (2 Min Cooldown)|r"
+],
+"13446": [
+"|cffffffffMajor Healing Potion|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: Restores 1050 to 1750 health. (2 Min Cooldown)|r"
+],
+"13501": [
+"|cff1eff00Recipe: Major Mana Potion|r",
+"|cffffd100Item Level 59|r",
+"Binds when picked up",
+"Requires Alchemy (295)",
+"|cff1eff00Use: Teaches you how to make a Major Mana Potion.|r",
+" ",
+"|cffffffffMajor Mana Potion|r",
+"|cffffd100Item Level 59|r",
+"Requires Level 49",
+"|cff1eff00Use: Restores 1350 to 2250 mana. (2 Min Cooldown)|r"
+],
+"13509": [
+"|cff1eff00Clutch of Foresight|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Unique",
+"Requires Level 55",
+"|cff1eff00Use: Counters the enemy's spellcast, preventing any spell from that school of magic from being cast for 10 sec. Generates a high amount of threat. (1 Min Cooldown)|r"
+],
+"13519": [
+"|cff1eff00Recipe: Flask of the Titans|r",
+"|cffffd100Item Level 60|r",
+"Requires Alchemy (300)",
+"|cff1eff00Use: Teaches you how to make a Flask of the Titans.|r",
+" ",
+"|cffffffffFlask of the Titans|r",
+"|cffffd100Item Level 60|r",
+"Requires Level 50",
+"|cff1eff00Use: Increases the player's maximum health by 1200 for 2 hrs. You can only have the effect of one flask at a time. This effect persists through death. (3 Sec Cooldown)|r"
+],
+"13520": [
+"|cff1eff00Recipe: Flask of Distilled Wisdom|r",
+"|cffffd100Item Level 60|r",
+"Requires Alchemy (300)",
+"|cff1eff00Use: Teaches you how to make a Flask of Distilled Wisdom.|r",
+" ",
+"|cffffffffFlask of Distilled Wisdom|r",
+"|cffffd100Item Level 60|r",
+"Requires Level 50",
+"|cff1eff00Use: Increases the player's maximum Mana by 2000 for 2 hrs. You can only have the effect of one flask at a time. This effect persists through death. (3 Sec Cooldown)|r"
+],
+"13521": [
+"|cff1eff00Recipe: Flask of Supreme Power|r",
+"|cffffd100Item Level 60|r",
+"Requires Alchemy (300)",
+"|cff1eff00Use: Teaches you how to make a Flask of Supreme Power.|r",
+" ",
+"|cffffffffFlask of Supreme Power|r",
+"|cffffd100Item Level 60|r",
+"Requires Level 50",
+"|cff1eff00Use: Increases damage done by magical spells and effects by up to 150 for 2 hrs. You can only have the effect of one flask at a time. This effect persists through death. (3 Sec Cooldown)|r"
+],
+"13523": [
+"|cffffffffBlood of Innocents|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"The blood is still fresh.\"|r"
+],
+"13626": [
+"|cffffffffHuman Head of Ras Frostwhisper|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"13725": [
+"|cffffffffKrastinov's Bag of Horrors|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"13873": [
+"|cffffffffViewing Room Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"14047": [
+"|cffffffffRunecloth|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"14227": [
+"|cffffffffIronweb Spider Silk|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"14512": [
+"|cffa335eePattern: Truefaith Vestments|r",
+"|cffffd100Item Level 62|r",
+"Requires Tailoring (295)",
+"|cff1eff00Use: Teaches you how to sew Truefaith Vestments.|r",
+" ",
+"|cffa335eeTruefaith Vestments|r",
+"|cffffd100Item Level 62|r",
+"Binds when picked up",
+"Chest\tCloth",
+"96 Armor",
+"+14 Stamina",
+"+16 Spirit",
+"Classes: Priest",
+"Requires Level 57",
+"|cff1eff00Equip: Increases healing done by up to 73 and damage done by up to 25 for all magical spells and effects.|r",
+"|cff1eff00Equip: Reduces the cooldown of your Fade ability by 2 sec.|r"
+],
+"14514": [
+"|cffa335eePattern: Robe of the Void|r",
+"|cffffd100Item Level 62|r",
+"Requires Tailoring (295)",
+"|cff1eff00Use: Teaches you how to sew a Robe of the Void.|r",
+" ",
+"|cffa335eeRobe of the Void|r",
+"|cffffd100Item Level 62|r",
+"Binds when picked up",
+"Chest\tCloth",
+"96 Armor",
+"+10 Stamina",
+"+9 Intellect",
+"Classes: Warlock",
+"Requires Level 57",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 46.|r",
+"|cff1eff00Use: Heal your pet for 450 to 750. (10 Min Cooldown)|r"
+],
+"14540": [
+"|cffffffffTaragaman the Hungerer's Heart|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"14617": [
+"|cffffffffSawbones Shirt|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Shirt"
+],
+"15412": [
+"|cffffffffGreen Dragonscale|r",
+"|cffffd100Item Level 50|r",
+"Crafting Reagent"
+],
+"15730": [
+"|cff0070ddPattern: Red Dragonscale Breastplate|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Requires Leatherworking (290)",
+"|cff1eff00Use: Teaches you how to craft a Red Dragonscale Breastplate.|r",
+" ",
+"|cff0070ddRed Dragonscale Breastplate|r",
+"|cffffd100Item Level 61|r",
+"Binds when equipped",
+"Chest\tMail",
+"360 Armor",
+"+20 Fire Resistance",
+"Requires Level 56",
+"|cff1eff00Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects.|r"
+],
+"15880": [
+"|cffffffffHead of Ramstein the Gorger|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"15964": [
+"|cff1eff00Silksand Star|r",
+"|cffffd100Item Level 44|r",
+"Binds when equipped",
+"Held In Off-hand",
+"+9 Spirit",
+"+2 Stamina",
+"Requires Level 39"
+],
+"16250": [
+"|cff1eff00Formula: Enchant Weapon - Superior Striking|r",
+"|cffffd100Item Level 60|r",
+"Requires Enchanting (300)",
+"|cff1eff00Use: Teaches you how to permanently enchant a weapon to do 5 additional damage.|r",
+"Permanently enchant a Melee Weapon to do 5 additional points of damage."
+],
+"16663": [
+"|cffffffffBlood of the Black Dragon Champion|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"16786": [
+"|cffffffffBlack Dragonspawn Eye|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"17008": [
+"|cffffffffSmall Scroll|r",
+"|cffffd100Item Level 28|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 28",
+"|cffffd100\"The scroll bears an insignia foreign to you.\"|r"
+],
+"17057": [
+"|cffffffffShiny Fish Scales|r",
+"|cffffd100Item Level 1|r"
+],
+"17058": [
+"|cffffffffFish Oil|r",
+"|cffffd100Item Level 1|r"
+],
+"17322": [
+"|cffffffffEye of the Emberseer|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"17684": [
+"|cffffffffTheradric Crystal Carving|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"17702": [
+"|cffffffffCelebrian Rod|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"17703": [
+"|cffffffffCelebrian Diamond|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"17747": [
+"|cffffffffRazorlash Root|r",
+"|cffffd100Item Level 50|r",
+"Requires Level 40",
+"|cff1eff00Use: Restores 600 health and mana over 10 sec. (2 Min Cooldown)|r"
+],
+"17966": [
+"|cff1eff00Onyxia Hide Backpack|r",
+"|cffffd100Item Level 55|r",
+"Binds when picked up",
+"18 Slot Bag"
+],
+"18249": [
+"|cffffffffCrescent Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"18250": [
+"|cff1eff00Gordok Shackle Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"Used with Gordok ogre shackles.\"|r"
+],
+"18255": [
+"|cffffffffRunn Tum Tuber|r",
+"|cffffd100Item Level 55|r",
+"Requires Level 45",
+"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
+],
+"18261": [
+"|cffffffffBook of Incantations|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"18267": [
+"|cff1eff00Recipe: Runn Tum Tuber Surprise|r",
+"|cffffd100Item Level 55|r",
+"Binds when picked up",
+"Requires Cooking (275)",
+"|cff1eff00Use: Teaches you how to cook Runn Tum Tuber Surprise.|r"
+],
+"18268": [
+"|cffffffffGordok Inner Door Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"18299": [
+"|cffffffffHydrospawn Essence|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"18332": [
+"|cff1eff00Libram of Rapidity|r",
+"|cffffd100Item Level 50|r",
+"Unique",
+"Requires Level 50",
+"|cffffd100\"Dark runes skitter across the surface.\"|r",
+"<Right Click to Read>"
+],
+"18333": [
+"|cff1eff00Libram of Focus|r",
+"|cffffd100Item Level 50|r",
+"Unique",
+"Requires Level 50",
+"|cffffd100\"Dark runes skitter across the surface.\"|r",
+"<Right Click to Read>"
+],
+"18334": [
+"|cff1eff00Libram of Protection|r",
+"|cffffd100Item Level 50|r",
+"Unique",
+"Requires Level 50",
+"|cffffd100\"Dark runes skitter across the surface.\"|r",
+"<Right Click to Read>"
+],
+"18335": [
+"|cff0070ddPristine Black Diamond|r",
+"|cffffd100Item Level 1|r",
+"Crafting Reagent"
+],
+"18364": [
+"|cff0070ddThe Emerald Dream|r",
+"|cffffd100Item Level 60|r",
+"Unique",
+"This Item Begins a Quest",
+"Classes: Druid",
+"Requires Level 54",
+"|cffffd100\"Fact or Carefully Planned Out Farce Perpetrated By My Brother -By Illidan\"|r"
+],
+"18422": [
+"|cffa335eeHead of Onyxia|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 60",
+"|cffffd100\"The head of the Black Dragonflight's Brood Mother.\"|r"
+],
+"18423": [
+"|cffa335eeHead of Onyxia|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 60",
+"|cffffd100\"The head of the Black Dragonflight's Brood Mother.\"|r"
+],
+"18426": [
+"|cffffffffLethtendris's Web|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"18640": [
+"|cffffffffHappy Fun Rock|r",
+"|cffffd100Item Level 1|r",
+"Unique (4)",
+"|cff1eff00Use: Throw rock to a friendly target. If they have free room in their pack they will catch it!|r"
+],
+"18657": [
+"|cff1eff00Schematic: Hyper-Radiant Flame Reflector|r",
+"|cffffd100Item Level 58|r",
+"Requires Engineering (290)",
+"|cff1eff00Use: Teaches you how to make a Hyper-Radiant Flame Reflector.|r",
+" ",
+"|cff0070ddHyper-Radiant Flame Reflector|r",
+"|cffffd100Item Level 58|r",
+"Binds when equipped",
+"Unique-Equipped",
+"Trinket",
+"+18 Fire Resistance",
+"Requires Level 53",
+"Requires Engineering (290)",
+"|cff1eff00Use: Reflects Fire spells back at their caster for 5 sec. (5 Min Cooldown)|r"
+],
+"18705": [
+"|cffa335eeMature Black Dragon Sinew|r",
+"|cffffd100Item Level 71|r",
+"Binds when picked up",
+"Unique",
+"Classes: Hunter",
+"Requires Level 60"
+],
+"18779": [
+"|cff0070ddBottom Half of Advanced Armorsmithing: Volume I|r",
+"|cffffd100Item Level 60|r",
+"Unique",
+"Requires Level 50",
+"|cff1eff00Use: Combines the Top and Bottom Half of Advanced Armorsmithing: Volume I.|r"
+],
+"18780": [
+"|cff0070ddTop Half of Advanced Armorsmithing: Volume I|r",
+"|cffffd100Item Level 60|r",
+"Unique",
+"Requires Level 50",
+"|cff1eff00Use: Combines the Top and Bottom Half of Advanced Armorsmithing: Volume I.|r"
+],
+"18782": [
+"|cff0070ddTop Half of Advanced Armorsmithing: Volume II|r",
+"|cffffd100Item Level 60|r",
+"Unique",
+"Requires Level 50",
+"|cff1eff00Use: Combines the Top and Bottom Half of Advanced Armorsmithing: Volume II.|r"
+],
+"18784": [
+"|cff0070ddTop Half of Advanced Armorsmithing: Volume III|r",
+"|cffffd100Item Level 60|r",
+"Unique",
+"Requires Level 50",
+"|cff1eff00Use: Combines the Top and Bottom Half of Advanced Armorsmithing: Volume III.|r"
+],
+"18945": [
+"|cffffffffDark Iron Residue|r",
+"|cffffd100Item Level 1|r"
+],
+"19227": [
+"|cff0070ddAce of Beasts|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: Combine the Ace through Eight of Beasts to complete the set.|r"
+],
+"19258": [
+"|cff0070ddAce of Warlords|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: Combine the Ace through Eight of Warlords to complete the set.|r"
+],
+"19268": [
+"|cff0070ddAce of Elementals|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: Combine the Ace through Eight of Elementals to complete the set.|r"
+],
+"19276": [
+"|cff0070ddAce of Portals|r",
+"|cffffd100Item Level 1|r",
+"|cff1eff00Use: Combine the Ace through Eight of Portals to complete the set.|r"
+],
+"20520": [
+"|cff1eff00Dark Rune|r",
+"|cffffd100Item Level 55|r",
+"Crafting Reagent",
+"|cff1eff00Use: Restores 900 to 1500 mana at the cost of 600 to 1000 life. (2 Min Cooldown)|r"
+],
+"20608": [
+"|cffffffffGreen Voodoo Feather|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique (2)"
+],
+"21108": [
+"|cffa335eeDraconic for Dummies|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"|cffffd100\"Chapter VI\"|r"
+],
+"21982": [
+"|cffffffffOgre Warbeads|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"21984": [
+"|cffffffffLeft Piece of Lord Valthalak's Amulet|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cff1eff00Use: Recombines the left, right and top pieces of Lord Valthalak's Amulet into one whole.|r",
+"|cffffd100\"The evil trapped within this fragment seems to be growing stronger...\"|r"
+],
+"21987": [
+"|cffffffffIncendicite of Incendius|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"|cffffd100\"This still-smoldering chunk of Lord Incendius will make for an excellent coal.\"|r"
+],
+"21988": [
+"|cffffffffEmber of Emberseer|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"|cffffd100\"This one's far too hot to touch... better wrap it in something nonflammable!\"|r"
+],
+"22046": [
+"|cffffffffRight Piece of Lord Valthalak's Amulet|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique",
+"|cff1eff00Use: Recombines the left, right and top pieces of Lord Valthalak's Amulet into one whole.|r",
+"|cffffd100\"This section of the amulet vibrates with a palpable fervor to be rejoined with its sibling pieces.\"|r"
+],
+"22138": [
+"|cffffffffBlackrock Bracer|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"|cffffd100\"Crudely crafted, mostly from dark iron, these bracers exhibit trace amounts of a shiny metal.\"|r"
+],
+"22206": [
+"|cff1eff00Bouquet of Red Roses|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"Held In Off-hand",
+"|cff1eff00Use: Shower a nearby target with a cascade of rose petals! (5 Min Cooldown)|r"
+],
+"22309": [
+"|cff1eff00Pattern: Big Bag of Enchantment|r",
+"|cffffd100Item Level 65|r",
+"Requires Tailoring (255)",
+"|cff1eff00Use: Teaches you how to sew an Big Bag of Enchantment.|r",
+" ",
+"|cff1eff00Big Bag of Enchantment|r",
+"|cffffd100Item Level 65|r",
+"Binds when equipped",
+"32 Slot Enchanting Bag"
+],
+"22444": [
+"|cffffffffPutrid Vine|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"22525": [
+"|cffffffffCrypt Fiend Parts|r",
+"|cffffd100Item Level 1|r"
+],
+"22526": [
+"|cffffffffBone Fragments|r",
+"|cffffd100Item Level 1|r"
+],
+"22527": [
+"|cffffffffCore of Elements|r",
+"|cffffd100Item Level 1|r"
+],
+"22528": [
+"|cffffffffDark Iron Scraps|r",
+"|cffffd100Item Level 1|r"
+],
+"22529": [
+"|cffffffffSavage Frond|r",
+"|cffffd100Item Level 1|r"
+],
+"22897": [
+"|cff0070ddTome of Conjure Food VII|r",
+"|cffffd100Item Level 60|r",
+"Classes: Mage",
+"Requires Level 60",
+"|cff1eff00Use: Teaches Conjure Food (Rank 7).|r",
+" ",
+"|cffffffffConjured Cinnamon Roll|r",
+"|cffffd100Item Level 65|r",
+"Requires Level 55",
+"|cff1eff00Use: Restores 3058 health over 30 sec. Must remain seated while eating.|r"
+],
+"23320": [
+"|cff0070ddTablet of Flame Shock VI|r",
+"|cffffd100Item Level 60|r",
+"Classes: Shaman",
+"Requires Level 60",
+"|cff1eff00Use: Teaches Flame Shock (Rank 6).|r"
+],
+"24101": [
+"|cff0070ddBook of Ferocious Bite V|r",
+"|cffffd100Item Level 60|r",
+"Classes: Druid",
+"Requires Level 60",
+"|cff1eff00Use: Teaches Ferocious Bite (Rank 5).|r",
+"Finishing move that causes damage per combo point and converts each extra point of energy into 3.3 additional damage. Damage is increased by your Attack Power.",
+"1 point : 245-321 damage",
+"2 points: 426-502 damage",
+"3 points: 607-683 damage",
+"4 points: 788-864 damage",
+"5 points: 969-1045 damage"
+],
+"209838": [
+"|cffffffffHypnotic Crystal|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Unique"
+],
+"245675": [
+"|cffffffffGordok Inner Door Key|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique"
+],
+"251341": [
+"|cff0070ddPlans: Guard's Chain Shirt|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Blacksmithing (80)",
+"|cff1eff00Use: Teaches you how to craft Guard's Chain Shirt.|r",
+" ",
+"|cff0070ddGuard's Chain Shirt|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Chest\tMail",
+"184 Armor",
+"+7 Stamina",
+"+4 Strength",
+"Requires Level 15",
+"|cff1eff00Equip: Increased Defense +5.|r"
+],
+"251360": [
+"|cff0070ddPlans: Veteran's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Blacksmithing (80)",
+"|cff1eff00Use: Teaches you how to craft Veteran's Gloves.|r",
+" ",
+"|cff0070ddVeteran's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tMail",
+"115 Armor",
+"+3 Agility",
+"+5 Stamina",
+"+5 Strength",
+"Requires Level 15"
+],
+"251361": [
+"|cff0070ddPlans: Guard's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Blacksmithing (80)",
+"|cff1eff00Use: Teaches you how to craft Guard's Gloves.|r",
+" ",
+"|cff0070ddGuard's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tMail",
+"115 Armor",
+"+5 Stamina",
+"+5 Strength",
+"Requires Level 15",
+"|cff1eff00Equip: Increased Defense +3.|r"
+],
+"251363": [
+"|cff0070ddPlans: Acolyte's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Blacksmithing (80)",
+"|cff1eff00Use: Teaches you how to craft Acolyte's Gloves.|r",
+" ",
+"|cff0070ddAcolyte's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tMail",
+"115 Armor",
+"+5 Intellect",
+"+3 Stamina",
+"Requires Level 15",
+"|cff1eff00Equip: Increases healing done by up to 10 and damage done by up to 3 for all magical spells and effects.|r"
+],
+"251364": [
+"|cff0070ddPlans: Crusader's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Blacksmithing (80)",
+"|cff1eff00Use: Teaches you how to craft Crusader's Gloves.|r",
+" ",
+"|cff0070ddCrusader's Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tMail",
+"115 Armor",
+"+5 Stamina",
+"+3 Strength",
+"Requires Level 15",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 5.|r"
+],
+"251378": [
+"|cff0070ddPlans: Acolyte's Silvered Chain Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Requires Blacksmithing (125)",
+"|cff1eff00Use: Teaches you how to craft Acolyte's Silvered Chain Leggings.|r",
+" ",
+"|cff0070ddAcolyte's Silvered Chain Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Legs\tMail",
+"191 Armor",
+"+8 Intellect",
+"+7 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases healing done by up to 25 and damage done by up to 8 for all magical spells and effects.|r"
+],
+"251379": [
+"|cff0070ddPlans: Crusader's Silvered Chain Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Requires Blacksmithing (125)",
+"|cff1eff00Use: Teaches you how to craft Crusader's Silvered Chain Leggings.|r",
+" ",
+"|cff0070ddCrusader's Silvered Chain Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Legs\tMail",
+"191 Armor",
+"+8 Stamina",
+"+7 Strength",
+"Requires Level 25",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 13.|r"
+],
+"251380": [
+"|cff0070ddPlans: Veteran's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Blacksmithing (95)",
+"|cff1eff00Use: Teaches you how to craft Veteran's Silvered Chain Helm.|r",
+" ",
+"|cff0070ddVeteran's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tMail",
+"163 Armor",
+"+9 Stamina",
+"+10 Strength",
+"Requires Level 20"
+],
+"251381": [
+"|cff0070ddPlans: Guard's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Blacksmithing (95)",
+"|cff1eff00Use: Teaches you how to craft Guard's Silvered Chain Helm.|r",
+" ",
+"|cff0070ddGuard's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tMail",
+"163 Armor",
+"+9 Stamina",
+"+10 Agility",
+"Requires Level 20"
+],
+"251382": [
+"|cff0070ddPlans: Protector's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Blacksmithing (95)",
+"|cff1eff00Use: Teaches you how to craft Protector's Silvered Chain Helm.|r",
+" ",
+"|cff0070ddProtector's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tMail",
+"163 Armor",
+"+9 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increased Defense +7.|r"
+],
+"251383": [
+"|cff0070ddPlans: Acolyte's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Blacksmithing (95)",
+"|cff1eff00Use: Teaches you how to craft Acolyte's Silvered Chain Helm.|r",
+" ",
+"|cff0070ddAcolyte's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tMail",
+"163 Armor",
+"+9 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increases healing done by up to 21 and damage done by up to 7 for all magical spells and effects.|r"
+],
+"251384": [
+"|cff0070ddPlans: Crusader's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Blacksmithing (95)",
+"|cff1eff00Use: Teaches you how to craft Crusader's Silvered Chain Helm.|r",
+" ",
+"|cff0070ddCrusader's Silvered Chain Helm|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tMail",
+"163 Armor",
+"+9 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 11.|r"
+],
+"251961": [
+"|cffffffffArcane Mote|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"252514": [
+"|cff0070ddStormrider's Leather Helm|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Head\tLeather",
+"84 Armor",
+"+10 Spirit",
+"+13 Stamina",
+"Requires Level 25"
+],
+"252515": [
+"|cff0070ddWisdom's Leather Helm|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Head\tLeather",
+"84 Armor",
+"+13 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases healing done by up to 21 and damage done by up to 7 for all magical spells and effects.|r"
+],
+"252777": [
+"|cff0070ddPattern: Brawler's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Leatherworking (75)",
+"|cff1eff00Use: Teaches you how to craft Brawler's Leather Gloves.|r",
+" ",
+"|cff0070ddBrawler's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tLeather",
+"53 Armor",
+"+4 Agility",
+"+3 Stamina",
+"+4 Strength",
+"Requires Level 15"
+],
+"252778": [
+"|cff0070ddPattern: Trapper's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Leatherworking (75)",
+"|cff1eff00Use: Teaches you how to craft Trapper's Leather Gloves.|r",
+" ",
+"|cff0070ddTrapper's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tLeather",
+"53 Armor",
+"+4 Agility",
+"+3 Intellect",
+"+4 Stamina",
+"Requires Level 15"
+],
+"252779": [
+"|cff0070ddPattern: Defender's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Leatherworking (75)",
+"|cff1eff00Use: Teaches you how to craft Defender's Leather Gloves.|r",
+" ",
+"|cff0070ddDefender's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tLeather",
+"53 Armor",
+"+4 Stamina",
+"+4 Strength",
+"+34 Armor",
+"Requires Level 15"
+],
+"252780": [
+"|cff0070ddPattern: Totemic Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Leatherworking (75)",
+"|cff1eff00Use: Teaches you how to craft Totemic Leather Gloves.|r",
+" ",
+"|cff0070ddTotemic Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tLeather",
+"53 Armor",
+"+3 Stamina",
+"+4 Strength",
+"Requires Level 15",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 5.|r"
+],
+"252781": [
+"|cff0070ddPattern: Stormrider's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Leatherworking (75)",
+"|cff1eff00Use: Teaches you how to craft Stormrider's Leather Gloves.|r",
+" ",
+"|cff0070ddStormrider's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tLeather",
+"53 Armor",
+"+4 Intellect",
+"+3 Stamina",
+"Requires Level 15",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 5.|r"
+],
+"252782": [
+"|cff0070ddPattern: Wisdom's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Requires Leatherworking (75)",
+"|cff1eff00Use: Teaches you how to craft Wisdom's Leather Gloves.|r",
+" ",
+"|cff0070ddWisdom's Leather Gloves|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Hands\tLeather",
+"53 Armor",
+"+4 Intellect",
+"+3 Stamina",
+"Requires Level 15",
+"|cff1eff00Equip: Increases healing done by up to 10 and damage done by up to 3 for all magical spells and effects.|r"
+],
+"252798": [
+"|cff0070ddPattern: Brawler's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Leatherworking (100)",
+"|cff1eff00Use: Teaches you how to craft Brawler's Leather Hood.|r",
+" ",
+"|cff0070ddBrawler's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tLeather",
+"76 Armor",
+"+10 Stamina",
+"+8 Agility",
+"Requires Level 20"
+],
+"252800": [
+"|cff0070ddPattern: Defender's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Leatherworking (100)",
+"|cff1eff00Use: Teaches you how to craft Defender's Leather Hood.|r",
+" ",
+"|cff0070ddDefender's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tLeather",
+"76 Armor",
+"+10 Stamina",
+"+8 Strength",
+"Requires Level 20"
+],
+"252801": [
+"|cff0070ddPattern: Totemic Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Leatherworking (100)",
+"|cff1eff00Use: Teaches you how to craft Totemic Leather Hood.|r",
+" ",
+"|cff0070ddTotemic Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tLeather",
+"76 Armor",
+"+10 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 9.|r"
+],
+"252802": [
+"|cff0070ddPattern: Stormrider's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Leatherworking (100)",
+"|cff1eff00Use: Teaches you how to craft Stormrider's Leather Hood.|r",
+" ",
+"|cff0070ddStormrider's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tLeather",
+"76 Armor",
+"+9 Spirit",
+"+10 Stamina",
+"Requires Level 20"
+],
+"252803": [
+"|cff0070ddPattern: Wisdom's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Requires Leatherworking (100)",
+"|cff1eff00Use: Teaches you how to craft Wisdom's Leather Hood.|r",
+" ",
+"|cff0070ddWisdom's Leather Hood|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Head\tLeather",
+"76 Armor",
+"+10 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increases healing done by up to 17 and damage done by up to 6 for all magical spells and effects.|r"
+],
+"252820": [
+"|cff0070ddPattern: Brawler's Leather Legguards|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Requires Leatherworking (125)",
+"|cff1eff00Use: Teaches you how to craft Brawler's Leather Legguards.|r",
+" ",
+"|cff0070ddBrawler's Leather Legguards|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Legs\tLeather",
+"90 Armor",
+"+9 Agility",
+"+6 Spirit",
+"+7 Stamina",
+"+7 Strength",
+"Requires Level 25"
+],
+"252822": [
+"|cff0070ddPattern: Defender's Leather Kilt|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Requires Leatherworking (125)",
+"|cff1eff00Use: Teaches you how to craft Defender's Leather Kilt.|r",
+" ",
+"|cff0070ddDefender's Leather Kilt|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Legs\tLeather",
+"90 Armor",
+"+7 Agility",
+"+9 Stamina",
+"+7 Strength",
+"+58 Armor",
+"Requires Level 25"
+],
+"252823": [
+"|cff0070ddPattern: Totemic Leather Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Requires Leatherworking (125)",
+"|cff1eff00Use: Teaches you how to craft Totemic Leather Leggings.|r",
+" ",
+"|cff0070ddTotemic Leather Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Legs\tLeather",
+"90 Armor",
+"+6 Intellect",
+"+7 Stamina",
+"+9 Strength",
+"Requires Level 25",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 8.|r"
+],
+"252824": [
+"|cff0070ddPattern: Stormrider's Leather Kilt|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Requires Leatherworking (125)",
+"|cff1eff00Use: Teaches you how to craft Stormrider's Leather Kilt.|r",
+" ",
+"|cff0070ddStormrider's Leather Kilt|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Legs\tLeather",
+"90 Armor",
+"+7 Intellect",
+"+11 Spirit",
+"+6 Stamina",
+"+7 Strength",
+"Requires Level 25"
+],
+"252825": [
+"|cff0070ddPattern: Wisdom's Leather Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Requires Leatherworking (125)",
+"|cff1eff00Use: Teaches you how to craft Wisdom's Leather Leggings.|r",
+" ",
+"|cff0070ddWisdom's Leather Leggings|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Legs\tLeather",
+"90 Armor",
+"+7 Intellect",
+"+7 Spirit",
+"+6 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases healing done by up to 21 and damage done by up to 7 for all magical spells and effects.|r"
+],
+"253902": [
+"|cff0070ddPattern: Filigreed Pristine Gown|r",
+"|cffffd100Item Level 20|r",
+"Requires Tailoring (75)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Pristine Gown.|r",
+" ",
+"|cff0070ddFiligreed Pristine Gown|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Chest\tCloth",
+"37 Armor",
+"+5 Intellect",
+"+4 Stamina",
+"+3 Spirit",
+"Requires Level 15",
+"|cff1eff00Equip: Increases healing done by up to 13 and damage done by up to 5 for all magical spells and effects.|r"
+],
+"253904": [
+"|cff0070ddPattern: Filigreed Silky Gown|r",
+"|cffffd100Item Level 20|r",
+"Requires Tailoring (75)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Silky Gown.|r",
+" ",
+"|cff0070ddFiligreed Silky Gown|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Chest\tCloth",
+"37 Armor",
+"+5 Intellect",
+"+4 Stamina",
+"+3 Spirit",
+"Requires Level 15",
+"|cff1eff00Equip: Increases damage done by Frost spells and effects by up to 9.|r"
+],
+"253906": [
+"|cff0070ddPattern: Filigreed Flame Gown|r",
+"|cffffd100Item Level 20|r",
+"Requires Tailoring (75)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Flame Gown.|r",
+" ",
+"|cff0070ddFiligreed Flame Gown|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Chest\tCloth",
+"37 Armor",
+"+5 Intellect",
+"+4 Stamina",
+"+3 Spirit",
+"Requires Level 15",
+"|cff1eff00Equip: Increases damage done by Fire spells and effects by up to 9.|r"
+],
+"253912": [
+"|cff0070ddPattern: Filigreed Shining Gown|r",
+"|cffffd100Item Level 20|r",
+"Requires Tailoring (75)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Shining Gown.|r",
+" ",
+"|cff0070ddFiligreed Shining Gown|r",
+"|cffffd100Item Level 20|r",
+"Binds when picked up",
+"Chest\tCloth",
+"37 Armor",
+"+5 Intellect",
+"+4 Stamina",
+"+3 Spirit",
+"Requires Level 15",
+"|cff1eff00Equip: Increases damage done by Holy spells and effects by up to 9.|r"
+],
+"253938": [
+"|cff0070ddPattern: Filigreed Pristine Leggings|r",
+"|cffffd100Item Level 25|r",
+"Requires Tailoring (100)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Pristine Leggings.|r",
+" ",
+"|cff0070ddFiligreed Pristine Leggings|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Legs\tCloth",
+"37 Armor",
+"+6 Intellect",
+"+5 Stamina",
+"+4 Spirit",
+"Requires Level 20",
+"|cff1eff00Equip: Increases healing done by up to 18 and damage done by up to 6 for all magical spells and effects.|r"
+],
+"253940": [
+"|cff0070ddPattern: Filigreed Silky Leggings|r",
+"|cffffd100Item Level 25|r",
+"Requires Tailoring (100)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Silky Leggings.|r",
+" ",
+"|cff0070ddFiligreed Silky Leggings|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Legs\tCloth",
+"37 Armor",
+"+6 Intellect",
+"+5 Stamina",
+"+4 Spirit",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage done by Frost spells and effects by up to 11.|r"
+],
+"253942": [
+"|cff0070ddPattern: Filigreed Flame Leggings|r",
+"|cffffd100Item Level 25|r",
+"Requires Tailoring (100)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Flame Leggings.|r",
+" ",
+"|cff0070ddFiligreed Flame Leggings|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Legs\tCloth",
+"37 Armor",
+"+6 Intellect",
+"+5 Stamina",
+"+4 Spirit",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage done by Fire spells and effects by up to 11.|r"
+],
+"253944": [
+"|cff0070ddPattern: Filigreed Shadow Leggings|r",
+"|cffffd100Item Level 25|r",
+"Requires Tailoring (100)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Shadow Leggings.|r",
+" ",
+"|cff0070ddFiligreed Shadow Leggings|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Legs\tCloth",
+"37 Armor",
+"+6 Intellect",
+"+5 Stamina",
+"+4 Spirit",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage done by Shadow spells and effects by up to 11.|r"
+],
+"253946": [
+"|cff0070ddPattern: Filigreed Pearly Leggings|r",
+"|cffffd100Item Level 25|r",
+"Requires Tailoring (100)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Pearly Leggings.|r",
+" ",
+"|cff0070ddFiligreed Pearly Leggings|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Legs\tCloth",
+"37 Armor",
+"+6 Intellect",
+"+5 Stamina",
+"+4 Spirit",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage done by Arcane spells and effects by up to 11.|r"
+],
+"253948": [
+"|cff0070ddPattern: Filigreed Shining Leggings|r",
+"|cffffd100Item Level 25|r",
+"Requires Tailoring (100)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Shining Leggings.|r",
+" ",
+"|cff0070ddFiligreed Shining Leggings|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Legs\tCloth",
+"37 Armor",
+"+6 Intellect",
+"+5 Stamina",
+"+4 Spirit",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage done by Holy spells and effects by up to 11.|r"
+],
+"253978": [
+"|cff0070ddPattern: Filigreed Silky Circlet|r",
+"|cffffd100Item Level 30|r",
+"Requires Tailoring (125)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Silky Circlet.|r",
+" ",
+"|cff0070ddFiligreed Silky Circlet|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Head\tCloth",
+"38 Armor",
+"+12 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases damage done by Frost spells and effects by up to 14.|r"
+],
+"253982": [
+"|cff0070ddPattern: Filigreed Shadow Circlet|r",
+"|cffffd100Item Level 30|r",
+"Requires Tailoring (125)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Shadow Circlet.|r",
+" ",
+"|cff0070ddFiligreed Shadow Circlet|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Head\tCloth",
+"38 Armor",
+"+12 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases damage done by Shadow spells and effects by up to 14.|r"
+],
+"253984": [
+"|cff0070ddPattern: Filigreed Pearly Circlet|r",
+"|cffffd100Item Level 30|r",
+"Requires Tailoring (125)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Pearly Circlet.|r",
+" ",
+"|cff0070ddFiligreed Pearly Circlet|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Head\tCloth",
+"38 Armor",
+"+12 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases damage done by Arcane spells and effects by up to 14.|r"
+],
+"253986": [
+"|cff0070ddPattern: Filigreed Shining Circlet|r",
+"|cffffd100Item Level 30|r",
+"Requires Tailoring (125)",
+"|cff1eff00Use: Teaches you how to craft Filigreed Shining Circlet.|r",
+" ",
+"|cff0070ddFiligreed Shining Circlet|r",
+"|cffffd100Item Level 30|r",
+"Binds when picked up",
+"Head\tCloth",
+"38 Armor",
+"+12 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases damage done by Holy spells and effects by up to 14.|r"
+],
+"268518": [
+"|cffffffffHead of the Baron|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"270865": [
+"|cffffffffTitan Relic|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"|cffffd100\"Fragmented remnants of the construct, refracting light like a kaleidoscope.\"|r"
+],
+"270866": [
+"|cffffffffTitan Relic|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"|cffffd100\"Fragmented remnants of the construct, refracting light like a kaleidoscope.\"|r"
+],
+"272017": [
+"|cff0070ddNefarion's Remit|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"A draconic language document with Nefarion's seal\"|r"
+],
+"272018": [
+"|cff0070ddOverseer's License|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"A draconic language document with General Drakkisath's seal\"|r"
+],
+"272019": [
+"|cff0070ddBronzebeard Wedding Contract|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"A detailed contract stipulating dowry and inheritance rights for the marriage of Dagran Thaurissan and Moira Bronzebeard.\"|r"
+],
+"272020": [
+"|cff0070ddFelvine Seed|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"The seed of a fel-infused plant, glowing with demonic energies.\"|r"
+],
+"272021": [
+"|cff0070ddAncient Memento|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"A shattered pendant with the broken seal of Shen'dralas.\"|r"
+],
+"272022": [
+"|cff0070ddEarthstone Diamond Pinky Ring|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"An ogre's pinky ring set with a fabled Draenic earthstone diamond\"|r"
+],
+"272023": [
+"|cff0070ddHeadmaster's Records|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"Scholomance enrollment records during the time of the great plague\"|r"
+],
+"272024": [
+"|cff0070ddGrain Shipment Records|r",
+"|cffffd100Item Level 60|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"Detailed grain shipment orders written by Baron Rivendare during the great plague\"|r"
+],
+"273085": [
+"|cff1eff00Blueprint: Fermenter|r",
+"|cffffd100Item Level 25|r",
+"Requires Alchemy (140)",
+"|cff1eff00Use: Teaches you how to place a Fermenter at a campsite.|r",
+"Craft a Fermenter.",
+" ",
+"|cffffffffFermenter|r",
+"|cffffd100Item Level 28|r",
+"Requires Alchemy (140)",
+"|cff1eff00Use: Places a fermenter that allows the creation of certain reagents, and provides all of the benefits of a Mana Well. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Mana Well to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273086": [
+"|cff1eff00Blueprint: Anvil|r",
+"|cffffd100Item Level 25|r",
+"Requires Blacksmithing (140)",
+"|cff1eff00Use: Teaches you how to place an Anvil at a campsite.|r",
+"Craft an Anvil.",
+" ",
+"|cffffffffAnvil|r",
+"|cffffd100Item Level 28|r",
+"Requires Blacksmithing (140)",
+"|cff1eff00Use: Places an anvil, and provides all of the benefits of a Sharpening Wheel. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Sharpening Wheel to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273087": [
+"|cff1eff00Blueprint: Journeyman Campfire|r",
+"|cffffd100Item Level 25|r",
+"Requires Cooking (90)",
+"|cff1eff00Use: Teaches you how to place a Journeyman Campfire at a campsite.|r",
+"Craft a Journeyman Campfire.",
+" ",
+"|cffffffffJourneyman Campfire Kit|r",
+"|cffffd100Item Level 18|r",
+"Requires Cooking (140)",
+"|cff1eff00Use: Builds a journeyman campfire that allows cooking and the placement of up to 5 additional camp features. Players sitting or crafting nearby for 1 min will gain benefits from other camp features. (5 Min Cooldown)|r"
+],
+"273092": [
+"|cff1eff00Blueprint: Repair Bot|r",
+"|cffffd100Item Level 25|r",
+"Requires Engineering (140)",
+"|cff1eff00Use: Teaches you how to place a Repair Bot at a campsite.|r",
+"Craft a Repair Bot.",
+" ",
+"|cffffffffRepair Bot|r",
+"|cffffd100Item Level 28|r",
+"Requires Engineering (140)",
+"|cff1eff00Use: Summons a Repair Bot that allows you and others nearby to buy reagents and repair gear. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Reagent Bot to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273096": [
+"|cff1eff00Blueprint: Tanning Rack|r",
+"|cffffd100Item Level 25|r",
+"Requires Leatherworking (140)",
+"|cff1eff00Use: Teaches you how to place a Tanning Rack at a campsite.|r",
+"Craft a Tanning Rack.",
+" ",
+"|cffffffffTanning Rack|r",
+"|cffffd100Item Level 28|r",
+"Requires Leatherworking (140)",
+"|cff1eff00Use: Places a Tanning Rack that allows the creation of certain reagents, and provides all of the benefits of a Camp Tent. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Camp Tent to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273097": [
+"|cff1eff00Blueprint: Rock Garden|r",
+"|cffffd100Item Level 25|r",
+"Requires Mining (140)",
+"|cff1eff00Use: Teaches you how to place a Rock Garden at a campsite.|r",
+"Craft a Rock Garden.",
+" ",
+"|cffffffffRock Garden|r",
+"|cffffd100Item Level 28|r",
+"Requires Mining (140)",
+"|cff1eff00Use: Places a Rock Garden that spawns a common mining node over time, and provides all the benefits of a Lodestone. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Lodestone to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273098": [
+"|cff1eff00Blueprint: Field Guide|r",
+"|cffffd100Item Level 25|r",
+"Requires Skinning (140)",
+"|cff1eff00Use: Teaches you how to place a Field Guide at a campsite.|r",
+"Craft a Field Guide.",
+" ",
+"|cffffffffField Guide|r",
+"|cffffd100Item Level 28|r",
+"Requires Skinning (140)",
+"|cff1eff00Use: Places a Field Guide that allows players to read it and gain Track Beasts, and provides all the benefits of a Camp Chair. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Camp Chair to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273099": [
+"|cff1eff00Blueprint: Spinning Wheel|r",
+"|cffffd100Item Level 25|r",
+"Requires Tailoring (140)",
+"|cff1eff00Use: Teaches you how to place a Spinning Wheel at a campsite.|r",
+"Craft a Spinning Wheel.",
+" ",
+"|cffffffffSpinning Wheel|r",
+"|cffffd100Item Level 28|r",
+"Requires Tailoring (140)",
+"|cff1eff00Use: Places a Spinning Wheel that allows the creation of certain reagents, and provides all the benefits of a Faction Banner. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Faction Banner to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273102": [
+"|cff1eff00Blueprint: Cookie's Feast|r",
+"|cffffd100Item Level 25|r",
+"Requires Cooking (140)",
+"|cff1eff00Use: Teaches you how to place Cookie's Feast at a campsite.|r",
+"Craft Cookie's Feast.",
+" ",
+"|cffffffffCookie's Feast|r",
+"|cffffd100Item Level 28|r",
+"Requires Cooking (140)",
+"|cff1eff00Use: Lay out Cookie's Feast that contains Stamina-boosting food.|r",
+"|cff1eff00Requires a Cooking Fire nearby. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273103": [
+"|cff1eff00Blueprint: Arcane Salvager|r",
+"|cffffd100Item Level 25|r",
+"Requires Enchanting (140)",
+"|cff1eff00Use: Teaches you how to place an Arcane Salvager at a campsite.|r",
+"Craft an Arcane Salvager.",
+" ",
+"|cffffffffArcane Salvager|r",
+"|cffffd100Item Level 28|r",
+"Requires Enchanting (140)",
+"|cff1eff00Use: Places an Arcane Salvager that enables more efficient disenchanting, and provides all the benefits of an Enchanted Lute. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over an Enchanted Lute to replace it.|r",
+"|cff1eff00All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273105": [
+"|cff1eff00Blueprint: Toxin Study|r",
+"|cffffd100Item Level 25|r",
+"Requires First Aid (140)",
+"|cff1eff00Use: Teaches you how to place a Toxin Study at a campsite.|r",
+"Craft a Toxin Study.",
+" ",
+"|cffffffffToxin Study|r",
+"|cffffd100Item Level 28|r",
+"Requires First Aid (140)",
+"|cff1eff00Use: Places a Toxin Study that contains healing potions and anti-venom, and provides all of the benefits of a First Aid Kit. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a First Aid Kit to replace it.|r",
+"|cff1eff00All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273106": [
+"|cff1eff00Blueprint: Greenhouse|r",
+"|cffffd100Item Level 25|r",
+"Requires Herbalism (140)",
+"|cff1eff00Use: Teaches you how to place a Greenhouse at a campsite.|r",
+"Craft a Greenhouse.",
+" ",
+"|cffffffffGreenhouse|r",
+"|cffffd100Item Level 28|r",
+"Requires Herbalism (140)",
+"|cff1eff00Use: Places a Greenhouse that will grow herbs over time from seeds planted, and provides all of the benefits of an Incense Candle. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over an Incense Candle to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273109": [
+"|cff1eff00Blueprint: Trapper's Workbench|r",
+"|cffffd100Item Level 60|r",
+"Requires Skinning (300)",
+"|cff1eff00Use: Teaches you how to place a Trapper's Workbench at a campsite.|r",
+"Craft a Trapper's Workbench.",
+" ",
+"|cffffffffTrapper's Workbench|r",
+"|cffffd100Item Level 60|r",
+"Requires Skinning (300)",
+"|cff1eff00Use: Places a Trapper's Workbench containing 1 trap, and provides all the benefits of a Camp Chair. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Camp Chair to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"273141": [
+"|cff1eff00Blueprint: Fishing Rack|r",
+"|cffffd100Item Level 25|r",
+"Requires Fishing (140)",
+"|cff1eff00Use: Teaches you how to place a Fishing Rack at a campsite.|r",
+"Craft a Fishing Rack.",
+" ",
+"|cffffffffFishing Rack|r",
+"|cffffd100Item Level 28|r",
+"Requires Fishing (140)",
+"|cff1eff00Use: Places a Fishing Rack that grants the ability to catch uncommon fish for 1 hour, provides Fishing Skill lures, and provides all of the benefits of a Fish Bowl. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Fish Bowl to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r"
+],
+"274286": [
+"|cffffffffDurgen Dirgehammer's Head|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"274463": [
+"|cffffffffTattered Note|r",
+"|cffffd100Item Level 30|r",
+"Quest Item",
+"Unique",
+"Classes: Shaman",
+"Requires Level 30",
+"<Right Click to Read>"
+],
+"275443": [
+"|cffffffffHighly Toxic Strain|r",
+"|cffffd100Item Level 1|r",
+"Quest Item"
+],
+"277129": [
+"|cffffffffFragment of the Firelands|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"280438": [
+"|cffffffffAbominable Head|r",
+"|cffffd100Item Level 1|r",
+"Binds when picked up",
+"Unique",
+"This Item Begins a Quest",
+"Requires Level 15"
+],
+"285808": [
+"|cffffffffEye of Blackhand|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"285868": [
+"|cffffffffEye of Drakkisath|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"285873": [
+"|cffffffffShattered Pauldron of Rivendare|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"285949": [
+"|cffffffffBlood of Immol'thar|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"285960": [
+"|cffffffffEverfrost Sample|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+],
+"285962": [
+"|cffffffffGandling's Signet Ring|r",
+"|cffffd100Item Level 1|r",
+"Quest Item",
+"Unique"
+]
+}
+}

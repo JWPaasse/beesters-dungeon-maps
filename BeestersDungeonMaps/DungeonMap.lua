@@ -365,7 +365,7 @@ ShowItemTooltip = function(owner, itemID)
     end
     RequestItem(itemID)
     owner.waitingTooltip = itemID
-    -- A tooltip built from the Classic database's item stats (Data/LootTooltips.lua).
+    -- A tooltip from the game's own item tables, else classic item stats (Data/LootTooltips.lua).
     local lines = ns.LootTooltips and ns.LootTooltips[itemID]
     if lines then
         for i, line in ipairs(lines) do

@@ -1,7 +1,7 @@
 name: Game item data
 
 # Downloads the WoW Forever client's item tables from wago.tools, kept to the bosses' loot,
-# and commits tools/game_items.json. The loot tooltips are built from it. Runs when the
+# rebuilds the loot tooltips from it, and commits. Runs when the
 # script changes, or by hand (Actions > Game item data > Run workflow). It never publishes a release.
 
 on:
@@ -22,11 +22,19 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Download item tables
-        run: python3 tools/fetch_game_items.py
+      - name: Download item tables and rebuild the tooltips
+        run: |
+          python3 tools/fetch_game_items.py
+          python3 tools/build_game_tooltips.py
+          python3 tools/fetch_loot_tooltips.py
+      - name: Check the addon still loads, and update the data audit
+        run: |
+          pip install lupa
+          python3 tools/test_addon.py
+          python3 tools/audit.py
       - name: Commit
         run: |
-          git add tools/game_items.json
+          git add tools/game_items.json tools/game_item_tooltips.json BeestersDungeonMaps/Data/LootTooltips.lua docs/AUDIT.md
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

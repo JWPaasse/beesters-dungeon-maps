@@ -113,6 +113,12 @@ def main():
         if (len(items), len(spells)) == before:
             break
 
+    # Items that need a skill specialisation ("Requires Master Axesmith"): the spell's name.
+    columns, rows = tables["ItemSparse"]
+    if "RequiredAbility" in columns:
+        c = columns.index("RequiredAbility")
+        spells |= {as_int(r[c]) for r in rows if as_int(r[0]) in items} - {None, 0}
+
     result = {"_source": f"WoW Forever client tables, build {build} (via wago.tools), kept to the bosses' loot.",
               "build": build, "tables": {}, "errors": errors}
     effect_ids = {as_int(value("ItemXItemEffect", r, "ItemEffectID"))

@@ -1,7 +1,7 @@
 name: Loot tooltips
 
-# Rebuilds the loot tooltips (classic item stats; Wowhead's only when switched on in
-# tools/fetch_loot_tooltips.py, which needs Wowhead's permission) and commits
+# Rebuilds the loot tooltips (from the game's own item tables in tools/game_items.json, else
+# classic item stats) and commits
 # BeestersDungeonMaps/Data/LootTooltips.lua. Runs when the fetch script changes, or by hand
 # (Actions > Loot tooltips > Run workflow). It never publishes a release.
 
@@ -16,6 +16,7 @@ on:
     paths:
       - "tools/fetch_loot_tooltips.py"
       - "tools/wowhead_tooltip.py"
+      - "tools/build_game_tooltips.py"
       - "tools/classic_item_tooltips.json"
       - ".github/workflows/loot-tooltips.yml"
 
@@ -30,8 +31,10 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Fetch tooltips
-        run: python3 tools/fetch_loot_tooltips.py ${{ inputs.refresh && '--refresh' || '' }}
+      - name: Build tooltips
+        run: |
+          python3 tools/build_game_tooltips.py
+          python3 tools/fetch_loot_tooltips.py ${{ inputs.refresh && '--refresh' || '' }}
       - name: Check the addon still loads, and update the data audit
         run: |
           pip install lupa
@@ -39,7 +42,7 @@ jobs:
           python3 tools/audit.py
       - name: Commit
         run: |
-          git add BeestersDungeonMaps/Data/LootTooltips.lua docs/AUDIT.md
+          git add tools/game_item_tooltips.json BeestersDungeonMaps/Data/LootTooltips.lua docs/AUDIT.md
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
