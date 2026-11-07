@@ -6,31 +6,31 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Instance | Bosses placed | Confirmed | Bosses without loot | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
 | Blackfathom Deeps | 6/7 | 0/7 | 1 | 36 | 0 |
-| Blackrock Depths | 17/18 | 0/18 | 1 | 78 | 0 |
-| Blackrock Spire | 13/21 | 0/21 | 0 | 118 | 1 |
+| Blackrock Depths | 18/18 | 0/18 | 1 | 78 | 0 |
+| Blackrock Spire | 19/21 | 0/21 | 0 | 118 | 1 |
 | City of Dalaran | 0/8 | 0/8 | 0 | 24 | 0 |
 | Dire Maul East | 5/6 | 0/6 | 0 | 31 | 0 |
 | Dire Maul North | 6/6 | 0/6 | 0 | 51 | 0 |
 | Dire Maul West | 6/7 | 0/7 | 0 | 43 | 0 |
 | Excavation Site: Wetlands | 0/3 | 0/3 | 0 | 9 | 0 |
-| Gnomeregan | 5/6 | 0/6 | 0 | 23 | 0 |
+| Gnomeregan | 6/6 | 0/6 | 0 | 23 | 0 |
 | Hall of Thanes | 0/4 | 0/4 | 0 | 12 | 0 |
-| Maraudon | 8/9 | 0/9 | 0 | 28 | 0 |
+| Maraudon | 9/9 | 0/9 | 0 | 28 | 0 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
 | Ragefire Chasm | 4/4 | 0/4 | 0 | 20 | 0 |
 | Razorfen Downs | 4/6 | 0/6 | 0 | 18 | 0 |
-| Razorfen Kraul | 7/8 | 0/8 | 0 | 24 | 0 |
+| Razorfen Kraul | 8/8 | 0/8 | 0 | 24 | 0 |
 | Ruins of Lordaeron | 6/6 | 0/6 | 0 | 18 | 0 |
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 31 | 0 |
 | Scholomance | 12/15 | 0/15 | 1 | 243 | 0 |
-| Shadowfang Keep | 8/10 | 0/10 | 0 | 40 | 0 |
+| Shadowfang Keep | 9/10 | 0/10 | 0 | 40 | 0 |
 | Stratholme | 16/17 | 0/17 | 1 | 134 | 3 |
 | Sunken Temple | 5/7 | 0/7 | 3 | 19 | 1 |
 | The Deadmines | 8/8 | 0/8 | 0 | 37 | 0 |
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 0 |
 | Uldaman | 8/8 | 0/8 | 1 | 20 | 0 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 38 | 0 |
-| **All** | 165/209 | 0/209 | 8 | 1138 | 5 |
+| **All** | 176/209 | 0/209 | 8 | 1138 | 5 |
 
 ## Blackfathom Deeps
 
@@ -65,7 +65,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Magmus | yes | journal |  | 5 | 0 |
 | Emperor Dagran Thaurissan | yes | journal |  | 12 | 0 |
 | Warder Stilgiss & Verek | yes | journal |  | 4 | 0 |
-| Panzor the Invincible | **no** | — |  | 4 | 0 |
+| Panzor the Invincible | yes | spawn point |  | 4 | 0 |
 
 ## Blackrock Spire
 
@@ -81,17 +81,17 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Halycon | yes | journal |  | 4 | 0 |
 | Gizrul the Slavener | yes | journal |  | 4 | 0 |
 | Overlord Wyrmthalak | yes | journal |  | 7 | 0 |
-| Spirestone Butcher | **no** | — |  | 2 | 0 |
-| Spirestone Battle Lord | **no** | — |  | 2 | 0 |
-| Bannok Grimaxe | **no** | — |  | 3 | 0 |
-| Crystal Fang | **no** | — |  | 3 | 0 |
+| Spirestone Butcher | yes | spawn point |  | 2 | 0 |
+| Spirestone Battle Lord | yes | spawn point |  | 2 | 0 |
+| Bannok Grimaxe | yes | spawn point |  | 3 | 0 |
+| Crystal Fang | yes | spawn point |  | 3 | 0 |
 | Pyroguard Emberseer | yes | wowhead |  | 4 | 0 |
 | Solakar Flamewreath | **no** | — |  | 5 | 0 |
-| Goraluk Anvilcrack | **no** | — |  | 5 | 0 |
+| Goraluk Anvilcrack | yes | spawn point |  | 5 | 0 |
 | Warchief Rend Blackhand & Gyth | yes | spawn point |  | 12 | 0 |
 | The Beast | yes | spawn point |  | 10 | 0 |
 | General Drakkisath | yes | spawn point |  | 19 | 0 |
-| Jed Runewatcher | **no** | — |  | 3 | 0 |
+| Jed Runewatcher | yes | spawn point |  | 3 | 0 |
 
 ## City of Dalaran
 
@@ -157,7 +157,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Electrocutioner 6000 | yes | journal |  | 3 | 0 |
 | Crowd Pummeler 9-60 | yes | journal |  | 3 (+1 unknown) | 0 |
 | Mekgineer Thermaplugg | yes | journal |  | 5 | 0 |
-| Dark Iron Ambassador | **no** | — |  | 3 | 0 |
+| Dark Iron Ambassador | yes | spawn point |  | 3 | 0 |
 
 ## Hall of Thanes
 
@@ -180,7 +180,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Princess Theradras | yes | journal |  | 2 | 0 |
 | Rotgrip | yes | journal |  | 3 | 0 |
 | Tinkerer Gizlock | yes | journal |  | 3 | 0 |
-| Meshlok the Harvester | **no** | — |  | 3 | 0 |
+| Meshlok the Harvester | yes | spawn point |  | 3 | 0 |
 
 ## Onyxia's Lair
 
@@ -219,7 +219,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Agathelos the Raging | yes | spawn point |  | 2 (+1 unknown) | 0 |
 | Charlga Razorflank | yes | journal |  | 3 | 0 |
 | Blind Hunter | yes | journal |  | 3 | 0 |
-| Earthcaller Halmgar | **no** | — |  | 2 | 0 |
+| Earthcaller Halmgar | yes | spawn point |  | 2 | 0 |
 
 ## Ruins of Lordaeron
 
@@ -280,7 +280,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Fenrus the Devourer | yes | spawn point |  | 4 (+1 unknown) | 0 |
 | Wolf Master Nandos | yes | spawn point |  | 4 (+1 unknown) | 0 |
 | Archmage Arugal | yes | spawn point |  | 4 | 0 |
-| Deathsworn Captain | **no** | — |  | 3 | 0 |
+| Deathsworn Captain | yes | spawn point |  | 3 | 0 |
 
 ## Stratholme
 

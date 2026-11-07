@@ -1,5 +1,5 @@
 {
- "_source": "Boss spawn points from the CMaNGOS Classic database (GPL-3.0, https://github.com/cmangos/classic-db), projected onto the dungeon map art with Blizzard's UiMapAssignment table; floors checked by eye against the map art and spawn heights. Rend, The Beast, Drakkisath and Gandling are placed at their rooms as drawn on the map (Blackhand Stadium, The Furnace, Spire Throne, Headmaster's Study), because the Upper Blackrock Spire floor doesn't line up with its map coordinates or the boss has no fixed spawn.",
+ "_source": "Boss spawn points from the CMaNGOS Classic database (GPL-3.0, https://github.com/cmangos/classic-db), projected onto the dungeon map art with Blizzard's UiMapAssignment table; floors checked by eye against the map art and spawn heights. Rend, The Beast, Drakkisath and Gandling are placed at their rooms as drawn on the map (Blackhand Stadium, The Furnace, Spire Throne, Headmaster's Study), because the Upper Blackrock Spire floor doesn't line up with its map coordinates or the boss has no fixed spawn. Rares from the Dungeon Journal: floor picked by spawn height against the bosses near them; Goraluk Anvilcrack and Jed Runewatcher placed in the Hall of Blackhand as drawn on the Upper Blackrock Spire map.",
  "bosses": [
   [
    "bfd|1",
@@ -315,6 +315,83 @@
    "Darkmaster Gandling",
    0.631,
    0.403
+  ],
+  [
+   "brd|2",
+   0,
+   "Panzor the Invincible",
+   0.504,
+   0.325
+  ],
+  [
+   "brs|3",
+   0,
+   "Spirestone Butcher",
+   0.448,
+   0.578
+  ],
+  [
+   "brs|4",
+   0,
+   "Spirestone Battle Lord",
+   0.358,
+   0.604
+  ],
+  [
+   "brs|1",
+   0,
+   "Bannok Grimaxe",
+   0.469,
+   0.641
+  ],
+  [
+   "brs|2",
+   0,
+   "Crystal Fang",
+   0.541,
+   0.749
+  ],
+  [
+   "brs|7",
+   0,
+   "Goraluk Anvilcrack",
+   0.29,
+   0.21
+  ],
+  [
+   "brs|7",
+   0,
+   "Jed Runewatcher",
+   0.315,
+   0.245
+  ],
+  [
+   "gnomer|4",
+   0,
+   "Dark Iron Ambassador",
+   0.295,
+   0.54
+  ],
+  [
+   "mara|1",
+   0,
+   "Meshlok the Harvester",
+   0.246,
+   0.874
+  ],
+  [
+   "rfk|1",
+   0,
+   "Earthcaller Halmgar",
+   0.494,
+   0.471
+  ],
+  [
+   "sfk|1",
+   0,
+   "Deathsworn Captain",
+   0.657,
+   0.456
   ]
  ]
 }
