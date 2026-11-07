@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0
 
 - Minimap button: click it for a list of every dungeon and raid, with the ones for your level (within 5 levels) pinned on top and the rest in a scroll list by level band. Levels are coloured by difficulty for you. Click a dungeon to open its map; a "coming soon" one opens its zone. Drag the button to move it; right-click for options, where you can also hide it. `/bdm list` opens the list too.
 - Clicking a dungeon during combat opens its map as soon as the fight ends (the game doesn't let addons open the map in combat).
