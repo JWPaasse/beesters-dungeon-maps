@@ -6,6 +6,12 @@ WoW Forever's map has no dungeon maps, no boss locations and no dungeon quest li
 - Entrances on your zone and continent maps. Hover one for its level range, and whether it's new in Forever.
 - A **Dungeons** menu in the map's top bar to open any dungeon in the zone you're looking at, even from the other side of the world.
 
+**Minimap button**
+- One click for a list of every dungeon and raid in the game, the ones for your level pinned on top.
+- Levels coloured by difficulty for you, like quest titles. Click a dungeon to open its map.
+- New dungeons that aren't in the addon yet are listed too: click one to see which zone it's in.
+- Drag it anywhere around the minimap, or hide it in the options.
+
 **Dungeon maps**
 - Open your map inside a dungeon and its map appears. Or click an entrance on the world map.
 - The classic dungeon maps, plus maps for the new Forever dungeons by Santiago Reyes.
@@ -34,6 +40,7 @@ Know where a missing boss stands? Shift-drag it from the list onto the map to pl
 
 - `/bdm` opens the options (or `/beesterdm` if another addon already uses `/bdm`)
 - `/bdm map` opens the map of the dungeon you're in
+- `/bdm list` opens the dungeon list
 - `/bdm status` shows the addon and game version. Please include it when you report a problem.
 
 ## Works with Questie

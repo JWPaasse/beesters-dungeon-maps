@@ -17,6 +17,7 @@ ns.defaults = {
     autoOpenInside = true,
     dungeonsInTopBar = true,
     questPanel = true,
+    minimapButton = true,
 }
 
 function ns:Print(message)
@@ -70,6 +71,8 @@ function ns:InitSlashCommands()
         message = (message or ""):lower():match("^%s*(.-)%s*$")
         if message == "status" then
             PrintStatus()
+        elseif message == "list" then
+            ns:ToggleDungeonList(ns.MinimapButton)
         elseif message == "map" then
             local key = ns.CurrentInstanceKey and ns.CurrentInstanceKey()
             if key then ns:OpenDungeonMap(key) else ns:Print("You are not inside a dungeon. Click an entrance on the map instead.") end
@@ -122,6 +125,7 @@ loader:SetScript("OnEvent", function(self, _, loadedName)
     ns:InitMapPins()
     ns:InitDungeonMap()
     ns:InitQuestPanel()
+    ns:InitMinimap()
 end)
 
 -- Item tooltips with the game's comparison tooltips ("Currently equipped"). Those hang off

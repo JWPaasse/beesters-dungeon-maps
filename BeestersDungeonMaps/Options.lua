@@ -97,8 +97,14 @@ function ns:InitOptions()
         "When you open your map inside a dungeon, show that dungeon's map.", "autoOpenInside", mapsHeader)
     local topBar = NewCheckbox(panel, "List dungeons in the map's top bar",
         "Adds a Dungeons button after the zone name (World > Kalimdor > Durotar > Dungeons).", "dungeonsInTopBar", auto)
-    NewCheckbox(panel, "Show the dungeon's quests next to its map",
+    local quests = NewCheckbox(panel, "Show the dungeon's quests next to its map",
         "Adds a tab with the dungeon's quests to the quest list while a dungeon map is open.", "questPanel", topBar)
+
+    local minimapHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+    minimapHeader:SetPoint("TOPLEFT", quests, "BOTTOMLEFT", 0, -16)
+    minimapHeader:SetText(MINIMAP_LABEL or "Minimap")
+    NewCheckbox(panel, "Show the minimap button",
+        "A button on the minimap that lists every dungeon and raid, yours on top. The list also opens with /bdm list.", "minimapButton", minimapHeader)
 
     if Settings and Settings.RegisterCanvasLayoutCategory then
         local category = Settings.RegisterCanvasLayoutCategory(panel, ns.title)

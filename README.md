@@ -13,6 +13,11 @@ It's built to look like part of the game: the world map's own pins and menus, th
 - A **Dungeons** menu in the map's top bar (World › Kalimdor › Durotar › Dungeons) to open any dungeon in the zone you're looking at.
 - New Forever dungeons the addon has no data for yet are listed in that menu as "coming soon".
 
+**Minimap button**
+- Click it for a list of every dungeon and raid. Your dungeons (within 5 levels of you) are pinned on top; the rest scrolls underneath, by level band, raids last. Levels are coloured by difficulty for you, like quest titles.
+- Click a dungeon to open its map. A dungeon that's "coming soon" opens its zone, so you know where to find it.
+- Drag the button around the minimap, right-click it for the options, or hide it there. `/bdm list` opens the list too.
+
 **Dungeon maps**
 - Opens by itself when you open your map inside a dungeon, or click an entrance.
 - The classic dungeon maps that still ship with the game, and Santiago Reyes's maps for the new Forever dungeons.
@@ -46,6 +51,7 @@ To update by hand, delete the old `BeestersDungeonMaps` folder first, then unzip
 
 - `/bdm` opens the options. If another addon already uses `/bdm`, use `/beesterdm`.
 - `/bdm map` opens the map of the dungeon you're in.
+- `/bdm list` opens the list of all dungeons and raids.
 - `/bdm status` prints the addon, game and data versions and the map you're on. Please include it when you report a problem.
 
 Right-click a dungeon map to go back to the normal map.

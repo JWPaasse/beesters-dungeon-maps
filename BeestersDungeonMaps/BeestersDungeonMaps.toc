@@ -20,4 +20,5 @@ MapPins.lua
 MapPins.xml
 DungeonMap.lua
 QuestPanel.lua
+Minimap.lua
 Options.lua

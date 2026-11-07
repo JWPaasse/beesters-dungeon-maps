@@ -339,19 +339,23 @@ end
 -- Instances the addon has no data for yet (ns.ComingSoon), on this map or a map inside it.
 -- They're listed by zone name; the zone's map is looked up once, among all of Azeroth's zones.
 local zoneByName
-function ns:ComingSoonOnMap(mapID)
-    local info = mapID and C_Map.GetMapInfo(mapID)
-    if not (ns.ComingSoon and info) or info.mapType == Enum.UIMapType.Cosmic or info.mapType == Enum.UIMapType.World then
-        return {}
-    end
+function ns:ZoneMapID(name)
     if not zoneByName then
         zoneByName = {}
         local zones = C_Map.GetMapChildrenInfo and C_Map.GetMapChildrenInfo(947, Enum.UIMapType.Zone, true) or {}
         for _, zone in ipairs(zones) do zoneByName[zone.name] = zoneByName[zone.name] or zone.mapID end
     end
+    return name and zoneByName[name]
+end
+
+function ns:ComingSoonOnMap(mapID)
+    local info = mapID and C_Map.GetMapInfo(mapID)
+    if not (ns.ComingSoon and info) or info.mapType == Enum.UIMapType.Cosmic or info.mapType == Enum.UIMapType.World then
+        return {}
+    end
     local list = {}
     for _, instance in ipairs(ns.ComingSoon) do
-        local zoneMapID = zoneByName[instance.zone]
+        local zoneMapID = ns:ZoneMapID(instance.zone)
         if zoneMapID and (zoneMapID == mapID or ShowsOn(mapID, zoneMapID)) then
             table.insert(list, instance)
         end
@@ -385,6 +389,7 @@ function ns:RefreshMapPins()
     if ns.mapPinsActive and WorldMapFrame:IsShown() then
         Provider:RefreshAllData()
     end
+    if ns.UpdateMinimapButton then ns:UpdateMinimapButton() end
 end
 
 function ns:InitMapPins()

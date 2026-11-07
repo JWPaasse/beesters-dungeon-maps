@@ -146,6 +146,9 @@ Settings = {
 
 acquired = {}
 WorldMapFrame = CreateFrame("Frame")
+UIParent = CreateFrame("Frame")
+Minimap = CreateFrame("Frame")
+UISpecialFrames = {}
 WorldMapFrame.providers = {}
 WorldMapFrame.mapID = 1413
 WorldMapFrame.AddDataProvider = function(self, provider) provider.owningMap = self; table.insert(self.providers, provider) end
@@ -575,6 +578,27 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local soon = ns:ComingSoonOnMap(1446)
         check("a coming-soon dungeon is found by its zone name", #soon == 1 and soon[1].name == "Shaper's Terrace")
         check("coming-soon dungeons show on the continent too", #ns:ComingSoonOnMap(1414) >= 1)
+
+        -- Minimap button and the dungeon list.
+        ns.db.minimapButton = true
+        ns:InitMinimap()
+        check("minimap button is made and shown", ns.MinimapButton ~= nil and ns.MinimapButton:IsShown())
+        local mine, all = ns:DungeonList(30)
+        local names, allNames, headers = {}, {}, 0
+        for _, e in ipairs(mine) do names[e.name] = true end
+        for _, e in ipairs(all) do if e.header then headers = headers + 1 else allNames[e.name] = true end end
+        check("for level 30: Shadowfang Keep and Scarlet Monastery are yours", names["Shadowfang Keep"] and names["Scarlet Monastery"])
+        check("for level 30: Ragefire Chasm and Stratholme aren't", not names["Ragefire Chasm"] and not names["Stratholme"])
+        check("for level 30: The Drowned City (coming soon) is listed as yours", names["The Drowned City"] == true)
+        check("the full list has every instance and coming-soon one", allNames["Onyxia's Lair"] and allNames["Hyjal Summit"] and allNames["Wailing Caverns"])
+        check("the full list is split into level bands and raids", headers >= 6 and all[#all].kind == "raid")
+        ns:ToggleDungeonList(ns.MinimapButton)
+        check("clicking the button opens the list", BeestersDungeonMapsList:IsShown())
+        SlashCmdList.BEESTERSDUNGEONMAPS("list")
+        check("/bdm list closes it again", not BeestersDungeonMapsList:IsShown())
+        ns.db.minimapButton = false
+        ns:UpdateMinimapButton()
+        check("the button can be hidden", not ns.MinimapButton:IsShown())
 
         SlashCmdList.BEESTERSDUNGEONMAPS("status")
         IsInInstance = function() return true, "party" end

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Minimap button: click it for a list of every dungeon and raid, with the ones for your level (within 5 levels) pinned on top and the rest in a scroll list by level band. Levels are coloured by difficulty for you. Click a dungeon to open its map; a "coming soon" one opens its zone. Drag the button to move it; right-click for options, where you can also hide it. `/bdm list` opens the list too.
+
 ## 1.0.1
 
 - Fixed: clicking "Quest chain" sometimes opened the quest instead of folding the chain open.
