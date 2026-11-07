@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.10
 
 - Item tooltips for new WoW Forever items (recipes, blueprints, food, new gear) now come from the game's own item data, with Forever's real values, until the game has loaded the item. Recipes also show the item they make. Old items Forever didn't change keep the classic-stats tooltip.
 
