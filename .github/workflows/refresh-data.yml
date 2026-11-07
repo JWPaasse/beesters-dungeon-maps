@@ -102,7 +102,8 @@ jobs:
 
           toc=BeestersDungeonMaps/BeestersDungeonMaps.toc
           loaded=$(grep -v '^##' "$toc" | tr -d '\r' | sed '/^\s*$/d; s#\\#/#g; s#^#BeestersDungeonMaps/#')
-          changed=$(git diff --cached --name-only)
+          # A changed comment (a new client build number in a header) is no reason for a release.
+          changed=$(git diff --cached --name-only -I '^--')
           echo "Changed: $changed"
           git commit -m "Refresh data"
           git push
