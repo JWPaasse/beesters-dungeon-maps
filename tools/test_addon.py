@@ -632,7 +632,29 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:OpenDungeonMap("dal")
         check("inside Dalaran, in the Underbelly: the Underbelly opens", ns:CurrentDungeonFloor() == 2)
         ns:CloseDungeonMap(true)
+        -- Gnomeregan has no subzones: the map holds the level you picked during the run,
+        -- and follows the boss you pull or target.
+        subzone = ""
+        GetMinimapZoneText = function() return "Gnomeregan" end
+        GetInstanceInfo = function() return "Gnomeregan", "party", 1, "Normal", 5, 0, false, 90 end
+        local runEvent = BeestersDungeonMapsRunWatcher.scripts.OnEvent
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        ns:OpenDungeonMap("gnomer")
+        local firstFloor = ns:CurrentDungeonFloor()
+        ns:OpenDungeonMap("gnomer", 3)
+        ns:CloseDungeonMap(true)
+        ns:OpenDungeonMap("gnomer")
+        check("inside Gnomeregan the map holds the level you picked", ns:CurrentDungeonFloor() == 3)
+        local thermaplugg
+        for _, b in ipairs(ns.BossPositions.gnomer or {}) do if b[5] and b[5]:find("Thermaplugg") then thermaplugg = b end end
+        runEvent(nil, "ENCOUNTER_START", thermaplugg and thermaplugg[4] or 0, "Mekgineer Thermaplugg")
+        check("pulling a boss turns the map to its level", thermaplugg and ns:CurrentDungeonFloor() == thermaplugg[1])
+        ns:CloseDungeonMap(true)
         IsInInstance, GetInstanceInfo = inInst, instInfo
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        ns:OpenDungeonMap("gnomer")
+        check("after leaving, the next run starts on the default level again", ns:CurrentDungeonFloor() == firstFloor)
+        ns:CloseDungeonMap(true)
         ns:OpenDungeonMap("dal")
         check("outside, Dalaran still opens on the Underbelly", ns:CurrentDungeonFloor() == 2)
         ns:CloseDungeonMap(true)

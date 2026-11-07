@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Dungeons without subzones (like Gnomeregan): the map now holds the level you last looked at during your run, and turns to a boss's level when you pull or target that boss. A new run starts on the first level again.
+
 ## 1.1.0
 
 - Minimap button: click it for a list of every dungeon and raid, with the ones for your level (within 5 levels) pinned on top and the rest in a scroll list by level band. Levels are coloured by difficulty for you. Click a dungeon to open its map; a "coming soon" one opens its zone. Drag the button to move it; right-click for options, where you can also hide it. `/bdm list` opens the list too.

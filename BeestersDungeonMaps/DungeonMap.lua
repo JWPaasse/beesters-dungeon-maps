@@ -129,6 +129,32 @@ local function FloorHere(key)
     end
 end
 
+-- The level you're on during this run, for dungeons without subzones (Gnomeregan): the last
+-- level you looked at inside, or the level of the boss you last pulled or targeted. It starts
+-- over when you leave the dungeon.
+local run = { key = nil, floor = nil }
+
+local function NoteRunFloor(key, floor)
+    if floor and ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key then
+        run.key, run.floor = key, floor
+    end
+end
+
+local function RunFloor(key)
+    return run.key == key and run.floor or nil
+end
+
+-- A boss of this run, by encounter ID or name: the level it stands on.
+local function BossFloor(key, encounterID, name)
+    local wanted = name and Normalize(name)
+    for _, boss in ipairs(BossesWithPositions(key)) do
+        if boss.floor and ((encounterID and encounterID ~= 0 and boss.encounterID == encounterID)
+            or (wanted and Normalize(boss.name) == wanted)) then
+            return boss.floor
+        end
+    end
+end
+
 -- Switching floors by hand inside the dungeon teaches the addon which floor this subzone is on.
 local function LearnFloorHere(key, floor)
     if not (ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key) then return end
@@ -819,6 +845,7 @@ function ShowFloor(index)
     if lootPanel then lootPanel:Hide() end
     local map = ns.DungeonMaps[current.key]
     current.floor = index
+    NoteRunFloor(current.key, index)
     local floor = map.floors[index]
 
     if floor.tiles then
@@ -1086,8 +1113,9 @@ function ns:OpenDungeonMap(key, floor)
         end
         current.key = key
         -- Inside this dungeon: the level you're on. Otherwise where a group starts.
-        local here = ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key and FloorHere(key)
-        current.floor = floor or here or DefaultFloor(key) -- before Show: its layout reads the floor
+        local inside = ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key
+        local here = inside and FloorHere(key)
+        current.floor = floor or here or (inside and RunFloor(key)) or DefaultFloor(key) -- before Show: its layout reads it
         current.zoneMapID = WorldMapFrame:GetMapID()
         SetCanvasShown(false)
         view:Show()
@@ -1291,6 +1319,32 @@ function ns:InitDungeonMap()
         if not (ns:IsDungeonMapOpen() and current.key and CurrentInstanceKey() == current.key) then return end
         local here = FloorHere(current.key)
         if here and here ~= current.floor then ShowFloor(here) end
+    end)
+
+    -- Leaving the dungeon ends the run; a boss pulled or targeted tells which level you're on.
+    local runWatcher = CreateFrame("Frame", "BeestersDungeonMapsRunWatcher")
+    for _, event in ipairs({ "PLAYER_ENTERING_WORLD", "ENCOUNTER_START", "PLAYER_TARGET_CHANGED" }) do
+        pcall(runWatcher.RegisterEvent, runWatcher, event)
+    end
+    runWatcher:SetScript("OnEvent", function(_, event, encounterID, encounterName)
+        local key = CurrentInstanceKey()
+        if event == "PLAYER_ENTERING_WORLD" then
+            if key ~= run.key then run.key, run.floor = nil, nil end
+            return
+        end
+        if not key then return end
+        local floor
+        -- Names inside instances can be hidden from addons ("secret" values): never fail on one.
+        pcall(function()
+            if event == "ENCOUNTER_START" then
+                floor = BossFloor(key, encounterID, encounterName)
+            elseif UnitExists("target") and not UnitIsPlayer("target") then
+                floor = BossFloor(key, nil, UnitName("target"))
+            end
+        end)
+        if not floor then return end
+        NoteRunFloor(key, floor)
+        if ns:IsDungeonMapOpen() and current.key == key and current.floor ~= floor then ShowFloor(floor) end
     end)
     WorldMapFrame:HookScript("OnHide", function()
         ns:CloseDungeonMap(false)
