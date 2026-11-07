@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.7
+
+- Boss pins are now the boss's portrait in a gold ring, with a small skull in the corner.
+- Boss lists checked against Wowhead's WoW Forever Dungeon Journal: City of Dalaran, Hall of Thanes and the Excavation Site corrected (for example Magmatus and Arcanic Enigma), and the journal's rares and extra encounters added. Names are the ones you see in game.
+- Boss positions for City of Dalaran, Hall of Thanes, the Excavation Site, and the rares that have a fixed spawn.
+- City of Dalaran opens on The Underbelly, where a run starts.
+- The dungeon quest tab now looks like the quest log: same border, spacing, scroll bar and "(Dungeon)" tag.
+- When you've handed in every quest in a dungeon, the quest tab says so.
+- Fixed: the "Currently equipped" comparison could stay on screen after hovering an item.
+
 ## 0.2.6
 
 - Fuller loot tables: classic bosses' loot now comes from the Classic database's own loot tables, with drop chances. Dungeon set pieces are back (Scholomance, Stratholme, Blackrock Spire), world drops stay out.
