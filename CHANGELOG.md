@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.9
 
 - Item tooltips for items the game hasn't loaded are now built from the classic item stats only (marked "Classic values; WoW Forever may differ"); the addon no longer includes tooltips copied from Wowhead.
 
