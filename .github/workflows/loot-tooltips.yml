@@ -1,6 +1,7 @@
-name: Loot tooltips (Wowhead)
+name: Loot tooltips
 
-# Fetches the WoW Forever tooltips of the bosses' loot from Wowhead and commits
+# Rebuilds the loot tooltips (classic item stats; Wowhead's only when switched on in
+# tools/fetch_loot_tooltips.py, which needs Wowhead's permission) and commits
 # BeestersDungeonMaps/Data/LootTooltips.lua. Runs when the fetch script changes, or by hand
 # (Actions > Loot tooltips > Run workflow). It never publishes a release.
 
@@ -42,5 +43,5 @@ jobs:
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "Loot tooltips from Wowhead"
+          git commit -m "Loot tooltips"
           git push
