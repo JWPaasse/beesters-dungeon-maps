@@ -1,30 +1,52 @@
-Beester's Dungeon Maps adds the dungeon information WoW Forever's map is missing, and makes it look like part of the game.
+WoW Forever's map has no dungeon maps, no boss locations and no dungeon quest list. Beester's Dungeon Maps adds them, and makes them look like they were always part of the game.
 
-**In this version (beta)**
+## Features
 
-- Dungeon and raid entrances on your zone and continent maps
-- Hover an entrance for its level range, and whether it is new in Forever
-- Blackrock Mountain shows both Blackrock Depths and Blackrock Spire on one pin
-- Options in the game's own Settings window: show or hide dungeons and raids, show them on continent maps or only on zone maps, and change the icon size
+**Dungeon and raid entrances**
+- Entrances on your zone and continent maps. Hover one for its level range, and whether it's new in Forever.
+- A **Dungeons** menu in the map's top bar to open any dungeon in the zone you're looking at, even from the other side of the world.
 
-**Coming next**
+**Dungeon maps**
+- Open your map inside a dungeon and its map appears. Or click an entrance on the world map.
+- The classic dungeon maps, plus maps for the new Forever dungeons by Santiago Reyes.
+- Every boss has a pin with its portrait. Hover it for the boss's loot (Bind on Pickup, Uncommon and better), sorted into gear, recipes and other. Click to keep the list open.
+- Multi-level dungeons get a floor menu that shows how many bosses are on each level.
 
-- Dungeon maps when you open your map inside a dungeon, including maps for the new Forever dungeons by Santiago Reyes
-- Boss locations on the dungeon map
-- A dungeon quest list beside the dungeon map, showing which quests you have, which you can still pick up and where, and which start inside
-- Browse any dungeon and its quests from the map's own menus, without being there
+**Dungeon quests**
+- All of the dungeon's quests next to its map, in the quest log's own style: the ones you have, the ones you can still pick up and where, and the ones that start inside.
+- Quest chains fold to the step you're on. Click a quest for its text, objectives and rewards.
+- Share a quest with your group, or show it on the map.
+- Switch between Horde and Alliance quests.
 
-**Commands**
+**Tooltips that don't get stuck**
+- If the game hasn't loaded an item yet, you see the addon's copy of its tooltip instead of "Retrieving item information".
+
+## Still in progress
+
+- **New dungeons:** The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace aren't in the addon's data yet. They're listed as "coming soon" in their zone's Dungeons menu and will be added as the data comes in.
+- **Raids:** Barrow Deeps and Hyjal Summit follow after they open on 9 December.
+- **Incomplete data:** a dungeon with bosses that don't have a position or loot yet shows a "Work in progress" tag on its map. Hover it to see what's missing.
+- **Language:** English only for now.
+
+Know where a missing boss stands? Shift-drag it from the list onto the map to place it yourself, and let me know so everyone gets it.
+
+## Commands
 
 - `/bdm` opens the options (or `/beesterdm` if another addon already uses `/bdm`)
-- `/bdm status` shows the addon and game version, handy when reporting a problem
+- `/bdm map` opens the map of the dungeon you're in
+- `/bdm status` shows the addon and game version. Please include it when you report a problem.
 
-**Works with Questie**
+## Works with Questie
 
-You don't need Questie, and it runs fine alongside it. If you do see an error with both installed, please report it on GitHub with the error text.
+You don't need Questie, and the two run side by side without problems. If you do see an error with both installed, please report it with the error text.
 
-**Data**
+## Credits
 
-Entrance and quest data comes from QuestieDB, the open database behind Questie, and updates automatically as their team adds Forever content. Some of the new Forever dungeons are not in that data yet. They will appear as it fills in.
+- Entrances and quests: QuestieDB, the open database behind Questie
+- Quest text and classic item data: the CMaNGOS Classic database
+- Maps of the new Forever dungeons: Santiago Reyes (Atlas de Azeroth: Forever), used with permission
+- Bosses and item tooltips for new Forever items: the game's own files
+
+The data updates automatically, so new Forever content shows up as it's added.
 
 Source code and bug reports: https://github.com/JWPaasse/beesters-dungeon-maps

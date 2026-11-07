@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- "Work in progress" tag on dungeon maps whose data is still thin (bosses without a position or loot). Hover it to see what's missing. The entrance tooltip says so too.
+- New Forever dungeons and raids that aren't in the data yet are listed as "coming soon" in their zone's Dungeons menu: The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold, Shaper's Terrace, Barrow Deeps and Hyjal Summit.
+- Boss positions you placed under a name the addon no longer uses are cleaned up.
+- Removed the `/bdm probe` test command.
+
 ## 0.2.10
 
 - Item tooltips for new WoW Forever items (recipes, blueprints, food, new gear) now come from the game's own item data, with Forever's real values, until the game has loaded the item. Recipes also show the item they make. Old items Forever didn't change keep the classic-stats tooltip.
