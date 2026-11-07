@@ -760,7 +760,9 @@ local function Layout()
     local artH = artW / 1.5
     view.Art:SetSize(artW, artH)
 
-    local floor = ns.DungeonMaps[current.key].floors[current.floor]
+    local map = current.key and ns.DungeonMaps[current.key]
+    local floor = map and map.floors[current.floor]
+    if not floor then return end -- not set up yet; ShowFloor lays it out again
     if floor.tiles then
         local scale = artW / MAP_W
         for i = 1, 12 do
@@ -1052,10 +1054,11 @@ function ns:OpenDungeonMap(key, floor)
             ns.db.lastDireMaulWing = key
         end
         current.key = key
+        current.floor = floor or DefaultFloor(key) -- before Show: its layout reads the floor
         current.zoneMapID = WorldMapFrame:GetMapID()
         SetCanvasShown(false)
         view:Show()
-        ShowFloor(floor or DefaultFloor(key))
+        ShowFloor(current.floor)
         if ns.UpdateDungeonCrumb then ns:UpdateDungeonCrumb() end
         if ns.ShowDungeonQuests then ns:ShowDungeonQuests(key) end
     end)

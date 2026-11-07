@@ -92,18 +92,31 @@ end
 -- Opening an entry
 ----------------------------------------------------------------------
 
+-- The game doesn't let addons open the world map during combat: wait for the fight to end.
+local waiting
+local combatWatcher = CreateFrame("Frame")
+combatWatcher:SetScript("OnEvent", function(self)
+    self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+    local e = waiting
+    waiting = nil
+    if e then ns:OpenDungeonListEntry(e) end
+end)
+
 local function Open(e)
+    if list then list:Hide() end
     if InCombatLockdown() and not WorldMapFrame:IsShown() then
-        ns:Print("The map can't be opened during combat.")
+        waiting = e
+        combatWatcher:RegisterEvent("PLAYER_REGEN_ENABLED")
+        ns:Print(("%s opens when combat ends."):format(e.name))
         return
     end
-    if list then list:Hide() end
     if not e.soon and ns.DungeonMaps and ns.DungeonMaps[e.key] then
         ns:OpenDungeonMap(e.key)
     elseif e.zoneID then
         ns:GoToMap(e.zoneID)
     end
 end
+function ns:OpenDungeonListEntry(e) Open(e) end
 
 local function ShowEntryTooltip(row)
     local e = row.entry

@@ -592,6 +592,24 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("for level 30: The Drowned City (coming soon) is listed as yours", names["The Drowned City"] == true)
         check("the full list has every instance and coming-soon one", allNames["Onyxia's Lair"] and allNames["Hyjal Summit"] and allNames["Wailing Caverns"])
         check("the full list is split into level bands and raids", headers >= 6 and all[#all].kind == "raid")
+        -- The error from 1.0.1: a dungeon opened after a two-floor one, while the map is closed.
+        ns:OpenDungeonMap("dal", 2)
+        ns:CloseDungeonMap(true)
+        WorldMapFrame:Hide()
+        check("opening a one-floor dungeon after Dalaran's second floor works",
+            pcall(function() ns:OpenDungeonMap("rfc") end) and ns:CurrentDungeonKey() == "rfc")
+        ns:CloseDungeonMap(true)
+        -- In combat with the map closed: wait, then open when the fight ends.
+        local shown = WorldMapFrame.IsShown
+        WorldMapFrame.IsShown = function() return false end
+        inCombat = true
+        ns:OpenDungeonListEntry({ key = "wc", name = "Wailing Caverns", levels = "17–24" })
+        check("in combat the dungeon map waits", not ns:IsDungeonMapOpen())
+        inCombat = false
+        WorldMapFrame.IsShown = shown
+        ns:OpenDungeonListEntry({ key = "wc", name = "Wailing Caverns", levels = "17–24" })
+        check("out of combat it opens", ns:IsDungeonMapOpen() and ns:CurrentDungeonKey() == "wc")
+        ns:CloseDungeonMap(true)
         ns:ToggleDungeonList(ns.MinimapButton)
         check("clicking the button opens the list", BeestersDungeonMapsList:IsShown())
         SlashCmdList.BEESTERSDUNGEONMAPS("list")
