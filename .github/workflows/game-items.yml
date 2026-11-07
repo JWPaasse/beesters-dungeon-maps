@@ -1,0 +1,35 @@
+name: Game item data
+
+# Downloads the WoW Forever client's item tables from wago.tools, kept to the bosses' loot,
+# and commits tools/game_items.json. The loot tooltips are built from it. Runs when the
+# script changes, or by hand (Actions > Game item data > Run workflow). It never publishes a release.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/fetch_game_items.py"
+      - ".github/workflows/game-items.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Download item tables
+        run: python3 tools/fetch_game_items.py
+      - name: Commit
+        run: |
+          git add tools/game_items.json
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Game item data"
+          git pull --rebase
+          git push
