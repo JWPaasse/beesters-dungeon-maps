@@ -110,15 +110,33 @@ local START_FLOOR = { dal = 2 }
 
 -- Inside a dungeon the game no longer says which level you're on, but the subzone name under
 -- the minimap does. Known subzones per floor; others are learned (below) and matched by name.
+-- Forever's files list each dungeon's subzone names (tools/floor_subzones.json) but no longer
+-- which map level they're on; these are the ones the boss positions settle. Dungeons with no
+-- subzones at all (Blackrock Depths, Maraudon, ...) rely on the run's level and the bosses.
 local SUBZONE_FLOORS = {
     dal = { ["Dalaran"] = 1, ["City of Dalaran"] = 1, ["The Underbelly"] = 2 },
+    -- Gilnid in the foundry, Mr. Smite in the mast room, the ship in the cove: the second map.
+    dm = { ["Goblin Foundry"] = 2, ["Mast Room"] = 2, ["Ironclad Cove"] = 2 },
+    -- Stratholme's two maps are the city's two halves: the living side and the undead side.
+    strat = {
+        ["King's Square"] = 1, ["Market Row"] = 1, ["The Scarlet Bastion"] = 1, ["The Hall of Lights"] = 1,
+        ["The Crimson Throne"] = 1,
+        ["Elders' Square"] = 2, ["The Gauntlet"] = 2, ["Slaughter Square"] = 2, ["The Slaughter House"] = 2,
+    },
 }
+
+-- The subzone under the minimap, unless it's just the dungeon's own name (that says nothing).
+local function SubzoneHere(key)
+    local subzone = GetSubZoneText and GetSubZoneText() or ""
+    local instance = ns.Instances[key] and ns.Instances[key].name
+    if subzone == "" or subzone == instance or subzone == (GetZoneText and GetZoneText()) then return nil end
+    return subzone
+end
 
 -- The floor you're standing on, when it can be told from the subzone; nil otherwise.
 local function FloorHere(key)
-    local subzone = GetSubZoneText and GetSubZoneText() or ""
-    if subzone == "" then subzone = GetMinimapZoneText and GetMinimapZoneText() or "" end
-    if subzone == "" then return nil end
+    local subzone = SubzoneHere(key)
+    if not subzone then return nil end
     local known = SUBZONE_FLOORS[key] and SUBZONE_FLOORS[key][subzone]
     if known then return known end
     local learned = ns.db.subzoneFloors and ns.db.subzoneFloors[key] and ns.db.subzoneFloors[key][subzone]
@@ -158,8 +176,8 @@ end
 -- Switching floors by hand inside the dungeon teaches the addon which floor this subzone is on.
 local function LearnFloorHere(key, floor)
     if not (ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key) then return end
-    local subzone = GetSubZoneText and GetSubZoneText() or ""
-    if subzone == "" or (SUBZONE_FLOORS[key] and SUBZONE_FLOORS[key][subzone]) then return end
+    local subzone = SubzoneHere(key)
+    if not subzone or (SUBZONE_FLOORS[key] and SUBZONE_FLOORS[key][subzone]) then return end
     ns.db.subzoneFloors = ns.db.subzoneFloors or {}
     ns.db.subzoneFloors[key] = ns.db.subzoneFloors[key] or {}
     ns.db.subzoneFloors[key][subzone] = floor
@@ -1344,6 +1362,9 @@ function ns:InitDungeonMap()
         end)
         if not floor then return end
         NoteRunFloor(key, floor)
+        -- A boss pulled here stands on this level: remember the subzone (targeting can reach
+        -- across levels, so only a pull counts).
+        if event == "ENCOUNTER_START" then LearnFloorHere(key, floor) end
         if ns:IsDungeonMapOpen() and current.key == key and current.floor ~= floor then ShowFloor(floor) end
     end)
     WorldMapFrame:HookScript("OnHide", function()

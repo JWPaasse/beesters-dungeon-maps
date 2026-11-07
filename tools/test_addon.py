@@ -650,6 +650,29 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         runEvent(nil, "ENCOUNTER_START", thermaplugg and thermaplugg[4] or 0, "Mekgineer Thermaplugg")
         check("pulling a boss turns the map to its level", thermaplugg and ns:CurrentDungeonFloor() == thermaplugg[1])
         ns:CloseDungeonMap(true)
+        -- The dungeon's own name as subzone says nothing about the level.
+        subzone = "Gnomeregan"
+        ns:OpenDungeonMap("gnomer")
+        check("the dungeon's own name isn't taken for a level", ns:CurrentDungeonFloor() == thermaplugg[1])
+        ns:CloseDungeonMap(true)
+        -- Deadmines: Ironclad Cove is on the second map.
+        GetInstanceInfo = function() return "The Deadmines", "party", 1, "Normal", 5, 0, false, 36 end
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        subzone = "Ironclad Cove"
+        ns:OpenDungeonMap("dm")
+        check("Deadmines: Ironclad Cove opens the second map", ns:CurrentDungeonFloor() == 2)
+        ns:CloseDungeonMap(true)
+        -- Scholomance: pulling a boss teaches the addon the subzone's level.
+        GetInstanceInfo = function() return "Scholomance", "party", 1, "Normal", 5, 0, false, 289 end
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        subzone = "Vault of the Ravenian"
+        local ravenian
+        for _, b in ipairs(ns.BossPositions.scholo or {}) do if b[5] == "The Ravenian" then ravenian = b end end
+        runEvent(nil, "ENCOUNTER_START", 0, "The Ravenian")
+        runEvent(nil, "PLAYER_ENTERING_WORLD") -- a new day: the run's level is gone, the subzone stays
+        ns:OpenDungeonMap("scholo")
+        check("a subzone where a boss was pulled opens that boss's level", ravenian and ns:CurrentDungeonFloor() == ravenian[1])
+        ns:CloseDungeonMap(true)
         IsInInstance, GetInstanceInfo = inInst, instInfo
         runEvent(nil, "PLAYER_ENTERING_WORLD")
         ns:OpenDungeonMap("gnomer")
