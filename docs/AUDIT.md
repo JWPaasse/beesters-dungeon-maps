@@ -265,7 +265,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Ravenian | yes | spawn point |  | 29 | 0 |
 | Lord Alexei Barov | yes | spawn point |  | 28 | 0 |
 | Lady Illucia Barov | yes | spawn point |  | 29 | 0 |
-| Darkmaster Gandling | yes | spawn point |  | 20 | 0 |
+| Darkmaster Gandling | yes | placed in game |  | 20 | 0 |
 
 ## Shadowfang Keep
 
