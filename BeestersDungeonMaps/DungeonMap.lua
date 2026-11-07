@@ -605,28 +605,93 @@ end
 -- The view
 ----------------------------------------------------------------------
 
+-- Boss pin: the boss's still portrait in a round gold ring, with a small skull in the bottom-left
+-- corner. Bosses without a known portrait keep the plain skull.
+local PIN_SIZE, RING_SIZE, BADGE_SIZE = 30, 38, 14
+local PORTRAIT_MASK = "Interface\\CharacterFrame\\TempPortraitAlphaMask"
+local GOLD_RING = "Interface\\Common\\GoldRing"
+
+local function SetSkull(texture)
+    if C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(SKULL_ATLAS) then
+        texture:SetAtlas(SKULL_ATLAS)
+    else
+        texture:SetTexture(SKULL_FALLBACK)
+    end
+end
+
 local function CreateBossButton(parent)
     local button = CreateFrame("Button", nil, parent)
-    button:SetSize(26, 26)
+    button:SetSize(PIN_SIZE, PIN_SIZE)
+    -- Portrait, masked round.
+    button.Portrait = button:CreateTexture(nil, "ARTWORK")
+    button.Portrait:SetAllPoints()
+    local mask = button:CreateMaskTexture()
+    mask:SetTexture(PORTRAIT_MASK, "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+    mask:SetAllPoints(button.Portrait)
+    button.Portrait:AddMaskTexture(mask)
+    button.Ring = button:CreateTexture(nil, "OVERLAY")
+    button.Ring:SetTexture(GOLD_RING)
+    button.Ring:SetSize(RING_SIZE, RING_SIZE)
+    button.Ring:SetPoint("CENTER")
+    -- Skull badge: a dark disc with the skull on it.
+    button.BadgeBack = button:CreateTexture(nil, "OVERLAY", nil, 2)
+    button.BadgeBack:SetSize(BADGE_SIZE, BADGE_SIZE)
+    button.BadgeBack:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT", -3, -3)
+    button.BadgeBack:SetColorTexture(0.12, 0.08, 0.04, 1)
+    local badgeMask = button:CreateMaskTexture()
+    badgeMask:SetTexture(PORTRAIT_MASK, "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+    badgeMask:SetAllPoints(button.BadgeBack)
+    button.BadgeBack:AddMaskTexture(badgeMask)
+    button.Badge = button:CreateTexture(nil, "OVERLAY", nil, 3)
+    button.Badge:SetSize(BADGE_SIZE - 2, BADGE_SIZE - 2)
+    button.Badge:SetPoint("CENTER", button.BadgeBack, "CENTER")
+    SetSkull(button.Badge)
+    -- Plain skull, for bosses without a portrait.
     button.Icon = button:CreateTexture(nil, "ARTWORK")
-    button.Icon:SetAllPoints()
-    if C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(SKULL_ATLAS) then
-        button.Icon:SetAtlas(SKULL_ATLAS)
-    else
-        button.Icon:SetTexture(SKULL_FALLBACK)
-    end
+    button.Icon:SetSize(26, 26)
+    button.Icon:SetPoint("CENTER")
+    SetSkull(button.Icon)
     button.Highlight = button:CreateTexture(nil, "HIGHLIGHT")
-    button.Highlight:SetAllPoints()
-    if C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(SKULL_ATLAS) then
-        button.Highlight:SetAtlas(SKULL_ATLAS)
-    else
-        button.Highlight:SetTexture(SKULL_FALLBACK)
-    end
     button.Highlight:SetBlendMode("ADD")
     button.Highlight:SetAlpha(0.4)
     SetupBossFrame(button)
     return button
 end
+
+-- Portrait or plain skull, for the boss this pin shows now.
+local function UpdateBossPin(button)
+    local boss = button.boss
+    local displayID = boss and boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
+    local portrait = displayID and SetPortraitTextureFromCreatureDisplayID and true or false
+    button.displayID = portrait and displayID or nil
+    if portrait then SetPortraitTextureFromCreatureDisplayID(button.Portrait, displayID) end
+    button.Portrait:SetShown(portrait)
+    button.Ring:SetShown(portrait)
+    button.BadgeBack:SetShown(portrait)
+    button.Badge:SetShown(portrait)
+    button.Icon:SetShown(not portrait)
+    button.Highlight:ClearAllPoints()
+    if portrait then
+        button.Highlight:SetTexture(GOLD_RING)
+        button.Highlight:SetSize(RING_SIZE, RING_SIZE)
+        button.Highlight:SetPoint("CENTER")
+    else
+        SetSkull(button.Highlight)
+        button.Highlight:SetAllPoints(button.Icon)
+    end
+end
+
+-- Portraits load a moment later the first time; draw them again when they do.
+local portraitWatcher = CreateFrame("Frame")
+portraitWatcher:RegisterEvent("PORTRAITS_UPDATED")
+portraitWatcher:SetScript("OnEvent", function()
+    if not (view and view.BossButtons) then return end
+    for _, button in ipairs(view.BossButtons) do
+        if button:IsShown() and button.displayID then
+            SetPortraitTextureFromCreatureDisplayID(button.Portrait, button.displayID)
+        end
+    end
+end)
 
 local function CreateListRow(parent)
     local row = CreateFrame("Button", nil, parent)
@@ -711,6 +776,7 @@ function ShowFloor(index)
             local button = view.BossButtons[pinIndex] or CreateBossButton(view.Art)
             view.BossButtons[pinIndex] = button
             button.boss, button.total = boss, #bosses
+            UpdateBossPin(button)
             button:Show()
         elseif not boss.x then
             rowIndex = rowIndex + 1

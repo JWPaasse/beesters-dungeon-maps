@@ -332,6 +332,12 @@ def main():
         GameTooltip.GetName = function() return "GameTooltip" end
         GameTooltipTextLeft3 = CreateFrame("Frame")
         mutanus.scripts.OnEnter(mutanus)
+        local pinPortrait
+        SetPortraitTextureFromCreatureDisplayID = function(texture, displayID) if texture == mutanus.Portrait then pinPortrait = displayID end portraitID = displayID end
+        ns:CloseDungeonMap(true); ns:OpenDungeonMap("wc")
+        for _, b in ipairs(view.BossButtons) do if b:IsShown() and b.boss.name == "Mutanus the Devourer" then mutanus = b end end
+        check("boss pins show the boss's portrait in a ring", pinPortrait == ns.BossModels[mutanus.boss.npcID])
+        mutanus.scripts.OnEnter(mutanus)
         check("hovering a boss shows its portrait", portraitID == ns.BossModels[mutanus.boss.npcID])
         check("the portrait doesn't use GameTooltip_InsertFrame (secret values inside dungeons)", inserted == nil)
         -- Fake loot covering every kind, to check the grouping and order.
