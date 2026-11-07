@@ -31,6 +31,7 @@ BUDGET_SLOT = {1: 0, 5: 0, 7: 0, 17: 0, 20: 0,
                13: 3, 21: 3, 22: 3,
                15: 4, 25: 4, 26: 4, 28: 4}
 PRIMARY = {3: "Agility", 4: "Strength", 5: "Intellect", 6: "Spirit", 7: "Stamina"}
+PRIMARY_ORDER = [4, 3, 5, 7, 6]  # the game lists them in this order, whatever the item data's order
 SCHOOL_DAMAGE = {84: "Holy", 85: "Fire", 86: "Nature", 87: "Frost", 88: "Shadow", 89: "Arcane"}
 RESIST = {51: "Fire", 52: "Frost", 53: "Holy", 54: "Shadow", 55: "Nature", 56: "Arcane"}
 WEAPONS = {0: "Axe", 1: "Axe", 2: "Bow", 3: "Gun", 4: "Mace", 5: "Mace", 6: "Polearm", 7: "Sword", 8: "Sword",
@@ -316,8 +317,6 @@ class Builder:
         q = num(s["OverallQualityID"])
         inv = num(s["InventoryType"])
         lines = [f"|cff{QUALITY[min(q, 7)]}{s['Display_lang']}|r"]
-        if num(s["ItemLevel"]):
-            lines.append(f"{YELLOW}Item Level {num(s['ItemLevel'])}|r")
         if not nested:
             lines += {1: ["Binds when picked up"], 2: ["Binds when equipped"], 3: ["Binds when used"],
                       4: ["Quest Item"]}.get(num(s["Bonding"]), [])
@@ -348,7 +347,7 @@ class Builder:
         armor = self.armor(s, it)
         if armor:
             lines.append(f"{armor} Armor")
-        equip_lines, power, bonus_armor = [], {}, 0
+        equip_lines, power, bonus_armor, primary = [], {}, 0, {}
         for k in range(10):
             stat, alloc = num(s[f"StatModifier_bonusStat_{k}"]), num(s[f"StatPercentEditor_{k}"])
             if stat in (-1,) or not alloc:
@@ -357,7 +356,7 @@ class Builder:
             if amount is None:
                 continue
             if stat in PRIMARY:
-                lines.append(f"{amount:+d} {PRIMARY[stat]}")
+                primary[stat] = amount
             elif stat in SCHOOL_DAMAGE:
                 equip_lines.append(f"{GREEN}Equip: Increases damage done by {SCHOOL_DAMAGE[stat]} spells and effects by up to {amount}.|r")
             elif stat == 50:
@@ -373,6 +372,9 @@ class Builder:
                 equip_lines.append(None)  # unknown stat: the tooltip would be incomplete
         if None in equip_lines:
             return None
+        resist = [l for l in lines if l.endswith(" Resistance")]
+        lines = [l for l in lines if not l.endswith(" Resistance")]
+        lines += [f"{primary[k]:+d} {PRIMARY[k]}" for k in PRIMARY_ORDER if k in primary] + resist
         if bonus_armor:
             lines.append(f"+{bonus_armor} Armor")
         if 41 in power and 42 in power:
@@ -385,15 +387,17 @@ class Builder:
             names = [r["Name_lang"] for cid, r in sorted(self.classes.items()) if cid and cls & (1 << (cid - 1))]
             if names and len(names) < 9:
                 lines.append("Classes: " + ", ".join(names))
+        requires = []
         if num(s["RequiredLevel"]) > 1:
-            lines.append(f"Requires Level {num(s['RequiredLevel'])}")
+            requires.append(f"Requires Level {num(s['RequiredLevel'])}")
         ability = self.spell_name.get(num(s["RequiredAbility"]))
         if ability:
             lines.insert(1, f"Requires {ability['Name_lang']}")
         skill = self.skill.get(num(s["RequiredSkill"]))
         if skill:
-            lines.append(f"Requires {skill['DisplayName_lang']} ({num(s['RequiredSkillRank'])})")
-        lines += equip_lines
+            requires.append(f"Requires {skill['DisplayName_lang']} ({num(s['RequiredSkillRank'])})")
+        head = lines
+        lines = []
         created, teaches, charges, learn = None, [], 0, False
         for link in self.links.get(item_id, []):
             eff = self.effect.get(num(link["ItemEffectID"]))
@@ -425,7 +429,7 @@ class Builder:
         desc = s.get("Description_lang") or ""
         if desc:
             if learn:
-                lines.append(f"{GREEN}Use: {desc}|r")
+                lines.append(f"Use: {desc}")
             else:
                 lines.append(f'{YELLOW}"{desc}"|r')
         lines += teaches
@@ -437,12 +441,11 @@ class Builder:
             lines.append("Locked")
         elif num(s["Flags_0"]) & 0x4:
             lines.append("<Right Click to Open>")
-        if created and not nested:
-            sub = self.tooltip(created, nested=True)
-            if sub:
-                lines.append(" ")
-                lines += sub
-        return lines
+        sub = self.tooltip(created, nested=True) if created and not nested else None
+        if sub:
+            # A recipe, the way the game shows it: the item it makes, then what it teaches and needs.
+            return head + [" "] + sub + lines + requires
+        return head + requires + equip_lines + lines
 
 
 def main():

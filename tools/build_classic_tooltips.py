@@ -35,8 +35,6 @@ TRIGGER = {0: "Use", 1: "Equip", 2: "Chance on hit"}
 
 def tooltip(r):
     lines = [f"|cff{QUALITY[r['Quality']]}{r['name']}|r"]
-    if r.get("ItemLevel"):
-        lines.append(f"|cffffd100Item Level {r['ItemLevel']}|r")
     lines += {1: ["Binds when picked up"], 2: ["Binds when equipped"], 3: ["Binds when used"], 4: ["Quest Item"]}.get(r["bonding"], [])
     if r.get("MaxCount") == 1:
         lines.append("Unique")
