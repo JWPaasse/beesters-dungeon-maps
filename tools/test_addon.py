@@ -480,6 +480,15 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         C_QuestLog.IsQuestFlaggedCompleted, C_QuestLog.GetLogIndexForQuestID = realDone, realIndex
         ns:OpenDungeonMap("rfc")
         check("with quests left, no 'completed' line", BeestersDungeonMapsQuests.allDone == false)
+        -- Faction toggle: switches to the other side's quests and back.
+        local toggle = BeestersDungeonMapsQuestTabs.Faction
+        check("faction toggle starts on your own faction", ns.questFaction == "H")
+        toggle.scripts.OnClick(toggle)
+        local ga = ns.ClassifyDungeonQuests("stocks")
+        local anyHorde = false
+        for _, list in pairs(ga) do for _, e in ipairs(list) do if e.q[4] == "H" then anyHorde = true end end end
+        check("on Alliance, only Alliance and shared quests are listed", ns.questFaction == "A" and not anyHorde and #ga.available + #ga.inside > 0)
+        toggle.scripts.OnClick(toggle)
         local allianceOnly = false
         for _, list in pairs(g) do for _, e in ipairs(list) do if e.q[4] == "A" then allianceOnly = true end end end
         check("no Alliance-only quests for a Horde character", not allianceOnly)

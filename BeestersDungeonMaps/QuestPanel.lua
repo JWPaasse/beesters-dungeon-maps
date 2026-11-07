@@ -53,7 +53,7 @@ local function ForPlayer(q)
         local _, _, classID = UnitClass("player")
         playerClassBit = classID and 2 ^ (classID - 1) or 0
     end
-    if q[F.FACTION] and q[F.FACTION] ~= playerFaction then return false end
+    if q[F.FACTION] and q[F.FACTION] ~= (ns.questFaction or playerFaction) then return false end
     local classes = q[F.CLASSES]
     if type(classes) == "number" and classes > 0 and playerClassBit > 0 then
         if math.floor(classes / playerClassBit) % 2 == 0 then return false end
@@ -669,6 +669,8 @@ local function AddQuestRow(y, entry, kind)
     -- Icon: the game's round quest button for quests in your log; "!" for ones you can pick up.
     if t.POI then t.POI:Hide() end
     t.Bang:Hide(); t.BangMark:Hide(); t.Badge:SetText("")
+    t.Bang:SetDesaturated(false); t.BangMark:SetDesaturated(false)
+    t.Bang:SetAlpha(1); t.BangMark:SetAlpha(1)
     if kind == "log" and entry.chain then
         t.Bang:SetAtlas("UI-QuestPoi-QuestNumber")
         t.Bang:Show()
@@ -691,6 +693,14 @@ local function AddQuestRow(y, entry, kind)
                 t.BangMark:SetAtlas("QuestNormal")
                 t.BangMark:Show()
             end
+        else
+            -- Not available yet (level, or an earlier quest first): the same "!", greyed out,
+            -- so every quest has its icon in the same place.
+            t.Bang:SetAtlas("UI-QuestPoi-QuestNumber")
+            t.BangMark:SetAtlas("QuestNormal")
+            t.Bang:SetDesaturated(true); t.BangMark:SetDesaturated(true)
+            t.Bang:SetAlpha(0.6); t.BangMark:SetAlpha(0.6)
+            t.Bang:Show(); t.BangMark:Show()
         end
     end
 
@@ -1298,6 +1308,46 @@ local function CreateFrames()
             SetTab("dungeon")
         end
     end)
+    -- Horde / Alliance: which side's quests to list. Starts on your own faction.
+    local f = CreateFrame("Button", nil, strip)
+    f:SetHeight(20)
+    f:SetPoint("RIGHT", strip, "RIGHT", -4, 0)
+    f.Icon = f:CreateTexture(nil, "ARTWORK")
+    f.Icon:SetSize(16, 16)
+    f.Icon:SetPoint("LEFT", 4, 0)
+    f.Label = f:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+    f.Label:SetPoint("LEFT", f.Icon, "RIGHT", 3, 0)
+    local hl = f:CreateTexture(nil, "HIGHLIGHT")
+    hl:SetAllPoints()
+    hl:SetColorTexture(1, 1, 1, 0.08)
+    f.Update = function(self)
+        local horde = ns.questFaction == "H"
+        self.Icon:SetTexture(horde and "Interface\\PVPFrame\\PVP-Currency-Horde" or "Interface\\PVPFrame\\PVP-Currency-Alliance")
+        self.Label:SetText(horde and (FACTION_HORDE or "Horde") or (FACTION_ALLIANCE or "Alliance"))
+        local c = horde and { 0.9, 0.3, 0.25 } or { 0.35, 0.6, 1 }
+        self.Label:SetTextColor(c[1], c[2], c[3])
+        self:SetWidth(self.Label:GetStringWidth() + 28)
+    end
+    f:SetScript("OnClick", function(self)
+        ns.questFaction = ns.questFaction == "H" and "A" or "H"
+        self:Update()
+        if panel then panel.Detail:Hide(); selected = nil; Layout(); Refresh() end
+        if GameTooltip:IsShown() and GameTooltip:GetOwner() == self then self.ShowTip(self) end
+    end)
+    f.ShowTip = function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
+        local side = ns.questFaction == "H" and "Horde" or "Alliance"
+        local other = ns.questFaction == "H" and "Alliance" or "Horde"
+        GameTooltip:SetText(("Showing %s quests"):format(side), 1, 1, 1)
+        GameTooltip:AddLine(("<Click to show %s quests>"):format(other), GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
+        GameTooltip:Show()
+    end
+    f:SetScript("OnEnter", f.ShowTip)
+    f:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    strip.Faction = f
+    local own = UnitFactionGroup("player")
+    ns.questFaction = own == "Alliance" and "A" or "H"
+    f:Update()
     strip:Hide()
 
     panel = CreateFrame("Frame", "BeestersDungeonMapsQuests", host)
