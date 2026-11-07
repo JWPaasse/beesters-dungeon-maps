@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.1
 
 - Dungeons without subzones (like Gnomeregan): the map now holds the level you last looked at during your run, and turns to a boss's level when you pull or target that boss. A new run starts on the first level again.
 - The Deadmines and Stratholme now switch levels by subzone too (Goblin Foundry, Mast Room and Ironclad Cove; Stratholme's living and undead sides).
