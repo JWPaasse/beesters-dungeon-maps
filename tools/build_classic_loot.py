@@ -68,7 +68,7 @@ def main():
     for r in rlt:
         refs[r["entry"]].append(r)
 
-    bosses = {int(n) for n in re.findall(r'\{\d+,"(?:[^"\\]|\\.)*",(\d+)\}', BOSSES.read_text(encoding="utf-8").split("ns.Bosses = {")[1].split("\n}")[0])}
+    bosses = {int(n) for n in re.findall(r'\{\d+,"(?:[^"\\]|\\.)*",(\d+)[,}]', BOSSES.read_text(encoding="utf-8").split("ns.Bosses = {")[1].split("\n}")[0])}
     boss_names = {re.sub(r"[^a-z]", "", names.get(b, "").lower()) for b in bosses}
     # Rares and a boss's own adds ("Noxxion's Spawn") may share a boss's tables.
     boss_like = set(bosses)

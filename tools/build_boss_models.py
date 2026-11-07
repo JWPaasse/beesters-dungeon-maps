@@ -44,7 +44,7 @@ def main():
     sql = gzip.decompress(raw).decode("utf-8", errors="replace") if sys.argv[1].endswith(".gz") else raw.decode("utf-8", errors="replace")
     create = re.search(r"CREATE TABLE `creature_template` \((.*?)\) ENGINE", sql, re.S).group(1)
     cols = re.findall(r"^\s*`(\w+)`", create, re.M)
-    wanted = {int(n) for n in re.findall(r'\{\d+,"(?:[^"\\]|\\.)*",(\d+)\}', BOSSES.read_text(encoding="utf-8"))}
+    wanted = {int(n) for n in re.findall(r'\{\d+,"(?:[^"\\]|\\.)*",(\d+)[,}]', BOSSES.read_text(encoding="utf-8"))}
     models = {}
     for m in re.finditer(r"INSERT INTO `creature_template` VALUES (.*?);\n", sql, re.S):
         for row in parse_values(m.group(1)):

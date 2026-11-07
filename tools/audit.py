@@ -26,7 +26,7 @@ def main():
     maps_lua = (DATA / "Maps.lua").read_text(encoding="utf-8")
     entr = (DATA / "Entrances.lua").read_text(encoding="utf-8")
     names = dict(re.findall(r'\["(\w+)"\] = \{ name = "([^"]+)"', entr))
-    bosses = {k: re.findall(r'\{(\d+),"((?:[^"\\]|\\.)*)",(\w+)\}', body)
+    bosses = {k: re.findall(r'\{(\d+),"((?:[^"\\]|\\.)*)",(\w+)[,}]', body)
               for k, body in re.findall(r'\["(\w+)"\] = \{ (.*?) \},\n', lua_section(bosses_lua, "Bosses"))}
     positions = {k: re.findall(r'\{(\d+),[\d.]+,[\d.]+,(\d+),"((?:[^"\\]|\\.)*)"\}', body)
                  for k, body in re.findall(r'\["(\w+)"\] = \{ (\{.*?\}) \},\n', lua_section(maps_lua, "BossPositions"))}
@@ -36,7 +36,9 @@ def main():
 
     # Where each position came from (the tools/*.json sources, in build_maps.py's order).
     source = {}
-    norm = lambda s: re.sub(r"[^a-z]", "", s.lower())
+    dm_lua = (ROOT / "BeestersDungeonMaps" / "DungeonMap.lua").read_text(encoding="utf-8")
+    aliases = dict(re.findall(r'(\w+) = "(\w+)"', dm_lua.split("local NAME_ALIASES = {")[1].split("\n}")[0]))
+    norm = lambda s: (lambda n: aliases.get(n, n))(re.sub(r"[^a-z]", "", s.lower()))
     for fname, tag in [("journal_positions.json", "journal"), ("journal_positions_cata.json", "journal"),
                        ("wowhead_positions.json", "wowhead"), ("placed_positions.json", "placed in game"),
                        ("spawn_positions.json", "spawn point")]:

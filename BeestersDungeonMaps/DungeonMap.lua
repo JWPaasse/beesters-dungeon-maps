@@ -35,6 +35,14 @@ local NAME_ALIASES = {
     cannonmasterwilley = "willeyhopebreaker", archivistgalford = "instructorgalford",
     malorthezealous = "commandermalor", baronrivendare = "lordauriusrivendare",
     overlordramtusk = "warlordramtusk",
+    -- The Dungeon Journal's group names
+    sneedsshredder = "sneed", jammalantheprophetogomthewretched = "jammalantheprophet",
+    weaverdreamscythe = "wardensofthedream", hazzasmorphaz = "wardensofthedream",
+    kinggordokchorushtheobserver = "kinggordok", nekrumgutchewershadowpriestsezzziz = "nekrumsezzziz",
+    warchiefrendblackhandgyth = "warchiefrendblackhand",
+    scarletcommandermograinehighinquisitorwhitemane = "highinquisitorwhitemane",
+    warderstilgissverek = "warderstilgiss", groyattheblindhunter = "blindhunter",
+    ringofthelaw = "ringoflaw", chestoftheseven = "theseven",
 }
 
 local function Normalize(name)
@@ -59,7 +67,7 @@ local function BossesWithPositions(key)
     local positions = ns.BossPositions and ns.BossPositions[key] or {}
     local byEncounter, byName = {}, {}
     for _, p in ipairs(positions) do
-        byEncounter[p[4]] = p
+        if p[4] and p[4] ~= 0 then byEncounter[p[4]] = p end
         byName[Normalize(p[5])] = p
     end
     local result = {}
@@ -67,12 +75,13 @@ local function BossesWithPositions(key)
     local list = ns.Bosses and ns.Bosses[key]
     if list then
         for order, boss in ipairs(list) do
-            local encounterID, name, npcID = boss[1], boss[2], boss[3]
-            local p = byEncounter[encounterID] or byName[Normalize(name)]
+            local encounterID, name, npcID, note = boss[1], boss[2], boss[3], boss[4]
+            local p = (encounterID ~= 0 and byEncounter[encounterID]) or byName[Normalize(name)]
             local mine = custom and custom[name]
             if mine then p = { mine[1], mine[2], mine[3] } end
             table.insert(result, {
                 order = order, encounterID = encounterID, name = name, npcID = npcID,
+                note = note ~= "" and note or nil,
                 floor = p and p[1], x = p and p[2], y = p and p[3], custom = mine and true or nil,
             })
         end
@@ -95,7 +104,11 @@ local function BossesPerFloor(key)
     return counts
 end
 
+-- Where a group starts: the City of Dalaran run begins in The Underbelly (its second map).
+local START_FLOOR = { dal = 2 }
+
 local function DefaultFloor(key)
+    if START_FLOOR[key] then return START_FLOOR[key] end
     local counts = BossesPerFloor(key)
     if (counts[1] or 0) > 0 then return 1 end
     local best, most = 1, 0
@@ -300,7 +313,8 @@ local function ShowBossTooltip(owner, boss, total)
     GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
     GameTooltip:SetText(boss.name, 1, 1, 1)
     GameTooltip:AddLine(("Boss %d of %d"):format(boss.order, total), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-    ShowPortrait(GameTooltip, boss, 3) -- after the name and "Boss x of y"
+    if boss.note then GameTooltip:AddLine(boss.note, 0.75, 0.75, 0.75) end
+    ShowPortrait(GameTooltip, boss, boss.note and 4 or 3) -- after the name, "Boss x of y" and its note
     local hasLoot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID]
     local panelOpen = lootPanel and lootPanel:IsShown() and lootPanel.boss == boss
     if hasLoot and not panelOpen then

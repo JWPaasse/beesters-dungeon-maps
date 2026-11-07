@@ -100,6 +100,31 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"2941": [
+"|cff0070ddPrison Shank|r",
+"|cffffd100Item Level 26|r",
+"Binds when picked up",
+"One-Hand\tDagger",
+"21 - 39 Damage\tSpeed 1.80",
+"(16.7 damage per second)",
+"+5 Agility",
+"+2 Stamina",
+"Durability 60 / 60",
+"Requires Level 21",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"2942": [
+"|cff0070ddIron Knuckles|r",
+"|cffffd100Item Level 26|r",
+"Binds when picked up",
+"One-Hand\tFist Weapon",
+"19 - 37 Damage\tSpeed 1.70",
+"(16.5 damage per second)",
+"Durability 60 / 60",
+"Requires Level 21",
+"|cff1eff00Chance on hit: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "2985": [
 "|cff1eff00Inscribed Leather Breastplate|r",
 "|cffffd100Item Level 21|r",
@@ -157,6 +182,18 @@
 "+4 Stamina",
 "+2 Strength",
 "Durability 35 / 35",
+"Requires Level 21",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"3228": [
+"|cff0070ddJimmied Handcuffs|r",
+"|cffffd100Item Level 26|r",
+"Binds when picked up",
+"Wrist\tMail",
+"89 Armor",
+"+3 Strength",
+"+7 Stamina",
+"Durability 40 / 40",
 "Requires Level 21",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -591,6 +628,15 @@
 "Requires Level 21",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"6341": [
+"|cff1eff00Eerie Stable Lantern|r",
+"|cffffd100Item Level 19|r",
+"Binds when picked up",
+"Held In Off-hand",
+"+3 Stamina",
+"Requires Level 14",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "6388": [
 "|cff1eff00Glimmering Mail Pauldrons|r",
 "|cffffd100Item Level 30|r",
@@ -884,6 +930,19 @@
 "Requires Level 21",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"6642": [
+"|cff0070ddPhantom Armor|r",
+"|cffffd100Item Level 25|r",
+"Binds when picked up",
+"Chest\tMail",
+"201 Armor",
+"+5 Spirit",
+"+11 Stamina",
+"+3 Strength",
+"Durability 105 / 105",
+"Requires Level 20",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "6681": [
 "|cffffffffThornspike|r",
 "|cffffd100Item Level 32|r",
@@ -944,6 +1003,33 @@
 "Requires Level 29",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"6688": [
+"|cff1eff00Whisperwind Headdress|r",
+"|cffffd100Item Level 32|r",
+"Binds when picked up",
+"Head\tLeather",
+"79 Armor",
+"+3 Stamina",
+"+7 Intellect",
+"+7 Spirit",
+"Durability 50 / 50",
+"Requires Level 27",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"6689": [
+"|cff0070ddWind Spirit Staff|r",
+"|cffffd100Item Level 32|r",
+"Binds when picked up",
+"Two-Hand\tStaff",
+"70 - 106 Damage\tSpeed 3.30",
+"(26.7 damage per second)",
+"+5 Intellect",
+"+15 Spirit",
+"+3 Stamina",
+"Durability 100 / 100",
+"Requires Level 27",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "6690": [
 "|cff1eff00Ferine Leggings|r",
 "|cffffd100Item Level 34|r",
@@ -1002,6 +1088,41 @@
 "+7 Stamina",
 "Durability 100 / 100",
 "Requires Level 31",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"6695": [
+"|cff0070ddStygian Bone Amulet|r",
+"|cffffd100Item Level 32|r",
+"Binds when picked up",
+"Neck",
+"+8 Spirit",
+"+4 Stamina",
+"Requires Level 27",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"6696": [
+"|cff0070ddNightstalker Bow|r",
+"|cffffd100Item Level 32|r",
+"Binds when picked up",
+"Ranged\tBow",
+"19 - 36 Damage\tSpeed 1.70",
+"(16.2 damage per second)",
+"+3 Agility",
+"Durability 75 / 75",
+"Requires Level 27",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"6697": [
+"|cff0070ddBatwing Mantle|r",
+"|cffffd100Item Level 32|r",
+"Binds when picked up",
+"Shoulder\tCloth",
+"37 Armor",
+"+5 Spirit",
+"+10 Intellect",
+"+3 Agility",
+"Durability 50 / 50",
+"Requires Level 27",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "6901": [
@@ -1218,6 +1339,103 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"7686": [
+"|cff0070ddIronspine's Eye|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Finger",
+"+9 Agility",
+"+4 Strength",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"7687": [
+"|cff0070ddIronspine's Fist|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"One-Hand\tMace",
+"38 - 72 Damage\tSpeed 2.40",
+"(22.9 damage per second)",
+"+7 Strength",
+"Durability 90 / 90",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"7688": [
+"|cff0070ddIronspine's Ribcage|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Chest\tMail",
+"235 Armor",
+"+17 Stamina",
+"+6 Strength",
+"+3 Agility",
+"Durability 120 / 120",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"7689": [
+"|cff0070ddMorbid Dawn|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Two-Hand\tSword",
+"70 - 105 Damage\tSpeed 2.90",
+"(30.2 damage per second)",
+"+15 Stamina",
+"+10 Strength",
+"Durability 100 / 100",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"7690": [
+"|cff0070ddEbon Vise|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Hands\tLeather",
+"70 Armor",
+"+4 Strength",
+"+6 Agility",
+"+8 Stamina",
+"Durability 35 / 35",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"7691": [
+"|cff0070ddEmbalmed Shroud|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Head\tCloth",
+"42 Armor",
+"+12 Spirit",
+"+7 Stamina",
+"+11 Intellect",
+"Durability 50 / 50",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"7708": [
+"|cff0070ddNecrotic Wand|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Ranged\tWand",
+"32 - 61 Damage\tSpeed 1.40",
+"(33.2 damage per second)",
+"Durability 65 / 65",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"7709": [
+"|cff0070ddBlighted Leggings|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Legs\tCloth",
+"45 Armor",
+"+17 Spirit",
+"Durability 65 / 65",
+"Requires Level 30",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "7710": [
 "|cff0070ddLoksey's Training Stick|r",
 "|cffffd100Item Level 36|r",
@@ -1356,6 +1574,16 @@
 "Requires Level 39",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"7731": [
+"|cff0070ddGhostshard Talisman|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Neck",
+"+9 Stamina",
+"+4 Spirit",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "7756": [
 "|cff1eff00Dog Training Gloves|r",
 "|cffffd100Item Level 34|r",
@@ -1450,6 +1678,29 @@
 "33 Armor",
 "Durability 25 / 25",
 "Requires Level 35",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"9400": [
+"|cffffffffBaelog's Shortbow|r",
+"|cffffd100Item Level 41|r",
+"Ranged\tBow",
+"26 - 50 Damage\tSpeed 2.30",
+"(16.5 damage per second)",
+"Durability 65 / 65",
+"Requires Level 36",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"9401": [
+"|cff0070ddNordic Longshank|r",
+"|cffffd100Item Level 43|r",
+"Binds when picked up",
+"One-Hand\tSword",
+"45 - 84 Damage\tSpeed 2.20",
+"(29.3 damage per second)",
+"+8 Agility",
+"+5 Stamina",
+"Durability 90 / 90",
+"Requires Level 38",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "9407": [
@@ -1711,6 +1962,41 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"9455": [
+"|cff0070ddEmissary Cuffs|r",
+"|cffffd100Item Level 33|r",
+"Binds when picked up",
+"Wrist\tLeather",
+"47 Armor",
+"+5 Arcane Resistance",
+"Durability 35 / 35",
+"Requires Level 28",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"9456": [
+"|cff0070ddGlass Shooter|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"Ranged\tGun",
+"36 - 68 Damage\tSpeed 2.90",
+"(17.9 damage per second)",
+"Durability 75 / 75",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"9457": [
+"|cff0070ddRoyal Diplomatic Scepter|r",
+"|cffffd100Item Level 35|r",
+"Binds when picked up",
+"One-Hand\tMace",
+"37 - 69 Damage\tSpeed 2.30",
+"(23.0 damage per second)",
+"+7 Spirit",
+"+2 Stamina",
+"Durability 90 / 90",
+"Requires Level 30",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "9458": [
 "|cff0070ddThermaplugg's Central Core|r",
 "|cffffd100Item Level 37|r",
@@ -1768,55 +2054,6 @@
 "+23 Spirit",
 "Durability 120 / 120",
 "Requires Level 43",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"9470": [
-"|cff0070ddBad Mojo Mask|r",
-"|cffffd100Item Level 49|r",
-"Binds when picked up",
-"Head\tCloth",
-"57 Armor",
-"+24 Intellect",
-"Durability 50 / 50",
-"Requires Level 44",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"9473": [
-"|cff0070ddJinxed Hoodoo Skin|r",
-"|cffffd100Item Level 49|r",
-"Binds when picked up",
-"Chest\tLeather",
-"144 Armor",
-"+20 Spirit",
-"+8 Strength",
-"+10 Stamina",
-"Durability 100 / 100",
-"Requires Level 44",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"9474": [
-"|cff0070ddJinxed Hoodoo Kilt|r",
-"|cffffd100Item Level 49|r",
-"Binds when picked up",
-"Legs\tLeather",
-"126 Armor",
-"+24 Spirit",
-"+10 Intellect",
-"Durability 75 / 75",
-"Requires Level 44",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"9475": [
-"|cff0070ddDiabolic Skiver|r",
-"|cffffd100Item Level 49|r",
-"Binds when picked up",
-"Two-Hand\tPolearm",
-"99 - 149 Damage\tSpeed 2.90",
-"(42.8 damage per second)",
-"Durability 100 / 100",
-"Requires Level 44",
-"|cff1eff00Chance on hit: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "9476": [
@@ -2309,36 +2546,6 @@
 "Requires Level 37",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
-"10795": [
-"|cff0070ddDrakeclaw Band|r",
-"|cffffd100Item Level 54|r",
-"Binds when picked up",
-"Finger",
-"Requires Level 49",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"10796": [
-"|cff0070ddDrakestone|r",
-"|cffffd100Item Level 54|r",
-"Binds when picked up",
-"Held In Off-hand",
-"Requires Level 49",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"10797": [
-"|cff0070ddFirebreather|r",
-"|cffffd100Item Level 53|r",
-"Binds when picked up",
-"One-Hand\tSword",
-"54 - 101 Damage\tSpeed 2.20",
-"(35.2 damage per second)",
-"Durability 90 / 90",
-"Requires Level 48",
-"|cff1eff00Chance on hit: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
 "10798": [
 "|cff0070ddAtal'alarion's Tusk Ring|r",
 "|cffffd100Item Level 51|r",
@@ -2762,6 +2969,20 @@
 "|cff1eff00Chance on hit: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"11726": [
+"|cffa335eeSavage Gladiator Chain|r",
+"|cffffd100Item Level 57|r",
+"Binds when picked up",
+"Chest\tMail",
+"369 Armor",
+"+13 Stamina",
+"+14 Agility",
+"+13 Strength",
+"Durability 140 / 140",
+"Requires Level 52",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "11735": [
 "|cff0070ddRagefury Eyepatch|r",
 "|cffffd100Item Level 57|r",
@@ -2951,6 +3172,44 @@
 "+8 Stamina",
 "Durability 90 / 90",
 "Requires Level 48",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"11785": [
+"|cff0070ddRock Golem Bulwark|r",
+"|cffffd100Item Level 58|r",
+"Binds when picked up",
+"Off Hand\tShield",
+"1994 Armor",
+"+10 Stamina",
+"+10 Nature Resistance",
+"+10 Arcane Resistance",
+"Durability 100 / 100",
+"Requires Level 53",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"11786": [
+"|cff0070ddStone of the Earth|r",
+"|cffffd100Item Level 56|r",
+"Binds when picked up",
+"Two-Hand\tSword",
+"123 - 185 Damage\tSpeed 3.20",
+"(48.1 damage per second)",
+"280 Armor",
+"+12 Stamina",
+"Durability 100 / 100",
+"Requires Level 51",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"11787": [
+"|cff0070ddShalehusk Boots|r",
+"|cffffd100Item Level 58|r",
+"Binds when picked up",
+"Feet\tPlate",
+"417 Armor",
+"+5 Stamina",
+"Durability 65 / 65",
+"Requires Level 53",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -3374,119 +3633,17 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
-"12243": [
-"|cff0070ddSmoldering Claw|r",
-"|cffffd100Item Level 54|r",
-"Binds when picked up",
-"Two-Hand\tPolearm",
-"108 - 162 Damage\tSpeed 2.90",
-"(46.6 damage per second)",
-"+10 Fire Resistance",
-"Durability 100 / 100",
-"Requires Level 49",
-"|cff1eff00Chance on hit: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12463": [
-"|cff0070ddDrakefang Butcher|r",
-"|cffffd100Item Level 53|r",
-"Binds when picked up",
-"Two-Hand\tSword",
-"99 - 149 Damage\tSpeed 2.70",
-"(45.9 damage per second)",
-"+15 Strength",
-"Durability 100 / 100",
-"Requires Level 48",
-"|cff1eff00Chance on hit: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12464": [
-"|cff0070ddBloodfire Talons|r",
-"|cffffd100Item Level 53|r",
-"Binds when picked up",
-"Hands\tLeather",
-"96 Armor",
-"+9 Spirit",
-"+5 Intellect",
-"+10 Fire Resistance",
-"Durability 35 / 35",
-"Requires Level 48",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12465": [
-"|cff0070ddNightfall Drape|r",
-"|cffffd100Item Level 53|r",
-"Binds when picked up",
-"Back\tCloth",
-"38 Armor",
-"+14 Stamina",
-"+8 Spirit",
-"Requires Level 48",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12466": [
-"|cff0070ddDawnspire Cord|r",
-"|cffffd100Item Level 53|r",
-"Binds when picked up",
-"Waist\tCloth",
-"43 Armor",
-"+19 Intellect",
-"+8 Spirit",
-"Durability 30 / 30",
-"Requires Level 48",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12553": [
-"|cff0070ddSwiftwalker Boots|r",
-"|cffffd100Item Level 59|r",
+"12470": [
+"|cff0070ddSandstalker Ankleguards|r",
+"|cffffd100Item Level 47|r",
 "Binds when picked up",
 "Feet\tLeather",
-"115 Armor",
-"+21 Agility",
-"+7 Stamina",
-"+4 Strength",
-"Durability 50 / 50",
-"Requires Level 54",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12554": [
-"|cff0070ddHands of the Exalted Herald|r",
-"|cffffd100Item Level 59|r",
-"Binds when picked up",
-"Hands\tCloth",
-"52 Armor",
-"+13 Intellect",
-"+12 Spirit",
-"Durability 30 / 30",
-"Requires Level 54",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12556": [
-"|cff0070ddHigh Priestess Boots|r",
-"|cffffd100Item Level 59|r",
-"Binds when picked up",
-"Feet\tCloth",
-"58 Armor",
-"+20 Stamina",
-"+7 Spirit",
-"+10 Shadow Resistance",
-"Durability 40 / 40",
-"Requires Level 54",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12557": [
-"|cff0070ddEbonsteel Spaulders|r",
-"|cffffd100Item Level 59|r",
-"Binds when picked up",
-"Shoulder\tPlate",
-"553 Armor",
-"+16 Stamina",
-"+7 Agility",
+"95 Armor",
+"+17 Agility",
+"+3 Spirit",
 "+6 Strength",
-"Durability 80 / 80",
-"Requires Level 54",
+"Durability 50 / 50",
+"Requires Level 42",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "12582": [
@@ -3523,6 +3680,19 @@
 "+13 Strength",
 "Durability 60 / 60",
 "Requires Level 58",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12589": [
+"|cff0070ddDustfeather Sash|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Waist\tCloth",
+"49 Armor",
+"+18 Intellect",
+"+10 Stamina",
+"Durability 30 / 30",
+"Requires Level 56",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -3563,6 +3733,98 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"12603": [
+"|cff0070ddNightbrace Tunic|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Chest\tLeather",
+"172 Armor",
+"+5 Agility",
+"+10 Stamina",
+"+10 Fire Resistance",
+"+10 Shadow Resistance",
+"Durability 100 / 100",
+"Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12604": [
+"|cff0070ddStarfire Tiara|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Head\tCloth",
+"69 Armor",
+"+10 Spirit",
+"+28 Intellect",
+"+10 Fire Resistance",
+"Durability 50 / 50",
+"Requires Level 55",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12605": [
+"|cff0070ddSerpentine Skuller|r",
+"|cffffd100Item Level 56|r",
+"Binds when picked up",
+"Ranged\tWand",
+"53 - 100 Damage\tSpeed 1.40",
+"(54.6 damage per second)",
+"+10 Shadow Resistance",
+"Durability 65 / 65",
+"Requires Level 51",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12606": [
+"|cff0070ddCrystallized Girdle|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Waist\tLeather",
+"97 Armor",
+"+6 Stamina",
+"+19 Intellect",
+"+6 Spirit",
+"Durability 35 / 35",
+"Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12608": [
+"|cff0070ddButcher's Apron|r",
+"|cffffd100Item Level 58|r",
+"Binds when picked up",
+"Back\tCloth",
+"41 Armor",
+"+7 Stamina",
+"+16 Spirit",
+"Requires Level 53",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12609": [
+"|cff0070ddPolychromatic Visionwrap|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Chest\tCloth",
+"87 Armor",
+"+20 Fire Resistance",
+"+20 Nature Resistance",
+"+20 Frost Resistance",
+"+20 Shadow Resistance",
+"+20 Arcane Resistance",
+"Durability 80 / 80",
+"Requires Level 56",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12621": [
+"|cff0070ddDemonfork|r",
+"|cffffd100Item Level 59|r",
+"Binds when picked up",
+"Main Hand\tAxe",
+"76 - 142 Damage\tSpeed 2.80",
+"(38.9 damage per second)",
+"Durability 90 / 90",
+"Requires Level 54",
+"|cff1eff00Chance on hit: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "12626": [
 "|cff0070ddFuneral Cuffs|r",
 "|cffffd100Item Level 59|r",
@@ -3574,6 +3836,33 @@
 "+10 Shadow Resistance",
 "Durability 30 / 30",
 "Requires Level 54",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12634": [
+"|cff0070ddChiselbrand Girdle|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Waist\tMail",
+"199 Armor",
+"+6 Spirit",
+"+6 Stamina",
+"Durability 40 / 40",
+"Requires Level 55",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12637": [
+"|cff0070ddBackusarian Gauntlets|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Hands\tPlate",
+"392 Armor",
+"+9 Strength",
+"+9 Intellect",
+"+15 Stamina",
+"Durability 45 / 45",
+"Requires Level 55",
+"|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "12651": [
@@ -3612,31 +3901,6 @@
 "Requires Level 58",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12791": [
-"|cff0070ddBarman Shanker|r",
-"|cffffd100Item Level 55|r",
-"Binds when picked up",
-"Main Hand\tDagger",
-"51 - 95 Damage\tSpeed 2.00",
-"(36.5 damage per second)",
-"Durability 65 / 65",
-"Requires Level 50",
-"|cff1eff00Chance on hit: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"12793": [
-"|cff0070ddMixologist's Tunic|r",
-"|cffffd100Item Level 55|r",
-"Binds when picked up",
-"Chest\tLeather",
-"158 Armor",
-"+18 Strength",
-"+18 Stamina",
-"+11 Agility",
-"Durability 100 / 100",
-"Requires Level 50",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "12905": [
@@ -3679,6 +3943,15 @@
 "+5 Spirit",
 "+7 Fire Resistance",
 "Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"12930": [
+"|cff0070ddBriarwood Reed|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Trinket",
+"Requires Level 55",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -4055,6 +4328,34 @@
 "|cff1eff00Chance on hit: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"13184": [
+"|cff0070ddFallbrush Handgrips|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Hands\tLeather",
+"107 Armor",
+"+11 Spirit",
+"+12 Intellect",
+"+11 Stamina",
+"Durability 35 / 35",
+"Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"13185": [
+"|cff0070ddSunderseer Mantle|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Shoulder\tCloth",
+"65 Armor",
+"+17 Intellect",
+"+11 Spirit",
+"+4 Stamina",
+"Durability 50 / 50",
+"Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "13205": [
 "|cff0070ddRhombeard Protector|r",
 "|cffffd100Item Level 61|r",
@@ -4137,6 +4438,18 @@
 "Trinket",
 "Requires Level 55",
 "|cff1eff00Use: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"13218": [
+"|cff0070ddFang of the Crystal Spider|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"One-Hand\tDagger",
+"45 - 84 Damage\tSpeed 1.60",
+"(40.3 damage per second)",
+"Durability 65 / 65",
+"Requires Level 56",
+"|cff1eff00Chance on hit: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "13244": [
@@ -4236,6 +4549,43 @@
 "+10 Agility",
 "Durability 65 / 65",
 "Requires Level 56",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"13284": [
+"|cff0070ddSwiftdart Battleboots|r",
+"|cffffd100Item Level 58|r",
+"Binds when picked up",
+"Feet\tMail",
+"236 Armor",
+"+9 Stamina",
+"+17 Agility",
+"+10 Intellect",
+"Durability 60 / 60",
+"Requires Level 53",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"13285": [
+"|cff0070ddThe Nicker|r",
+"|cffffd100Item Level 58|r",
+"Binds when picked up",
+"Two-Hand\tAxe",
+"159 - 239 Damage\tSpeed 4.00",
+"(49.8 damage per second)",
+"Durability 100 / 100",
+"Requires Level 53",
+"|cff1eff00Chance on hit: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"13286": [
+"|cff0070ddRivenspike|r",
+"|cffffd100Item Level 58|r",
+"Binds when picked up",
+"One-Hand\tAxe",
+"77 - 144 Damage\tSpeed 2.90",
+"(38.1 damage per second)",
+"Durability 90 / 90",
+"Requires Level 53",
+"|cff1eff00Chance on hit: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "13314": [
@@ -4844,6 +5194,31 @@
 "35 Armor",
 "Durability 30 / 30",
 "Requires Level 52",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"13498": [
+"|cff0070ddHandcrafted Mastersmith Leggings|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Legs\tPlate",
+"548 Armor",
+"+29 Strength",
+"+12 Stamina",
+"Durability 100 / 100",
+"Requires Level 55",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"13502": [
+"|cff0070ddHandcrafted Mastersmith Girdle|r",
+"|cffffd100Item Level 63|r",
+"Binds when picked up",
+"Waist\tPlate",
+"519 Armor",
+"+11 Strength",
+"+10 Stamina",
+"+10 Agility",
+"Durability 45 / 45",
+"Requires Level 58",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "13505": [
@@ -6402,6 +6777,19 @@
 "Requires Level 56",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"16695": [
+"|cff0070ddDevout Mantle|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Shoulder\tCloth",
+"64 Armor",
+"+21 Intellect",
+"+9 Spirit",
+"+4 Stamina",
+"Durability 50 / 50",
+"Requires Level 55",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "16698": [
 "|cff0070ddDreadmist Mask|r",
 "|cffffd100Item Level 62|r",
@@ -7225,6 +7613,30 @@
 "Requires Level 47",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"17741": [
+"|cff0070ddNature's Embrace|r",
+"|cffffd100Item Level 51|r",
+"Binds when picked up",
+"Chest\tCloth",
+"73 Armor",
+"Durability 80 / 80",
+"Requires Level 46",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"17742": [
+"|cff0070ddFungus Shroud Armor|r",
+"|cffffd100Item Level 51|r",
+"Binds when picked up",
+"Chest\tLeather",
+"148 Armor",
+"+25 Agility",
+"+10 Stamina",
+"Durability 100 / 100",
+"Requires Level 46",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "17744": [
 "|cff0070ddHeart of Noxxion|r",
 "|cffffd100Item Level 51|r",
@@ -7348,6 +7760,19 @@
 "Requires Level 45",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"17767": [
+"|cff0070ddBloomsprout Headpiece|r",
+"|cffffd100Item Level 51|r",
+"Binds when picked up",
+"Head\tMail",
+"249 Armor",
+"+18 Stamina",
+"+10 Nature Resistance",
+"Durability 70 / 70",
+"Requires Level 46",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "17943": [
 "|cff0070ddFist of Stone|r",
 "|cffffd100Item Level 53|r",
@@ -7384,6 +7809,32 @@
 "+5 Agility",
 "Durability 90 / 90",
 "Requires Level 52",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"18047": [
+"|cff0070ddFlame Walkers|r",
+"|cffffd100Item Level 62|r",
+"Binds when picked up",
+"Feet\tMail",
+"251 Armor",
+"+10 Stamina",
+"+18 Fire Resistance",
+"Durability 60 / 60",
+"Requires Level 57",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"18048": [
+"|cff0070ddMastersmith's Hammer|r",
+"|cffffd100Item Level 60|r",
+"Binds when picked up",
+"Main Hand\tMace",
+"66 - 123 Damage\tSpeed 2.40",
+"(39.4 damage per second)",
+"+5 Intellect",
+"Durability 90 / 90",
+"Requires Level 55",
+"|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "18082": [
@@ -8310,58 +8761,6 @@
 "Requires Level 55",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
-"18483": [
-"|cff0070ddMana Channeling Wand|r",
-"|cffffd100Item Level 61|r",
-"Binds when picked up",
-"Ranged\tWand",
-"68 - 127 Damage\tSpeed 1.60",
-"(60.9 damage per second)",
-"Durability 65 / 65",
-"Requires Level 56",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"18484": [
-"|cff0070ddCho'Rush's Blade|r",
-"|cffffd100Item Level 61|r",
-"Binds when picked up",
-"One-Hand\tSword",
-"67 - 125 Damage\tSpeed 2.40",
-"(40.0 damage per second)",
-"Durability 90 / 90",
-"Requires Level 56",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"18485": [
-"|cff0070ddObserver's Shield|r",
-"|cffffd100Item Level 61|r",
-"Binds when picked up",
-"Off Hand\tShield",
-"2089 Armor",
-"+14 Intellect",
-"+5 Spirit",
-"+9 Stamina",
-"Durability 100 / 100",
-"Requires Level 56",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"18490": [
-"|cff0070ddInsightful Hood|r",
-"|cffffd100Item Level 61|r",
-"Binds when picked up",
-"Head\tLeather",
-"139 Armor",
-"+15 Intellect",
-"+9 Spirit",
-"+12 Stamina",
-"Durability 60 / 60",
-"Requires Level 56",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
 "18493": [
 "|cff0070ddBulky Iron Spaulders|r",
 "|cffffd100Item Level 60|r",
@@ -9257,6 +9656,20 @@
 "Requires Level 52",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"22245": [
+"|cff0070ddSoot Encrusted Footwear|r",
+"|cffffd100Item Level 56|r",
+"Binds when picked up",
+"Feet\tCloth",
+"55 Armor",
+"+9 Intellect",
+"+8 Stamina",
+"+14 Spirit",
+"Durability 40 / 40",
+"Requires Level 51",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "22247": [
 "|cff0070ddFaith Healer's Boots|r",
 "|cffffd100Item Level 63|r",
@@ -9279,6 +9692,31 @@
 "+7 Intellect",
 "+6 Stamina",
 "Requires Level 58",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22257": [
+"|cff0070ddBloodclot Band|r",
+"|cffffd100Item Level 57|r",
+"Binds when picked up",
+"Finger",
+"+8 Intellect",
+"+8 Stamina",
+"+7 Spirit",
+"Requires Level 52",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22266": [
+"|cff0070ddFlarethorn|r",
+"|cffffd100Item Level 57|r",
+"Binds when picked up",
+"One-Hand\tDagger",
+"47 - 88 Damage\tSpeed 1.80",
+"(37.5 damage per second)",
+"+5 Intellect",
+"Durability 65 / 65",
+"Requires Level 52",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -9315,6 +9753,20 @@
 "Requires Level 58",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"22271": [
+"|cff0070ddLeggings of Frenzied Magic|r",
+"|cffffd100Item Level 57|r",
+"Binds when picked up",
+"Legs\tLeather",
+"142 Armor",
+"+15 Intellect",
+"+15 Stamina",
+"Durability 75 / 75",
+"Requires Level 52",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "22275": [
 "|cff0070ddFiremoss Boots|r",
 "|cffffd100Item Level 57|r",
@@ -9328,18 +9780,6 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
-"22302": [
-"|cff0070ddIronweave Cowl|r",
-"|cffffd100Item Level 63|r",
-"Binds when picked up",
-"Head\tCloth",
-"203 Armor",
-"+24 Stamina",
-"+15 Intellect",
-"Durability 50 / 50",
-"Requires Level 58",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
 "22303": [
 "|cff0070ddIronweave Pants|r",
 "|cffffd100Item Level 62|r",
@@ -9350,6 +9790,30 @@
 "+15 Intellect",
 "Durability 65 / 65",
 "Requires Level 57",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22304": [
+"|cff0070ddIronweave Gloves|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Hands\tCloth",
+"144 Armor",
+"+17 Stamina",
+"+11 Intellect",
+"Durability 30 / 30",
+"Requires Level 56",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22306": [
+"|cff0070ddIronweave Belt|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Waist\tCloth",
+"139 Armor",
+"+17 Stamina",
+"+11 Intellect",
+"Durability 30 / 30",
+"Requires Level 56",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "22311": [
@@ -9376,6 +9840,43 @@
 "Requires Level 56",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"22314": [
+"|cff0070ddHuntsman's Harpoon|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Two-Hand\tPolearm",
+"150 - 226 Damage\tSpeed 3.60",
+"(52.2 damage per second)",
+"+35 Agility",
+"Durability 100 / 100",
+"Requires Level 56",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22315": [
+"|cff0070ddHammer of Revitalization|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Main Hand\tMace",
+"75 - 141 Damage\tSpeed 2.70",
+"(40.0 damage per second)",
+"+5 Stamina",
+"Durability 90 / 90",
+"Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22319": [
+"|cff0070ddTome of Divine Right|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Held In Off-hand",
+"+5 Intellect",
+"+4 Stamina",
+"Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "22321": [
 "|cff0070ddHeart of Wyrmthalak|r",
 "|cffffd100Item Level 61|r",
@@ -9383,6 +9884,30 @@
 "Trinket",
 "Requires Level 56",
 "|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22322": [
+"|cff0070ddThe Jaw Breaker|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"One-Hand\tMace",
+"45 - 84 Damage\tSpeed 1.60",
+"(40.3 damage per second)",
+"Durability 90 / 90",
+"Requires Level 56",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22325": [
+"|cff0070ddBelt of the Trickster|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Waist\tLeather",
+"97 Armor",
+"+22 Agility",
+"+9 Stamina",
+"Durability 35 / 35",
+"Requires Level 56",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "22326": [
@@ -9435,88 +9960,12 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
-"22335": [
-"|cff0070ddLord Valthalak's Staff of Command|r",
-"|cffffd100Item Level 63|r",
+"22345": [
+"|cff0070ddTotem of Rebirth|r",
+"|cffffd100Item Level 62|r",
 "Binds when picked up",
-"Two-Hand\tStaff",
-"90 - 136 Damage\tSpeed 2.10",
-"(53.8 damage per second)",
-"+11 Stamina",
-"+10 Intellect",
-"Durability 100 / 100",
-"Requires Level 58",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"22336": [
-"|cff0070ddDraconian Aegis of the Legion|r",
-"|cffffd100Item Level 63|r",
-"Binds when picked up",
-"Off Hand\tShield",
-"2153 Armor",
-"+7 Stamina",
-"Durability 100 / 100",
-"Requires Level 58",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"22337": [
-"|cff0070ddShroud of Domination|r",
-"|cffffd100Item Level 63|r",
-"Binds when picked up",
-"Back\tCloth",
-"45 Armor",
-"+7 Stamina",
-"+17 Strength",
-"Requires Level 58",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"22339": [
-"|cff0070ddRune Band of Wizardry|r",
-"|cffffd100Item Level 63|r",
-"Binds when picked up",
-"Finger",
-"+7 Stamina",
-"Requires Level 58",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"22340": [
-"|cff0070ddPendant of Celerity|r",
-"|cffffd100Item Level 63|r",
-"Binds when picked up",
-"Neck",
-"+15 Agility",
-"Requires Level 58",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"22342": [
-"|cff0070ddLeggings of Torment|r",
-"|cffffd100Item Level 63|r",
-"Binds when picked up",
-"Legs\tCloth",
-"78 Armor",
-"+16 Stamina",
-"+16 Intellect",
-"Durability 65 / 65",
-"Requires Level 58",
-"|cff1eff00Equip: (effect not listed here)|r",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"22343": [
-"|cff0070ddHandguards of Savagery|r",
-"|cffffd100Item Level 63|r",
-"Binds when picked up",
-"Hands\tMail",
-"231 Armor",
-"+10 Stamina",
-"+9 Intellect",
-"Durability 40 / 40",
-"Requires Level 58",
+"Relic",
+"Requires Level 57",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -9553,12 +10002,30 @@
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
+"22398": [
+"|cff0070ddIdol of Rejuvenation|r",
+"|cffffd100Item Level 62|r",
+"Binds when picked up",
+"Relic",
+"Requires Level 57",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
 "22400": [
 "|cff0070ddLibram of Truth|r",
 "|cffffd100Item Level 57|r",
 "Binds when picked up",
 "Relic",
 "Requires Level 52",
+"|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22401": [
+"|cff0070ddLibram of Hope|r",
+"|cffffd100Item Level 62|r",
+"Binds when picked up",
+"Relic",
+"Requires Level 57",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -9703,6 +10170,19 @@
 "Requires Level 58",
 "|cff1eff00Equip: (effect not listed here)|r",
 "|cff1eff00Equip: (effect not listed here)|r",
+"|cff808080Classic values; WoW Forever may differ.|r"
+],
+"22472": [
+"|cff0070ddBoots of Ferocity|r",
+"|cffffd100Item Level 61|r",
+"Binds when picked up",
+"Feet\tLeather",
+"118 Armor",
+"+13 Agility",
+"+13 Stamina",
+"+13 Strength",
+"Durability 50 / 50",
+"Requires Level 56",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "23198": [
