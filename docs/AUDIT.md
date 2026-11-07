@@ -17,20 +17,20 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Hall of Thanes | 4/4 | 0/4 | 0 | 12 | 12 |
 | Maraudon | 9/9 | 0/9 | 0 | 28 | 0 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 4 |
-| Ragefire Chasm | 4/4 | 0/4 | 0 | 20 | 14 |
+| Ragefire Chasm | 4/4 | 0/4 | 0 | 27 | 21 |
 | Razorfen Downs | 4/6 | 0/6 | 0 | 18 | 0 |
 | Razorfen Kraul | 8/8 | 0/8 | 0 | 24 | 9 |
 | Ruins of Lordaeron | 6/6 | 0/6 | 0 | 18 | 18 |
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 31 | 3 |
 | Scholomance | 12/15 | 0/15 | 1 | 243 | 16 |
-| Shadowfang Keep | 9/10 | 0/10 | 0 | 40 | 21 |
+| Shadowfang Keep | 9/10 | 0/10 | 0 | 41 | 22 |
 | Stratholme | 16/17 | 0/17 | 1 | 134 | 21 |
 | Sunken Temple | 5/7 | 0/7 | 3 | 19 | 1 |
-| The Deadmines | 8/8 | 0/8 | 0 | 37 | 19 |
+| The Deadmines | 8/8 | 0/8 | 0 | 41 | 23 |
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 20 |
 | Uldaman | 8/8 | 0/8 | 1 | 20 | 0 |
-| Wailing Caverns | 8/8 | 0/8 | 0 | 38 | 19 |
-| **All** | 191/209 | 0/209 | 8 | 1138 | 249 |
+| Wailing Caverns | 8/8 | 0/8 | 0 | 44 | 25 |
+| **All** | 191/209 | 0/209 | 8 | 1156 | 267 |
 
 ## Blackfathom Deeps
 
@@ -192,10 +192,10 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Oggleflint | yes | placed in game |  | 1 (+4 unknown) | 5 |
-| Taragaman the Hungerer | yes | placed in game |  | 4 | 1 |
+| Oggleflint | yes | placed in game |  | 1 (+6 unknown) | 7 |
+| Taragaman the Hungerer | yes | placed in game |  | 4 (+3 unknown) | 4 |
 | Jergosh the Invoker | yes | placed in game |  | 3 (+3 unknown) | 3 |
-| Bazzalan | yes | placed in game |  | 1 (+4 unknown) | 5 |
+| Bazzalan | yes | placed in game |  | 1 (+6 unknown) | 7 |
 
 ## Razorfen Downs
 
@@ -273,7 +273,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 |---|---|---|---|---|---|
 | Rethilgore | yes | spawn point |  | 0 (+2 unknown) | 2 |
 | Fel Steeds / Shadow Charger | **no** | — |  | 1 (+5 unknown) | 5 |
-| Razorclaw the Butcher | yes | spawn point |  | 3 | 0 |
+| Razorclaw the Butcher | yes | spawn point |  | 3 (+1 unknown) | 1 |
 | Baron Silverlaine | yes | journal |  | 3 (+1 unknown) | 2 |
 | Commander Springvale | yes | journal |  | 4 (+1 unknown) | 3 |
 | Odo the Blindwatcher | yes | spawn point |  | 2 (+1 unknown) | 1 |
@@ -322,11 +322,11 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 |---|---|---|---|---|---|
 | Rhahk'Zor | yes | journal |  | 3 (+2 unknown) | 4 |
 | Sneed's Shredder | yes | journal |  | 4 (+1 unknown) | 3 |
-| Gilnid | yes | journal |  | 2 (+2 unknown) | 2 |
-| Mr. Smite | yes | journal |  | 5 (+2 unknown) | 4 |
-| Captain Greenskin | yes | journal |  | 4 | 2 |
+| Gilnid | yes | journal |  | 2 (+3 unknown) | 3 |
+| Mr. Smite | yes | journal |  | 5 (+3 unknown) | 5 |
+| Captain Greenskin | yes | journal |  | 4 (+1 unknown) | 3 |
 | Edwin VanCleef | yes | journal |  | 4 | 0 |
-| Cookie | yes | journal |  | 4 (+2 unknown) | 4 |
+| Cookie | yes | journal |  | 4 (+3 unknown) | 5 |
 | Miner Johnson | yes | spawn point |  | 2 | 0 |
 
 ## The Stockade
@@ -357,11 +357,11 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Kresh | yes | journal |  | 3 (+2 unknown) | 4 |
-| Lady Anacondra | yes | journal |  | 2 (+1 unknown) | 2 |
-| Lord Cobrahn | yes | journal |  | 6 | 3 |
-| Lord Pythas | yes | journal |  | 4 (+1 unknown) | 3 |
-| Skum | yes | journal |  | 3 (+1 unknown) | 2 |
+| Kresh | yes | journal |  | 3 (+3 unknown) | 5 |
+| Lady Anacondra | yes | journal |  | 2 (+3 unknown) | 4 |
+| Lord Cobrahn | yes | journal |  | 6 (+1 unknown) | 4 |
+| Lord Pythas | yes | journal |  | 4 (+2 unknown) | 4 |
+| Skum | yes | journal |  | 3 (+2 unknown) | 3 |
 | Lord Serpentis | yes | journal |  | 5 | 1 |
 | Verdan the Everliving | yes | journal |  | 7 | 4 |
 | Mutanus the Devourer | yes | journal |  | 3 | 0 |
