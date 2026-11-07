@@ -1,0 +1,35 @@
+name: Floor subzones
+
+# Reads which subzone names exist inside each multi-level dungeon, and on which map level,
+# from the WoW Forever client's tables (wago.tools), and commits tools/floor_subzones.json.
+# Runs when the script changes, or by hand. It never publishes a release.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/fetch_floor_subzones.py"
+      - ".github/workflows/floor-subzones.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Read the game's tables
+        run: python3 tools/fetch_floor_subzones.py
+      - name: Commit
+        run: |
+          git add tools/floor_subzones.json
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Floor subzones"
+          git pull --rebase
+          git push
