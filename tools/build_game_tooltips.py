@@ -7,7 +7,7 @@ Reads tools/game_items.json (from tools/fetch_game_items.py). The game's files h
 WoW Forever added or changed; for those this gives the real values, the way the game itself would
 show them. Stats, armour and weapon damage are worked out the way the game does it: from the
 item level, quality and slot, using the game's own budget tables.
-tools/fetch_loot_tooltips.py prefers these over the classic-stats tooltips.
+tools/build_loot_tooltips.py prefers these over the classic-stats tooltips.
 """
 import json
 import math

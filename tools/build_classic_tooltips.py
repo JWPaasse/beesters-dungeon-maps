@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Build tools/classic_item_tooltips.json: tooltips made from the Classic database's item stats,
-for loot items Wowhead's WoW Forever database doesn't have.
+for loot items the game's own files don't have (tools/build_game_tooltips.py covers those).
 
     python3 tools/build_classic_tooltips.py ClassicDB.sql.gz
 
 Source: CMaNGOS Classic-DB item_template (GPL-3.0). These are classic values: WoW Forever may
 have changed an item, and spell effects ("Equip: ...") only appear as a placeholder, so the
-tooltip says so. tools/fetch_loot_tooltips.py uses these where Wowhead has nothing.
+tooltip says so. tools/build_loot_tooltips.py uses these for the rest.
 """
 import gzip
 import json

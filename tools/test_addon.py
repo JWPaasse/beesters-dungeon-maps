@@ -577,9 +577,8 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("coming-soon dungeons show on the continent too", #ns:ComingSoonOnMap(1414) >= 1)
 
         SlashCmdList.BEESTERSDUNGEONMAPS("status")
-        SlashCmdList.BEESTERSDUNGEONMAPS("probe")
         IsInInstance = function() return true, "party" end
-        SlashCmdList.BEESTERSDUNGEONMAPS("probe")
+        SlashCmdList.BEESTERSDUNGEONMAPS("map")
         SlashCmdList.BEESTERSDUNGEONMAPS("")
         check("slash command runs", true)
         return table.concat(results, "\n")

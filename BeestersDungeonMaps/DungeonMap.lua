@@ -4,7 +4,8 @@
 -- This view takes the place of the map picture while a dungeon is open:
 --   * old dungeons: the classic dungeon map tiles that still ship in the game files
 --   * new Forever dungeons: Santiago Reyes's maps (watermarked, used with permission)
--- with boss pins (Dungeon Journal positions) and a game-style tooltip with the boss's loot.
+-- with boss pins (Dungeon Journal positions and ones placed in game), a game-style tooltip with
+-- the boss's loot, and a "Work in progress" tag while an instance's data is still thin.
 --
 -- It opens by itself inside a dungeon, from an entrance pin, or from the map's top bar
 -- (World > Kalimdor > Durotar > Dungeons). Any other map navigation closes it again.
