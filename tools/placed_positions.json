@@ -70,6 +70,111 @@
    "Rath'mael",
    0.487,
    0.603
+  ],
+  [
+   "dal|1",
+   0,
+   "Arcanic Enigma",
+   0.524,
+   0.838
+  ],
+  [
+   "dal|2",
+   3310,
+   "Lyn the Ignored",
+   0.686,
+   0.165
+  ],
+  [
+   "dal|1",
+   3298,
+   "Arcane Anomaly",
+   0.66,
+   0.488
+  ],
+  [
+   "dal|1",
+   3303,
+   "Shade of the Archmage",
+   0.562,
+   0.264
+  ],
+  [
+   "dal|1",
+   3300,
+   "Mana Devourer",
+   0.418,
+   0.725
+  ],
+  [
+   "dal|1",
+   3299,
+   "Fel Ancient",
+   0.519,
+   0.553
+  ],
+  [
+   "dal|2",
+   3311,
+   "Atrexis the Grave Knight",
+   0.546,
+   0.51
+  ],
+  [
+   "dal|1",
+   3302,
+   "Unstable Sentinel",
+   0.585,
+   0.422
+  ],
+  [
+   "hot|1",
+   3494,
+   "Plunder",
+   0.511,
+   0.494
+  ],
+  [
+   "hot|1",
+   3496,
+   "Durgen Dirgehammer",
+   0.509,
+   0.239
+  ],
+  [
+   "hot|1",
+   3493,
+   "Faldrim Anvilmar",
+   0.511,
+   0.633
+  ],
+  [
+   "hot|1",
+   0,
+   "Magmatus",
+   0.627,
+   0.501
+  ],
+  [
+   "exc|1",
+   3481,
+   "Shadetooth",
+   0.32,
+   0.52
+  ],
+  [
+   "exc|1",
+   3482,
+   "Relic Guardian",
+   0.34,
+   0.676
+  ],
+  [
+   "exc|1",
+   3480,
+   "Saltspine",
+   0.512,
+   0.368
   ]
  ]
 }

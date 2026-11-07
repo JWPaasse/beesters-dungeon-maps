@@ -411,9 +411,11 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
 
         ns:OpenDungeonMap("dal")
         check("Dalaran opens (Santiago's map, two floors)", ns:IsDungeonMapOpen() and #ns.DungeonMaps.dal.floors == 2)
+        check("Dalaran opens on The Underbelly", ns:CurrentDungeonFloor() == 2)
+        ns:OpenDungeonMap("stocks")
         local rows = 0
         for _, r in ipairs(view.ListRows) do if r:IsShown() then rows = rows + 1 end end
-        check("Dalaran's bosses without a position are listed", rows > 0)
+        check("bosses without a position are listed (Bruegal Ironknuckle)", rows > 0)
         WorldMapFrame.NavBar:GoToMap(WorldMapFrame:GetMapID())
         check("clicking the current zone in the top bar closes the dungeon map", not ns:IsDungeonMapOpen())
 

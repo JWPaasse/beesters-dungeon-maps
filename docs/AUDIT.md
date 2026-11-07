@@ -8,13 +8,13 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Blackfathom Deeps | 6/7 | 0/7 | 1 | 36 | 0 |
 | Blackrock Depths | 18/18 | 0/18 | 1 | 78 | 0 |
 | Blackrock Spire | 19/21 | 0/21 | 0 | 118 | 1 |
-| City of Dalaran | 0/8 | 0/8 | 0 | 24 | 0 |
+| City of Dalaran | 8/8 | 0/8 | 0 | 24 | 0 |
 | Dire Maul East | 5/6 | 0/6 | 0 | 31 | 0 |
 | Dire Maul North | 6/6 | 0/6 | 0 | 51 | 0 |
 | Dire Maul West | 6/7 | 0/7 | 0 | 43 | 0 |
-| Excavation Site: Wetlands | 0/3 | 0/3 | 0 | 9 | 0 |
+| Excavation Site: Wetlands | 3/3 | 0/3 | 0 | 9 | 0 |
 | Gnomeregan | 6/6 | 0/6 | 0 | 23 | 0 |
-| Hall of Thanes | 0/4 | 0/4 | 0 | 12 | 0 |
+| Hall of Thanes | 4/4 | 0/4 | 0 | 12 | 0 |
 | Maraudon | 9/9 | 0/9 | 0 | 28 | 0 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
 | Ragefire Chasm | 4/4 | 0/4 | 0 | 20 | 0 |
@@ -30,7 +30,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 0 |
 | Uldaman | 8/8 | 0/8 | 1 | 20 | 0 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 38 | 0 |
-| **All** | 176/209 | 0/209 | 8 | 1138 | 5 |
+| **All** | 191/209 | 0/209 | 8 | 1138 | 5 |
 
 ## Blackfathom Deeps
 
@@ -97,14 +97,14 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Atrexis the Grave Knight | **no** | — |  | 0 (+3 unknown) | 0 |
-| Arcane Anomaly | **no** | — |  | 0 (+3 unknown) | 0 |
-| Arcanic Enigma | **no** | — |  | 0 (+3 unknown) | 0 |
-| Unstable Sentinel | **no** | — |  | 0 (+3 unknown) | 0 |
-| Mana Devourer | **no** | — |  | 0 (+3 unknown) | 0 |
-| Fel Ancient | **no** | — |  | 0 (+3 unknown) | 0 |
-| Lyn the Ignored | **no** | — |  | 0 (+3 unknown) | 0 |
-| Shade of the Archmage | **no** | — |  | 0 (+3 unknown) | 0 |
+| Atrexis the Grave Knight | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Arcane Anomaly | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Arcanic Enigma | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Unstable Sentinel | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Mana Devourer | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Fel Ancient | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Lyn the Ignored | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Shade of the Archmage | yes | placed in game |  | 0 (+3 unknown) | 0 |
 
 ## Dire Maul East
 
@@ -144,9 +144,9 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Saltspine | **no** | — |  | 0 (+3 unknown) | 0 |
-| Shadetooth | **no** | — |  | 0 (+3 unknown) | 0 |
-| Relic Guardian | **no** | — |  | 0 (+3 unknown) | 0 |
+| Saltspine | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Shadetooth | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Relic Guardian | yes | placed in game |  | 0 (+3 unknown) | 0 |
 
 ## Gnomeregan
 
@@ -163,10 +163,10 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Faldrim Anvilmar | **no** | — |  | 0 (+3 unknown) | 0 |
-| Magmatus | **no** | — |  | 0 (+3 unknown) | 0 |
-| Plunder | **no** | — |  | 0 (+3 unknown) | 0 |
-| Durgen Dirgehammer | **no** | — |  | 0 (+3 unknown) | 0 |
+| Faldrim Anvilmar | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Magmatus | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Plunder | yes | placed in game |  | 0 (+3 unknown) | 0 |
+| Durgen Dirgehammer | yes | placed in game |  | 0 (+3 unknown) | 0 |
 
 ## Maraudon
 
