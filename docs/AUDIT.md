@@ -6,31 +6,31 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Instance | Bosses placed | Confirmed | Bosses without loot | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
 | Blackfathom Deeps | 6/7 | 0/7 | 1 | 36 | 0 |
-| Blackrock Depths | 15/18 | 0/18 | 1 | 78 | 0 |
+| Blackrock Depths | 17/18 | 0/18 | 1 | 78 | 0 |
 | Blackrock Spire | 13/21 | 0/21 | 0 | 118 | 1 |
-| City of Dalaran | 0/8 | 0/8 | 0 | 24 | 3 |
+| City of Dalaran | 0/8 | 0/8 | 0 | 24 | 0 |
 | Dire Maul East | 5/6 | 0/6 | 0 | 31 | 0 |
 | Dire Maul North | 6/6 | 0/6 | 0 | 51 | 0 |
 | Dire Maul West | 6/7 | 0/7 | 0 | 43 | 0 |
 | Excavation Site: Wetlands | 0/3 | 0/3 | 0 | 9 | 0 |
 | Gnomeregan | 5/6 | 0/6 | 0 | 23 | 0 |
-| Hall of Thanes | 0/4 | 0/4 | 0 | 12 | 3 |
+| Hall of Thanes | 0/4 | 0/4 | 0 | 12 | 0 |
 | Maraudon | 8/9 | 0/9 | 0 | 28 | 0 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
-| Ragefire Chasm | 4/4 | 0/4 | 0 | 20 | 3 |
+| Ragefire Chasm | 4/4 | 0/4 | 0 | 20 | 0 |
 | Razorfen Downs | 4/6 | 0/6 | 0 | 18 | 0 |
 | Razorfen Kraul | 7/8 | 0/8 | 0 | 24 | 0 |
 | Ruins of Lordaeron | 6/6 | 0/6 | 0 | 18 | 0 |
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 31 | 0 |
 | Scholomance | 12/15 | 0/15 | 1 | 243 | 0 |
-| Shadowfang Keep | 8/10 | 0/10 | 0 | 40 | 5 |
+| Shadowfang Keep | 8/10 | 0/10 | 0 | 40 | 0 |
 | Stratholme | 16/17 | 0/17 | 1 | 134 | 3 |
 | Sunken Temple | 5/7 | 0/7 | 3 | 19 | 1 |
-| The Deadmines | 8/8 | 0/8 | 0 | 37 | 4 |
+| The Deadmines | 8/8 | 0/8 | 0 | 37 | 0 |
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 0 |
 | Uldaman | 8/8 | 0/8 | 1 | 20 | 0 |
-| Wailing Caverns | 8/8 | 0/8 | 0 | 38 | 1 |
-| **All** | 163/209 | 0/209 | 8 | 1138 | 24 |
+| Wailing Caverns | 8/8 | 0/8 | 0 | 38 | 0 |
+| **All** | 165/209 | 0/209 | 8 | 1138 | 5 |
 
 ## Blackfathom Deeps
 
@@ -51,7 +51,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | High Interrogator Gerstahn | yes | journal |  | 4 | 0 |
 | Lord Roccor | yes | journal |  | 4 | 0 |
 | Houndmaster Grebmar | yes | journal |  | 4 | 0 |
-| Ring of the Law | **no** | — |  | 4 | 0 |
+| Ring of the Law | yes | journal |  | 4 | 0 |
 | Fineous Darkvire | yes | journal |  | 4 | 0 |
 | Pyromancer Loregrain | yes | journal |  | 4 | 0 |
 | Bael'Gar | yes | journal |  | 4 | 0 |
@@ -61,7 +61,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Phalanx | yes | journal |  | 3 | 0 |
 | Hurley Blackbreath | yes | journal |  | 4 | 0 |
 | Ambassador Flamelash | yes | journal |  | 5 | 0 |
-| Chest of the Seven | **no** | — |  | 0 | 0 |
+| Chest of the Seven | yes | journal |  | 0 | 0 |
 | Magmus | yes | journal |  | 5 | 0 |
 | Emperor Dagran Thaurissan | yes | journal |  | 12 | 0 |
 | Warder Stilgiss & Verek | yes | journal |  | 4 | 0 |
@@ -99,7 +99,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 |---|---|---|---|---|---|
 | Atrexis the Grave Knight | **no** | — |  | 0 (+3 unknown) | 0 |
 | Arcane Anomaly | **no** | — |  | 0 (+3 unknown) | 0 |
-| Arcanic Enigma | **no** | — |  | 0 (+3 unknown) | 3 |
+| Arcanic Enigma | **no** | — |  | 0 (+3 unknown) | 0 |
 | Unstable Sentinel | **no** | — |  | 0 (+3 unknown) | 0 |
 | Mana Devourer | **no** | — |  | 0 (+3 unknown) | 0 |
 | Fel Ancient | **no** | — |  | 0 (+3 unknown) | 0 |
@@ -164,7 +164,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
 | Faldrim Anvilmar | **no** | — |  | 0 (+3 unknown) | 0 |
-| Magmatus | **no** | — |  | 0 (+3 unknown) | 3 |
+| Magmatus | **no** | — |  | 0 (+3 unknown) | 0 |
 | Plunder | **no** | — |  | 0 (+3 unknown) | 0 |
 | Durgen Dirgehammer | **no** | — |  | 0 (+3 unknown) | 0 |
 
@@ -194,7 +194,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 |---|---|---|---|---|---|
 | Oggleflint | yes | placed in game |  | 1 (+4 unknown) | 0 |
 | Taragaman the Hungerer | yes | placed in game |  | 4 | 0 |
-| Jergosh the Invoker | yes | placed in game |  | 3 (+3 unknown) | 3 |
+| Jergosh the Invoker | yes | placed in game |  | 3 (+3 unknown) | 0 |
 | Bazzalan | yes | placed in game |  | 1 (+4 unknown) | 0 |
 
 ## Razorfen Downs
@@ -272,7 +272,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
 | Rethilgore | yes | spawn point |  | 0 (+2 unknown) | 0 |
-| Fel Steeds / Shadow Charger | **no** | — |  | 1 (+5 unknown) | 5 |
+| Fel Steeds / Shadow Charger | **no** | — |  | 1 (+5 unknown) | 0 |
 | Razorclaw the Butcher | yes | spawn point |  | 3 | 0 |
 | Baron Silverlaine | yes | journal |  | 3 (+1 unknown) | 0 |
 | Commander Springvale | yes | journal |  | 4 (+1 unknown) | 0 |
@@ -320,13 +320,13 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Rhahk'Zor | yes | journal |  | 3 (+2 unknown) | 1 |
+| Rhahk'Zor | yes | journal |  | 3 (+2 unknown) | 0 |
 | Sneed's Shredder | yes | journal |  | 4 (+1 unknown) | 0 |
-| Gilnid | yes | journal |  | 2 (+2 unknown) | 1 |
-| Mr. Smite | yes | journal |  | 5 (+2 unknown) | 1 |
+| Gilnid | yes | journal |  | 2 (+2 unknown) | 0 |
+| Mr. Smite | yes | journal |  | 5 (+2 unknown) | 0 |
 | Captain Greenskin | yes | journal |  | 4 | 0 |
 | Edwin VanCleef | yes | journal |  | 4 | 0 |
-| Cookie | yes | journal |  | 4 (+2 unknown) | 1 |
+| Cookie | yes | journal |  | 4 (+2 unknown) | 0 |
 | Miner Johnson | yes | spawn point |  | 2 | 0 |
 
 ## The Stockade
@@ -357,7 +357,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Kresh | yes | journal |  | 3 (+2 unknown) | 1 |
+| Kresh | yes | journal |  | 3 (+2 unknown) | 0 |
 | Lady Anacondra | yes | journal |  | 2 (+1 unknown) | 0 |
 | Lord Cobrahn | yes | journal |  | 6 | 0 |
 | Lord Pythas | yes | journal |  | 4 (+1 unknown) | 0 |
