@@ -1259,7 +1259,13 @@ DecorateNavBar = function(navBar)
     local name, listFunc
     if ns:IsDungeonMapOpen() then
         name = ns.Instances[current.key].name
-        listFunc = function() return DungeonMenuList(current.zoneMapID) end
+        -- The dungeons of the zone the map was on. When the dungeon opened over the world or a
+        -- continent view (inside it, or during combat) that can be none: then its entrance's zone.
+        listFunc = function()
+            local entries = DungeonMenuList(current.zoneMapID)
+            if #entries == 0 then entries = DungeonMenuList(ns:EntranceMapFor(current.key)) end
+            return entries
+        end
     elseif #DungeonMenuList(WorldMapFrame:GetMapID()) > 0 then
         name = DUNGEONS or "Dungeons"
         -- Read the map when the list opens, not when the bar was built.

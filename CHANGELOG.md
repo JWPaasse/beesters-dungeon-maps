@@ -6,6 +6,7 @@
 - The Deadmines and Stratholme now switch levels by subzone too (Goblin Foundry, Mast Room and Ironclad Cove; Stratholme's living and undead sides).
 - Pulling a boss teaches the addon which level that spot's subzone is on, so dungeons like Scholomance switch by themselves after a run.
 - Scholomance: Darkmaster Gandling's pin moved to where he stands in WoW Forever.
+- Fixed: the top bar's dungeon button sometimes did nothing until you reopened the map (when a dungeon map had opened over the world view, inside a dungeon or during combat). It now lists the dungeons of that dungeon's zone.
 
 ## 1.1.0
 

@@ -579,6 +579,18 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("a coming-soon dungeon is found by its zone name", #soon == 1 and soon[1].name == "Shaper's Terrace")
         check("coming-soon dungeons show on the continent too", #ns:ComingSoonOnMap(1414) >= 1)
 
+        -- The top bar's menu while a dungeon map is open over the world view (opened inside the
+        -- dungeon, or in combat) still lists the dungeons of that dungeon's zone.
+        inCombat = true
+        WorldMapFrame.mapID = 947
+        ns:OpenDungeonMap("wc")
+        inCombat = false
+        ns:UpdateDungeonCrumb()
+        local items = ns.DungeonCrumb.listFunc and ns.DungeonCrumb.listFunc() or {}
+        check("the top bar's dungeon menu isn't empty after opening over the world view", #items > 0)
+        ns:CloseDungeonMap(true)
+        WorldMapFrame.mapID = 1413
+
         -- Minimap button and the dungeon list.
         ns.db.minimapButton = true
         ns:InitMinimap()
