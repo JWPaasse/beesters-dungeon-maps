@@ -1145,6 +1145,7 @@
 ],
 "12728": [
 "|cffa335eePattern: Invulnerable Mail|r",
+"Requires Elemental Leatherworking",
 "|cffffd100Item Level 63|r",
 "Requires Leatherworking (295)",
 "|cff1eff00Use: Teaches you how to make Invulnerable Mail.|r",
@@ -1188,6 +1189,7 @@
 ],
 "12833": [
 "|cff0070ddPlans: Hammer of the Titans|r",
+"Requires Master Hammersmith",
 "|cffffd100Item Level 63|r",
 "Requires Blacksmithing (300)",
 "|cff1eff00Use: Teaches you how to make a Hammer of the Titans.|r",
@@ -1204,6 +1206,7 @@
 ],
 "12834": [
 "|cff0070ddPlans: Arcanite Champion|r",
+"Requires Master Swordsmith",
 "|cffffd100Item Level 63|r",
 "Requires Blacksmithing (300)",
 "|cff1eff00Use: Teaches you how to make an Arcanite Champion.|r",
@@ -1219,6 +1222,7 @@
 ],
 "12835": [
 "|cff0070ddPlans: Annihilator|r",
+"Requires Master Axesmith",
 "|cffffd100Item Level 63|r",
 "Requires Blacksmithing (300)",
 "|cff1eff00Use: Teaches you how to make an Annihilator.|r",
@@ -1236,6 +1240,7 @@
 ],
 "12837": [
 "|cff0070ddPlans: Masterwork Stormhammer|r",
+"Requires Master Hammersmith",
 "|cffffd100Item Level 63|r",
 "Requires Blacksmithing (300)",
 "|cff1eff00Use: Teaches you how to make a Masterwork Stormhammer.|r",
@@ -1251,6 +1256,7 @@
 ],
 "12838": [
 "|cff0070ddPlans: Arcanite Reaper|r",
+"Requires Master Axesmith",
 "|cffffd100Item Level 63|r",
 "Requires Blacksmithing (300)",
 "|cff1eff00Use: Teaches you how to make an Arcanite Reaper.|r",
@@ -1267,6 +1273,7 @@
 ],
 "12839": [
 "|cff0070ddPlans: Heartseeker|r",
+"Requires Weaponsmith",
 "|cffffd100Item Level 63|r",
 "Requires Blacksmithing (300)",
 "|cff1eff00Use: Teaches you how to make Heartseeker.|r"
@@ -1314,6 +1321,7 @@
 ],
 "13335": [
 "|cff0070ddDeathcharger's Reins|r",
+"Requires Journeyman Riding",
 "|cffffd100Item Level 60|r",
 "Binds when picked up",
 "Unique",
@@ -1482,6 +1490,7 @@
 ],
 "15730": [
 "|cff0070ddPattern: Red Dragonscale Breastplate|r",
+"Requires Dragonscale Leatherworking",
 "|cffffd100Item Level 61|r",
 "Binds when picked up",
 "Requires Leatherworking (290)",
