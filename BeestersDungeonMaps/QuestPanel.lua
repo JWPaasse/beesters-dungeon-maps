@@ -556,6 +556,10 @@ local function AddStepLine(y, indent, text, state, r, g, b, onClick, last, hint)
     y = y + objectiveGap - 1 -- step lines are a little taller than objective lines
     objectiveGap = 2
     local st = Acquire("step")
+    -- A quest's row is clickable over its full height, chain lines included: keep the chain
+    -- lines above it, or a row made later would take their clicks (opening the quest instead
+    -- of folding the chain open).
+    st:SetFrameLevel(panel.Child:GetFrameLevel() + 3)
     st:ClearAllPoints()
     st:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", TITLE_LEFT + indent, -y)
     st:SetWidth(ListWidth() - indent - 20)
@@ -647,6 +651,7 @@ local function AddQuestRow(y, entry, kind)
     local t = Acquire("title")
     t.questID = entry.id
     t:ClearAllPoints()
+    t:SetFrameLevel(panel.Child:GetFrameLevel() + 1)
     t:SetPoint("TOPLEFT", panel.Child, "TOPLEFT", TITLE_LEFT, -y)
     t:SetWidth(math.min(290, ListWidth() - TITLE_LEFT))
     t.Label:ClearAllPoints()

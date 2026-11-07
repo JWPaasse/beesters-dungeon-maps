@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed: clicking "Quest chain" sometimes opened the quest instead of folding the chain open.
+
 ## 1.0.0
 
 The first full release. Thanks to everyone who tested the betas.
