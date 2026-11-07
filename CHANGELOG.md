@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 1.0.0
+
+The first full release. Thanks to everyone who tested the betas.
 
 - "Work in progress" tag on dungeon maps whose data is still thin (bosses without a position or loot). Hover it to see what's missing. The entrance tooltip says so too.
 - New Forever dungeons and raids that aren't in the data yet are listed as "coming soon" in their zone's Dungeons menu: The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold, Shaper's Terrace, Barrow Deeps and Hyjal Summit.
