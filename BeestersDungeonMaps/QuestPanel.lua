@@ -425,14 +425,51 @@ local function ListWidth()
     return math.max(panel.Child:GetWidth(), 150)
 end
 
--- Shift-click a quest to put its link in chat, as in the game's quest log. The link is the
--- game's own quest link format, with the name the game knows (your language) where it has it.
+-- Shift-click a quest to put its link in chat, as in the game's quest log. Chat only keeps a
+-- link in the exact format this client uses, so the game makes it wherever it can:
+-- 1. GetQuestLink(questID) (newer clients) or via its quest log line (older ones);
+-- 2. for a quest not in your log, a link built the same way as one the game made for a quest
+--    that is, with its extra fields copied (they're the same for every quest).
+local function GameLink(id)
+    if not GetQuestLink then return nil end
+    local ok, link = pcall(GetQuestLink, id)
+    if ok and type(link) == "string" and link:find("|Hquest:" .. id .. ":", 1, true) then return link end
+    local index = C_QuestLog and C_QuestLog.GetLogIndexForQuestID and C_QuestLog.GetLogIndexForQuestID(id)
+    if index then
+        ok, link = pcall(GetQuestLink, index)
+        if ok and type(link) == "string" and link:find("|Hquest:" .. id .. ":", 1, true) then return link end
+    end
+end
+
+local linkShape -- { color, tail }: from a link the game made, e.g. "|cffffff00", ":-1:-1:0"
+local function LearnLinkShape()
+    if linkShape then return linkShape end
+    local count = C_QuestLog and C_QuestLog.GetNumQuestLogEntries and C_QuestLog.GetNumQuestLogEntries()
+        or (GetNumQuestLogEntries and GetNumQuestLogEntries()) or 0
+    for i = 1, count do
+        local info = C_QuestLog and C_QuestLog.GetInfo and C_QuestLog.GetInfo(i)
+        local qid = info and not info.isHeader and info.questID
+        if not qid and GetQuestLogTitle then qid = select(8, GetQuestLogTitle(i)) end
+        local link = qid and qid ~= 0 and GameLink(qid)
+        if link then
+            local color, tail = link:match("^(|c%x%x%x%x%x%x%x%x)|Hquest:%-?%d+:%-?%d+([^|]*)|h")
+            if color then
+                linkShape = { color = color, tail = tail or "" }
+                return linkShape
+            end
+        end
+    end
+end
+
 local function QuestLink(id)
+    local link = GameLink(id)
+    if link then return link end
     local q = Q(id)
     local name = C_QuestLog and C_QuestLog.GetTitleForQuestID and C_QuestLog.GetTitleForQuestID(id)
     name = name or (q and q[F.NAME])
     if not name then return nil end
-    return ("|cffffff00|Hquest:%d:%d|h[%s]|h|r"):format(id, q and q[F.LEVEL] or -1, name)
+    local shape = LearnLinkShape() or { color = "|cffffff00", tail = "" }
+    return ("%s|Hquest:%d:%d%s|h[%s]|h|r"):format(shape.color, id, q and q[F.LEVEL] or -1, shape.tail, name)
 end
 
 local function LinkQuestToChat(id)
