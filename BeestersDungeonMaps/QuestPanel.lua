@@ -474,6 +474,16 @@ end
 
 local function LinkQuestToChat(id)
     if not (id and IsModifiedClick and IsModifiedClick("CHATLINK")) then return false end
+    -- Newer clients: exactly what the game's own quest log does on shift-click.
+    if ChatEdit_TryInsertQuestLinkForQuestID then
+        local ok, done = pcall(ChatEdit_TryInsertQuestLinkForQuestID, id)
+        if ok and done then return true end
+    end
+    -- Otherwise the game's link as it gives it, unchanged (its form differs between clients).
+    if GetQuestLink and ChatEdit_InsertLink then
+        local ok, link = pcall(GetQuestLink, id)
+        if ok and link and link ~= "" and ChatEdit_InsertLink(link) then return true end
+    end
     local link = QuestLink(id)
     if not link then return false end
     if ChatEdit_InsertLink and ChatEdit_InsertLink(link) then return true end
