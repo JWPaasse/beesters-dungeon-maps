@@ -426,69 +426,46 @@ local function ListWidth()
 end
 
 -- Shift-click a quest to put its link in chat, as in the game's quest log. Chat only keeps a
--- link in the exact format this client uses, so the game makes it wherever it can:
--- 1. GetQuestLink(questID) (newer clients) or via its quest log line (older ones);
--- 2. for a quest not in your log, a link built the same way as one the game made for a quest
---    that is, with its extra fields copied (they're the same for every quest).
-local function GameLink(id)
-    if not GetQuestLink then return nil end
-    local ok, link = pcall(GetQuestLink, id)
-    if ok and type(link) == "string" and link:find("|Hquest:" .. id .. ":", 1, true) then return link end
-    local index = C_QuestLog and C_QuestLog.GetLogIndexForQuestID and C_QuestLog.GetLogIndexForQuestID(id)
-    if index then
-        ok, link = pcall(GetQuestLink, index)
-        if ok and type(link) == "string" and link:find("|Hquest:" .. id .. ":", 1, true) then return link end
-    end
+-- link the game made itself, so the game makes it.
+-- The game only makes a link for a quest it has loaded; quests you haven't picked up often
+-- aren't. Ask for them (on hover already), and put the link in once the game has it.
+local waitingLink -- { id, editBox }
+local linkLoader = CreateFrame("Frame")
+pcall(linkLoader.RegisterEvent, linkLoader, "QUEST_DATA_LOAD_RESULT")
+local function LoadQuest(id)
+    if id and C_QuestLog and C_QuestLog.RequestLoadQuestByID then pcall(C_QuestLog.RequestLoadQuestByID, id) end
 end
 
-local linkShape -- { color, tail }: from a link the game made, e.g. "|cffffff00", ":-1:-1:0"
-local function LearnLinkShape()
-    if linkShape then return linkShape end
-    local count = C_QuestLog and C_QuestLog.GetNumQuestLogEntries and C_QuestLog.GetNumQuestLogEntries()
-        or (GetNumQuestLogEntries and GetNumQuestLogEntries()) or 0
-    for i = 1, count do
-        local info = C_QuestLog and C_QuestLog.GetInfo and C_QuestLog.GetInfo(i)
-        local qid = info and not info.isHeader and info.questID
-        if not qid and GetQuestLogTitle then qid = select(8, GetQuestLogTitle(i)) end
-        local link = qid and qid ~= 0 and GameLink(qid)
-        if link then
-            local color, tail = link:match("^(|c%x%x%x%x%x%x%x%x)|Hquest:%-?%d+:%-?%d+([^|]*)|h")
-            if color then
-                linkShape = { color = color, tail = tail or "" }
-                return linkShape
-            end
-        end
-    end
-end
-
-local function QuestLink(id)
-    local link = GameLink(id)
-    if link then return link end
-    local q = Q(id)
-    local name = C_QuestLog and C_QuestLog.GetTitleForQuestID and C_QuestLog.GetTitleForQuestID(id)
-    name = name or (q and q[F.NAME])
-    if not name then return nil end
-    local shape = LearnLinkShape() or { color = "|cffffff00", tail = "" }
-    return ("%s|Hquest:%d:%d%s|h[%s]|h|r"):format(shape.color, id, q and q[F.LEVEL] or -1, shape.tail, name)
-end
-
-local function LinkQuestToChat(id)
-    if not (id and IsModifiedClick and IsModifiedClick("CHATLINK")) then return false end
-    -- Newer clients: exactly what the game's own quest log does on shift-click.
-    if ChatEdit_TryInsertQuestLinkForQuestID then
+local function InsertGameLink(id, editBox)
+    if ChatEdit_TryInsertQuestLinkForQuestID and not editBox then
         local ok, done = pcall(ChatEdit_TryInsertQuestLinkForQuestID, id)
         if ok and done then return true end
     end
-    -- Otherwise the game's link as it gives it, unchanged (its form differs between clients).
-    if GetQuestLink and ChatEdit_InsertLink then
-        local ok, link = pcall(GetQuestLink, id)
-        if ok and link and link ~= "" and ChatEdit_InsertLink(link) then return true end
+    local ok, link = pcall(GetQuestLink or function() end, id)
+    if not (ok and type(link) == "string" and link ~= "") then return false end
+    if editBox and editBox.Insert then
+        if not editBox:IsShown() and ChatFrame_OpenChat then ChatFrame_OpenChat(link) else editBox:Insert(link) end
+        return true
     end
-    local link = QuestLink(id)
-    if not link then return false end
     if ChatEdit_InsertLink and ChatEdit_InsertLink(link) then return true end
-    if ChatFrame_OpenChat then ChatFrame_OpenChat(link) return true end -- no chat box open yet
+    if ChatFrame_OpenChat then ChatFrame_OpenChat(link) return true end
     return false
+end
+
+linkLoader:SetScript("OnEvent", function(_, _, questID, success)
+    local w = waitingLink
+    if not (w and questID == w.id) then return end
+    waitingLink = nil
+    if success then InsertGameLink(w.id, w.editBox) end
+end)
+
+local function LinkQuestToChat(id)
+    if not (id and IsModifiedClick and IsModifiedClick("CHATLINK")) then return false end
+    if InsertGameLink(id) then return true end
+    -- Not loaded yet: ask, and insert it when it arrives (into the chat box open now).
+    waitingLink = { id = id, editBox = ChatEdit_GetActiveWindow and ChatEdit_GetActiveWindow() or nil }
+    LoadQuest(id)
+    return true
 end
 
 -- "[26] The Book of Ur", like the quest log; "(Dungeon)" goes to the right as its tag.
@@ -798,6 +775,7 @@ local function AddQuestRow(y, entry, kind)
     end
     if t.Glow then t.Glow:Hide() end
     t:SetScript("OnEnter", function(self)
+        LoadQuest(self.linkID) -- so a shift-click can link it straight away
         self.Label:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
         self.Tag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
         if self.Glow then self.Glow:Show() end
