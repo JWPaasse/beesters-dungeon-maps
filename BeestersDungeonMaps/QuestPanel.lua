@@ -453,13 +453,21 @@ local function InsertGameLink(id, editBox)
 end
 
 -- The game makes no link for a quest you've never had in your log, and chat drops links it
--- didn't make. Then the quest's name goes in as text: readable, not clickable.
-local function InsertQuestName(id, editBox)
+-- didn't make. Then the quest goes in as text in Questie's form, "[[33] Hearts of Zeal (1234)]":
+-- players with Questie, or with this addon, see it as a link (see the chat filter below).
+local function QuestText(id)
     local q = Q(id)
     local name = C_QuestLog and C_QuestLog.GetTitleForQuestID and C_QuestLog.GetTitleForQuestID(id)
     name = name or (q and q[F.NAME])
-    if not name then return end
-    local text = "[" .. name .. "]"
+    if not name then return nil end
+    local level = q and q[F.LEVEL]
+    if level and level > 0 then return ("[[%d] %s (%d)]"):format(level, name, id) end
+    return ("[%s (%d)]"):format(name, id)
+end
+
+local function InsertQuestName(id, editBox)
+    local text = QuestText(id)
+    if not text then return end
     if editBox and editBox.Insert and editBox:IsShown() then editBox:Insert(text)
     elseif ChatEdit_InsertLink and ChatEdit_InsertLink(text) then return
     elseif ChatFrame_OpenChat then ChatFrame_OpenChat(text) end
@@ -1507,8 +1515,88 @@ function ns:HideDungeonQuests(keepForMarker)
     if panel then panel:Hide(); panel.key = nil end
 end
 
+----------------------------------------------------------------------
+-- Quest text in chat as links
+----------------------------------------------------------------------
+-- Messages with a dungeon quest in Questie's text form ("[[33] Hearts of Zeal (1234)]") get a
+-- link on your screen; clicking it shows the quest. Only when Questie isn't running: Questie
+-- does the same for every quest. Nothing is sent; this only changes how a message looks here.
+local LINK_TYPE = "bdmquest"
+local lastShown
+
+local function ShowQuestReference(id)
+    local q = Q(id)
+    if not (q and ItemRefTooltip) then return false end
+    if not ItemRefTooltip:IsShown() then lastShown = nil end
+    ShowUIPanel(ItemRefTooltip)
+    ItemRefTooltip:SetOwner(UIParent, "ANCHOR_PRESERVE")
+    ItemRefTooltip:ClearLines()
+    ItemRefTooltip:AddLine(q[F.NAME], NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, true)
+    ItemRefTooltip:AddLine(("Level %d · %s quest"):format(q[F.LEVEL] or 0, LFG_TYPE_DUNGEON or "Dungeon"), 1, 1, 1)
+    local who, mapID = StartInfo(q)
+    local zone = mapID and C_Map.GetMapInfo(mapID)
+    if who then
+        ItemRefTooltip:AddLine(("Starts at %s%s"):format(who, zone and (", " .. zone.name) or ""), 0.8, 0.8, 0.8, true)
+    end
+    local text = ns.QuestText and ns.QuestText[id]
+    if text and text[2] and text[2] ~= "" then
+        ItemRefTooltip:AddLine(" ")
+        ItemRefTooltip:AddLine(FillText(text[2]), 1, 1, 1, true)
+    end
+    ItemRefTooltip:Show()
+    if ItemRefTooltip.SetPadding then ItemRefTooltip:SetPadding(16, 0) end
+    if lastShown == id then ItemRefTooltip:Hide(); lastShown = nil else lastShown = id end -- a second click closes it
+    return true
+end
+
+local function LinkUp(level, name, idText)
+    local id = tonumber(idText)
+    if not (id and Q(id)) then return nil end -- not a dungeon quest this addon knows
+    local label = level and ("[[%s] %s]"):format(level, name) or ("[%s]"):format(name)
+    return ("|cffffff00|H%s:%d|h%s|h|r"):format(LINK_TYPE, id, label)
+end
+
+local function ChatFilter(_, _, msg, ...)
+    if type(msg) ~= "string" or (issecretvalue and issecretvalue(msg)) or not msg:find("%(%d+%)%]") then
+        return false
+    end
+    local ok, changed = pcall(function()
+        local out = msg:gsub("%[%[(%d+)%] ([^%]]-) %((%d+)%)%]", function(level, name, id)
+            return LinkUp(level, name, id)
+        end)
+        return (out:gsub("%[([^%[%]]-) %((%d+)%)%]", function(name, id) return LinkUp(nil, name, id) end))
+    end)
+    if ok and changed and changed ~= msg then return false, changed, ... end
+    return false
+end
+
+local function InitChatLinks()
+    local questie = C_AddOns and C_AddOns.IsAddOnLoaded and C_AddOns.IsAddOnLoaded("Questie")
+        or (IsAddOnLoaded and IsAddOnLoaded("Questie"))
+    if questie or not ChatFrame_AddMessageEventFilter then return end
+    for _, event in ipairs({ "CHAT_MSG_SAY", "CHAT_MSG_YELL", "CHAT_MSG_EMOTE", "CHAT_MSG_PARTY",
+        "CHAT_MSG_PARTY_LEADER", "CHAT_MSG_RAID", "CHAT_MSG_RAID_LEADER", "CHAT_MSG_RAID_WARNING",
+        "CHAT_MSG_INSTANCE_CHAT", "CHAT_MSG_INSTANCE_CHAT_LEADER", "CHAT_MSG_GUILD", "CHAT_MSG_OFFICER",
+        "CHAT_MSG_WHISPER", "CHAT_MSG_WHISPER_INFORM", "CHAT_MSG_BN_WHISPER", "CHAT_MSG_BN_WHISPER_INFORM",
+        "CHAT_MSG_CHANNEL" }) do
+        ChatFrame_AddMessageEventFilter(event, ChatFilter)
+    end
+    -- Clicking the link: the game's link handler API, as Questie uses it on Forever (replacing
+    -- the reference tooltip's SetHyperlink would taint every link click).
+    if LinkUtil and LinkUtil.RegisterLinkHandler and LinkProcessorResponse then
+        LinkUtil.RegisterLinkHandler(LINK_TYPE, function(link)
+            if IsModifiedClick() then return LinkProcessorResponse.Unhandled end
+            local id = tonumber((link or ""):match(LINK_TYPE .. ":(%d+)"))
+            if id and ShowQuestReference(id) then return LinkProcessorResponse.Handled end
+            return LinkProcessorResponse.Unhandled
+        end)
+    end
+    ns.QuestChatFilter = ChatFilter -- read by tools/test_addon.py
+end
+
 function ns:InitQuestPanel()
     if not ns.Quests then return end
+    InitChatLinks()
     -- Leaving the marker's zone map for any other map ends the dungeon's quest view.
     hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
         if panel and panel.key and not ns:IsDungeonMapOpen() and not ns.keepQuestPanel then

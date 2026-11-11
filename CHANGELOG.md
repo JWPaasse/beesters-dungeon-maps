@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- Shift-click a quest in the dungeon quest tab to put its link in chat, like in the game's quest log. On a quest chain, it links the step you're on. For a quest you've never had in your log the game makes no link, so its name goes in as text.
+- Shift-click a quest in the dungeon quest tab to put its link in chat, like in the game's quest log. On a quest chain, it links the step you're on. For a quest you've never had in your log the game makes no link, so it goes in as text in Questie's form ("[[33] Hearts of Zeal (1234)]"): players with Questie see it as a link.
+- Dungeon quests in that form in chat become clickable links for you too, also without Questie: click one to see its level, where it starts and its objectives.
 
 ## 1.1.1
 

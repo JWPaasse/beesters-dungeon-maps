@@ -149,6 +149,8 @@ WorldMapFrame = CreateFrame("Frame")
 UIParent = CreateFrame("Frame")
 Minimap = CreateFrame("Frame")
 UISpecialFrames = {}
+chatFilters = {}
+function ChatFrame_AddMessageEventFilter(event, fn) chatFilters[event] = fn end
 WorldMapFrame.providers = {}
 WorldMapFrame.mapID = 1413
 WorldMapFrame.AddDataProvider = function(self, provider) provider.owningMap = self; table.insert(self.providers, provider) end
@@ -590,6 +592,20 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("the top bar's dungeon menu isn't empty after opening over the world view", #items > 0)
         ns:CloseDungeonMap(true)
         WorldMapFrame.mapID = 1413
+
+        -- Quest text in chat (Questie's form) becomes a link for dungeon quests this addon knows.
+        local anyQuest
+        for id in pairs(ns.Quests) do anyQuest = id; break end
+        ns:InitQuestPanel()
+        local filter = chatFilters["CHAT_MSG_PARTY"]
+        check("a chat filter is set up for party chat", filter ~= nil)
+        if filter then
+            local name = ns.Quests[anyQuest][1]
+            local _, out = filter(nil, "CHAT_MSG_PARTY", ("Doing [[33] %s (%d)] now"):format(name, anyQuest), "Someone")
+            check("a dungeon quest in Questie's form becomes a link", type(out) == "string" and out:find("|Hbdmquest:" .. anyQuest .. "|h", 1, true) ~= nil)
+            local changed = filter(nil, "CHAT_MSG_PARTY", "[Something Else (99999999)] and a normal line", "Someone")
+            check("other text is left alone", changed == false)
+        end
 
         -- Minimap button and the dungeon list.
         ns.db.minimapButton = true
