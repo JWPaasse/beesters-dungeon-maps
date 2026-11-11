@@ -425,6 +425,25 @@ local function ListWidth()
     return math.max(panel.Child:GetWidth(), 150)
 end
 
+-- Shift-click a quest to put its link in chat, as in the game's quest log. The link is the
+-- game's own quest link format, with the name the game knows (your language) where it has it.
+local function QuestLink(id)
+    local q = Q(id)
+    local name = C_QuestLog and C_QuestLog.GetTitleForQuestID and C_QuestLog.GetTitleForQuestID(id)
+    name = name or (q and q[F.NAME])
+    if not name then return nil end
+    return ("|cffffff00|Hquest:%d:%d|h[%s]|h|r"):format(id, q and q[F.LEVEL] or -1, name)
+end
+
+local function LinkQuestToChat(id)
+    if not (id and IsModifiedClick and IsModifiedClick("CHATLINK")) then return false end
+    local link = QuestLink(id)
+    if not link then return false end
+    if ChatEdit_InsertLink and ChatEdit_InsertLink(link) then return true end
+    if ChatFrame_OpenChat then ChatFrame_OpenChat(link) return true end -- no chat box open yet
+    return false
+end
+
 -- "[26] The Book of Ur", like the quest log; "(Dungeon)" goes to the right as its tag.
 local function QuestTitle(entry)
     local q = entry.q
@@ -600,7 +619,10 @@ local function AddChain(y, entry)
             if entry.dungeonSteps and entry.dungeonSteps[stepID] then
                 name = ("%s (%s)"):format(name, LFG_TYPE_DUNGEON or "Dungeon")
             end
-            local showStep = function() ShowDetail(entry.id, entry, stepID) end
+            local showStep = function()
+                if LinkQuestToChat(stepID) then return end
+                ShowDetail(entry.id, entry, stepID)
+            end
             if i < (entry.step or 1) then
                 y = AddStepLine(y, 40, name, "done", 0.55, 0.55, 0.55, showStep, last, "<Click for details>")
             elseif i == (entry.step or 1) then
@@ -709,15 +731,23 @@ local function AddQuestRow(y, entry, kind)
         end
     end
 
+    -- The quest a shift-click links: for a chain, the step you're on.
+    t.linkID = entry.chain and entry.steps and entry.steps[entry.step or 1] or entry.id
     local inLog = kind == "log" and not entry.chain
     t.Box:SetShown(inLog)
     if inLog then
         SetTracked(t, C_QuestLog.GetQuestWatchType and C_QuestLog.GetQuestWatchType(entry.id) ~= nil)
         t.hint = "<Click for details>"
-        t:SetScript("OnClick", function(self) ShowDetail(self.questID, entry) end)
+        t:SetScript("OnClick", function(self)
+            if LinkQuestToChat(self.linkID) then return end
+            ShowDetail(self.questID, entry)
+        end)
     else
         t.hint = "<Click for details>"
-        t:SetScript("OnClick", function(self) ShowDetail(self.questID, entry) end)
+        t:SetScript("OnClick", function(self)
+            if LinkQuestToChat(self.linkID) then return end
+            ShowDetail(self.questID, entry)
+        end)
     end
     if t.Glow then t.Glow:Hide() end
     t:SetScript("OnEnter", function(self)

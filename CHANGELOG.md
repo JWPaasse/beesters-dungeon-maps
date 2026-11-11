@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Shift-click a quest in the dungeon quest tab to put its link in chat, like in the game's quest log. On a quest chain, it links the step you're on.
+
 ## 1.1.1
 
 - Dungeons without subzones (like Gnomeregan): the map now holds the level you last looked at during your run, and turns to a boss's level when you pull or target that boss. A new run starts on the first level again.
