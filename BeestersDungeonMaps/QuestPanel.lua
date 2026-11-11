@@ -452,19 +452,40 @@ local function InsertGameLink(id, editBox)
     return false
 end
 
+-- The game makes no link for a quest you've never had in your log, and chat drops links it
+-- didn't make. Then the quest's name goes in as text: readable, not clickable.
+local function InsertQuestName(id, editBox)
+    local q = Q(id)
+    local name = C_QuestLog and C_QuestLog.GetTitleForQuestID and C_QuestLog.GetTitleForQuestID(id)
+    name = name or (q and q[F.NAME])
+    if not name then return end
+    local text = "[" .. name .. "]"
+    if editBox and editBox.Insert and editBox:IsShown() then editBox:Insert(text)
+    elseif ChatEdit_InsertLink and ChatEdit_InsertLink(text) then return
+    elseif ChatFrame_OpenChat then ChatFrame_OpenChat(text) end
+end
+
 linkLoader:SetScript("OnEvent", function(_, _, questID, success)
     local w = waitingLink
     if not (w and questID == w.id) then return end
     waitingLink = nil
-    if success then InsertGameLink(w.id, w.editBox) end
+    if not (success and InsertGameLink(w.id, w.editBox)) then InsertQuestName(w.id, w.editBox) end
 end)
 
 local function LinkQuestToChat(id)
     if not (id and IsModifiedClick and IsModifiedClick("CHATLINK")) then return false end
     if InsertGameLink(id) then return true end
     -- Not loaded yet: ask, and insert it when it arrives (into the chat box open now).
-    waitingLink = { id = id, editBox = ChatEdit_GetActiveWindow and ChatEdit_GetActiveWindow() or nil }
+    local w = { id = id, editBox = ChatEdit_GetActiveWindow and ChatEdit_GetActiveWindow() or nil }
+    waitingLink = w
     LoadQuest(id)
+    -- No answer from the game (it often doesn't for quests you've never had): the name as text.
+    C_Timer.After(0.5, function()
+        if waitingLink == w then
+            waitingLink = nil
+            if not InsertGameLink(w.id, w.editBox) then InsertQuestName(w.id, w.editBox) end
+        end
+    end)
     return true
 end
 

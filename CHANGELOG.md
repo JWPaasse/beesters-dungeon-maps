@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Shift-click a quest in the dungeon quest tab to put its link in chat, like in the game's quest log. On a quest chain, it links the step you're on.
+- Shift-click a quest in the dungeon quest tab to put its link in chat, like in the game's quest log. On a quest chain, it links the step you're on. For a quest you've never had in your log the game makes no link, so its name goes in as text.
 
 ## 1.1.1
 
