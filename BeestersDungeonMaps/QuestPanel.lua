@@ -1488,8 +1488,22 @@ RaiseAboveQuestDetails = function()
     if strip and strip:GetFrameLevel() < level + 10 then strip:SetFrameLevel(level + 10) end
 end
 
+-- The tab bar sits where the game's quest details have their Back button. While those
+-- details are open in the Quest Log tab, the bar steps aside so that button can be used;
+-- it comes back with the quest list.
+local function GameDetailsOpen()
+    local details = QuestMapFrame and rawget(QuestMapFrame, "DetailsFrame")
+    return type(details) == "table" and details.IsShown and details:IsShown() == true
+end
+
+local function UpdateStrip()
+    if not strip then return end
+    strip:SetShown(rawget(strip, "active") == true and not (tab == "log" and GameDetailsOpen()))
+end
+
 local function SetTab(which)
     tab = which
+    UpdateStrip()
     if strip then
         strip.Log.Selected:SetShown(which == "log")
         strip.Dungeon.Selected:SetShown(which == "dungeon")
@@ -1593,6 +1607,11 @@ local function CreateFrames()
     ns.questFaction = own == "Alliance" and "A" or "H"
     f:Update()
     strip:Hide()
+    local details = QuestMapFrame and rawget(QuestMapFrame, "DetailsFrame")
+    if type(details) == "table" and details.HookScript then
+        details:HookScript("OnShow", UpdateStrip)
+        details:HookScript("OnHide", UpdateStrip)
+    end
 
     panel = CreateFrame("Frame", "BeestersDungeonMapsQuests", host)
     panel:SetAllPoints(list)
@@ -1658,7 +1677,7 @@ function ns:ShowDungeonQuests(key)
     end
     panel.key = key
     SetTabText(strip.Dungeon, ns.Instances[key] and ns.Instances[key].name or key)
-    strip:Show()
+    strip.active = true
     SetTab("dungeon")
 end
 
@@ -1666,7 +1685,7 @@ end
 -- go on reading them. Clicking the dungeon tab brings the dungeon map back.
 function ns:HideDungeonQuests(keepForMarker)
     if keepForMarker or ns.keepQuestPanel then return end
-    if strip then strip:Hide() end
+    if strip then strip.active = false; strip:Hide() end
     if panel then panel:Hide(); panel.key = nil end
 end
 
