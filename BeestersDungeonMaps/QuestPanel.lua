@@ -1311,7 +1311,15 @@ local function CreateDetail(parent)
     -- The text sits in its own box (parchment and border, closed at the bottom); the
     -- buttons go underneath it, outside the border.
     local box = CreateFrame("Frame", nil, d)
-    box:SetPoint("TOPLEFT", 0, 0)
+    -- A dark bar on top for the Back button, as in the game's quest details; the parchment
+    -- and its border (filigree and all) start under it.
+    local BAR = 32
+    local bar = d:CreateTexture(nil, "BACKGROUND")
+    bar:SetPoint("TOPLEFT", 0, 0)
+    bar:SetPoint("TOPRIGHT", 0, 0)
+    bar:SetHeight(BAR + 4)
+    bar:SetColorTexture(0.06, 0.05, 0.03, 1)
+    box:SetPoint("TOPLEFT", 0, -(BAR + 4))
     box:SetPoint("BOTTOMRIGHT", 0, 30)
     d.Box = box
     -- The parchment of the game's own quest details.
@@ -1334,7 +1342,7 @@ local function CreateDetail(parent)
     -- The game's thin scroll bar, just outside the parchment like the list's; the old
     -- template's bar inside it if this client can't make that one.
     local scroll = CreateFrame("ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", box)
-    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 40, -8
+    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 6, -8
     local right = 0
     if not (ScrollFrame_OnLoad and pcall(ScrollFrame_OnLoad, scroll)) then
         scroll:Hide()
@@ -1342,7 +1350,7 @@ local function CreateDetail(parent)
         scroll = ok and made or CreateFrame("ScrollFrame", nil, box)
         right = -24
     end
-    scroll:SetPoint("TOPLEFT", 0, -38) -- under the Back button
+    scroll:SetPoint("TOPLEFT", 0, -4)
     scroll:SetPoint("BOTTOMRIGHT", right, 4)
     d.Scroll = scroll
     d.Page = CreateFrame("Frame", nil, scroll)
@@ -1422,7 +1430,7 @@ local function CreateDetail(parent)
     -- Back to the list, like the Back button on the game's quest details.
     d.Back = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     d.Back:SetSize(105, 22)
-    d.Back:SetPoint("TOPLEFT", box, "TOPLEFT", 14, -10)
+    d.Back:SetPoint("LEFT", bar, "LEFT", 10, -1)
     d.Back:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
     d.Back:SetText(BACK or "Back")
     d.Back:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
