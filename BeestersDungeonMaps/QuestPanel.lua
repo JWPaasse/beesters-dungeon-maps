@@ -1342,7 +1342,9 @@ local function CreateDetail(parent)
     -- The game's thin scroll bar, just outside the parchment like the list's; the old
     -- template's bar inside it if this client can't make that one.
     local scroll = CreateFrame("ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", box)
-    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 6, -8
+    -- Same length and place as the list's bar (and the game's under it, which it covers):
+    -- the scroll area starts 40 below the tab's top (+3) and ends 34 above its bottom.
+    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 39, -38
     local right = 0
     if not (ScrollFrame_OnLoad and pcall(ScrollFrame_OnLoad, scroll)) then
         scroll:Hide()
