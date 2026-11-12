@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.5
 
 - Shadowfang Keep: the Fel Steeds / Shadow Charger now have their place on the map.
 - Blackfathom Deeps: the Fire of Aku'Mai is gone from the boss list. It's the event that opens the door to Aku'mai, not a boss.
