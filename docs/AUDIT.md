@@ -5,7 +5,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Instance | Bosses placed | Confirmed | Bosses without loot | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Alcaz Prison | 0/5 | 0/5 | 0 | 11 | 11 |
+| Alcaz Prison | 0/5 | 0/5 | 0 | 11 | 7 |
 | Blackfathom Deeps | 6/6 | 0/6 | 0 | 34 | 3 |
 | Blackmaw Hold | 0/7 | 0/7 | 4 | 3 | 3 |
 | Blackrock Depths | 18/18 | 0/18 | 1 | 78 | 0 |
@@ -17,7 +17,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Excavation Site: Wetlands | 3/3 | 0/3 | 0 | 9 | 9 |
 | Gnomeregan | 6/6 | 0/6 | 0 | 24 | 4 |
 | Hall of Thanes | 4/4 | 0/4 | 0 | 12 | 12 |
-| Krol'dok Stronghold | 0/5 | 0/5 | 2 | 11 | 11 |
+| Krol'dok Stronghold | 0/5 | 0/5 | 2 | 11 | 9 |
 | Maraudon | 9/9 | 0/9 | 0 | 32 | 1 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
 | Ragefire Chasm | 4/4 | 0/4 | 0 | 15 | 6 |
@@ -35,17 +35,17 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 39 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 194/242 | 0/242 | 27 | 1240 | 168 |
+| **All** | 194/242 | 0/242 | 27 | 1240 | 162 |
 
 ## Alcaz Prison
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Overseer Wrex | **no** | — |  | 0 (+2 unknown) | 2 |
-| Tidemistress Ca'zass | **no** | — |  | 0 (+3 unknown) | 3 |
+| Overseer Wrex | **no** | — |  | 0 (+2 unknown) | 1 |
+| Tidemistress Ca'zass | **no** | — |  | 0 (+3 unknown) | 2 |
 | Katerina the Cleaner | **no** | — |  | 0 (+1 unknown) | 1 |
-| The Questioner | **no** | — |  | 0 (+4 unknown) | 4 |
-| Blazeroar | **no** | — |  | 0 (+1 unknown) | 1 |
+| The Questioner | **no** | — |  | 0 (+4 unknown) | 3 |
+| Blazeroar | **no** | — |  | 0 (+1 unknown) | 0 |
 
 ## Blackfathom Deeps
 
@@ -198,10 +198,10 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Slavecrusher Grox | **no** | — |  | 0 (+4 unknown) | 4 |
+| Slavecrusher Grox | **no** | — |  | 0 (+4 unknown) | 3 |
 | Twilight Commander Zarmok | **no** | — |  | 0 (+3 unknown) | 3 |
 | Handler Ashka | **no** | — |  | 0 | 0 |
-| Nar'gurk | **no** | — |  | 0 (+4 unknown) | 4 |
+| Nar'gurk | **no** | — |  | 0 (+4 unknown) | 3 |
 | Overseer Mugg | **no** | — |  | 0 | 0 |
 
 ## Maraudon
