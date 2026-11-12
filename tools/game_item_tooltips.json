@@ -1,5 +1,5 @@
 {
-"_source": "WoW Forever client tables, build 1.60.1.70862 (via wago.tools)",
+"_source": "WoW Forever client tables, build 1.60.1.70888 (via wago.tools)",
 "items": {
 "414": [
 "|cffffffffDalaran Sharp|r",
@@ -559,18 +559,6 @@
 "|cff1eff00Use: Allows control of a mechanical target for a short time. It may not always work and may just root the machine or make it very very angry. Gnomish engineering at its finest. (3 Min Cooldown)|r",
 "Use: Teaches you how to make a Gnomish Universal Remote.",
 "Requires Engineering (125)"
-],
-"7561": [
-"|cffffffffSchematic: Goblin Jumper Cables|r",
-"Binds when picked up",
-" ",
-"|cffffffffGoblin Jumper Cables|r",
-"Unique-Equipped",
-"Trinket",
-"Requires Engineering (165)",
-"|cff1eff00Use: Jumper Cables will sometimes be able to shock a dead player back to life. Cannot be used when in combat. (30 Min Cooldown)|r",
-"Use: Teaches you how to make Goblin Jumper Cables.",
-"Requires Engineering (165)"
 ],
 "7670": [
 "|cffffffffShattered Necklace Sapphire|r",
@@ -1589,6 +1577,30 @@
 "Binds when picked up",
 "Unique"
 ],
+"210178": [
+"|cff1eff00Schematic: Shredder Autosalvage Unit|r",
+" ",
+"|cffffffffShredder Autosalvage Unit|r",
+"|cff1eff00Use: Salvage the wreckage of a shredder for spare parts.|r",
+"Use: Teaches you how to craft Shredder Autosalvage Unit.",
+"Requires Engineering (135)"
+],
+"227690": [
+"|cffffffffNecrotic Runestone|r",
+"Quest Item",
+"|cffffd100\"You feel sick to your stomach when your bare flesh makes contact with this runestone.\"|r"
+],
+"227912": [
+"|cffffffffApplied Divinity|r",
+"Quest Item",
+"Unique"
+],
+"228312": [
+"|cffa335eePlans: Invincible Mail|r",
+"Requires Armorsmith",
+"Requires Blacksmithing (300)",
+"Use: Teaches you how to make Invincible Mail."
+],
 "245675": [
 "|cffffffffGordok Inner Door Key|r",
 "Binds when picked up",
@@ -1608,6 +1620,80 @@
 "|cff1eff00Equip: Increased Defense +5.|r",
 "Use: Teaches you how to craft Guard's Chain Shirt.",
 "Requires Blacksmithing (80)"
+],
+"251344": [
+"|cff0070ddPlans: Crusader's Chain Shirt|r",
+"Binds when picked up",
+" ",
+"|cff0070ddCrusader's Chain Shirt|r",
+"Binds when picked up",
+"Chest\tMail",
+"184 Armor",
+"+4 Strength",
+"+5 Stamina",
+"Requires Level 15",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 9.|r",
+"Use: Teaches you how to craft Crusader's Chain Shirt.",
+"Requires Blacksmithing (80)"
+],
+"251345": [
+"|cff0070ddPlans: Veteran's Chain Leggings|r",
+"Binds when picked up",
+" ",
+"|cff0070ddVeteran's Chain Leggings|r",
+"Binds when picked up",
+"Legs\tMail",
+"176 Armor",
+"+9 Strength",
+"+5 Agility",
+"+7 Stamina",
+"Requires Level 20",
+"Use: Teaches you how to craft Veteran's Chain Leggings.",
+"Requires Blacksmithing (95)"
+],
+"251347": [
+"|cff0070ddPlans: Protector's Chain Leggings|r",
+"Binds when picked up",
+" ",
+"|cff0070ddProtector's Chain Leggings|r",
+"Binds when picked up",
+"Legs\tMail",
+"176 Armor",
+"+9 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increased Defense +5.|r",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 6.|r",
+"Use: Teaches you how to craft Protector's Chain Leggings.",
+"Requires Blacksmithing (95)"
+],
+"251349": [
+"|cff0070ddPlans: Crusader's Chain Leggings|r",
+"Binds when picked up",
+" ",
+"|cff0070ddCrusader's Chain Leggings|r",
+"Binds when picked up",
+"Legs\tMail",
+"176 Armor",
+"+3 Strength",
+"+7 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 11.|r",
+"Use: Teaches you how to craft Crusader's Chain Leggings.",
+"Requires Blacksmithing (95)"
+],
+"251353": [
+"|cff0070ddPlans: Acolyte's Chain Helm|r",
+"Binds when picked up",
+" ",
+"|cff0070ddAcolyte's Chain Helm|r",
+"Binds when picked up",
+"Head\tMail",
+"177 Armor",
+"+11 Stamina",
+"Requires Level 25",
+"|cff1eff00Equip: Increases healing done by up to 25 and damage done by up to 8 for all magical spells and effects.|r",
+"Use: Teaches you how to craft Acolyte's Chain Helm.",
+"Requires Blacksmithing (125)"
 ],
 "251360": [
 "|cff0070ddPlans: Veteran's Gloves|r",
@@ -1792,6 +1878,21 @@
 "Requires Level 25",
 "|cff1eff00Equip: Increases healing done by up to 21 and damage done by up to 7 for all magical spells and effects.|r"
 ],
+"252773": [
+"|cff0070ddPattern: Defender's Leather Armor|r",
+" ",
+"|cff0070ddDefender's Leather Armor|r",
+"Binds when picked up",
+"Chest\tLeather",
+"85 Armor",
+"+7 Strength",
+"+3 Agility",
+"+5 Stamina",
+"+33 Armor",
+"Requires Level 15",
+"Use: Teaches you how to craft Defender's Leather Armor.",
+"Requires Leatherworking (75)"
+],
 "252777": [
 "|cff0070ddPattern: Brawler's Leather Gloves|r",
 "Binds when picked up",
@@ -1882,6 +1983,21 @@
 "Use: Teaches you how to craft Wisdom's Leather Gloves.",
 "Requires Leatherworking (75)"
 ],
+"252795": [
+"|cff0070ddPattern: Totemic Leather Pants|r",
+" ",
+"|cff0070ddTotemic Leather Pants|r",
+"Binds when picked up",
+"Legs\tLeather",
+"82 Armor",
+"+9 Strength",
+"+4 Intellect",
+"+4 Stamina",
+"Requires Level 20",
+"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 7.|r",
+"Use: Teaches you how to craft Totemic Leather Pants.",
+"Requires Leatherworking (100)"
+],
 "252798": [
 "|cff0070ddPattern: Brawler's Leather Hood|r",
 "Binds when picked up",
@@ -1936,20 +2052,6 @@
 "+9 Spirit",
 "Requires Level 20",
 "Use: Teaches you how to craft Stormrider's Leather Hood.",
-"Requires Leatherworking (100)"
-],
-"252803": [
-"|cff0070ddPattern: Wisdom's Leather Hood|r",
-"Binds when picked up",
-" ",
-"|cff0070ddWisdom's Leather Hood|r",
-"Binds when picked up",
-"Head\tLeather",
-"76 Armor",
-"+10 Stamina",
-"Requires Level 20",
-"|cff1eff00Equip: Increases healing done by up to 17 and damage done by up to 6 for all magical spells and effects.|r",
-"Use: Teaches you how to craft Wisdom's Leather Hood.",
 "Requires Leatherworking (100)"
 ],
 "252820": [
