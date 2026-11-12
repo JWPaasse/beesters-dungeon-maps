@@ -1218,7 +1218,7 @@ function ShowDetail(id, entry, stepOverride)
         -- The rewards on a dark brown panel, "Rewards" centred over a divider, small light
         -- captions: the map's own quest details.
         local top = y + 2
-        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, { 0.82, 0.74, 0.6 }, "CENTER")
+        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, { 0.76, 0.69, 0.58 }, "CENTER")
         if type(rawget(d, "RewardDivider")) ~= "table" then
             d.RewardDivider = d.Page:CreateTexture(nil, "ARTWORK")
             d.RewardDivider:SetTexture("Interface\\QuestFrame\\UI-HorizontalBreak")
@@ -1238,22 +1238,15 @@ function ShowDetail(id, entry, stepOverride)
             y = PageText(d, "GameFontHighlightSmall", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", y, 4, caption)
             y = RewardGrid(d, receive, y)
         end
-        if type(rawget(d, "RewardPanel")) ~= "table" then
-            d.RewardPanel = d.Page:CreateTexture(nil, "BACKGROUND", nil, 7)
-            d.RewardPanel:SetColorTexture(0.16, 0.11, 0.07, 1)
-        end
-        d.RewardPanel:ClearAllPoints()
-        d.RewardPanel:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 0, -top)
-        d.RewardPanel:SetPoint("TOPRIGHT", d.Page, "TOPRIGHT", 0, -top)
-        d.RewardPanel:SetHeight(y - top + 4)
-        d.RewardPanel:Show()
+        d.rewardTop = top
         y = y + 4
     else
+        d.rewardTop = nil
         if type(rawget(d, "RewardDivider")) == "table" then d.RewardDivider:Hide() end
-        if type(rawget(d, "RewardPanel")) == "table" then d.RewardPanel:Hide() end
     end
     d.Page:SetHeight(y + 8)
     d.Scroll:SetVerticalScroll(0)
+    d.UpdateRewardPanel()
 
     d.MapButton.target = mapID and { mapID = mapID, x = x, y = yy, title = step[F.NAME],
         who = ("%s: %s"):format(inLog and "Hand in" or "Pick up", who or "?") } or nil
@@ -1303,6 +1296,28 @@ local function CreateDetail(parent)
     d.Page = CreateFrame("Frame", nil, scroll)
     d.Page:SetSize(200, 10)
     scroll:SetScrollChild(d.Page)
+
+    -- The rewards' dark brown panel, as in the game's quest details: on the box itself, so it
+    -- runs from edge to edge (under the scroll bar too) down to the bottom, its top following
+    -- the "Rewards" heading as the page scrolls.
+    local panelTex = box:CreateTexture(nil, "BACKGROUND", nil, 2)
+    panelTex:SetColorTexture(0.22, 0.155, 0.105, 1)
+    panelTex:Hide()
+    d.UpdateRewardPanel = function()
+        local top = rawget(d, "rewardTop")
+        local offset = scroll.GetVerticalScroll and scroll:GetVerticalScroll() or 0
+        local shown = type(top) == "number" and type(offset) == "number"
+        if shown then
+            local t = math.max(0, top - offset)
+            local h = box:GetHeight()
+            shown = not (type(h) == "number" and t + 4 >= h)
+            panelTex:ClearAllPoints()
+            panelTex:SetPoint("TOPLEFT", box, "TOPLEFT", 0, -(4 + t))
+            panelTex:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", 0, 0)
+        end
+        panelTex:SetShown(shown and true or false)
+    end
+    scroll:HookScript("OnVerticalScroll", function() d.UpdateRewardPanel() end)
 
     -- On the border's corner and above it (the border's filigree used to cover it).
     d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
