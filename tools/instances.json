@@ -232,7 +232,14 @@
           "Captain Dreadrise",
           "Min'loth"
         ]
-      }
+      },
+      "entrance": [
+        [
+          1434,
+          21.2,
+          27.7
+        ]
+      ]
     },
     "16842": {
       "key": "kroldok",
@@ -251,7 +258,14 @@
           "Nar'gurk",
           "Overseer Mugg"
         ]
-      }
+      },
+      "entrance": [
+        [
+          2548,
+          37.5,
+          37.3
+        ]
+      ]
     },
     "16620": {
       "key": "alcaz",
@@ -270,7 +284,14 @@
           "The Questioner",
           "Blazeroar"
         ]
-      }
+      },
+      "entrance": [
+        [
+          1445,
+          75.3,
+          14.0
+        ]
+      ]
     },
     "16554": {
       "key": "blackmaw",
@@ -290,7 +311,14 @@
           "Varrox Bleakhoof",
           "Blackmaw Behemoth"
         ]
-      }
+      },
+      "entrance": [
+        [
+          1447,
+          38.5,
+          33.2
+        ]
+      ]
     },
     "16667": {
       "key": "shaper",
@@ -315,7 +343,14 @@
         "areas": [
           16985
         ]
-      }
+      },
+      "entrance": [
+        [
+          1449,
+          48.0,
+          6.0
+        ]
+      ]
     }
   },
   "encounterCreatures": {
@@ -342,5 +377,6 @@
     }
   ],
   "_comingSoon": "Instances WoW Forever has that the addon has no data for yet (not in QuestieDB). Listed greyed out as 'coming soon' in the Dungeons menu of their zone; dropped automatically once QuestieDB has them.",
-  "_findQuests": "findQuests: for new dungeons QuestieDB doesn't file quests under yet. A quest belongs to the dungeon when its objective names the dungeon or one of its bosses (words), or QuestieDB files it under one of the areas. Chains are linked only where QuestieDB shows it: the next quest starts at the NPC where the previous one ends (after travelling there), or says 'Return to <NPC>' for the previous quest's NPC; within a few quest IDs, same faction."
+  "_findQuests": "findQuests: for new dungeons QuestieDB doesn't file quests under yet. A quest belongs to the dungeon when its objective names the dungeon or one of its bosses (words), or QuestieDB files it under one of the areas. Chains are linked only where QuestieDB shows it: the next quest starts at the NPC where the previous one ends (after travelling there), or says 'Return to <NPC>' for the previous quest's NPC; within a few quest IDs, same faction.",
+  "_entrance": "entrance: [[uiMapID, x, y]] (0-100) for dungeons QuestieDB has no entrance for yet, read off the map in game (12 Nov 2026). QuestieDB's entrance wins once it has one."
 }

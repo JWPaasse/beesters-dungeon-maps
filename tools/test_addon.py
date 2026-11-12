@@ -600,8 +600,12 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local soon = ns:ComingSoonOnMap(1450)
         check("a coming-soon raid is found by its zone name", #soon == 2 and soon[1].name == "Barrow Deeps")
         check("Shaper's Terrace isn't coming soon any more", #ns:ComingSoonOnMap(1446) == 0)
+        check("the new dungeons have entrances (read off the map in game)", ns:EntranceMapFor("shaper") == 1449 and ns:EntranceMapFor("alcaz") == 1445)
+        -- A dungeon whose entrance isn't known is still listed under its zone.
+        ns.Instances.testonly = { name = "Test Hold", kind = "dungeon", levels = "60", zone = "Un'Goro Crater" }
         local zoneOnly = ns:ZoneOnlyDungeonsOnMap(1446)
-        check("a dungeon without a known entrance is listed under its zone", #zoneOnly == 1 and zoneOnly[1] == "shaper" and ns:EntranceMapFor("shaper") == 1446)
+        check("a dungeon without a known entrance is listed under its zone", #zoneOnly == 1 and zoneOnly[1] == "testonly" and ns:EntranceMapFor("testonly") == 1446)
+        ns.Instances.testonly = nil
         -- A new dungeon without a map: its page opens with the notice, its bosses in the list.
         ns:OpenDungeonMap("shaper")
         local v = BeestersDungeonMapsView

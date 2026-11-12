@@ -11,7 +11,7 @@ It's built to look like part of the game: the world map's own pins and menus, th
 **On the world map**
 - Dungeon and raid entrances on zone and continent maps. Hover one for its level range, and whether it's new in Forever. Blackrock Mountain shows both Blackrock Depths and Blackrock Spire.
 - A **Dungeons** menu in the map's top bar (World › Kalimdor › Durotar › Dungeons) to open any dungeon in the zone you're looking at.
-- The newest Forever dungeons (The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold, Shaper's Terrace) are in that menu too. There's no map of them yet, so their page shows a "Work in progress" notice with their bosses and quests. The two Hyjal raids are listed as "coming soon".
+- The newest Forever dungeons (The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold, Shaper's Terrace) have entrances too. There's no map of them yet, so their page shows a "Work in progress" notice with their bosses and quests. The two Hyjal raids are listed as "coming soon".
 
 **Minimap button**
 - Click it for a list of every dungeon and raid. Your dungeons (within 5 levels of you) are pinned on top; the rest scrolls underneath, by level band, raids last. Levels are coloured by difficulty for you, like quest titles.

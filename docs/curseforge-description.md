@@ -29,7 +29,7 @@ WoW Forever's map has no dungeon maps, no boss locations and no dungeon quest li
 
 ## Still in progress
 
-- **New dungeons:** The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace have no map yet, and their entrances aren't on the world map yet. You'll find them in their zone's Dungeons menu and the minimap list, with their bosses, loot and quests. Their quest data is still thin: some quest givers and chains are missing and fill in as they become known.
+- **New dungeons:** The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace have no map yet. Their entrances are on the world map like the others, and their page has their bosses, loot and quests. Their quest data is still thin: some quest givers and chains are missing and fill in as they become known.
 - **Raids:** Barrow Deeps and Hyjal Summit follow after they open on 9 December.
 - **Incomplete data:** a dungeon with bosses that don't have a position or loot yet shows a "Work in progress" tag on its map. Hover it to see what's missing.
 - **Language:** English only for now.
