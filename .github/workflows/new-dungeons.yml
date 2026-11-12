@@ -1,0 +1,35 @@
+name: New dungeons
+
+# Reads the new Forever dungeons (instance IDs, entrances, bosses, quest lines)
+# from the WoW Forever client's tables (wago.tools), and commits tools/new_dungeons.json.
+# Runs when the script changes, or by hand. It never publishes a release.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/fetch_new_dungeons.py"
+      - ".github/workflows/new-dungeons.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Read the game's tables
+        run: python3 tools/fetch_new_dungeons.py
+      - name: Commit
+        run: |
+          git add tools/new_dungeons.json
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "New dungeons"
+          git pull --rebase
+          git push
