@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0
 
 - The five new dungeons are in: The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace. They have no map yet, so their page shows a "Work in progress" notice, with the bosses (and their loot) listed in the corner and the dungeon's quests in the tab beside it. They're in the minimap list and their zone's Dungeons menu, and their page opens by itself when you open the map inside.
 - Their quests come from QuestieDB. Quest chains are linked only where QuestieDB's own data shows the link; a quest without a known quest giver says so.
