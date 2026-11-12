@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Shadowfang Keep: the Fel Steeds / Shadow Charger now have their place on the map.
+- Blackfathom Deeps: the Fire of Aku'Mai is gone from the boss list. It's the event that opens the door to Aku'mai, not a boss.
+
 ## 1.1.4
 
 - Opening the map in combat inside a dungeon now shows the dungeon map on top of the game's own. The game doesn't let addons hide its map during a fight, so the dungeon map now goes over it instead.
