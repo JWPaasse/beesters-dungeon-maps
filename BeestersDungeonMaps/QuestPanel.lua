@@ -1334,7 +1334,7 @@ local function CreateDetail(parent)
     -- The game's thin scroll bar, just outside the parchment like the list's; the old
     -- template's bar inside it if this client can't make that one.
     local scroll = CreateFrame("ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", box)
-    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 6, -8
+    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 40, -8
     local right = 0
     if not (ScrollFrame_OnLoad and pcall(ScrollFrame_OnLoad, scroll)) then
         scroll:Hide()
@@ -1342,7 +1342,7 @@ local function CreateDetail(parent)
         scroll = ok and made or CreateFrame("ScrollFrame", nil, box)
         right = -24
     end
-    scroll:SetPoint("TOPLEFT", 0, -4)
+    scroll:SetPoint("TOPLEFT", 0, -38) -- under the Back button
     scroll:SetPoint("BOTTOMRIGHT", right, 4)
     d.Scroll = scroll
     d.Page = CreateFrame("Frame", nil, scroll)
@@ -1372,7 +1372,6 @@ local function CreateDetail(parent)
     local hasArt = C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(REWARD_ART.tile) ~= nil
     -- A dark base: the game's measured brown without the art, the frame behind it with it.
     local base = rewards:CreateTexture(nil, "BACKGROUND", nil, 1)
-    base:SetAllPoints()
     if hasArt then base:SetColorTexture(0.07, 0.045, 0.03, 1) else base:SetColorTexture(0.22, 0.118, 0.06, 1) end
     local tile, header, bottom
     if hasArt then
@@ -1388,6 +1387,12 @@ local function CreateDetail(parent)
         bottom:SetAtlas(REWARD_ART.bottom, false)
         bottom:SetPoint("BOTTOMLEFT", 0, 0)
         bottom:SetPoint("BOTTOMRIGHT", 0, 0)
+        -- The header's top is open (the parchment shows through it); the dark base starts
+        -- under it.
+        base:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, 0)
+        base:SetPoint("BOTTOMRIGHT", 0, 0)
+    else
+        base:SetAllPoints()
     end
     d.UpdateRewardPanel = function()
         local top = rawget(d, "rewardTop")
@@ -1414,11 +1419,13 @@ local function CreateDetail(parent)
     scroll:HookScript("OnVerticalScroll", function() d.UpdateRewardPanel() end)
     clip:SetScript("OnSizeChanged", function() d.UpdateRewardPanel() end)
 
-    -- On the border's corner and above it (the border's filigree used to cover it).
-    d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
-    d.Close:SetPoint("TOPRIGHT", 5, 6)
-    d.Close:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
-    d.Close:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
+    -- Back to the list, like the Back button on the game's quest details.
+    d.Back = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
+    d.Back:SetSize(105, 22)
+    d.Back:SetPoint("TOPLEFT", box, "TOPLEFT", 14, -10)
+    d.Back:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
+    d.Back:SetText(BACK or "Back")
+    d.Back:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
 
     d.MapButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     -- One bar of equal buttons under the text, like the game's Abandon | Share | Track.
