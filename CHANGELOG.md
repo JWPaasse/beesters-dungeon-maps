@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Quest details: the rewards now look like the map's own quest details (centred "Rewards" heading with a divider, small captions, the small reward buttons with white names, experience and money on their own row first).
+
 ## 1.1.2
 
 - Shift-click a quest in the dungeon quest tab to put its link in chat, like in the game's quest log. On a quest chain, it links the step you're on. For a quest you've never had in your log the game makes no link, so it goes in as text in Questie's form ("[[33] Hearts of Zeal (1234)]"): players with Questie see it as a link.

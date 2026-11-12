@@ -941,15 +941,15 @@ local function MoneyText(copper)
     return (g > 0 and (g .. "g ") or "") .. (s > 0 and (s .. "s ") or "") .. (c > 0 and (c .. "c") or "")
 end
 
-local function PageText(d, font, text, y, gap, ink)
+local function PageText(d, font, text, y, gap, ink, justify)
     d.textCount = d.textCount + 1
     local fs = d.texts[d.textCount]
     if not fs then
         fs = d.Page:CreateFontString(nil, "ARTWORK", font)
-        fs:SetJustifyH("LEFT")
         d.texts[d.textCount] = fs
     end
-    fs:SetFontObject(font)
+    fs:SetJustifyH(justify or "LEFT")
+    fs:SetFontObject(_G[font] and font or "GameFontHighlightSmall")
     ink = ink or INK
     fs:SetTextColor(ink[1], ink[2], ink[3])
     fs:ClearAllPoints()
@@ -964,7 +964,9 @@ local function RewardButton(d, itemID, count, x, y)
     d.buttonCount = d.buttonCount + 1
     local b = d.buttons[d.buttonCount]
     if not b then
-        local ok, made = pcall(CreateFrame, "Button", nil, d.Page, "LargeItemButtonTemplate")
+        -- The small reward button of the map's own quest details; older clients' large one else.
+        local ok, made = pcall(CreateFrame, "Button", nil, d.Page, "SmallQuestRewardItemButtonTemplate")
+        if not ok then ok, made = pcall(CreateFrame, "Button", nil, d.Page, "LargeItemButtonTemplate") end
         b = ok and made or CreateFrame("Button", nil, d.Page)
         if not ok then
             b:SetSize(147, 41)
@@ -1023,8 +1025,7 @@ local function FillReward(b)
     if type(b.Icon) == "table" then b.Icon:SetTexture(icon or (C_Item and C_Item.GetItemIconByID and C_Item.GetItemIconByID(itemID)) or 134400) end
     if type(b.Name) == "table" then
         b.Name:SetText(name or (SEARCH_LOADING_TEXT or "Loading..."))
-        local color = quality and ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[quality]
-        if color then b.Name:SetTextColor(color.r, color.g, color.b) else b.Name:SetTextColor(1, 1, 1) end
+        b.Name:SetTextColor(1, 1, 1) -- white, as in the map's quest details; quality shows on the icon border
     end
     if type(b.Count) == "table" then
         b.Count:SetText(b.count and b.count > 1 and b.count or "")
@@ -1033,23 +1034,30 @@ local function FillReward(b)
     if quality and type(b.IconBorder) == "table" and SetItemButtonQuality then pcall(SetItemButtonQuality, b, quality, itemID) end
 end
 
--- Rewards two per row, like the quest details; the buttons are scaled to fit.
-local REWARD_W, REWARD_H = 147, 41
+-- Rewards two per row, like the map's quest details; the buttons are scaled to fit if needed.
+-- Experience and money each get a row of their own first, as the game shows them.
 local function RewardGrid(d, items, y)
     local width = d.Page:GetWidth() - 20
-    local scale = math.min(1, (width / 2 - 4) / REWARD_W)
-    local cellW, cellH = REWARD_W * scale + 4, REWARD_H * scale + 4
-    for i, pair in ipairs(items) do
-        local col = (i - 1) % 2
-        local row = math.floor((i - 1) / 2)
+    local col, row, rows, cellHeight = 0, 0, 0, 44
+    for _, pair in ipairs(items) do
         RewardButton(d, pair[1], pair[2], 0, 0)
         local b = d.buttons[d.buttonCount]
+        local w, h = b:GetSize()
+        w = (type(w) == "number" and w > 0) and w or 147
+        h = (type(h) == "number" and h > 0) and h or 41
+        local scale = math.min(1, (width / 2 - 4) / w)
+        local cellW, cellH = w * scale + 4, h * scale + 3
+        local own = type(pair[1]) == "table" -- experience, money: a row of their own
+        if own and col > 0 then col, row = 0, row + 1 end
         b:SetScale(scale)
         b:ClearAllPoints()
         -- Offsets are in the button's own (scaled) units.
         b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", (10 + col * cellW) / scale, -(y + row * cellH) / scale)
+        rows = row + 1
+        if own or col == 1 then col, row = 0, row + 1 else col = 1 end
+        cellHeight = cellH
     end
-    return y + math.ceil(#items / 2) * cellH + 6
+    return y + rows * cellHeight + 6
 end
 
 -- Experience for this character: the game's number while the quest is in your log,
@@ -1196,9 +1204,8 @@ function ShowDetail(id, entry, stepOverride)
         if live.money > 0 then money = live.money end
         if live.xp > 0 then xp = live.xp end
     end
-    -- Items you always get, then experience and money, as in the game's quest details.
+    -- Experience and money first, then the items you always get, as in the map's quest details.
     local receive = {}
-    for _, pair in ipairs(fixed) do table.insert(receive, pair) end
     if xp > 0 then
         table.insert(receive, { { icon = "Interface\\Icons\\XP_Icon", text = BreakUpLargeNumbers and BreakUpLargeNumbers(xp) or tostring(xp),
             tooltip = (EXPERIENCE_COLON or "Experience:") .. " " .. (BreakUpLargeNumbers and BreakUpLargeNumbers(xp) or xp) } })
@@ -1206,16 +1213,31 @@ function ShowDetail(id, entry, stepOverride)
     if money > 0 then
         table.insert(receive, { { icon = "Interface\\Icons\\INV_Misc_Coin_01", text = MoneyText(money), tooltip = MoneyText(money) } })
     end
+    for _, pair in ipairs(fixed) do table.insert(receive, pair) end
     if #choice > 0 or #receive > 0 then
-        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y, 4)
+        -- "Rewards" centred over a divider, small light captions: the map's own quest details.
+        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 4, 2, nil, "CENTER")
+        if type(rawget(d, "RewardDivider")) ~= "table" then
+            d.RewardDivider = d.Page:CreateTexture(nil, "ARTWORK")
+            d.RewardDivider:SetTexture("Interface\\QuestFrame\\UI-HorizontalBreak")
+            d.RewardDivider:SetHeight(16)
+        end
+        d.RewardDivider:ClearAllPoints()
+        d.RewardDivider:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 14, -(y - 4))
+        d.RewardDivider:SetPoint("TOPRIGHT", d.Page, "TOPRIGHT", -14, -(y - 4))
+        d.RewardDivider:Show()
+        y = y + 10
+        local caption = { 0.82, 0.82, 0.82 }
         if #choice > 0 then
-            y = PageText(d, "QuestFont", REWARD_CHOICES or "You will be able to choose one of these rewards:", y, 4)
+            y = PageText(d, "GameFontHighlightSmall", REWARD_CHOICES or "You will be able to choose one of these rewards:", y, 4, caption)
             y = RewardGrid(d, choice, y)
         end
         if #receive > 0 then
-            y = PageText(d, "QuestFont", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", y, 4)
+            y = PageText(d, "GameFontHighlightSmall", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", y, 4, caption)
             y = RewardGrid(d, receive, y)
         end
+    elseif type(rawget(d, "RewardDivider")) == "table" then
+        d.RewardDivider:Hide()
     end
     d.Page:SetHeight(y + 8)
     d.Scroll:SetVerticalScroll(0)
