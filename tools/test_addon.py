@@ -579,10 +579,15 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
 
         -- Work in progress: complete instances get no badge, thin ones do.
         check("a complete instance isn't marked work in progress", ns:InstanceStatus("dal") == nil)
-        local rfd = ns:InstanceStatus("rfd")
-        check("an instance with missing bosses is marked work in progress", rfd ~= nil and rfd.placed < rfd.total)
+        local thin
+        for key in pairs(ns.Instances) do
+            local st = ns:InstanceStatus(key)
+            if not thin and st and not st.noMap and st.placed < st.total then thin = key end
+        end
+        check("an instance with missing bosses is marked work in progress", thin ~= nil)
+        check("Razorfen Downs is complete now", ns:InstanceStatus("rfd") == nil)
         check("an instance without a map is marked work in progress", (ns:InstanceStatus("nomap") or {}).noMap == true)
-        ns:OpenDungeonMap("rfd")
+        ns:OpenDungeonMap(thin or "rfd")
         check("the work-in-progress badge shows on its map", ns:IsDungeonMapOpen() and BeestersDungeonMapsView.StatusBadge:IsShown())
         ns:OpenDungeonMap("dal")
         check("the badge stays hidden on a complete map", not BeestersDungeonMapsView.StatusBadge:IsShown())

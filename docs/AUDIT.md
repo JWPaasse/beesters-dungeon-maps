@@ -18,7 +18,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Maraudon | 9/9 | 0/9 | 0 | 28 | 0 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
 | Ragefire Chasm | 4/4 | 0/4 | 0 | 35 | 6 |
-| Razorfen Downs | 4/6 | 0/6 | 0 | 20 | 2 |
+| Razorfen Downs | 6/6 | 0/6 | 0 | 20 | 2 |
 | Razorfen Kraul | 8/8 | 0/8 | 0 | 25 | 7 |
 | Ruins of Lordaeron | 6/6 | 0/6 | 0 | 18 | 18 |
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 35 | 7 |
@@ -30,7 +30,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 28 | 15 |
 | Uldaman | 8/8 | 0/8 | 1 | 20 | 0 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 52 | 4 |
-| **All** | 191/209 | 0/209 | 8 | 1217 | 127 |
+| **All** | 193/209 | 0/209 | 8 | 1217 | 127 |
 
 ## Blackfathom Deeps
 
@@ -201,11 +201,11 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Tuten'kash | **no** | — |  | 3 | 0 |
+| Tuten'kash | yes | placed in game |  | 3 | 0 |
 | Mordresh Fire Eye | yes | spawn point |  | 3 | 0 |
 | Glutton | yes | spawn point |  | 2 | 0 |
 | Amnennar the Coldbringer | yes | journal |  | 5 (+1 unknown) | 1 |
-| Plaguemaw the Rotting | **no** | — |  | 2 (+1 unknown) | 1 |
+| Plaguemaw the Rotting | yes | placed in game |  | 2 (+1 unknown) | 1 |
 | Ragglesnout | yes | spawn point |  | 3 | 0 |
 
 ## Razorfen Kraul

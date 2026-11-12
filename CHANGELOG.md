@@ -1,9 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.1.4
 
 - Opening the map in combat inside a dungeon now shows the dungeon map on top of the game's own. The game doesn't let addons hide its map during a fight, so the dungeon map now goes over it instead.
 - Scarlet Monastery and Gnomeregan turn to the right level in more places (Athenaeum, Hall of Champions, Crusader's Chapel; Engineering Labs, Tinkers' Court).
+- Razorfen Downs: Tuten'kash and Plaguemaw the Rotting now have their place on the map, so the dungeon is complete and loses its "Work in progress" tag.
 
 ## 1.1.3
 
