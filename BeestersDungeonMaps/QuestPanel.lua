@@ -1215,8 +1215,10 @@ function ShowDetail(id, entry, stepOverride)
     end
     for _, pair in ipairs(fixed) do table.insert(receive, pair) end
     if #choice > 0 or #receive > 0 then
-        -- "Rewards" centred over a divider, small light captions: the map's own quest details.
-        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 4, 2, nil, "CENTER")
+        -- The rewards on a dark brown panel, "Rewards" centred over a divider, small light
+        -- captions: the map's own quest details.
+        local top = y + 2
+        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, { 0.82, 0.74, 0.6 }, "CENTER")
         if type(rawget(d, "RewardDivider")) ~= "table" then
             d.RewardDivider = d.Page:CreateTexture(nil, "ARTWORK")
             d.RewardDivider:SetTexture("Interface\\QuestFrame\\UI-HorizontalBreak")
@@ -1236,8 +1238,19 @@ function ShowDetail(id, entry, stepOverride)
             y = PageText(d, "GameFontHighlightSmall", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", y, 4, caption)
             y = RewardGrid(d, receive, y)
         end
-    elseif type(rawget(d, "RewardDivider")) == "table" then
-        d.RewardDivider:Hide()
+        if type(rawget(d, "RewardPanel")) ~= "table" then
+            d.RewardPanel = d.Page:CreateTexture(nil, "BACKGROUND", nil, 7)
+            d.RewardPanel:SetColorTexture(0.16, 0.11, 0.07, 1)
+        end
+        d.RewardPanel:ClearAllPoints()
+        d.RewardPanel:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 0, -top)
+        d.RewardPanel:SetPoint("TOPRIGHT", d.Page, "TOPRIGHT", 0, -top)
+        d.RewardPanel:SetHeight(y - top + 4)
+        d.RewardPanel:Show()
+        y = y + 4
+    else
+        if type(rawget(d, "RewardDivider")) == "table" then d.RewardDivider:Hide() end
+        if type(rawget(d, "RewardPanel")) == "table" then d.RewardPanel:Hide() end
     end
     d.Page:SetHeight(y + 8)
     d.Scroll:SetVerticalScroll(0)

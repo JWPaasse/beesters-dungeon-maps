@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Quest details: the rewards now look like the map's own quest details (centred "Rewards" heading with a divider, small captions, the small reward buttons with white names, experience and money on their own row first).
+- Quest details: the rewards now look like the map's own quest details (on a dark brown panel, centred "Rewards" heading with a divider, small captions, the small reward buttons with white names, experience and money on their own row first).
 
 ## 1.1.2
 
