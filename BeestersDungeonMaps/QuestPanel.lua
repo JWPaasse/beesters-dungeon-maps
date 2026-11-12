@@ -941,6 +941,9 @@ local function MoneyText(copper)
     return (g > 0 and (g .. "g ") or "") .. (s > 0 and (s .. "s ") or "") .. (c > 0 and (c .. "c") or "")
 end
 
+-- The rewards' heading and captions: the warm beige the game uses on its brown rewards panel.
+local REWARD_INK = { 0.90, 0.79, 0.67 }
+
 local function PageText(d, font, text, y, gap, ink, justify)
     d.textCount = d.textCount + 1
     local fs = d.texts[d.textCount]
@@ -1218,7 +1221,7 @@ function ShowDetail(id, entry, stepOverride)
         -- The rewards on a dark brown panel, "Rewards" centred over a divider, small light
         -- captions: the map's own quest details.
         local top = y + 2
-        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, { 0.76, 0.69, 0.58 }, "CENTER")
+        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, REWARD_INK, "CENTER")
         if type(rawget(d, "RewardDivider")) ~= "table" then
             d.RewardDivider = d.Page:CreateTexture(nil, "ARTWORK")
             d.RewardDivider:SetTexture("Interface\\QuestFrame\\UI-HorizontalBreak")
@@ -1229,7 +1232,7 @@ function ShowDetail(id, entry, stepOverride)
         d.RewardDivider:SetPoint("TOPRIGHT", d.Page, "TOPRIGHT", -14, -(y - 4))
         d.RewardDivider:Show()
         y = y + 10
-        local caption = { 0.82, 0.82, 0.82 }
+        local caption = REWARD_INK
         if #choice > 0 then
             y = PageText(d, "GameFontHighlightSmall", REWARD_CHOICES or "You will be able to choose one of these rewards:", y, 4, caption)
             y = RewardGrid(d, choice, y)
@@ -1301,7 +1304,7 @@ local function CreateDetail(parent)
     -- runs from edge to edge (under the scroll bar too) down to the bottom, its top following
     -- the "Rewards" heading as the page scrolls.
     local panelTex = box:CreateTexture(nil, "BACKGROUND", nil, 2)
-    panelTex:SetColorTexture(0.22, 0.155, 0.105, 1)
+    panelTex:SetColorTexture(0.22, 0.118, 0.06, 1) -- measured from the game's quest details
     panelTex:Hide()
     d.UpdateRewardPanel = function()
         local top = rawget(d, "rewardTop")
