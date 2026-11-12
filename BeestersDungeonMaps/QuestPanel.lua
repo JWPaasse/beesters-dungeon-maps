@@ -944,6 +944,18 @@ end
 -- The rewards' heading and captions: the warm beige the game uses on its brown rewards panel.
 local REWARD_INK = { 0.90, 0.79, 0.67 }
 
+-- The game's own art for the rewards panel of its quest details (names read from the game's
+-- QuestMapFrame.DetailsFrame): a vertical tile, the wooden header band, a top edge, a bottom.
+local REWARD_ART = {
+    tile = "QuestLog-reward-tile-vertical", header = "QuestLog-reward-header-top",
+    top = "QuestLog-reward-top-frame", bottom = "QuestLog-reward-bottom",
+}
+local function AtlasHeight(name, width)
+    local info = C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(name)
+    if not (info and info.width and info.width > 0 and info.height) then return nil end
+    return info.height * width / info.width -- its height at this width, keeping its shape
+end
+
 local function PageText(d, font, text, y, gap, ink, justify)
     d.textCount = d.textCount + 1
     local fs = d.texts[d.textCount]
@@ -1221,17 +1233,29 @@ function ShowDetail(id, entry, stepOverride)
         -- The rewards on a dark brown panel, "Rewards" centred over a divider, small light
         -- captions: the map's own quest details.
         local top = y + 2
-        y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, REWARD_INK, "CENTER")
-        if type(rawget(d, "RewardDivider")) ~= "table" then
-            d.RewardDivider = d.Page:CreateTexture(nil, "ARTWORK")
-            d.RewardDivider:SetTexture("Interface\\QuestFrame\\UI-HorizontalBreak")
-            d.RewardDivider:SetHeight(16)
+        local boxW = d.Box:GetWidth()
+        if type(boxW) ~= "number" or boxW <= 0 then boxW = d.Page:GetWidth() + 24 end
+        local band = AtlasHeight(REWARD_ART.header, boxW)
+        if band then
+            -- "Rewards" centred in the game's wooden header band (drawn by the box, see below).
+            local fs_y = top + band / 2 - 8
+            PageText(d, "QuestTitleFont", REWARDS or "Rewards", fs_y, 0, REWARD_INK, "CENTER")
+            y = top + band + 6
+            if type(rawget(d, "RewardDivider")) == "table" then d.RewardDivider:Hide() end
+        else
+            -- No such art in this client: the heading over a divider line.
+            y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, REWARD_INK, "CENTER")
+            if type(rawget(d, "RewardDivider")) ~= "table" then
+                d.RewardDivider = d.Page:CreateTexture(nil, "ARTWORK")
+                d.RewardDivider:SetTexture("Interface\\QuestFrame\\UI-HorizontalBreak")
+                d.RewardDivider:SetHeight(16)
+            end
+            d.RewardDivider:ClearAllPoints()
+            d.RewardDivider:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 14, -(y - 4))
+            d.RewardDivider:SetPoint("TOPRIGHT", d.Page, "TOPRIGHT", -14, -(y - 4))
+            d.RewardDivider:Show()
+            y = y + 10
         end
-        d.RewardDivider:ClearAllPoints()
-        d.RewardDivider:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 14, -(y - 4))
-        d.RewardDivider:SetPoint("TOPRIGHT", d.Page, "TOPRIGHT", -14, -(y - 4))
-        d.RewardDivider:Show()
-        y = y + 10
         local caption = REWARD_INK
         if #choice > 0 then
             y = PageText(d, "GameFontHighlightSmall", REWARD_CHOICES or "You will be able to choose one of these rewards:", y, 4, caption)
@@ -1303,22 +1327,60 @@ local function CreateDetail(parent)
     -- The rewards' dark brown panel, as in the game's quest details: on the box itself, so it
     -- runs from edge to edge (under the scroll bar too) down to the bottom, its top following
     -- the "Rewards" heading as the page scrolls.
+    local hasArt = C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(REWARD_ART.tile) ~= nil
     local panelTex = box:CreateTexture(nil, "BACKGROUND", nil, 2)
-    panelTex:SetColorTexture(0.22, 0.118, 0.06, 1) -- measured from the game's quest details
+    if hasArt then
+        panelTex:SetAtlas(REWARD_ART.tile, false)
+        if panelTex.SetVertTile then panelTex:SetVertTile(true) end
+    else
+        panelTex:SetColorTexture(0.22, 0.118, 0.06, 1) -- measured from the game's quest details
+    end
     panelTex:Hide()
+    local header, topEdge, bottom
+    if hasArt then
+        header = box:CreateTexture(nil, "BACKGROUND", nil, 3)
+        header:SetAtlas(REWARD_ART.header, false)
+        topEdge = box:CreateTexture(nil, "BACKGROUND", nil, 4)
+        topEdge:SetAtlas(REWARD_ART.top, false)
+        bottom = box:CreateTexture(nil, "BACKGROUND", nil, 4)
+        bottom:SetAtlas(REWARD_ART.bottom, false)
+        for _, t in ipairs({ header, topEdge, bottom }) do t:Hide() end
+    end
     d.UpdateRewardPanel = function()
         local top = rawget(d, "rewardTop")
         local offset = scroll.GetVerticalScroll and scroll:GetVerticalScroll() or 0
         local shown = type(top) == "number" and type(offset) == "number"
+        local inView = false
         if shown then
             local t = math.max(0, top - offset)
+            inView = top - offset >= 0 -- the band scrolls away with the heading
             local h = box:GetHeight()
             shown = not (type(h) == "number" and t + 4 >= h)
             panelTex:ClearAllPoints()
             panelTex:SetPoint("TOPLEFT", box, "TOPLEFT", 0, -(4 + t))
             panelTex:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", 0, 0)
+            if header then
+                local w = box:GetWidth()
+                header:ClearAllPoints()
+                header:SetPoint("TOPLEFT", box, "TOPLEFT", 0, -(4 + t))
+                header:SetPoint("TOPRIGHT", box, "TOPRIGHT", 0, -(4 + t))
+                header:SetHeight(AtlasHeight(REWARD_ART.header, w) or 40)
+                topEdge:ClearAllPoints()
+                topEdge:SetPoint("BOTTOMLEFT", header, "TOPLEFT", 0, -(AtlasHeight(REWARD_ART.top, w) or 8) / 2)
+                topEdge:SetPoint("BOTTOMRIGHT", header, "TOPRIGHT", 0, -(AtlasHeight(REWARD_ART.top, w) or 8) / 2)
+                topEdge:SetHeight(AtlasHeight(REWARD_ART.top, w) or 8)
+                bottom:ClearAllPoints()
+                bottom:SetPoint("BOTTOMLEFT", box, "BOTTOMLEFT", 0, 0)
+                bottom:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", 0, 0)
+                bottom:SetHeight(AtlasHeight(REWARD_ART.bottom, w) or 8)
+            end
         end
         panelTex:SetShown(shown and true or false)
+        if header then
+            header:SetShown(shown and inView or false)
+            topEdge:SetShown(shown and inView or false)
+            bottom:SetShown(shown and true or false)
+        end
     end
     scroll:HookScript("OnVerticalScroll", function() d.UpdateRewardPanel() end)
 
