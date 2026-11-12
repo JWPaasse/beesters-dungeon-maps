@@ -26,7 +26,7 @@ jobs:
         run: python3 tools/fetch_new_dungeons.py
       - name: Commit
         run: |
-          git add tools/new_dungeons.json
+          git add tools/new_dungeons.json tools/dungeon_encounter.csv
           if git diff --cached --quiet; then echo "No changes."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

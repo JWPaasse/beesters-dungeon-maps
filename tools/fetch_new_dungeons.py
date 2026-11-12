@@ -49,6 +49,9 @@ def main():
         try:
             rows = list(csv.DictReader(io.StringIO(fetch(f"{WAGO}/db2/{name}/csv?build={build}"))))
             tables[name] = rows
+            if name == "DungeonEncounter":
+                # The whole table too, so tools/build_bosses.py can run without network access.
+                (ROOT / "tools" / "dungeon_encounter.csv").write_text(fetch(f"{WAGO}/db2/{name}/csv?build={build}"), encoding="utf-8")
             print(f"{name}: {len(rows)} rows; columns {list(rows[0].keys()) if rows else []}")
         except Exception as err:  # noqa: BLE001 - report and go on
             errors[name] = str(err)
