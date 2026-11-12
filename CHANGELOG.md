@@ -1,9 +1,9 @@
 # Changelog
 
-## Unreleased
+## 1.1.3
 
-- Quest details: the rewards now look like the map's own quest details (on a dark brown panel, centred "Rewards" heading with a divider, small captions, the small reward buttons with white names, experience and money on their own row first).
-- Quest details now fill the whole quest tab, like the game's, and the list comes back when you close them. The rewards start at the bottom of the details and slide up to their place as you scroll, the buttons are one full-width bar (Share | Show on map), and the scroll bar is the game's thin one. A Back button at the top takes you back to the list, like in the game's quest log.
+- Quest details now look and work like the game's own: they fill the whole quest tab, with a Back button in a bar on top to return to the list. The rewards sit on the game's dark panel with its "Rewards" header, start at the bottom of the details and slide up to their place as you scroll. Experience and money come first, each on their own row, and the reward buttons are the game's small ones.
+- The buttons under the details are one full-width bar (Share | Show on map), and the scroll bar is the game's thin one.
 - Inside a dungeon, the tab bar no longer covers the Back button of the game's own quest details: it steps aside while those are open and comes back with the quest list.
 
 ## 1.1.2
