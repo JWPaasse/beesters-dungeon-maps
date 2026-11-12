@@ -508,6 +508,9 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         -- Detail page with the Classic database's text and rewards (The Power to Destroy...).
         local ok, err = pcall(ns.ShowQuestDetail, 5725)
         check("detail page opens for a quest with choice rewards" .. (ok and "" or (": " .. tostring(err))), ok and qp.Detail:IsShown())
+        check("the details take the whole tab (the list is hidden)", not qp.Scroll:IsShown())
+        local d = qp.Detail
+        check("rewards sit on their own panel, which is shown", d.buttonCount > 0 and d.rtextCount > 0 and d.Rewards:IsShown() and rawget(d, "rewardTop") ~= nil)
         local entry = has(g.log, 5728)
         ok, err = pcall(ns.ShowQuestDetail, 5728, entry)
         check("detail page opens for a chain step" .. (ok and "" or (": " .. tostring(err))), ok)

@@ -894,22 +894,20 @@ function Refresh()
 end
 
 ----------------------------------------------------------------------
--- Detail pane (lower third)
+-- Detail pane
 ----------------------------------------------------------------------
 
+-- The details take the whole tab, as the game's own do; the list comes back when they close.
 local function Layout()
     if not panel then return end
-    local h = panel:GetHeight()
+    local d = panel.Detail
+    local open = d:IsShown() and true or false
     panel.Scroll:ClearAllPoints()
     panel.Scroll:SetPoint("TOPLEFT", 0, 0)
-    if panel.Detail:IsShown() then
-        panel.Detail:SetHeight(math.floor(h * 0.55))
-        panel.Scroll:SetPoint("BOTTOMRIGHT", panel.Detail, "TOPRIGHT", 0, 14)
-    else
-        panel.Scroll:SetPoint("BOTTOMRIGHT", 0, 0)
-    end
+    panel.Scroll:SetPoint("BOTTOMRIGHT", 0, 0)
+    panel.Scroll:SetShown(not open)
+    if type(rawget(panel, "Border")) == "table" then panel.Border:SetShown(not open) end
     panel.Child:SetWidth(math.max(panel.Scroll:GetWidth(), 50))
-    local d = panel.Detail
     if d and d.Page then d.Page:SetWidth(math.max(d.Scroll:GetWidth(), 50)) end
 end
 
@@ -958,19 +956,23 @@ local function AtlasHeight(name, width)
     return info.height * width / info.width -- its height at this width, keeping its shape
 end
 
+-- Text goes on the page, or on the rewards panel while d.host is set to it.
 local function PageText(d, font, text, y, gap, ink, justify)
-    d.textCount = d.textCount + 1
-    local fs = d.texts[d.textCount]
+    local host = rawget(d, "host") or d.Page
+    local onPage = host == d.Page
+    local pool, key = onPage and d.texts or d.rtexts, onPage and "textCount" or "rtextCount"
+    d[key] = d[key] + 1
+    local fs = pool[d[key]]
     if not fs then
-        fs = d.Page:CreateFontString(nil, "ARTWORK", font)
-        d.texts[d.textCount] = fs
+        fs = host:CreateFontString(nil, "ARTWORK", font)
+        pool[d[key]] = fs
     end
     fs:SetJustifyH(justify or "LEFT")
     fs:SetFontObject(_G[font] and font or "GameFontHighlightSmall")
     ink = ink or INK
     fs:SetTextColor(ink[1], ink[2], ink[3])
     fs:ClearAllPoints()
-    fs:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 10, -y)
+    fs:SetPoint("TOPLEFT", host, "TOPLEFT", 10, -y)
     fs:SetWidth(d.Page:GetWidth() - 20)
     fs:SetText(text)
     fs:Show()
@@ -980,11 +982,12 @@ end
 local function RewardButton(d, itemID, count, x, y)
     d.buttonCount = d.buttonCount + 1
     local b = d.buttons[d.buttonCount]
+    local host = rawget(d, "host") or d.Page
     if not b then
         -- The small reward button of the map's own quest details; older clients' large one else.
-        local ok, made = pcall(CreateFrame, "Button", nil, d.Page, "SmallQuestRewardItemButtonTemplate")
-        if not ok then ok, made = pcall(CreateFrame, "Button", nil, d.Page, "LargeItemButtonTemplate") end
-        b = ok and made or CreateFrame("Button", nil, d.Page)
+        local ok, made = pcall(CreateFrame, "Button", nil, host, "SmallQuestRewardItemButtonTemplate")
+        if not ok then ok, made = pcall(CreateFrame, "Button", nil, host, "LargeItemButtonTemplate") end
+        b = ok and made or CreateFrame("Button", nil, host)
         if not ok then
             b:SetSize(147, 41)
             b.Icon = b:CreateTexture(nil, "ARTWORK")
@@ -1020,7 +1023,7 @@ local function RewardButton(d, itemID, count, x, y)
     end
     d.FillReward(b)
     b:ClearAllPoints()
-    b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", x, -y)
+    b:SetPoint("TOPLEFT", host, "TOPLEFT", x, -y)
     b:Show()
 end
 
@@ -1069,7 +1072,7 @@ local function RewardGrid(d, items, y)
         b:SetScale(scale)
         b:ClearAllPoints()
         -- Offsets are in the button's own (scaled) units.
-        b:SetPoint("TOPLEFT", d.Page, "TOPLEFT", (10 + col * cellW) / scale, -(y + row * cellH) / scale)
+        b:SetPoint("TOPLEFT", rawget(d, "host") or d.Page, "TOPLEFT", (10 + col * cellW) / scale, -(y + row * cellH) / scale)
         rows = row + 1
         if own or col == 1 then col, row = 0, row + 1 else col = 1 end
         cellHeight = cellH
@@ -1156,8 +1159,10 @@ function ShowDetail(id, entry, stepOverride)
     local text = ns.QuestText and ns.QuestText[stepID]
     local inLog = InLog(stepID)
     d.current = { id = id, entry = entry, stepOverride = stepOverride, stepID = stepID }
-    d.textCount, d.buttonCount = 0, 0
+    d.textCount, d.buttonCount, d.rtextCount = 0, 0, 0
+    d.host = nil
     for _, fs in ipairs(d.texts) do fs:Hide() end
+    for _, fs in ipairs(d.rtexts) do fs:Hide() end
     for _, b in ipairs(d.buttons) do b:Hide() end
 
     local y = 8
@@ -1232,43 +1237,50 @@ function ShowDetail(id, entry, stepOverride)
     end
     for _, pair in ipairs(fixed) do table.insert(receive, pair) end
     if #choice > 0 or #receive > 0 then
-        -- The rewards on a dark brown panel, "Rewards" centred over a divider, small light
-        -- captions: the map's own quest details.
+        -- The rewards on their own dark brown panel, as in the map's quest details: "Rewards"
+        -- in the wooden header band, small light captions. The panel sits at the bottom of the
+        -- details from the start (over the text) and rises to its place as you scroll; the
+        -- page keeps room for it at the end. Its y values count from the panel's top.
         local top = y + 2
-        local boxW = d.Box:GetWidth()
+        d.host = d.Rewards
+        local boxW = d.RewardClip:GetWidth()
+        if type(boxW) ~= "number" or boxW <= 0 then boxW = d.Box:GetWidth() end
         if type(boxW) ~= "number" or boxW <= 0 then boxW = d.Page:GetWidth() + 24 end
         local band = AtlasHeight(REWARD_ART.header, boxW)
+        local ry
         if band then
-            -- "Rewards" centred in the game's wooden header band (drawn by the box, see below).
-            local fs_y = top + (band - 18) / 2
-            PageText(d, "QuestTitleFont", REWARDS or "Rewards", fs_y, 0, REWARD_INK, "CENTER")
-            y = top + band + 6
+            PageText(d, "QuestTitleFont", REWARDS or "Rewards", (band - 18) / 2, 0, REWARD_INK, "CENTER")
+            ry = band + 6
             if type(rawget(d, "RewardDivider")) == "table" then d.RewardDivider:Hide() end
         else
             -- No such art in this client: the heading over a divider line.
-            y = PageText(d, "QuestTitleFont", REWARDS or "Rewards", y + 10, 2, REWARD_INK, "CENTER")
+            ry = PageText(d, "QuestTitleFont", REWARDS or "Rewards", 10, 2, REWARD_INK, "CENTER")
             if type(rawget(d, "RewardDivider")) ~= "table" then
-                d.RewardDivider = d.Page:CreateTexture(nil, "ARTWORK")
+                d.RewardDivider = d.Rewards:CreateTexture(nil, "ARTWORK")
                 d.RewardDivider:SetTexture("Interface\\QuestFrame\\UI-HorizontalBreak")
                 d.RewardDivider:SetHeight(16)
             end
             d.RewardDivider:ClearAllPoints()
-            d.RewardDivider:SetPoint("TOPLEFT", d.Page, "TOPLEFT", 14, -(y - 4))
-            d.RewardDivider:SetPoint("TOPRIGHT", d.Page, "TOPRIGHT", -14, -(y - 4))
+            d.RewardDivider:SetPoint("TOPLEFT", d.Rewards, "TOPLEFT", 14, -(ry - 4))
+            d.RewardDivider:SetPoint("TOPRIGHT", d.Rewards, "TOPRIGHT", -14, -(ry - 4))
             d.RewardDivider:Show()
-            y = y + 10
+            ry = ry + 10
         end
         local caption = REWARD_INK
         if #choice > 0 then
-            y = PageText(d, "GameFontHighlightSmall", REWARD_CHOICES or "You will be able to choose one of these rewards:", y, 4, caption)
-            y = RewardGrid(d, choice, y)
+            ry = PageText(d, "GameFontHighlightSmall", REWARD_CHOICES or "You will be able to choose one of these rewards:", ry, 4, caption)
+            ry = RewardGrid(d, choice, ry)
         end
         if #receive > 0 then
-            y = PageText(d, "GameFontHighlightSmall", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", y, 4, caption)
-            y = RewardGrid(d, receive, y)
+            ry = PageText(d, "GameFontHighlightSmall", (#choice > 0 and REWARD_ITEMS or REWARD_ITEMS_ONLY) or "You will receive:", ry, 4, caption)
+            ry = RewardGrid(d, receive, ry)
         end
+        ry = ry + 4
+        d.host = nil
         d.rewardTop = top
-        y = y + 4
+        -- How much shows at the bottom before you scroll: the header and the first row or so.
+        d.rewardPeek = math.min(ry, (band or 30) + 95)
+        y = top + ry
     else
         d.rewardTop = nil
         if type(rawget(d, "RewardDivider")) == "table" then d.RewardDivider:Hide() end
@@ -1287,15 +1299,17 @@ ns.ShowQuestDetail = function(id, entry, step) ShowDetail(id, entry, step) end -
 
 local function CreateDetail(parent)
     local d = CreateFrame("Frame", nil, parent)
-    d:SetPoint("BOTTOMLEFT", 0, 0)
+    -- The whole tab; the border's top lines up with the list's.
+    d:SetPoint("TOPLEFT", 0, 3)
     d:SetPoint("BOTTOMRIGHT", 0, 0)
     d:Hide()
     d:SetScript("OnHide", function(self) ns:HideTooltipWithin(self) end)
     d:EnableMouse(true)
     d.texts, d.buttons, d.textCount, d.buttonCount = {}, {}, 0, 0
+    d.rtexts, d.rtextCount = {}, 0
     d.FillReward = FillReward
     -- The text sits in its own box (parchment and border, closed at the bottom); the
-    -- "Show on map" button goes underneath it, outside the border.
+    -- buttons go underneath it, outside the border.
     local box = CreateFrame("Frame", nil, d)
     box:SetPoint("TOPLEFT", 0, 0)
     box:SetPoint("BOTTOMRIGHT", 0, 30)
@@ -1317,70 +1331,88 @@ local function CreateDetail(parent)
         d.Border = border
     end
 
-    local ok, scroll = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", box, "UIPanelScrollFrameTemplate")
-    if not ok then scroll = CreateFrame("ScrollFrame", nil, box) end
+    -- The game's thin scroll bar, just outside the parchment like the list's; the old
+    -- template's bar inside it if this client can't make that one.
+    local scroll = CreateFrame("ScrollFrame", "BeestersDungeonMapsQuestDetailScroll", box)
+    scroll.scrollBarX, scroll.scrollBarTopY, scroll.scrollBarBottomY = 8, 6, -8
+    local right = 0
+    if not (ScrollFrame_OnLoad and pcall(ScrollFrame_OnLoad, scroll)) then
+        scroll:Hide()
+        local ok, made = pcall(CreateFrame, "ScrollFrame", "BeestersDungeonMapsQuestDetailScrollOld", box, "UIPanelScrollFrameTemplate")
+        scroll = ok and made or CreateFrame("ScrollFrame", nil, box)
+        right = -24
+    end
     scroll:SetPoint("TOPLEFT", 0, -4)
-    scroll:SetPoint("BOTTOMRIGHT", -24, 4)
+    scroll:SetPoint("BOTTOMRIGHT", right, 4)
     d.Scroll = scroll
     d.Page = CreateFrame("Frame", nil, scroll)
     d.Page:SetSize(200, 10)
     scroll:SetScrollChild(d.Page)
 
-    -- The rewards' dark brown panel, as in the game's quest details: on the box itself, so it
-    -- runs from edge to edge (under the scroll bar too) down to the bottom, its top following
-    -- the "Rewards" heading as the page scrolls.
+    -- The rewards panel: over the page, cut off at the top of the text area like the page,
+    -- running edge to edge down to the bottom of the box.
+    local clip = CreateFrame("Frame", nil, box)
+    clip:SetPoint("TOPLEFT", scroll, "TOPLEFT", 0, 0)
+    clip:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", right, 0)
+    if clip.SetClipsChildren then clip:SetClipsChildren(true) end
+    clip:SetFrameLevel(scroll:GetFrameLevel() + 2)
+    d.RewardClip = clip
+    local rewards = CreateFrame("Frame", nil, clip)
+    rewards:SetPoint("TOPLEFT", clip, "TOPLEFT", 0, 0)
+    rewards:SetPoint("BOTTOMRIGHT", clip, "BOTTOMRIGHT", 0, 0)
+    -- Scrolling over the rewards scrolls the page.
+    rewards:EnableMouseWheel(true)
+    rewards:SetScript("OnMouseWheel", function(_, delta)
+        local wheel = scroll:GetScript("OnMouseWheel")
+        if type(wheel) == "function" then wheel(scroll, delta) end
+    end)
+    rewards:Hide()
+    d.Rewards = rewards
+
     local hasArt = C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo(REWARD_ART.tile) ~= nil
     -- A dark base: the game's measured brown without the art, the frame behind it with it.
-    local base = box:CreateTexture(nil, "BACKGROUND", nil, 1)
+    local base = rewards:CreateTexture(nil, "BACKGROUND", nil, 1)
+    base:SetAllPoints()
     if hasArt then base:SetColorTexture(0.07, 0.045, 0.03, 1) else base:SetColorTexture(0.22, 0.118, 0.06, 1) end
-    base:Hide()
     local tile, header, bottom
     if hasArt then
-        tile = box:CreateTexture(nil, "BACKGROUND", nil, 2)
-        tile:SetAtlas(REWARD_ART.tile, false)
-        header = box:CreateTexture(nil, "BACKGROUND", nil, 3)
+        header = rewards:CreateTexture(nil, "BACKGROUND", nil, 3)
         header:SetAtlas(REWARD_ART.header, false)
-        bottom = box:CreateTexture(nil, "BACKGROUND", nil, 3)
+        header:SetPoint("TOPLEFT", 0, 0)
+        header:SetPoint("TOPRIGHT", 0, 0)
+        tile = rewards:CreateTexture(nil, "BACKGROUND", nil, 2)
+        tile:SetAtlas(REWARD_ART.tile, false)
+        tile:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, 0)
+        tile:SetPoint("BOTTOMRIGHT", 0, 0)
+        bottom = rewards:CreateTexture(nil, "BACKGROUND", nil, 3)
         bottom:SetAtlas(REWARD_ART.bottom, false)
-        for _, t in ipairs({ tile, header, bottom }) do t:Hide() end
+        bottom:SetPoint("BOTTOMLEFT", 0, 0)
+        bottom:SetPoint("BOTTOMRIGHT", 0, 0)
     end
     d.UpdateRewardPanel = function()
         local top = rawget(d, "rewardTop")
         local offset = scroll.GetVerticalScroll and scroll:GetVerticalScroll() or 0
-        local shown = type(top) == "number" and type(offset) == "number"
-        local inView = false
-        if shown then
-            local t = math.max(0, top - offset)
-            inView = top - offset >= 0 -- the band scrolls away with the heading
-            local h = box:GetHeight()
-            shown = not (type(h) == "number" and t + 4 >= h)
-            base:ClearAllPoints()
-            base:SetPoint("TOPLEFT", box, "TOPLEFT", 0, -(4 + t))
-            base:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", 0, 0)
-            if header then
-                local w = box:GetWidth()
-                local bandH = AtlasHeight(REWARD_ART.header, w) or 55
-                header:ClearAllPoints()
-                header:SetPoint("TOPLEFT", box, "TOPLEFT", 0, -(4 + t))
-                header:SetPoint("TOPRIGHT", box, "TOPRIGHT", 0, -(4 + t))
-                header:SetHeight(bandH)
-                tile:ClearAllPoints()
-                tile:SetPoint("TOPLEFT", box, "TOPLEFT", 0, -(4 + t + (inView and bandH or 0)))
-                tile:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", 0, 0)
-                bottom:ClearAllPoints()
-                bottom:SetPoint("BOTTOMLEFT", box, "BOTTOMLEFT", 0, 0)
-                bottom:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", 0, 0)
-                bottom:SetHeight(AtlasHeight(REWARD_ART.bottom, w) or 87)
-            end
+        if type(offset) ~= "number" then offset = 0 end
+        if type(top) ~= "number" then rewards:Hide(); return end
+        -- Where it is on the page, but never lower than its peek at the bottom.
+        local t = top - offset
+        local viewH, peek = clip:GetHeight(), rawget(d, "rewardPeek")
+        if type(viewH) == "number" and viewH > 0 and type(peek) == "number" then
+            t = math.min(t, viewH - peek)
         end
-        base:SetShown(shown and true or false)
+        rewards:ClearAllPoints()
+        rewards:SetPoint("TOPLEFT", clip, "TOPLEFT", 0, -t)
+        rewards:SetPoint("BOTTOMRIGHT", clip, "BOTTOMRIGHT", 0, 0)
         if header then
-            tile:SetShown(shown and true or false)
-            header:SetShown(shown and inView or false)
-            bottom:SetShown(shown and true or false)
+            local w = clip:GetWidth()
+            if type(w) ~= "number" or w <= 0 then w = box:GetWidth() end
+            header:SetHeight(AtlasHeight(REWARD_ART.header, w) or 55)
+            bottom:SetHeight(AtlasHeight(REWARD_ART.bottom, w) or 87)
         end
+        rewards:Show()
     end
     scroll:HookScript("OnVerticalScroll", function() d.UpdateRewardPanel() end)
+    clip:SetScript("OnSizeChanged", function() d.UpdateRewardPanel() end)
 
     -- On the border's corner and above it (the border's filigree used to cover it).
     d.Close = CreateFrame("Button", nil, d, "UIPanelCloseButton")
@@ -1389,7 +1421,9 @@ local function CreateDetail(parent)
     d.Close:SetScript("OnClick", function() d:Hide(); selected = nil; Layout() end)
 
     d.MapButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
-    d.MapButton:SetSize(110, 22)
+    -- One bar of equal buttons under the text, like the game's Abandon | Share | Track.
+    d.MapButton:SetHeight(22)
+    d.MapButton:SetPoint("BOTTOMLEFT", d, "BOTTOM", 1, 2)
     d.MapButton:SetPoint("BOTTOMRIGHT", 0, 2)
     d.MapButton:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
     d.MapButton:SetText("Show on map")
@@ -1400,8 +1434,9 @@ local function CreateDetail(parent)
 
     -- Share the quest with your group, like the quest log's Share button.
     d.ShareButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
-    d.ShareButton:SetSize(80, 22)
-    d.ShareButton:SetPoint("RIGHT", d.MapButton, "LEFT", -4, 0)
+    d.ShareButton:SetHeight(22)
+    d.ShareButton:SetPoint("BOTTOMLEFT", 0, 2)
+    d.ShareButton:SetPoint("BOTTOMRIGHT", d, "BOTTOM", -1, 2)
     d.ShareButton:SetFrameLevel(d.MapButton:GetFrameLevel())
     d.ShareButton:SetText(SHARE_QUEST_ABBREV or "Share")
     d.ShareButton:SetMotionScriptsWhileDisabled(true)
