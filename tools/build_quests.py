@@ -81,6 +81,86 @@ def load_questiedb(qdb):
     return lua
 
 
+# New dungeons QuestieDB doesn't file quests under yet (instances.json, findQuests).
+NEW_QUEST_MIN_ID = 90000  # quests new in WoW Forever
+LINK_SPAN = 5             # a follow-up sits within a few quest IDs of the quest before it
+RETURN_TO = re.compile(r"^(?:Return|Report back|Report|Go back|Bring [^.]*?) to ([A-Z][^.,]*?)(?: in | at |\.|$)")
+HORDE, ALLIANCE = 8589934770, 4294967373
+
+
+def find_new_dungeon_quests(quests_lua, npcs_lua, curated):
+    """Quests of the dungeons marked findQuests, and the chain links QuestieDB's own data shows.
+    A quest belongs to such a dungeon when its objective names the dungeon or one of its bosses.
+    Quest B follows quest A (same faction, B a few IDs after A, B without a requirement of its own)
+    when B starts at the NPC A sends you to (A ends somewhere else than it starts), or when B
+    has no quest giver and says "Return to <NPC>" for A's NPC. Returns ({key: [questIDs]}, {B: A})."""
+    def side(mask):
+        if not mask:
+            return None
+        if mask == HORDE or (mask & HORDE and not mask & ALLIANCE):
+            return "H"
+        if mask == ALLIANCE or (mask & ALLIANCE and not mask & HORDE):
+            return "A"
+        return None
+
+    def npc_name(nid):
+        e = npcs_lua[nid]
+        return e[N_NAME] if e is not None else None
+
+    info = {}
+    for qid, entity in quests_lua.items():
+        if qid < NEW_QUEST_MIN_ID:
+            continue
+        q = to_py(entity)
+        text = field(q, Q_OBJ_TEXT)
+        text = " ".join(t for t in text if isinstance(t, str)) if isinstance(text, list) else (text or "")
+        started, finished = field(q, Q_STARTED_BY) or [], field(q, Q_FINISHED_BY) or []
+        info[qid] = {"text": text, "side": side(field(q, Q_RACES)),
+                     "start": set(ids(field(started, 1))), "end": set(ids(field(finished, 1))),
+                     "pre": ids(field(q, Q_PRE_SINGLE)) + ids(field(q, Q_PRE_GROUP))}
+
+    def follows(a, b):
+        A, B = info.get(a), info.get(b)
+        if not A or not B or B["pre"] or not (a < b <= a + LINK_SPAN):
+            return False
+        if A["side"] and B["side"] and A["side"] != B["side"]:
+            return False
+        if A["end"] and not A["end"] <= A["start"] and B["start"] & A["end"]:
+            return True
+        m = RETURN_TO.match(B["text"])
+        if m and not B["start"]:
+            target = m.group(1).strip()
+            return any(n and (n == target or n.split()[-1] == target.split()[-1] and n.split()[0] in target)
+                       for n in map(npc_name, A["start"] | A["end"]))
+        return False
+
+    found, links = {}, {}
+    for info_key in curated.values():
+        rule = info_key.get("findQuests")
+        if not rule:
+            continue
+        words = [w.lower() for w in rule.get("words", [])]
+        core = {q for q, i in info.items() if any(w in i["text"].lower() for w in words)}
+        found[info_key["key"]] = sorted(core)
+        # Walk the chains both ways from the dungeon's quests.
+        seen, todo = set(core), list(core)
+        while todo:
+            q = todo.pop()
+            for b in range(q + 1, q + LINK_SPAN + 1):
+                if b not in links and follows(q, b):
+                    links[b] = q
+                    if b not in seen:
+                        seen.add(b)
+                        todo.append(b)
+            for a in range(q - LINK_SPAN, q):
+                if q not in links and follows(a, q):
+                    links[q] = a
+                    if a not in seen:
+                        seen.add(a)
+                        todo.append(a)
+    return found, links
+
+
 def main():
     if len(sys.argv) != 2:
         sys.exit(__doc__)
@@ -102,6 +182,11 @@ def main():
         if not ids(to_py(entity[Q_PRE_SINGLE])) and not ids(to_py(entity[Q_PRE_GROUP])):
             entity[Q_PRE_SINGLE] = lua.table(*fix["pre"])
     npcs_lua = lua.eval("DB.Npc.entities")
+    # New dungeons QuestieDB doesn't file quests under yet: their quests, and the chain links
+    # QuestieDB's data shows (as requirements, unless QuestieDB has one for the quest).
+    found_quests, found_links = find_new_dungeon_quests(quests_lua, npcs_lua, curated)
+    for b, a in found_links.items():
+        quests_lua[b][Q_PRE_SINGLE] = lua.table(a)
     items_lua = lua.eval("DB.Item.entities")
     objects_lua = lua.eval("DB.Object.entities")
 
@@ -125,7 +210,8 @@ def main():
     area_to_key = {}
     for area_str, info in curated.items():
         area = int(area_str)
-        areas = [area] + (dungeons.get(area, {}).get("alternates") or []) + EXTRA_QUEST_AREAS.get(info["key"], [])
+        areas = [area] + (dungeons.get(area, {}).get("alternates") or []) + EXTRA_QUEST_AREAS.get(info["key"], []) \
+            + (info.get("findQuests") or {}).get("areas", [])
         for a in areas:
             area_to_key.setdefault(a, []).append(info["key"])
 
@@ -135,6 +221,11 @@ def main():
         zone = entity[Q_ZONE]
         if zone in area_to_key:
             for key in area_to_key[zone]:
+                dungeon_quests[key].append(qid)
+            core.add(qid)
+    for key, qids in found_quests.items():
+        for qid in qids:
+            if qid not in dungeon_quests[key]:
                 dungeon_quests[key].append(qid)
             core.add(qid)
 

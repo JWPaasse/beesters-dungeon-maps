@@ -215,6 +215,107 @@
       "levels": "60",
       "size": "40 players",
       "map": 249
+    },
+    "16550": {
+      "key": "drowned",
+      "name": "The Drowned City",
+      "kind": "dungeon",
+      "levels": "35-40",
+      "new": true,
+      "map": 2970,
+      "zone": "Stranglethorn Vale",
+      "findQuests": {
+        "words": [
+          "the Drowned City",
+          "Zul'Alai",
+          "Var'Taka",
+          "Captain Dreadrise",
+          "Min'loth"
+        ]
+      }
+    },
+    "16842": {
+      "key": "kroldok",
+      "name": "Krol'dok Stronghold",
+      "kind": "dungeon",
+      "levels": "40-45",
+      "new": true,
+      "map": 3039,
+      "zone": "Riverglades",
+      "findQuests": {
+        "words": [
+          "Krol'dok Stronghold",
+          "Slavecrusher Grox",
+          "Twilight Commander Zarmok",
+          "Handler Ashka",
+          "Nar'gurk",
+          "Overseer Mugg"
+        ]
+      }
+    },
+    "16620": {
+      "key": "alcaz",
+      "name": "Alcaz Prison",
+      "kind": "dungeon",
+      "levels": "48-53",
+      "new": true,
+      "map": 2994,
+      "zone": "Dustwallow Marsh",
+      "findQuests": {
+        "words": [
+          "Alcaz Prison",
+          "Overseer Wrex",
+          "Ca'zass",
+          "Katerina the Cleaner",
+          "The Questioner",
+          "Blazeroar"
+        ]
+      }
+    },
+    "16554": {
+      "key": "blackmaw",
+      "name": "Blackmaw Hold",
+      "kind": "dungeon",
+      "levels": "55-60",
+      "new": true,
+      "map": 2974,
+      "zone": "Azshara",
+      "findQuests": {
+        "words": [
+          "Blackmaw Hold",
+          "Withermaw",
+          "Impaan the Imprisoner",
+          "Elder Shaman Bloodmane",
+          "Bonesnout",
+          "Varrox Bleakhoof",
+          "Blackmaw Behemoth"
+        ]
+      }
+    },
+    "16667": {
+      "key": "shaper",
+      "name": "Shaper's Terrace",
+      "kind": "dungeon",
+      "levels": "58-60",
+      "new": true,
+      "map": 3001,
+      "zone": "Un'Goro Crater",
+      "findQuests": {
+        "words": [
+          "Shaper's Terrace",
+          "Titanosaur",
+          "Thunderhoof",
+          "Venomridge",
+          "Direhorn Matriarch",
+          "King Op",
+          "Snowtalon",
+          "Vitrix",
+          "Nanaya"
+        ],
+        "areas": [
+          16985
+        ]
+      }
     }
   },
   "encounterCreatures": {
@@ -225,36 +326,6 @@
     "Ras Frostwhisperer": "Ras Frostwhisper"
   },
   "comingSoon": [
-    {
-      "name": "The Drowned City",
-      "kind": "dungeon",
-      "levels": "35-40",
-      "zone": "Stranglethorn Vale"
-    },
-    {
-      "name": "Krol'dok Stronghold",
-      "kind": "dungeon",
-      "levels": "40-45",
-      "zone": "Riverglades"
-    },
-    {
-      "name": "Alcaz Prison",
-      "kind": "dungeon",
-      "levels": "48-53",
-      "zone": "Dustwallow Marsh"
-    },
-    {
-      "name": "Blackmaw Hold",
-      "kind": "dungeon",
-      "levels": "55-60",
-      "zone": "Azshara"
-    },
-    {
-      "name": "Shaper's Terrace",
-      "kind": "dungeon",
-      "levels": "58-60",
-      "zone": "Un'Goro Crater"
-    },
     {
       "name": "Barrow Deeps",
       "kind": "raid",
@@ -270,5 +341,6 @@
       "size": "20 players"
     }
   ],
-  "_comingSoon": "Instances WoW Forever has that the addon has no data for yet (not in QuestieDB). Listed greyed out as 'coming soon' in the Dungeons menu of their zone; dropped automatically once QuestieDB has them."
+  "_comingSoon": "Instances WoW Forever has that the addon has no data for yet (not in QuestieDB). Listed greyed out as 'coming soon' in the Dungeons menu of their zone; dropped automatically once QuestieDB has them.",
+  "_findQuests": "findQuests: for new dungeons QuestieDB doesn't file quests under yet. A quest belongs to the dungeon when its objective names the dungeon or one of its bosses (words), or QuestieDB files it under one of the areas. Chains are linked only where QuestieDB shows it: the next quest starts at the NPC where the previous one ends (after travelling there), or says 'Return to <NPC>' for the previous quest's NPC; within a few quest IDs, same faction."
 }

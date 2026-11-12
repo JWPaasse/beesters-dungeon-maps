@@ -5,7 +5,9 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Instance | Bosses placed | Confirmed | Bosses without loot | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
+| Alcaz Prison | 0/5 | 0/5 | 0 | 11 | 11 |
 | Blackfathom Deeps | 6/6 | 0/6 | 0 | 34 | 3 |
+| Blackmaw Hold | 0/7 | 0/7 | 4 | 3 | 3 |
 | Blackrock Depths | 18/18 | 0/18 | 1 | 78 | 0 |
 | Blackrock Spire | 19/21 | 0/21 | 0 | 119 | 1 |
 | City of Dalaran | 8/8 | 0/8 | 0 | 24 | 24 |
@@ -15,6 +17,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Excavation Site: Wetlands | 3/3 | 0/3 | 0 | 9 | 9 |
 | Gnomeregan | 6/6 | 0/6 | 0 | 24 | 4 |
 | Hall of Thanes | 4/4 | 0/4 | 0 | 12 | 12 |
+| Krol'dok Stronghold | 0/5 | 0/5 | 2 | 11 | 11 |
 | Maraudon | 9/9 | 0/9 | 0 | 32 | 1 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
 | Ragefire Chasm | 4/4 | 0/4 | 0 | 15 | 6 |
@@ -24,13 +27,25 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 64 | 7 |
 | Scholomance | 12/15 | 0/15 | 1 | 243 | 0 |
 | Shadowfang Keep | 10/10 | 0/10 | 0 | 35 | 7 |
+| Shaper's Terrace | 0/11 | 0/11 | 11 | 0 | 0 |
 | Stratholme | 16/17 | 0/17 | 1 | 135 | 3 |
 | Sunken Temple | 5/7 | 0/7 | 3 | 19 | 1 |
 | The Deadmines | 8/8 | 0/8 | 0 | 35 | 5 |
+| The Drowned City | 0/6 | 0/6 | 4 | 6 | 6 |
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 39 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 194/208 | 0/208 | 6 | 1209 | 137 |
+| **All** | 194/242 | 0/242 | 27 | 1240 | 168 |
+
+## Alcaz Prison
+
+| Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
+|---|---|---|---|---|---|
+| Overseer Wrex | **no** | — |  | 0 (+2 unknown) | 2 |
+| Tidemistress Ca'zass | **no** | — |  | 0 (+3 unknown) | 3 |
+| Katerina the Cleaner | **no** | — |  | 0 (+1 unknown) | 1 |
+| The Questioner | **no** | — |  | 0 (+4 unknown) | 4 |
+| Blazeroar | **no** | — |  | 0 (+1 unknown) | 1 |
 
 ## Blackfathom Deeps
 
@@ -42,6 +57,18 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Twilight Lord Kelris | yes | spawn point |  | 6 (+1 unknown) | 1 |
 | Old Serra'kis | yes | spawn point |  | 5 | 0 |
 | Aku'mai | yes | journal |  | 6 | 0 |
+
+## Blackmaw Hold
+
+| Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
+|---|---|---|---|---|---|
+| Withermaw | **no** | — |  | 0 | 0 |
+| Impaan the Imprisoner | **no** | — |  | 0 (+1 unknown) | 1 |
+| Elder Shaman Bloodmane | **no** | — |  | 0 (+1 unknown) | 1 |
+| Bonesnout the Unbroken | **no** | — |  | 0 | 0 |
+| Varrox Bleakhoof | **no** | — |  | 0 | 0 |
+| Blackmaw Behemoth | **no** | — |  | 0 | 0 |
+| Unbound Spirit | **no** | — |  | 0 (+1 unknown) | 1 |
 
 ## Blackrock Depths
 
@@ -167,6 +194,16 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Plunder | yes | placed in game |  | 0 (+3 unknown) | 3 |
 | Durgen Dirgehammer | yes | placed in game |  | 0 (+3 unknown) | 3 |
 
+## Krol'dok Stronghold
+
+| Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
+|---|---|---|---|---|---|
+| Slavecrusher Grox | **no** | — |  | 0 (+4 unknown) | 4 |
+| Twilight Commander Zarmok | **no** | — |  | 0 (+3 unknown) | 3 |
+| Handler Ashka | **no** | — |  | 0 | 0 |
+| Nar'gurk | **no** | — |  | 0 (+4 unknown) | 4 |
+| Overseer Mugg | **no** | — |  | 0 | 0 |
+
 ## Maraudon
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
@@ -281,6 +318,22 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Archmage Arugal | yes | spawn point |  | 3 | 0 |
 | Deathsworn Captain | yes | spawn point |  | 3 | 0 |
 
+## Shaper's Terrace
+
+| Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
+|---|---|---|---|---|---|
+| Titanosaur | **no** | — |  | 0 | 0 |
+| Ravasaur Hunters | **no** | — |  | 0 | 0 |
+| Thunderhoof | **no** | — |  | 0 | 0 |
+| Venomridge | **no** | — |  | 0 | 0 |
+| Direhorn Matriarch | **no** | — |  | 0 | 0 |
+| Cinder | **no** | — |  | 0 | 0 |
+| King Op | **no** | — |  | 0 | 0 |
+| Snowtalon | **no** | — |  | 0 | 0 |
+| Bolt | **no** | — |  | 0 | 0 |
+| Vitrix | **no** | — |  | 0 | 0 |
+| Nanaya | **no** | — |  | 0 | 0 |
+
 ## Stratholme
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
@@ -327,6 +380,17 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Edwin VanCleef | yes | journal |  | 4 | 0 |
 | Cookie | yes | journal |  | 4 (+2 unknown) | 1 |
 | Miner Johnson | yes | spawn point |  | 2 | 0 |
+
+## The Drowned City
+
+| Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
+|---|---|---|---|---|---|
+| Zul'Alai | **no** | — |  | 0 | 0 |
+| Var'Taka | **no** | — |  | 0 | 0 |
+| Captain Dreadrise | **no** | — |  | 0 (+3 unknown) | 3 |
+| Deathless Guardians | **no** | — |  | 0 | 0 |
+| Primeval Elemental | **no** | — |  | 0 | 0 |
+| Min'loth the Serpent | **no** | — |  | 0 (+3 unknown) | 3 |
 
 ## The Stockade
 

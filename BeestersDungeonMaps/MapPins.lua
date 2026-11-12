@@ -348,18 +348,33 @@ function ns:ZoneMapID(name)
     return name and zoneByName[name]
 end
 
-function ns:ComingSoonOnMap(mapID)
+local function InZone(mapID, zoneName)
+    local zoneMapID = ns:ZoneMapID(zoneName)
+    return zoneMapID and (zoneMapID == mapID or ShowsOn(mapID, zoneMapID))
+end
+
+local function Listable(mapID)
     local info = mapID and C_Map.GetMapInfo(mapID)
-    if not (ns.ComingSoon and info) or info.mapType == Enum.UIMapType.Cosmic or info.mapType == Enum.UIMapType.World then
-        return {}
-    end
+    return info and info.mapType ~= Enum.UIMapType.Cosmic and info.mapType ~= Enum.UIMapType.World
+end
+
+function ns:ComingSoonOnMap(mapID)
+    if not (ns.ComingSoon and Listable(mapID)) then return {} end
     local list = {}
     for _, instance in ipairs(ns.ComingSoon) do
-        local zoneMapID = ns:ZoneMapID(instance.zone)
-        if zoneMapID and (zoneMapID == mapID or ShowsOn(mapID, zoneMapID)) then
-            table.insert(list, instance)
-        end
+        if InZone(mapID, instance.zone) then table.insert(list, instance) end
     end
+    return list
+end
+
+-- Dungeons whose entrance isn't known yet (no pin), by the zone they're in.
+function ns:ZoneOnlyDungeonsOnMap(mapID)
+    if not Listable(mapID) then return {} end
+    local list = {}
+    for key, instance in pairs(ns.Instances) do
+        if instance.zone and InZone(mapID, instance.zone) then table.insert(list, key) end
+    end
+    table.sort(list, function(a, b) return ns.Instances[a].name < ns.Instances[b].name end)
     return list
 end
 
@@ -379,6 +394,9 @@ function ns:EntranceMapFor(key)
             end
         end
     end
+    -- No known entrance: the zone it's in.
+    local instance = ns.Instances[key]
+    return instance and instance.zone and ns:ZoneMapID(instance.zone)
 end
 
 ----------------------------------------------------------------------

@@ -1193,6 +1193,8 @@ function ShowDetail(id, entry, stepOverride)
     if who then
         local zone = mapID and C_Map.GetMapInfo(mapID)
         line = line .. "\n" .. (zone and ("%s: %s, %s"):format(verb, who, zone.name) or ("%s: %s (inside the dungeon)"):format(verb, who))
+    elseif not inLog then
+        line = line .. "\n" .. "Quest giver not known yet"
     end
     y = PageText(d, "QuestFontNormalSmall", line, y, 10, FADED_INK)
 

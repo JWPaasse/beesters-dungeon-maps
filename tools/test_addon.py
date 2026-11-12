@@ -108,6 +108,7 @@ local maps = {
     -- As in the real client: cities hang under the continent, not under their zone.
     [1458] = { name = "Undercity", mapType = 3, parentMapID = 1415 },
     [1446] = { name = "Un'Goro Crater", mapType = 3, parentMapID = 1414 },
+    [1450] = { name = "Mount Hyjal", mapType = 3, parentMapID = 1414 },
 }
 setmetatable(maps, { __index = function(_, id) return { name = "Zone " .. id, mapType = 3, parentMapID = 0 } end })
 C_Map = {
@@ -275,9 +276,12 @@ def main():
 
         -- Dungeon maps
         ns:InitDungeonMap()
-        local mapCount = 0
-        for _ in pairs(ns.DungeonMaps) do mapCount = mapCount + 1 end
+        local mapCount, placeholders = 0, 0
+        for _, m in pairs(ns.DungeonMaps) do
+            if m.placeholder then placeholders = placeholders + 1 else mapCount = mapCount + 1 end
+        end
         check("26 dungeon maps (22 classic, 4 by Santiago Reyes)", mapCount == 26)
+        check("the 5 new dungeons without a map get a page", placeholders == 5)
         local missingMaps = {}
         for key in pairs(ns.Instances) do if not ns.DungeonMaps[key] then table.insert(missingMaps, key) end end
         check("every dungeon in the list has a map", #missingMaps == 0)
@@ -593,8 +597,19 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("the badge stays hidden on a complete map", not BeestersDungeonMapsView.StatusBadge:IsShown())
         ns:CloseDungeonMap(true)
         -- Coming soon: instances without data appear greyed out in their zone's Dungeons menu.
-        local soon = ns:ComingSoonOnMap(1446)
-        check("a coming-soon dungeon is found by its zone name", #soon == 1 and soon[1].name == "Shaper's Terrace")
+        local soon = ns:ComingSoonOnMap(1450)
+        check("a coming-soon raid is found by its zone name", #soon == 2 and soon[1].name == "Barrow Deeps")
+        check("Shaper's Terrace isn't coming soon any more", #ns:ComingSoonOnMap(1446) == 0)
+        local zoneOnly = ns:ZoneOnlyDungeonsOnMap(1446)
+        check("a dungeon without a known entrance is listed under its zone", #zoneOnly == 1 and zoneOnly[1] == "shaper" and ns:EntranceMapFor("shaper") == 1446)
+        -- A new dungeon without a map: its page opens with the notice, its bosses in the list.
+        ns:OpenDungeonMap("shaper")
+        local v = BeestersDungeonMapsView
+        check("a dungeon without a map opens its page with the notice", ns:IsDungeonMapOpen() and v.NoMap:IsShown() and v.List:IsShown())
+        check("that page is marked work in progress", v.StatusBadge:IsShown() and v.StatusBadge.status.noMap == true)
+        check("the new dungeons have their quests", #(ns.DungeonQuests.alcaz or {}) >= 5 and #(ns.DungeonQuests.drowned or {}) >= 5)
+        check("being inside a new dungeon is recognised", ns.InstanceByMap[2970] == "drowned")
+        ns:CloseDungeonMap(true)
         check("coming-soon dungeons show on the continent too", #ns:ComingSoonOnMap(1414) >= 1)
 
         -- The top bar's menu while a dungeon map is open over the world view (opened inside the

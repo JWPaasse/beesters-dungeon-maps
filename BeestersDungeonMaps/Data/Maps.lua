@@ -87,7 +87,12 @@ ns.InstanceByMap = {
     [389] = "rfc",
     [429] = "dme",
     [2959] = "dal",
+    [2970] = "drowned",
+    [2974] = "blackmaw",
+    [2994] = "alcaz",
     [2998] = "exc",
     [2999] = "rol",
+    [3001] = "shaper",
+    [3039] = "kroldok",
     [3065] = "hot",
 }

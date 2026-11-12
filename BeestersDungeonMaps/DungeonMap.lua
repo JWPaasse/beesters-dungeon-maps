@@ -55,6 +55,16 @@ end
 -- Data helpers
 ----------------------------------------------------------------------
 
+-- Dungeons without a map yet still get a page: a notice where the map would be, the bosses
+-- in the corner list and the quests beside it. Their "map" is one blank level.
+if ns.DungeonMaps and ns.Instances then
+    for key in pairs(ns.Instances) do
+        if not ns.DungeonMaps[key] then
+            ns.DungeonMaps[key] = { placeholder = true, floors = { { name = "No map yet" } } }
+        end
+    end
+end
+
 local function FloorName(key, index)
     local map = ns.DungeonMaps[key]
     local floor = map and map.floors[index]
@@ -203,7 +213,8 @@ end
 -- without a place on the map or without loot. Returns nil when the data is complete enough.
 local WIP_SHARE = 0.75
 function ns:InstanceStatus(key)
-    if not (ns.DungeonMaps and ns.DungeonMaps[key]) then
+    local map = ns.DungeonMaps and ns.DungeonMaps[key]
+    if not map or map.placeholder then
         return { noMap = true }
     end
     local total, placed, withLoot = 0, 0, 0
@@ -685,6 +696,8 @@ end
 
 local function StartPlacing(self)
     if not IsShiftKeyDown() then return end
+    local map = ns.DungeonMaps[current.key]
+    if map and map.placeholder then return end -- no map to place a boss on
     self.placing = true
     SetCursor("Interface\\Cursor\\UI-Cursor-Move")
 end
@@ -842,7 +855,9 @@ local function Layout()
     local map = current.key and ns.DungeonMaps[current.key]
     local floor = map and map.floors[current.floor]
     if not floor then return end -- not set up yet; ShowFloor lays it out again
-    if floor.tiles then
+    if map.placeholder then
+        -- nothing to size
+    elseif floor.tiles then
         local scale = artW / MAP_W
         for i = 1, 12 do
             local tex = view.Tiles[i]
@@ -870,7 +885,14 @@ function ShowFloor(index)
     NoteRunFloor(current.key, index)
     local floor = map.floors[index]
 
-    if floor.tiles then
+    view.NoMap:SetShown(map.placeholder == true)
+    if map.placeholder then
+        view.Left:Hide()
+        view.Right:Hide()
+        for i = 1, 12 do view.Tiles[i]:Hide() end
+        local name = ns.Instances[current.key] and ns.Instances[current.key].name or current.key
+        view.NoMap.Text:SetText(("There's no map of %s yet.\nIts bosses are listed in the corner, its quests in the tab beside the map."):format(name))
+    elseif floor.tiles then
         view.Left:Hide()
         view.Right:Hide()
         for i = 1, 12 do
@@ -970,9 +992,30 @@ local function CreateView()
     view.Credit = view.Art:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
     view.Credit:SetPoint("BOTTOMLEFT", 10, 8)
 
+    -- Where the map would be, for a dungeon that has none yet.
+    view.NoMap = CreateFrame("Frame", nil, view.Art)
+    view.NoMap:SetAllPoints()
+    local parchment = view.NoMap:CreateTexture(nil, "BACKGROUND")
+    parchment:SetAllPoints()
+    if C_Texture and C_Texture.GetAtlasInfo and C_Texture.GetAtlasInfo("QuestDetailsBackgrounds") then
+        parchment:SetAtlas("QuestDetailsBackgrounds")
+    else
+        parchment:SetColorTexture(0.24, 0.19, 0.12, 1)
+    end
+    view.NoMap.Title = view.NoMap:CreateFontString(nil, "ARTWORK", "QuestTitleFont")
+    view.NoMap.Title:SetPoint("BOTTOM", view.NoMap, "CENTER", 0, 12)
+    view.NoMap.Title:SetTextColor(0.18, 0.12, 0.06)
+    view.NoMap.Title:SetText("Work in progress")
+    view.NoMap.Text = view.NoMap:CreateFontString(nil, "ARTWORK", "QuestFont")
+    view.NoMap.Text:SetPoint("TOP", view.NoMap, "CENTER", 0, 0)
+    view.NoMap.Text:SetWidth(380)
+    view.NoMap.Text:SetTextColor(0.18, 0.12, 0.06)
+    view.NoMap:Hide()
+
     -- Bosses whose place on the map isn't known yet.
     view.List = CreateFrame("Frame", nil, view.Art, BackdropTemplateMixin and "BackdropTemplate")
     view.List:SetPoint("BOTTOMRIGHT", -10, 10)
+    view.List:SetFrameLevel(view.Art:GetFrameLevel() + 5) -- over the no-map notice
     if view.List.SetBackdrop then
         view.List:SetBackdrop({
             bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
@@ -1216,6 +1259,9 @@ local function DungeonMenuList(mapID)
                 func = function(_, id) ns:OpenDungeonMap(id) end,
             })
         end
+    end
+    for _, key in ipairs(ns:ZoneOnlyDungeonsOnMap(mapID)) do
+        table.insert(list, { text = ns.Instances[key].name, id = key, func = function(_, id) ns:OpenDungeonMap(id) end })
     end
     for _, instance in ipairs(ns:ComingSoonOnMap(mapID)) do
         table.insert(list, { text = instance.name .. "  |cff9d9d9d(coming soon)|r", soon = instance })

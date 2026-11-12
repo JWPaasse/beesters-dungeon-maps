@@ -11,7 +11,7 @@ It's built to look like part of the game: the world map's own pins and menus, th
 **On the world map**
 - Dungeon and raid entrances on zone and continent maps. Hover one for its level range, and whether it's new in Forever. Blackrock Mountain shows both Blackrock Depths and Blackrock Spire.
 - A **Dungeons** menu in the map's top bar (World › Kalimdor › Durotar › Dungeons) to open any dungeon in the zone you're looking at.
-- New Forever dungeons the addon has no data for yet are listed in that menu as "coming soon".
+- The newest Forever dungeons (The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold, Shaper's Terrace) are in that menu too. There's no map of them yet, so their page shows a "Work in progress" notice with their bosses and quests. The two Hyjal raids are listed as "coming soon".
 
 **Minimap button**
 - Click it for a list of every dungeon and raid. Your dungeons (within 5 levels of you) are pinned on top; the rest scrolls underneath, by level band, raids last. Levels are coloured by difficulty for you, like quest titles.
@@ -24,7 +24,7 @@ It's built to look like part of the game: the world map's own pins and menus, th
 - Each boss has a pin with its portrait. Hover it for the boss's loot (Bind on Pickup, Uncommon and better, sorted into gear, recipes and other). Click to keep the loot list open.
 - Multi-level dungeons have a floor menu that shows how many bosses are on each level.
 - A boss without a known position is listed in the corner. Shift-drag it onto the map to place it yourself; shift-right-click your pin to undo.
-- Dungeons whose data is still thin (bosses without a position or loot) show a "Work in progress" tag. Hover it to see what's missing.
+- Dungeons whose data is still thin (no map yet, or bosses without a position or loot) show a "Work in progress" tag. Hover it to see what's missing.
 
 **Dungeon quests**
 - The dungeon's quests in a tab next to its map, in the quest log's own style: the ones you have, the ones you can still pick up and where, and the ones that start inside.

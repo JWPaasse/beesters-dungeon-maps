@@ -78,11 +78,12 @@ def main():
     for area_str, info in curated.items():
         area = int(area_str)
         src = dungeons.get(area)
-        if not src:
+        if not src and not info.get("zone"):
             problems.append(f"{info['name']}: AreaID {area} not found in QuestieDB")
             continue
         instances.append((info, area))
-        for zone, x, y in src["points"]:
+        # New dungeons QuestieDB doesn't have an entrance for yet: listed, with their zone, no pin.
+        for zone, x, y in (src or {}).get("points", []):
             ui = area_to_ui.get(zone)
             if not ui:
                 problems.append(f"{info['name']}: no UiMapID for zone AreaID {zone}")
@@ -99,7 +100,7 @@ def main():
         "",
         "ns.dataVersion = " + lua_str(rev),
         "",
-        "-- [key] = { name, kind, levels, isNew, note, size }",
+        "-- [key] = { name, kind, levels, isNew, note, size, zone (the zone of a dungeon without a known entrance) }",
         "ns.Instances = {",
     ]
     for info, area in sorted(instances, key=lambda t: (int(t[0]["levels"].split("-")[0]), t[0]["name"])):
@@ -115,6 +116,8 @@ def main():
             parts.append(f"note = {lua_str(info['note'])}")
         if info.get("size"):
             parts.append(f"size = {lua_str(info['size'])}")
+        if info.get("zone"):
+            parts.append(f"zone = {lua_str(info['zone'])}")
         lines.append(f"    [{lua_str(info['key'])}] = {{ {', '.join(parts)} }},")
     lines += ["}", "", "-- [uiMapID] = { { x, y, { instanceKey, ... } }, ... }  (x and y are 0-1)", "ns.Entrances = {"]
     by_map = {}
