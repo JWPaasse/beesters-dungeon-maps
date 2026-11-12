@@ -409,7 +409,15 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         inCombat = true
         ns:OpenDungeonMap("wc")
         check("in combat, opening a dungeon map leaves the map where it is", WorldMapFrame:GetMapID() == 1414 and ns:IsDungeonMapOpen())
+        local strata
+        local setStrata = view.SetFrameStrata
+        view.SetFrameStrata = function(self, st) strata = st end
+        WorldMapFrame.GetFrameStrata = function() return "HIGH" end
         ns:CloseDungeonMap(true)
+        ns:OpenDungeonMap("wc")
+        check("in combat the dungeon map goes over the game's map", strata == "DIALOG")
+        ns:CloseDungeonMap(true)
+        view.SetFrameStrata = setStrata
         inCombat = false
         ns:OpenDungeonMap("wc")
 

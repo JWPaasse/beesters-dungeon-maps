@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Opening the map in combat inside a dungeon now shows the dungeon map on top of the game's own. The game doesn't let addons hide its map during a fight, so the dungeon map now goes over it instead.
+- Scarlet Monastery and Gnomeregan turn to the right level in more places (Athenaeum, Hall of Champions, Crusader's Chapel; Engineering Labs, Tinkers' Court).
+
 ## 1.1.3
 
 - Quest details now look and work like the game's own: they fill the whole quest tab, with a Back button in a bar on top to return to the list. The rewards sit on the game's dark panel with its "Rewards" header, start at the bottom of the details and slide up to their place as you scroll. Experience and money come first, each on their own row, and the reward buttons are the game's small ones.

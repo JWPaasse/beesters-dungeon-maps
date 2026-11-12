@@ -123,6 +123,10 @@ local SUBZONE_FLOORS = {
         ["The Crimson Throne"] = 1,
         ["Elders' Square"] = 2, ["The Gauntlet"] = 2, ["Slaughter Square"] = 2, ["The Slaughter House"] = 2,
     },
+    -- Learned in game: the wings' halls (Library, Armory, Cathedral).
+    sm = { ["Athenaeum"] = 2, ["Hall of Champions"] = 3, ["Crusader's Chapel"] = 4 },
+    -- Learned in game; the game writes "Engineering Labs" with a space after it.
+    gnomer = { ["Engineering Labs "] = 3, ["Engineering Labs"] = 3, ["Tinkers' Court"] = 4 },
 }
 
 -- The subzone under the minimap, unless it's just the dungeon's own name (that says nothing).
@@ -1055,9 +1059,40 @@ function ns:CurrentDungeonKey()
     return current.key
 end
 
+-- In combat the game won't let us hide its map picture (its pins are protected), so ours
+-- would open underneath it. Then ours goes up one layer, over the game's, until combat ends.
+local STRATA = { "BACKGROUND", "LOW", "MEDIUM", "HIGH", "DIALOG", "FULLSCREEN", "FULLSCREEN_DIALOG" }
+local canvasRetry
+
+local function LiftView(lift)
+    if not view then return end
+    local base = WorldMapFrame:GetFrameStrata()
+    local strata = base
+    if lift then
+        for i, name in ipairs(STRATA) do
+            if name == base then strata = STRATA[math.min(i + 1, #STRATA)] end
+        end
+    end
+    if view:GetFrameStrata() ~= strata then view:SetFrameStrata(strata) end
+    if lootPanel then lootPanel:SetFrameStrata(lift and STRATA[#STRATA] or "DIALOG") end
+end
+
 local function SetCanvasShown(shown)
     local child = WorldMapFrame.ScrollContainer and WorldMapFrame.ScrollContainer.Child
-    if child then child:SetShown(shown) end
+    if not child then return end
+    if InCombatLockdown() then
+        -- Hands off the game's map; cover it instead, and sort it out after combat.
+        LiftView(not shown)
+        canvasRetry = canvasRetry or CreateFrame("Frame")
+        canvasRetry:RegisterEvent("PLAYER_REGEN_ENABLED")
+        canvasRetry:SetScript("OnEvent", function(self)
+            self:UnregisterAllEvents()
+            SetCanvasShown(not ns:IsDungeonMapOpen())
+        end)
+        return
+    end
+    child:SetShown(shown)
+    LiftView(false)
 end
 
 -- Change the world map the way the game itself does. Calling WorldMapFrame:SetMapID (or
