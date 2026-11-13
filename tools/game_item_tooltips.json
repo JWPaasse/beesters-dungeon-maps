@@ -1,5 +1,5 @@
 {
-"_source": "WoW Forever client tables, build 1.60.1.70888 (via wago.tools)",
+"_source": "WoW Forever client tables, build 1.60.1.70938 (via wago.tools)",
 "items": {
 "414": [
 "|cffffffffDalaran Sharp|r",
@@ -1606,6 +1606,22 @@
 "Binds when picked up",
 "Unique"
 ],
+"249520": [
+"|cff0070ddFormula: Molten Heart of the Mountain|r",
+"Binds when picked up",
+"Requires Enchanting (265)",
+"Use: Teaches you how to craft a Molten Heart of the Mountain."
+],
+"249696": [
+"|cffffffffTusks of the Unbroken|r",
+"Quest Item",
+"Unique"
+],
+"249697": [
+"|cffffffffClaws of the Great Bear|r",
+"Quest Item",
+"Unique"
+],
 "251360": [
 "|cff0070ddPlans: Veteran's Gloves|r",
 "Binds when picked up",
@@ -1766,36 +1782,6 @@
 "Use: Teaches you how to craft Crusader's Silvered Chain Helm.",
 "Requires Blacksmithing (95)"
 ],
-"251399": [
-"|cff0070ddPlans: Sentinel's Boots|r",
-"Binds when picked up",
-" ",
-"|cff0070ddSentinel's Boots|r",
-"Binds when picked up",
-"Feet\tPlate",
-"330 Armor",
-"+7 Strength",
-"+13 Stamina",
-"Requires Level 40",
-"|cff1eff00Equip: Increased Defense +9.|r",
-"Use: Teaches you how to craft Sentinel's Boots.",
-"Requires Blacksmithing (200)"
-],
-"251400": [
-"|cff0070ddPlans: Warder's Boots|r",
-"Binds when picked up",
-" ",
-"|cff0070ddWarder's Boots|r",
-"Binds when picked up",
-"Feet\tPlate",
-"330 Armor",
-"+13 Stamina",
-"Requires Level 40",
-"|cff1eff00Equip: Increased Defense +9.|r",
-"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 9.|r",
-"Use: Teaches you how to craft Warder's Boots.",
-"Requires Blacksmithing (200)"
-],
 "251401": [
 "|cff0070ddPlans: Prefect's Boots|r",
 "Binds when picked up",
@@ -1810,66 +1796,6 @@
 "|cff1eff00Equip: Increases healing done by up to 28 and damage done by up to 9 for all magical spells and effects.|r",
 "Use: Teaches you how to craft Prefect's Boots.",
 "Requires Blacksmithing (200)"
-],
-"251403": [
-"|cff0070ddPlans: Officer's Gloves|r",
-"Binds when picked up",
-" ",
-"|cff0070ddOfficer's Gloves|r",
-"Binds when picked up",
-"Hands\tPlate",
-"361 Armor",
-"+16 Strength",
-"+9 Agility",
-"+11 Stamina",
-"Requires Level 50",
-"Use: Teaches you how to craft Officer's Gloves.",
-"Requires Blacksmithing (250)"
-],
-"251404": [
-"|cff0070ddPlans: Sentinel's Gloves|r",
-"Binds when picked up",
-" ",
-"|cff0070ddSentinel's Gloves|r",
-"Binds when picked up",
-"Hands\tPlate",
-"361 Armor",
-"+9 Strength",
-"+16 Stamina",
-"Requires Level 50",
-"|cff1eff00Equip: Increased Defense +11.|r",
-"Use: Teaches you how to craft Sentinel's Gloves.",
-"Requires Blacksmithing (250)"
-],
-"251405": [
-"|cff0070ddPlans: Warder's Gloves|r",
-"Binds when picked up",
-" ",
-"|cff0070ddWarder's Gloves|r",
-"Binds when picked up",
-"Hands\tPlate",
-"361 Armor",
-"+16 Stamina",
-"Requires Level 50",
-"|cff1eff00Equip: Increased Defense +11.|r",
-"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 11.|r",
-"Use: Teaches you how to craft Warder's Gloves.",
-"Requires Blacksmithing (250)"
-],
-"251407": [
-"|cff0070ddPlans: Justicar's Gloves|r",
-"Binds when picked up",
-" ",
-"|cff0070ddJusticar's Gloves|r",
-"Binds when picked up",
-"Hands\tPlate",
-"361 Armor",
-"+9 Strength",
-"+11 Stamina",
-"Requires Level 50",
-"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 19.|r",
-"Use: Teaches you how to craft Justicar's Gloves.",
-"Requires Blacksmithing (250)"
 ],
 "251961": [
 "|cffffffffArcane Mote|r",
@@ -2120,66 +2046,6 @@
 "Use: Teaches you how to craft Wisdom's Leather Leggings.",
 "Requires Leatherworking (125)"
 ],
-"252846": [
-"|cff0070ddPattern: Skycaller's Leather Shoes|r",
-" ",
-"|cff0070ddSkycaller's Leather Shoes|r",
-"Binds when picked up",
-"Feet\tLeather",
-"92 Armor",
-"+7 Intellect",
-"+7 Stamina",
-"+5 Spirit",
-"Requires Level 40",
-"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 13.|r",
-"Use: Teaches you how to craft Skycaller's Leather Shoes.",
-"Requires Leatherworking (200)"
-],
-"252847": [
-"|cff0070ddPattern: Mender's Leather Shoes|r",
-" ",
-"|cff0070ddMender's Leather Shoes|r",
-"Binds when picked up",
-"Feet\tLeather",
-"92 Armor",
-"+7 Intellect",
-"+5 Stamina",
-"+7 Spirit",
-"Requires Level 40",
-"|cff1eff00Equip: Increases healing done by up to 24 and damage done by up to 8 for all magical spells and effects.|r",
-"Use: Teaches you how to craft Mender's Leather Shoes.",
-"Requires Leatherworking (200)"
-],
-"252867": [
-"|cff0070ddPattern: Prowler's Leather Gauntlets|r",
-" ",
-"|cff0070ddProwler's Leather Gauntlets|r",
-"Binds when picked up",
-"Hands\tLeather",
-"99 Armor",
-"+14 Strength",
-"+9 Agility",
-"+6 Intellect",
-"+9 Stamina",
-"Requires Level 50",
-"Use: Teaches you how to craft Prowler's Leather Gauntlets.",
-"Requires Leatherworking (250)"
-],
-"252868": [
-"|cff0070ddPattern: Skulker's Leather Gauntlets|r",
-" ",
-"|cff0070ddSkulker's Leather Gauntlets|r",
-"Binds when picked up",
-"Hands\tLeather",
-"99 Armor",
-"+9 Strength",
-"+14 Agility",
-"+9 Stamina",
-"+6 Spirit",
-"Requires Level 50",
-"Use: Teaches you how to craft Skulker's Leather Gauntlets.",
-"Requires Leatherworking (250)"
-],
 "252897": [
 "|cff0070ddPattern: Skycaller's Mail Boots|r",
 " ",
@@ -2193,21 +2059,6 @@
 "Requires Level 40",
 "|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 13.|r",
 "Use: Teaches you how to craft Skycaller's Mail Boots.",
-"Requires Leatherworking (200)"
-],
-"252898": [
-"|cff0070ddPattern: Skirmisher's Mail Boots|r",
-" ",
-"|cff0070ddSkirmisher's Mail Boots|r",
-"Binds when picked up",
-"Feet\tMail",
-"188 Armor",
-"+11 Strength",
-"+5 Intellect",
-"+7 Stamina",
-"Requires Level 40",
-"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 9.|r",
-"Use: Teaches you how to craft Skirmisher's Mail Boots.",
 "Requires Leatherworking (200)"
 ],
 "252899": [
@@ -2225,110 +2076,15 @@
 "Use: Teaches you how to craft Mender's Mail Boots.",
 "Requires Leatherworking (200)"
 ],
-"252918": [
-"|cff0070ddPattern: Stalker's Mail Gauntlets|r",
-" ",
-"|cff0070ddStalker's Mail Gauntlets|r",
+"263992": [
+"|cffffffffOverseer's Keyring|r",
 "Binds when picked up",
-"Hands\tMail",
-"205 Armor",
-"+14 Agility",
-"+9 Intellect",
-"+9 Stamina",
-"+6 Spirit",
-"Requires Level 50",
-"Use: Teaches you how to craft Stalker's Mail Gauntlets.",
-"Requires Leatherworking (250)"
+"Unique"
 ],
-"252920": [
-"|cff0070ddPattern: Skirmisher's Mail Gauntlets|r",
-" ",
-"|cff0070ddSkirmisher's Mail Gauntlets|r",
-"Binds when picked up",
-"Hands\tMail",
-"205 Armor",
-"+14 Strength",
-"+6 Intellect",
-"+9 Stamina",
-"Requires Level 50",
-"|cff1eff00Equip: Increases damage and healing done by magical spells and effects by up to 11.|r",
-"Use: Teaches you how to craft Skirmisher's Mail Gauntlets.",
-"Requires Leatherworking (250)"
-],
-"254046": [
-"|cff0070ddPattern: Golden Cord|r",
-" ",
-"|cff0070ddGolden Cord|r",
-"Binds when picked up",
-"Waist\tCloth",
-"37 Armor",
-"+8 Intellect",
-"+8 Stamina",
-"+6 Spirit",
-"Requires Level 40",
-"|cff1eff00Equip: Increases damage done by Arcane spells and effects by up to 14.|r",
-"Use: Teaches you how to craft Golden Cord.",
-"Requires Tailoring (190)"
-],
-"254096": [
-"|cff0070ddPattern: Gilded Gloves|r",
-" ",
-"|cff0070ddGilded Gloves|r",
-"Binds when picked up",
-"Hands\tCloth",
-"49 Armor",
-"+10 Intellect",
-"+9 Stamina",
-"+8 Spirit",
-"Requires Level 50",
-"|cff1eff00Equip: Increases healing done by up to 29 and damage done by up to 10 for all magical spells and effects.|r",
-"Use: Teaches you how to craft Gilded Gloves.",
-"Requires Tailoring (235)"
-],
-"254098": [
-"|cff0070ddPattern: Frothing Gloves|r",
-" ",
-"|cff0070ddFrothing Gloves|r",
-"Binds when picked up",
-"Hands\tCloth",
-"49 Armor",
-"+10 Intellect",
-"+9 Stamina",
-"+8 Spirit",
-"Requires Level 50",
-"|cff1eff00Equip: Increases damage done by Frost spells and effects by up to 19.|r",
-"Use: Teaches you how to craft Frothing Gloves.",
-"Requires Tailoring (235)"
-],
-"254102": [
-"|cff0070ddPattern: Black Gloves|r",
-" ",
-"|cff0070ddBlack Gloves|r",
-"Binds when picked up",
-"Hands\tCloth",
-"49 Armor",
-"+10 Intellect",
-"+9 Stamina",
-"+8 Spirit",
-"Requires Level 50",
-"|cff1eff00Equip: Increases damage done by Shadow spells and effects by up to 19.|r",
-"Use: Teaches you how to craft Black Gloves.",
-"Requires Tailoring (235)"
-],
-"254104": [
-"|cff0070ddPattern: Golden Gloves|r",
-" ",
-"|cff0070ddGolden Gloves|r",
-"Binds when picked up",
-"Hands\tCloth",
-"49 Armor",
-"+10 Intellect",
-"+9 Stamina",
-"+8 Spirit",
-"Requires Level 50",
-"|cff1eff00Equip: Increases damage done by Arcane spells and effects by up to 19.|r",
-"Use: Teaches you how to craft Golden Gloves.",
-"Requires Tailoring (235)"
+"267104": [
+"|cffffffffTome of Twilight|r",
+"Quest Item",
+"Unique"
 ],
 "268518": [
 "|cffffffffHead of the Baron|r",
@@ -2422,7 +2178,7 @@
 "|cff1eff00Blueprint: Journeyman Campfire|r",
 " ",
 "|cffffffffJourneyman Campfire Kit|r",
-"Requires Cooking (140)",
+"Requires Cooking (90)",
 "|cff1eff00Use: Builds a journeyman campfire that allows cooking and the placement of up to 5 additional camp features. Players sitting or crafting nearby for 1 min will gain benefits from other camp features. (5 Min Cooldown)|r",
 "Use: Teaches you how to place a Journeyman Campfire at a campsite.",
 "Craft a Journeyman Campfire.",
@@ -2443,12 +2199,12 @@
 "|cff1eff00Blueprint: Tanning Rack|r",
 " ",
 "|cffffffffTanning Rack|r",
-"Requires Leatherworking (140)",
+"Requires Leatherworking (125)",
 "|cff1eff00Use: Places a Tanning Rack that allows the creation of certain reagents, and provides all of the benefits of a Camp Tent. Requires a Campfire nearby.|r",
 "|cff1eff00May be placed over a Camp Tent to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
 "Use: Teaches you how to place a Tanning Rack at a campsite.",
 "Craft a Tanning Rack.",
-"Requires Leatherworking (140)"
+"Requires Leatherworking (125)"
 ],
 "273097": [
 "|cff1eff00Blueprint: Rock Garden|r",
@@ -2482,6 +2238,16 @@
 "Use: Teaches you how to place a Spinning Wheel at a campsite.",
 "Craft a Spinning Wheel.",
 "Requires Tailoring (140)"
+],
+"273101": [
+"|cff1eff00Blueprint: Expert Campfire|r",
+" ",
+"|cffffffffExpert Campfire Kit|r",
+"Requires Cooking (220)",
+"|cff1eff00Use: Builds an expert campfire that allows cooking and the placement of up to 10 additional camp features. Players sitting or crafting nearby for 1 min will gain benefits from other camp features. (5 Min Cooldown)|r",
+"Use: Teaches you how to place an Expert Campfire at a campsite.",
+"Craft an Expert Campfire.",
+"Requires Cooking (200)"
 ],
 "273102": [
 "|cff1eff00Blueprint: Cookie's Feast|r",
@@ -2540,6 +2306,26 @@
 "Craft a Trapper's Workbench.",
 "Requires Skinning (300)"
 ],
+"273125": [
+"|cff1eff00Lich's Index Finger|r",
+"Crafting Reagent",
+"|cffffd100\"Needed for delicate work in an Alchemist's Laboratory.\"|r"
+],
+"273127": [
+"|cff1eff00Golem Heart|r",
+"Crafting Reagent",
+"|cffffd100\"This molten heart could fuel a Master Forge.\"|r"
+],
+"273129": [
+"|cff1eff00Essence of Anarchy|r",
+"Crafting Reagent",
+"|cffffd100\"An unstable mote of chaos, just what's needed for an Anarchist's Workbench.\"|r"
+],
+"273131": [
+"|cff1eff00Bottled Screams|r",
+"Crafting Reagent",
+"|cffffd100\"The bottled screams of a chorus of banshees, sufficient to power the Baroness's mysterious Loom.\"|r"
+],
 "273141": [
 "|cff1eff00Blueprint: Fishing Rack|r",
 " ",
@@ -2550,6 +2336,17 @@
 "Use: Teaches you how to place a Fishing Rack at a campsite.",
 "Craft a Fishing Rack.",
 "Requires Fishing (140)"
+],
+"273883": [
+"|cffffffffCa'zass's Head|r",
+"Quest Item",
+"Unique"
+],
+"274029": [
+"|cffffffffOrnate Shackle Key|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"The Questioner had a variety of keys on his person, but this one is particularly ornate.\"|r"
 ],
 "274286": [
 "|cffffffffDurgen Dirgehammer's Head|r",
@@ -2567,6 +2364,17 @@
 "275443": [
 "|cffffffffHighly Toxic Strain|r",
 "Quest Item"
+],
+"276890": [
+"|cffffffffZarla's Journal|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"The text in this journal is written in a jagged draconic script.\"|r"
+],
+"276893": [
+"|cffffffffBlackmaw Ritual Totem|r",
+"Quest Item",
+"Unique"
 ],
 "277129": [
 "|cffffffffFragment of the Firelands|r",
