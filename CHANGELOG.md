@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Uldaman opens on the right level when you walk in. Its entrance hall is called the Hall of the Keepers, the same name as the map's second level, so the map jumped to Archaedas's level.
+
 ## 1.2.0
 
 - The five new dungeons are in: The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace. They have no map yet, so their page shows a "Work in progress" notice, with the bosses (and their loot) listed in the corner and the dungeon's quests in the tab beside it. They're in the minimap list and their zone's Dungeons menu, and their page opens by itself when you open the map inside.

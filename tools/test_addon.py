@@ -718,6 +718,13 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:OpenDungeonMap("gnomer")
         check("the dungeon's own name isn't taken for a level", ns:CurrentDungeonFloor() == thermaplugg[1])
         ns:CloseDungeonMap(true)
+        -- Uldaman: the entrance hall shares its name with the second level, but is on the first.
+        subzone = "Hall of the Keepers"
+        GetInstanceInfo = function() return "Uldaman", "party", 1, "Normal", 5, 0, false, 70 end
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        ns:OpenDungeonMap("ulda")
+        check("Uldaman's entrance hall opens the first level", ns:CurrentDungeonFloor() == 1)
+        ns:CloseDungeonMap(true)
         -- Deadmines: Ironclad Cove is on the second map.
         GetInstanceInfo = function() return "The Deadmines", "party", 1, "Normal", 5, 0, false, 36 end
         runEvent(nil, "PLAYER_ENTERING_WORLD")
