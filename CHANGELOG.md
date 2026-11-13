@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.1
 
 - Uldaman's two levels had the wrong names, so the map opened on Archaedas's level when you walked in. They're now Hall of the Keepers (where you come in) and Khaz'Goroth's Seat (Archaedas).
 
