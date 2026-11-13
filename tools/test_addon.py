@@ -718,7 +718,7 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:OpenDungeonMap("gnomer")
         check("the dungeon's own name isn't taken for a level", ns:CurrentDungeonFloor() == thermaplugg[1])
         ns:CloseDungeonMap(true)
-        -- Uldaman: the entrance hall shares its name with the second level, but is on the first.
+        -- Uldaman: you come in on the Hall of the Keepers, the first level.
         subzone = "Hall of the Keepers"
         GetInstanceInfo = function() return "Uldaman", "party", 1, "Normal", 5, 0, false, 70 end
         runEvent(nil, "PLAYER_ENTERING_WORLD")

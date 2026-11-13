@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Uldaman opens on the right level when you walk in. Its entrance hall is called the Hall of the Keepers, the same name as the map's second level, so the map jumped to Archaedas's level.
+- Uldaman's two levels had the wrong names, so the map opened on Archaedas's level when you walked in. They're now Hall of the Keepers (where you come in) and Khaz'Goroth's Seat (Archaedas).
 
 ## 1.2.0
 

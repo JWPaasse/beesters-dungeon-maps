@@ -24,7 +24,7 @@ local SKULL_FALLBACK = "Interface\\TargetingFrame\\UI-TargetingFrame-Skull"
 local FLOOR_NAMES = {
     sm = { "Graveyard", "Library", "Armory", "Cathedral" },
     strat = { "Main Gate", "Service Gate" },
-    ulda = { "Uldaman", "Hall of the Keepers" },
+    ulda = { "Hall of the Keepers", "Khaz'Goroth's Seat" },
     mara = { "Caverns of Maraudon", "Zaetar's Grave" },
 }
 
@@ -133,8 +133,6 @@ local SUBZONE_FLOORS = {
         ["The Crimson Throne"] = 1,
         ["Elders' Square"] = 2, ["The Gauntlet"] = 2, ["Slaughter Square"] = 2, ["The Slaughter House"] = 2,
     },
-    -- The entrance hall is called the Hall of the Keepers, like the name of the second map
-    -- level (Archaedas's), but it's on the first.
     ulda = { ["Hall of the Keepers"] = 1 },
     -- Learned in game: the wings' halls (Library, Armory, Cathedral).
     sm = { ["Athenaeum"] = 2, ["Hall of Champions"] = 3, ["Crusader's Chapel"] = 4 },
