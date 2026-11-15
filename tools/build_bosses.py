@@ -60,6 +60,7 @@ JOURNAL_KEYS = {
     "blackrock-depths": "brd", "dire-maul-east": "dme", "dire-maul-west": "dmw", "dire-maul-north": "dmn",
     "scholomance": "scholo", "lower-blackrock-spire": "brs", "upper-blackrock-spire": "brs",
     "stratholme-live": "strat", "stratholme-undead": "strat",
+    "kroldok-stronghold": "kroldok",
 }
 
 

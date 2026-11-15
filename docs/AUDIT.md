@@ -17,7 +17,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Excavation Site: Wetlands | 3/3 | 0/3 | 0 | 9 | 9 |
 | Gnomeregan | 6/6 | 0/6 | 0 | 24 | 4 |
 | Hall of Thanes | 4/4 | 0/4 | 0 | 12 | 12 |
-| Krol'dok Stronghold | 0/5 | 0/5 | 2 | 11 | 9 |
+| Krol'dok Stronghold | 4/6 | 0/6 | 2 | 14 | 12 |
 | Maraudon | 9/9 | 0/9 | 0 | 29 | 1 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
 | Ragefire Chasm | 4/4 | 0/4 | 0 | 15 | 6 |
@@ -35,7 +35,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 194/242 | 0/242 | 13 | 1204 | 212 |
+| **All** | 198/243 | 0/243 | 13 | 1207 | 215 |
 
 ## Alcaz Prison
 
@@ -198,10 +198,11 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Slavecrusher Grox | **no** | — |  | 0 (+4 unknown) | 3 |
-| Twilight Commander Zarmok | **no** | — |  | 0 (+3 unknown) | 3 |
-| Handler Ashka | **no** | — |  | 0 | 0 |
-| Nar'gurk | **no** | — |  | 0 (+4 unknown) | 3 |
+| Slavecrusher Grox | yes | placed in game |  | 0 (+4 unknown) | 3 |
+| Twilight Commander Zarmok | yes | placed in game |  | 0 (+3 unknown) | 3 |
+| Handler Ashka | yes | placed in game |  | 0 | 0 |
+| Nar'gurk | yes | placed in game |  | 0 (+4 unknown) | 3 |
+| Bossman Toof | **no** | — |  | 0 (+3 unknown) | 3 |
 | Overseer Mugg | **no** | — |  | 0 | 0 |
 
 ## Maraudon

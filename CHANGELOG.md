@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Krol'dok Stronghold: Bossman Toof added to its bosses, and Slavecrusher Grox, Twilight Commander Zarmok, Handler Ashka and Nar'gurk have their place on the new map.
 - Maps for The Drowned City (two levels: The Drowned City and Atal'byzal), Krol'dok Stronghold, Alcaz Prison (two levels: Main Unit and Maximum Security Unit), Shaper's Terrace and Blackmaw Hold, by Santiago Reyes. Their bosses don't have a place on them yet: shift-drag them from the list in the corner. Blackmaw Hold has six levels: Blackmaw Hold, Festering Grotto and the Depths of the Fallen Grove, the Elders, the Burrow and Forbidden Magic.
 - Krol'dok Stronghold lists Krol'dok Moulding (both factions) and its follow-up Key Ingredients. The quest starts from an item that drops inside, so its text never names the dungeon.
 - A quest chain's round icon shows just the step you're on ("12"); "12/16" didn't fit and ran over the icon. The line under the quest still says "step 12 of 16".
