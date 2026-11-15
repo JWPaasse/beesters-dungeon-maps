@@ -754,7 +754,7 @@ local function AddQuestRow(y, entry, kind)
     if kind == "log" and entry.chain then
         t.Bang:SetAtlas("UI-QuestPoi-QuestNumber")
         t.Bang:Show()
-        t.Badge:SetText(("%d/%d"):format(entry.step or 1, #entry.steps))
+        t.Badge:SetText(entry.step or 1) -- the step you're on; "step 12 of 16" is on the line below
     elseif kind == "log" and t.POI then
         t.POI:SetQuestID(entry.id)
         if t.POI.SetStyle and POIButtonUtil then
@@ -768,7 +768,7 @@ local function AddQuestRow(y, entry, kind)
             t.Bang:SetAtlas("UI-QuestPoi-QuestNumber")
             t.Bang:Show()
             if started then
-                t.Badge:SetText(("%d/%d"):format(entry.step, #entry.steps))
+                t.Badge:SetText(entry.step)
             else
                 t.BangMark:SetAtlas("QuestNormal")
                 t.BangMark:Show()

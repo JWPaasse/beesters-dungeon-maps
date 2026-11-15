@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Krol'dok Stronghold lists Krol'dok Moulding (both factions) and its follow-up Key Ingredients. The quest starts from an item that drops inside, so its text never names the dungeon.
+- A quest chain's round icon shows just the step you're on ("12"); "12/16" didn't fit and ran over the icon. The line under the quest still says "step 12 of 16".
+
 ## 1.2.2
 
 - Boss loot no longer lists the zone's common drops: items that ordinary creatures in the dungeon drop as well, like the OOX-17/TN Distress Beacon in Zul'Farrak, the Gordok Shackle Key in Dire Maul, Corruptor's Scourgestones and Demonic Runes. Shriveled Heart in Zul'Farrak too, which a dozen of its trolls drop.

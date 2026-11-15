@@ -141,6 +141,7 @@ def find_new_dungeon_quests(quests_lua, npcs_lua, curated):
             continue
         words = [w.lower() for w in rule.get("words", [])]
         core = {q for q, i in info.items() if any(w in i["text"].lower() for w in words)}
+        core |= {q for q in rule.get("quests", []) if q in info}
         found[info_key["key"]] = sorted(core)
         # Walk the chains both ways from the dungeon's quests.
         seen, todo = set(core), list(core)

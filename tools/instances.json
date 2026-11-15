@@ -257,6 +257,10 @@
           "Handler Ashka",
           "Nar'gurk",
           "Overseer Mugg"
+        ],
+        "quests": [
+          94973,
+          94980
         ]
       },
       "entrance": [
@@ -377,6 +381,6 @@
     }
   ],
   "_comingSoon": "Instances WoW Forever has that the addon has no data for yet (not in QuestieDB). Listed greyed out as 'coming soon' in the Dungeons menu of their zone; dropped automatically once QuestieDB has them.",
-  "_findQuests": "findQuests: for new dungeons QuestieDB doesn't file quests under yet. A quest belongs to the dungeon when its objective names the dungeon or one of its bosses (words), or QuestieDB files it under one of the areas. Chains are linked only where QuestieDB shows it: the next quest starts at the NPC where the previous one ends (after travelling there), or says 'Return to <NPC>' for the previous quest's NPC; within a few quest IDs, same faction.",
+  "_findQuests": "findQuests: for new dungeons QuestieDB doesn't file quests under yet. A quest belongs to the dungeon when its objective names the dungeon or one of its bosses (words), or QuestieDB files it under one of the areas. Chains are linked only where QuestieDB shows it: the next quest starts at the NPC where the previous one ends (after travelling there), or says 'Return to <NPC>' for the previous quest's NPC; within a few quest IDs, same faction. quests: quests of the dungeon that QuestieDB has but whose text doesn't say so (Krol'dok Moulding starts from an item that drops inside).",
   "_entrance": "entrance: [[uiMapID, x, y]] (0-100) for dungeons QuestieDB has no entrance for yet, read off the map in game (12 Nov 2026). QuestieDB's entrance wins once it has one."
 }
