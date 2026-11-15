@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.0
 
 - Bosses without a picture yet get the same ring as the others, round a dark disc with the boss skull, so every pin looks alike.
 - Target a boss that has no picture yet and the addon notes its model, so its pin shows its portrait from then on. Mostly the bosses new in Forever: the game doesn't have their pictures in its files.
