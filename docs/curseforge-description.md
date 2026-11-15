@@ -37,14 +37,15 @@ The aim from day one: nothing in this addon should look like an addon. Every par
 - Switch between Horde and Alliance quests.
 
 **The new Forever dungeons**
-- The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace are in, with their entrances, bosses, loot and quests. There's no map of them yet, so their page shows a "Work in progress" notice where the map will go.
+- The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace are in, with their entrances, maps, bosses, loot and quests. Blackmaw Hold's map is still to come; until then its page shows a "Work in progress" notice where the map will go.
 
 **Tooltips that don't get stuck**
 - If the game hasn't loaded an item yet, you see the addon's copy of its tooltip instead of "Retrieving item information".
 
 ## Still in progress
 
-- **Maps of the newest dungeons:** they'll be added as soon as they exist.
+- **Blackmaw Hold's map:** it'll be added as soon as it exists.
+- **Boss positions in the newest dungeons:** most still need placing on their new maps.
 - **Quest data of the newest dungeons:** some quest givers and chains are still missing, and fill in as QuestieDB adds them.
 - **Raids:** Barrow Deeps and Hyjal Summit follow after they open on 9 December.
 - **Incomplete data:** a dungeon still missing a map, a boss position or loot shows a "Work in progress" tag. Hover it to see what's missing.

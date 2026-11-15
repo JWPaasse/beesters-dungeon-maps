@@ -28,10 +28,14 @@ ns.DungeonMaps = {
     ["dme"] = { floors = { { tiles = {449556,449560,449561,449562,449563,449564,449565,449566,449567,449557,449558,449559} }, { tiles = {449568,449572,449573,449574,449575,449576,449577,449578,449579,449569,449570,449571} } } },
     ["dmn"] = { floors = { { tiles = {449508,449512,449513,449514,449515,449516,449517,449518,449519,449509,449510,449511} } } },
     ["dmw"] = { floors = { { tiles = {449520,449524,449525,449526,449527,449528,449529,449530,449531,449521,449522,449523} }, { tiles = {449532,449536,449537,449538,449539,449540,449541,449542,449543,449533,449534,449535} }, { tiles = {449544,449548,449549,449550,449551,449552,449553,449554,449555,449545,449546,449547} } } },
+    ["alcaz"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\alcaz1", name = "Main Unit" }, { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\alcaz2", name = "Maximum Security Unit" } }, artist = "Santiago Reyes" },
     ["dal"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\dal1", name = "City of Dalaran" }, { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\dal2", name = "The Underbelly" } }, artist = "Santiago Reyes" },
+    ["drowned"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\drowned1", name = "The Drowned City" }, { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\drowned2", name = "Atal'byzal" } }, artist = "Santiago Reyes" },
     ["exc"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\exc1", name = "Excavation Site: Wetlands" } }, artist = "Santiago Reyes" },
     ["hot"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\hot1", name = "Hall of Thanes" } }, artist = "Santiago Reyes" },
+    ["kroldok"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\kroldok1", name = "Krol'dok Stronghold" } }, artist = "Santiago Reyes" },
     ["rol"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\rol1", name = "Ruins of Lordaeron" } }, artist = "Santiago Reyes" },
+    ["shaper"] = { floors = { { texture = "Interface\\AddOns\\BeestersDungeonMaps\\Media\\Maps\\shaper1", name = "Shaper's Terrace" } }, artist = "Santiago Reyes" },
 }
 
 -- [instanceKey] = { { floor, x, y, encounterID, name }, ... }

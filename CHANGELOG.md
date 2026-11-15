@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Maps for The Drowned City (two levels: The Drowned City and Atal'byzal), Krol'dok Stronghold, Alcaz Prison (two levels: Main Unit and Maximum Security Unit) and Shaper's Terrace, by Santiago Reyes. Their bosses don't have a place on them yet: shift-drag them from the list in the corner. Blackmaw Hold's map is still to come.
 - Krol'dok Stronghold lists Krol'dok Moulding (both factions) and its follow-up Key Ingredients. The quest starts from an item that drops inside, so its text never names the dungeon.
 - A quest chain's round icon shows just the step you're on ("12"); "12/16" didn't fit and ran over the icon. The line under the quest still says "step 12 of 16".
 

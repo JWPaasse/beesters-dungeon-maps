@@ -38,6 +38,10 @@ SANTIAGO = {
     "rol": ["Ruins of Lordaeron"],
     "exc": ["Excavation Site: Wetlands"],
     "dal": ["City of Dalaran", "The Underbelly"],
+    "drowned": ["The Drowned City", "Atal'byzal"],
+    "kroldok": ["Krol'dok Stronghold"],
+    "alcaz": ["Main Unit", "Maximum Security Unit"],
+    "shaper": ["Shaper's Terrace"],
 }
 
 
