@@ -39,7 +39,8 @@ ns.Bosses = {
     ["zf"] = { {595,"Antu'sul",8127,""}, {596,"Theka the Martyr",7272,""}, {597,"Witch Doctor Zum'rah",7271,""}, {598,"Nekrum Gutchewer & Shadowpriest Sezz'ziz",7796,""}, {0,"Sergeant Bly",7604,""}, {593,"Hydromancer Velratha",7795,""}, {600,"Chief Ukorz Sandscalp",7267,""}, {594,"Gahz'rilla",7273,""}, {0,"Zerillis",10082,"Rare"} },
 }
 
--- [npcID] = creature display ID, for the boss's picture (CMaNGOS Classic-DB, GPL-3.0)
+-- [npcID] = creature display ID, for the boss's picture (CMaNGOS Classic-DB, GPL-3.0;
+-- bosses new in WoW Forever: noted in game, tools/learned_models.json)
 ns.BossModels = {
     [639] = 2029,
     [643] = 7125,
