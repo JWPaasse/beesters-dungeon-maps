@@ -235,7 +235,7 @@
   [
    "kroldok|1",
    0,
-   "Handler Ashka",
+   "War Handler Ashka",
    0.634,
    0.52
   ],
@@ -245,6 +245,20 @@
    "Slavecrusher Grox",
    0.328,
    0.691
+  ],
+  [
+   "kroldok|1",
+   0,
+   "Overlord Mugg",
+   0.687,
+   0.174
+  ],
+  [
+   "kroldok|1",
+   0,
+   "Bossman Toof",
+   0.619,
+   0.427
   ]
  ]
 }
