@@ -358,11 +358,15 @@ def main():
         ns:CloseDungeonMap(true); ns:OpenDungeonMap("wc")
         for _, b in ipairs(view.BossButtons) do if b:IsShown() and b.boss.name == "Mutanus the Devourer" then mutanus = b end end
         check("boss pins show the boss's portrait in a ring", pinPortrait == ns.BossModels[mutanus.boss.npcID])
-        mutanus.scripts.OnEnter(mutanus)
-        check("hovering a boss shows its portrait", portraitID == ns.BossModels[mutanus.boss.npcID])
-        check("the portrait doesn't use GameTooltip_InsertFrame (secret values inside dungeons)", inserted == nil)
         -- Fake loot covering every kind, to check the grouping and order.
         ns.BossLoot[mutanus.boss.npcID] = { 15, 22, 13, 30, 34, 38, 27, 42, 43, 150 }
+        panel:Hide()
+        mutanus.scripts.OnEnter(mutanus)
+        local preview = BeestersDungeonMapsLootPreview
+        check("hovering a boss shows its loot window, saying a click keeps it open",
+            preview and preview:IsShown() and preview.Hint:IsShown() and not panel:IsShown())
+        mutanus.scripts.OnLeave(mutanus)
+        check("leaving the boss hides that window again", not preview:IsShown())
         panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
         local order = {}
         for _, e in ipairs(panel.shown) do table.insert(order, e[1] .. ":" .. e[2]) end
