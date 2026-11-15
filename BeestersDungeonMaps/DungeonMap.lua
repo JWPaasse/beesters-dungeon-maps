@@ -805,12 +805,17 @@ local function UpdateBossPin(button)
     if portrait then SetPortraitTextureFromCreatureDisplayID(button.Portrait, displayID) end
     button.Portrait:SetShown(portrait)
     button.Ring:SetShown(portrait)
+    -- Rare bosses get a silver ring, like the silver dragon round a rare's portrait in the game.
+    local rare = boss and boss.note == "Rare"
+    button.Ring:SetDesaturated(rare)
+    if rare then button.Ring:SetVertexColor(0.9, 0.92, 1) else button.Ring:SetVertexColor(1, 1, 1) end
     button.BadgeBack:SetShown(portrait)
     button.Badge:SetShown(portrait)
     button.Icon:SetShown(not portrait)
     button.Highlight:ClearAllPoints()
     if portrait then
         button.Highlight:SetTexture(GOLD_RING)
+        button.Highlight:SetDesaturated(rare)
         button.Highlight:SetSize(RING_SIZE, RING_SIZE)
         button.Highlight:SetPoint("CENTER")
     else
