@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Boss loot no longer lists the zone's common drops: items that ordinary creatures in the dungeon drop as well, like the OOX-17/TN Distress Beacon in Zul'Farrak, the Gordok Shackle Key in Dire Maul, Corruptor's Scourgestones and Demonic Runes. Weapons and armour stay, so dungeon set pieces that trash also drops are still listed.
+- Boss loot no longer lists the zone's common drops: items that ordinary creatures in the dungeon drop as well, like the OOX-17/TN Distress Beacon in Zul'Farrak, the Gordok Shackle Key in Dire Maul, Corruptor's Scourgestones and Demonic Runes. Shriveled Heart in Zul'Farrak too, which a dozen of its trolls drop.
 - Boss loot looks like the Dungeon Journal's loot list: a bigger icon with its quality border, the name in its quality colour, and what kind of item it is underneath ("Legs, Cloth", "Staff", "One-Hand, Sword").
 - Hovering a boss opens its loot list, and it stays open while you move the mouse onto it, so you can hover the items and shift-click them into chat. It closes by itself a moment after you move away; no more clicking to keep it open.
 - Rare bosses have a silver ring round their portrait on the map instead of a gold one, like the silver dragon the game puts round a rare's portrait.

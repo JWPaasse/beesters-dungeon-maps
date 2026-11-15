@@ -31,7 +31,6 @@ DIFFICULTIES = {0, 1}          # normal; 198/201/215 are Season of Discovery ver
 LOOT_CLASSES = {2, 4, 9, 12, 15}  # weapons, armour, recipes, quest items, miscellaneous
 WORLD_DROP_LIMIT = 20          # dropped by more creatures than this = a world drop, not boss loot
 COMMON_DROP_LIMIT = 3          # dropped by this many ordinary creatures = the zone's common drop
-EQUIPMENT_CLASSES = {2, 4}     # weapons, armour
 N_NAME, N_RANK, N_SPAWNS = 1, 6, 7
 I_NPC_DROPS, I_CLASS = 2, 12
 
@@ -133,13 +132,10 @@ def boss_lines(bosses):
 def common_drops(items, bosses, boss_like):
     """Items QuestieDB has dropping from several ordinary creatures (not bosses, rares or a boss's
     adds): the zone's common drops, like the OOX-17/TN Distress Beacon every Zul'Farrak troll can
-    drop. The Classic database lists them in each boss's own loot table too; they aren't boss loot.
-    Weapons and armour stay: a dungeon's set pieces drop from its trash as well."""
+    drop. The Classic database lists them in each boss's own loot table too; they aren't boss loot."""
     boss_npcs = {nid for entries in bosses.values() for _, _, nid, *_ in entries if nid}
     common = set()
     for iid, entity in items.items():
-        if entity[I_CLASS] in EQUIPMENT_CLASSES:
-            continue  # dungeon set pieces drop from trash too, and are still worth listing
         others = set(ids(to_py(entity[I_NPC_DROPS]))) - boss_npcs - boss_like
         if len(others) >= COMMON_DROP_LIMIT:
             common.add(iid)
