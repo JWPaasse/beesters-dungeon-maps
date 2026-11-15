@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.2
 
 - Boss loot no longer lists the zone's common drops: items that ordinary creatures in the dungeon drop as well, like the OOX-17/TN Distress Beacon in Zul'Farrak, the Gordok Shackle Key in Dire Maul, Corruptor's Scourgestones and Demonic Runes. Shriveled Heart in Zul'Farrak too, which a dozen of its trolls drop.
 - Boss loot looks like the Dungeon Journal's loot list: a bigger icon with its quality border, the name in its quality colour, and what kind of item it is underneath ("Legs, Cloth", "Staff", "One-Hand, Sword").
