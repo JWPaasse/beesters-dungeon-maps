@@ -317,6 +317,10 @@ def main():
             end
         end
         check("clicking a boss opens its loot", panel:IsShown() and rows > 0)
+        -- Each loot row says what kind of item it is, like the Dungeon Journal ("Legs, Cloth").
+        INVTYPE_HEAD, INVTYPE_WEAPON, INVTYPE_TRINKET = "Head", "One-Hand", "Trinket"
+        check("loot says what kind of item it is", ns.ItemTypeText(1003) == "Head, Cloth" and ns.ItemTypeText(1001) == "One-Hand, Swords"
+            and ns.ItemTypeText(1002) == "Trinket" and ns.ItemTypeText(1004) == nil)
         check("loot shows only Uncommon or better", not lowQuality)
         ns:OpenDungeonMap("scholo")
         check("Scholomance opens on a floor with bosses, not its empty entrance level", ns:CurrentDungeonFloor() ~= 1)

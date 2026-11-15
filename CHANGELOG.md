@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Boss loot looks like the Dungeon Journal's loot list: a bigger icon with its quality border, the name in its quality colour, and what kind of item it is underneath ("Legs, Cloth", "Staff", "One-Hand, Sword"). The loot in the boss's tooltip shows the kind of item on the right.
 - Rare bosses have a silver ring round their portrait on the map instead of a gold one, like the silver dragon the game puts round a rare's portrait.
 - Zul'Farrak: Sergeant Bly and Zerillis now have their place on the map.
 - Uldaman turns to the right level in more places (Map Chamber, Temple Hall, The Stone Vault, Echomok Cavern, Dig Two and Dig Three on the first level; Khaz'goroth's Seat on the second).

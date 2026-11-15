@@ -335,6 +335,34 @@ local SECTIONS = {
     { key = "other", title = "Other" },
 }
 
+-- What kind of item it is, the way the Dungeon Journal's loot list says it: "Legs, Cloth",
+-- "Staff", "One-Hand, Sword", "Finger". Known without asking the server. Nil for recipes
+-- (their profession is the heading above them) and plain trade goods.
+local NO_ARMOR_TYPE = { INVTYPE_CLOAK = true, INVTYPE_NECK = true, INVTYPE_FINGER = true, INVTYPE_TRINKET = true,
+    INVTYPE_HOLDABLE = true, INVTYPE_BODY = true, INVTYPE_TABARD = true, INVTYPE_RELIC = true }
+local SLOT_ONLY_WEAPONS = { INVTYPE_2HWEAPON = true, INVTYPE_RANGED = true, INVTYPE_RANGEDRIGHT = true,
+    INVTYPE_THROWN = true }
+local function ItemTypeText(itemID)
+    local getInstant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
+    if not getInstant then return nil end
+    local _, itemType, subType, equipLoc, _, classID = getInstant(itemID)
+    local slot = type(equipLoc) == "string" and equipLoc ~= "" and _G[equipLoc] or nil
+    subType = type(subType) == "string" and subType ~= "" and subType or nil
+    if classID == 2 then -- weapons: a staff says "Staff", a sword "One-Hand, Sword"
+        if not slot or SLOT_ONLY_WEAPONS[equipLoc] then return subType end
+        return subType and (slot .. ", " .. subType) or slot
+    elseif classID == 4 then -- armour: "Legs, Cloth"; rings, necks, cloaks just their slot
+        if slot and subType and not NO_ARMOR_TYPE[equipLoc] and subType ~= (MISCELLANEOUS or "Miscellaneous") then
+            return slot .. ", " .. subType
+        end
+        return slot or subType
+    elseif classID == RECIPE_CLASS then
+        return nil
+    end
+    return subType or itemType
+end
+ns.ItemTypeText = ItemTypeText -- used by tools/test_addon.py
+
 local function ItemKind(itemID)
     local getInstant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
     if not getInstant then return "other" end
@@ -466,8 +494,9 @@ local function ShowBossTooltip(owner, boss, total)
         end, function(item)
             any = true
             local color = item.loading and GRAY_FONT_COLOR or (ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality])
-            GameTooltip:AddLine(("|T%s:16|t %s"):format(item.icon or 134400, item.name),
-                color and color.r or 1, color and color.g or 1, color and color.b or 1)
+            -- What kind of item, on the right: "Legs, Cloth", "Staff".
+            GameTooltip:AddDoubleLine(("|T%s:16|t %s"):format(item.icon or 134400, item.name), ItemTypeText(item.id) or "",
+                color and color.r or 1, color and color.g or 1, color and color.b or 1, 0.75, 0.75, 0.75)
         end)
         if waiting and not any then
             GameTooltip:AddLine(SEARCH_LOADING_TEXT or "Loading...", 0.6, 0.6, 0.6)
@@ -536,18 +565,29 @@ ShowItemTooltip = function(owner, itemID)
     GameTooltip:Show()
 end
 
+
 local function AcquireRow(panel, index)
     local row = panel.Rows[index]
     if row then return row end
+    -- Laid out like a loot entry in the Dungeon Journal: icon, name in its quality's colour,
+    -- what kind of item it is underneath.
     row = CreateFrame("Button", nil, panel)
-    row:SetSize(230, 22)
+    row:SetSize(230, 34)
     row.Icon = row:CreateTexture(nil, "ARTWORK")
-    row.Icon:SetSize(20, 20)
-    row.Icon:SetPoint("LEFT")
-    row.Name = row:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-    row.Name:SetPoint("LEFT", row.Icon, "RIGHT", 6, 0)
+    row.Icon:SetSize(30, 30)
+    row.Icon:SetPoint("LEFT", 1, 0)
+    row.Border = row:CreateTexture(nil, "OVERLAY")
+    row.Border:SetTexture("Interface\\Common\\WhiteIconFrame")
+    row.Border:SetAllPoints(row.Icon)
+    row.Name = row:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+    row.Name:SetPoint("TOPLEFT", row.Icon, "TOPRIGHT", 7, -1)
     row.Name:SetPoint("RIGHT")
     row.Name:SetJustifyH("LEFT")
+    row.Name:SetWordWrap(false)
+    row.Kind = row:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+    row.Kind:SetPoint("TOPLEFT", row.Name, "BOTTOMLEFT", 0, -2)
+    row.Kind:SetPoint("RIGHT")
+    row.Kind:SetJustifyH("LEFT")
     row:SetHighlightTexture("Interface\\QuestFrame\\UI-QuestTitleHighlight", "ADD")
     row:SetScript("OnEnter", function(self) ShowItemTooltip(self, self.itemID) end)
     row:SetScript("OnLeave", function(self) ns:HideItemTooltip(self) end)
@@ -596,10 +636,18 @@ local function RefreshLootPanel()
         row.Name:SetText(item.name)
         local color = item.loading and GRAY_FONT_COLOR or (ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality])
         if color then row.Name:SetTextColor(color.r, color.g, color.b) else row.Name:SetTextColor(1, 1, 1) end
+        local kind = ItemTypeText(item.id)
+        row.Kind:SetText(kind or "")
+        row.Kind:SetShown(kind ~= nil)
+        -- The name sits in the middle when there's no second line.
+        row.Name:ClearAllPoints()
+        row.Name:SetPoint(kind and "TOPLEFT" or "LEFT", row.Icon, kind and "TOPRIGHT" or "RIGHT", 7, kind and -1 or 0)
+        row.Name:SetPoint("RIGHT")
+        if color and not item.loading then row.Border:SetVertexColor(color.r, color.g, color.b) else row.Border:SetVertexColor(0.5, 0.5, 0.5) end
         row:ClearAllPoints()
         row:SetPoint("TOPLEFT", 12, -y)
         row:Show()
-        y = y + 22
+        y = y + 36
     end)
     for i = rowIndex + 1, #panel.Rows do panel.Rows[i]:Hide() end
     for i = headerIndex + 1, #panel.Headers do panel.Headers[i]:Hide() end
