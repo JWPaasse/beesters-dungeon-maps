@@ -1008,6 +1008,7 @@ ns.LootTooltips = {
     [252824] = {"|cff0070ddPattern: Stormrider's Leather Kilt|r","Binds when picked up"," ","|cff0070ddStormrider's Leather Kilt|r","Binds when picked up","Legs\tLeather","90 Armor","+7 Strength","+7 Intellect","+6 Stamina","+11 Spirit","Requires Level 25","Use: Teaches you how to craft Stormrider's Leather Kilt.","Requires Leatherworking (125)"},
     [252825] = {"|cff0070ddPattern: Wisdom's Leather Leggings|r","Binds when picked up"," ","|cff0070ddWisdom's Leather Leggings|r","Binds when picked up","Legs\tLeather","90 Armor","+7 Intellect","+6 Stamina","+7 Spirit","Requires Level 25","|cff1eff00Equip: Increases healing done by up to 21 and damage done by up to 7 for all magical spells and effects.|r","Use: Teaches you how to craft Wisdom's Leather Leggings.","Requires Leatherworking (125)"},
     [263992] = {"|cffffffffOverseer's Keyring|r","Binds when picked up","Unique"},
+    [267086] = {"|cffffffffEye of Mugg|r","Quest Item","Unique","|cffffd100\"Squishy.\"|r"},
     [267104] = {"|cffffffffTome of Twilight|r","Quest Item","Unique"},
     [268518] = {"|cffffffffHead of the Baron|r","Quest Item"},
     [270865] = {"|cffffffffTitan Relic|r","Binds when picked up","Unique","This Item Begins a Quest","|cffffd100\"Fragmented remnants of the construct, refracting light like a kaleidoscope.\"|r"},
