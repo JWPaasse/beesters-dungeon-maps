@@ -24,7 +24,7 @@ local SKULL_FALLBACK = "Interface\\TargetingFrame\\UI-TargetingFrame-Skull"
 local FLOOR_NAMES = {
     sm = { "Graveyard", "Library", "Armory", "Cathedral" },
     strat = { "Main Gate", "Service Gate" },
-    ulda = { "Hall of the Keepers", "Khaz'Goroth's Seat" },
+    ulda = { "Hall of the Keepers", "Khaz'goroth's Seat" },
     mara = { "Caverns of Maraudon", "Zaetar's Grave" },
 }
 
@@ -133,7 +133,12 @@ local SUBZONE_FLOORS = {
         ["The Crimson Throne"] = 1,
         ["Elders' Square"] = 2, ["The Gauntlet"] = 2, ["Slaughter Square"] = 2, ["The Slaughter House"] = 2,
     },
-    ulda = { ["Hall of the Keepers"] = 1 },
+    -- Learned in game.
+    ulda = {
+        ["Hall of the Keepers"] = 1, ["Map Chamber"] = 1, ["Temple Hall"] = 1, ["The Stone Vault"] = 1,
+        ["Echomok Cavern"] = 1, ["Dig Two"] = 1, ["Dig Three"] = 1,
+        ["Khaz'goroth's Seat"] = 2,
+    },
     -- Learned in game: the wings' halls (Library, Armory, Cathedral).
     sm = { ["Athenaeum"] = 2, ["Hall of Champions"] = 3, ["Crusader's Chapel"] = 4 },
     -- Learned in game; the game writes "Engineering Labs" with a space after it.

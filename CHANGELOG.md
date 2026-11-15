@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Zul'Farrak: Sergeant Bly and Zerillis now have their place on the map.
+- Uldaman turns to the right level in more places (Map Chamber, Temple Hall, The Stone Vault, Echomok Cavern, Dig Two and Dig Three on the first level; Khaz'goroth's Seat on the second).
+
 ## 1.2.1
 
 - Uldaman's two levels had the wrong names, so the map opened on Archaedas's level when you walked in. They're now Hall of the Keepers (where you come in) and Khaz'Goroth's Seat (Archaedas).
