@@ -1,91 +1,15 @@
 {
 "_source": "WoW Forever client tables, build 1.60.1.70938 (via wago.tools)",
 "items": {
-"414": [
-"|cffffffffDalaran Sharp|r",
-"Requires Level 5",
-"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
-],
-"422": [
-"|cffffffffDwarven Mild|r",
-"Requires Level 15",
-"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
-],
-"730": [
-"|cffffffffMurloc Eye|r",
-"Crafting Reagent"
-],
-"765": [
-"|cffffffffSilverleaf|r",
-"Crafting Reagent"
-],
-"770": [
-"|cff9d9d9dPointy Crocolisk Tooth|r"
-],
-"785": [
-"|cffffffffMageroyal|r",
-"Crafting Reagent"
-],
-"858": [
-"|cffffffffLesser Healing Potion|r",
-"Requires Level 3",
-"|cff1eff00Use: Restores 140 to 180 health. (2 Min Cooldown)|r"
-],
-"929": [
-"|cffffffffHealing Potion|r",
-"Requires Level 12",
-"|cff1eff00Use: Restores 280 to 360 health. (2 Min Cooldown)|r"
-],
-"1015": [
-"|cffffffffLean Wolf Flank|r",
-"Crafting Reagent"
-],
-"1074": [
-"|cff9d9d9dHard Spider Leg Tip|r"
-],
-"1179": [
-"|cffffffffIce Cold Milk|r",
-"Requires Level 5",
-"|cff1eff00Use: Restores 437 mana over 21 sec. Must remain seated while drinking.|r"
-],
-"1205": [
-"|cffffffffMelon Juice|r",
-"Requires Level 15",
-"|cff1eff00Use: Restores 835 mana over 24 sec. Must remain seated while drinking.|r"
-],
-"1210": [
-"|cff1eff00Shadowgem|r",
-"Crafting Reagent"
-],
-"1468": [
-"|cffffffffMurloc Fin|r",
-"Crafting Reagent"
-],
 "1470": [
 "|cffffffffMurloc Skin Bag|r",
 "Unique",
 "10 Slot Bag"
 ],
-"1520": [
-"|cff9d9d9dTroll Sweat|r"
-],
-"1645": [
-"|cffffffffMoonberry Juice|r",
-"Requires Level 35",
-"|cff1eff00Use: Restores 1915 mana over 30 sec. Must remain seated while drinking.|r"
-],
 "1708": [
 "|cffffffffSweet Nectar|r",
 "Requires Level 25",
 "|cff1eff00Use: Restores 1345 mana over 27 sec. Must remain seated while drinking.|r"
-],
-"2287": [
-"|cffffffffHaunch of Meat|r",
-"Requires Level 5",
-"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
-],
-"2295": [
-"|cff9d9d9dLarge Boar Tusk|r"
 ],
 "2447": [
 "|cffffffffPeacebloom|r",
@@ -93,18 +17,6 @@
 ],
 "2449": [
 "|cffffffffEarthroot|r",
-"Crafting Reagent"
-],
-"2450": [
-"|cffffffffBriarthorn|r",
-"Crafting Reagent"
-],
-"2452": [
-"|cffffffffSwiftthistle|r",
-"Crafting Reagent"
-],
-"2453": [
-"|cffffffffBruiseweed|r",
 "Crafting Reagent"
 ],
 "2589": [
@@ -115,25 +27,6 @@
 "|cffffffffWool Cloth|r",
 "Crafting Reagent"
 ],
-"2608": [
-"|cff9d9d9dThreshadon Ambergris|r"
-],
-"2677": [
-"|cffffffffBoar Ribs|r",
-"Crafting Reagent"
-],
-"2770": [
-"|cffffffffCopper Ore|r",
-"Crafting Reagent"
-],
-"2771": [
-"|cffffffffTin Ore|r",
-"Crafting Reagent"
-],
-"2836": [
-"|cffffffffCoarse Stone|r",
-"Crafting Reagent"
-],
 "2874": [
 "|cffffffffAn Unsent Letter|r",
 "Binds when picked up",
@@ -142,30 +35,10 @@
 "Requires Level 16",
 "|cffffd100\"A letter found on Edwin VanCleef's person.\"|r"
 ],
-"2909": [
-"|cffffffffRed Wool Bandana|r",
-"Quest Item"
-],
 "2926": [
 "|cffffffffHead of Bazil Thredd|r",
 "Quest Item",
 "Unique"
-],
-"3010": [
-"|cff9d9d9dFine Sand|r"
-],
-"3172": [
-"|cffffffffBoar Intestines|r",
-"Crafting Reagent"
-],
-"3301": [
-"|cff9d9d9dSharp Canine|r"
-],
-"3402": [
-"|cff9d9d9dSoft Patch of Fur|r"
-],
-"3403": [
-"|cff9d9d9dIvory Boar Tusk|r"
 ],
 "3628": [
 "|cffffffffHand of Dextren Ward|r",
@@ -187,40 +60,12 @@
 "Quest Item",
 "Unique"
 ],
-"3712": [
-"|cffffffffTurtle Meat|r",
-"Crafting Reagent"
-],
-"3770": [
-"|cffffffffMutton Chop|r",
-"Requires Level 15",
-"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
-],
-"3771": [
-"|cffffffffWild Hog Shank|r",
-"Requires Level 25",
-"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
-],
 "3857": [
 "|cffffffffCoal|r",
 "Crafting Reagent"
 ],
-"3927": [
-"|cffffffffFine Aged Cheddar|r",
-"Requires Level 35",
-"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
-],
-"3928": [
-"|cffffffffSuperior Healing Potion|r",
-"Requires Level 35",
-"|cff1eff00Use: Restores 700 to 900 health. (2 Min Cooldown)|r"
-],
 "4306": [
 "|cffffffffSilk Cloth|r",
-"Crafting Reagent"
-],
-"4337": [
-"|cffffffffThick Spider's Silk|r",
 "Crafting Reagent"
 ],
 "4338": [
@@ -246,168 +91,18 @@
 "Use: Teaches you how to make a Discombobulator Ray.",
 "Requires Engineering (160)"
 ],
-"4415": [
-"|cff0070ddSchematic: Craftsman's Monocle|r",
-" ",
-"|cff1eff00Craftsman's Monocle|r",
-"Binds when equipped",
-"Head\tCloth",
-"40 Armor",
-"+15 Intellect",
-"Requires Level 32",
-"Requires Engineering (185)",
-"Use: Teaches you how to make a Craftsman's Monocle.",
-"Requires Engineering (185)"
-],
-"4460": [
-"|cff9d9d9dRipped Wing Webbing|r"
-],
-"4537": [
-"|cffffffffTel'Abim Banana|r",
-"Requires Level 5",
-"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
-],
-"4538": [
-"|cffffffffSnapvine Watermelon|r",
-"Requires Level 15",
-"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
-],
-"4539": [
-"|cffffffffGoldenbark Apple|r",
-"Requires Level 25",
-"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
-],
-"4541": [
-"|cffffffffFreshly Baked Bread|r",
-"Requires Level 5",
-"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
-],
-"4542": [
-"|cffffffffMoist Cornbread|r",
-"Requires Level 15",
-"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
-],
-"4552": [
-"|cff9d9d9dSmooth Stone Chip|r"
-],
-"4553": [
-"|cff9d9d9dJagged Piece of Stone|r"
-],
-"4554": [
-"|cff9d9d9dShiny Polished Stone|r"
-],
-"4555": [
-"|cff9d9d9dThick Scaly Tail|r"
-],
-"4556": [
-"|cff9d9d9dSpeckled Shell Fragment|r"
-],
-"4557": [
-"|cff9d9d9dFiery Gland|r"
-],
-"4583": [
-"|cff9d9d9dThick Furry Mane|r"
-],
-"4584": [
-"|cff9d9d9dLarge Trophy Paw|r"
-],
-"4585": [
-"|cff9d9d9dDripping Spider Mandible|r"
-],
 "4595": [
 "|cffffffffJunglevine Wine|r",
 "|cff1eff00Use: A strong alcoholic beverage.|r"
-],
-"4599": [
-"|cffffffffCured Ham Steak|r",
-"Requires Level 35",
-"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
-],
-"4601": [
-"|cffffffffSoft Banana Bread|r",
-"Requires Level 35",
-"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
-],
-"4603": [
-"|cffffffffRaw Spotted Yellowtail|r",
-"Crafting Reagent",
-"Requires Level 35",
-"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
-],
-"4605": [
-"|cffffffffRed-speckled Mushroom|r",
-"Requires Level 5",
-"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
-],
-"4606": [
-"|cffffffffSpongy Morel|r",
-"Requires Level 15",
-"|cff1eff00Use: Restores 531 health over 24 sec. Must remain seated while eating.|r"
-],
-"4607": [
-"|cffffffffDelicious Cave Mold|r",
-"Requires Level 25",
-"|cff1eff00Use: Restores 841 health over 27 sec. Must remain seated while eating.|r"
-],
-"4787": [
-"|cff9d9d9dBurning Pitch|r"
-],
-"4791": [
-"|cffffffffEnchanted Water|r",
-"Requires Level 25",
-"|cff1eff00Use: Restores 1345 mana over 27 sec. Must remain seated while drinking.|r"
 ],
 "4808": [
 "|cffffffffWell Stone|r",
 "Quest Item"
 ],
-"5120": [
-"|cff9d9d9dLong Tail Hair|r"
-],
-"5125": [
-"|cff9d9d9dCharged Scale|r"
-],
-"5128": [
-"|cff9d9d9dShed Lizard Skin|r"
-],
 "5442": [
 "|cffffffffHead of Arugal|r",
 "Quest Item",
 "Unique"
-],
-"5470": [
-"|cffffffffThunder Lizard Tail|r",
-"Crafting Reagent"
-],
-"5516": [
-"|cff9d9d9dThreshadon Fang|r",
-"One-Hand\tDagger",
-"5 - 10 Damage\tSpeed 1.50",
-"(5.0 damage per second)",
-"Requires Level 11"
-],
-"5523": [
-"|cffffffffSmall Barnacled Clam|r",
-"<Right Click to Open>"
-],
-"5524": [
-"|cffffffffThick-shelled Clam|r",
-"<Right Click to Open>"
-],
-"5569": [
-"|cff9d9d9dSeaweed|r"
-],
-"5635": [
-"|cffffffffSharp Claw|r",
-"Crafting Reagent"
-],
-"5637": [
-"|cffffffffLarge Fang|r",
-"Crafting Reagent"
-],
-"5784": [
-"|cffffffffSlimy Murloc Scale|r",
-"Crafting Reagent"
 ],
 "5792": [
 "|cffffffffRazorflank's Medallion|r",
@@ -419,73 +114,15 @@
 "Quest Item",
 "Unique"
 ],
-"5805": [
-"|cffffffffHeart of Zeal|r",
-"Quest Item"
-],
-"5825": [
-"|cffffffffTreshala's Pendant|r",
-"Quest Item",
-"Unique"
-],
-"5871": [
-"|cff9d9d9dLarge Hoof|r"
-],
 "5881": [
 "|cffffffffHead of Kelris|r",
 "Quest Item",
 "Unique"
 ],
-"5952": [
-"|cffffffffCorrupted Brain Stem|r",
-"Quest Item"
-],
-"6149": [
-"|cffffffffGreater Mana Potion|r",
-"Requires Level 31",
-"|cff1eff00Use: Restores 700 to 900 mana. (2 Min Cooldown)|r"
-],
-"6181": [
-"|cffffffffFetish of Hakkar|r",
-"Quest Item"
-],
 "6212": [
 "|cffffffffHead of Jammal'an|r",
 "Quest Item",
 "Unique"
-],
-"6289": [
-"|cffffffffRaw Longjaw Mud Snapper|r",
-"Crafting Reagent",
-"Requires Level 5",
-"|cff1eff00Use: Restores 59 health over 18 sec. Must remain seated while eating.|r"
-],
-"6308": [
-"|cffffffffRaw Bristle Whisker Catfish|r",
-"Crafting Reagent",
-"Requires Level 15",
-"|cff1eff00Use: Restores 234 health over 21 sec. Must remain seated while eating.|r"
-],
-"6361": [
-"|cffffffffRaw Rainbow Fin Albacore|r",
-"Crafting Reagent",
-"Requires Level 5",
-"|cff1eff00Use: Restores 59 health over 18 sec. Must remain seated while eating.|r"
-],
-"6443": [
-"|cffffffffDeviate Hide|r",
-"Quest Item"
-],
-"6444": [
-"|cff9d9d9dForked Tongue|r"
-],
-"6470": [
-"|cffffffffDeviate Scale|r",
-"Crafting Reagent"
-],
-"6471": [
-"|cffffffffPerfect Deviate Scale|r",
-"Crafting Reagent"
 ],
 "6530": [
 "|cffffffffNightcrawlers|r",
@@ -501,9 +138,6 @@
 "Use: Teaches you how to make a Flash Bomb.",
 "Requires Engineering (185)"
 ],
-"6826": [
-"|cff9d9d9dBrilliant Scale|r"
-],
 "6841": [
 "|cffffffffVial of Phlogiston|r",
 "Quest Item"
@@ -512,22 +146,6 @@
 "|cffffffffWorkshop Key|r",
 "Binds when picked up",
 "Unique"
-],
-"7070": [
-"|cffffffffElemental Water|r",
-"Crafting Reagent"
-],
-"7072": [
-"|cffffffffNaga Scale|r",
-"Crafting Reagent"
-],
-"7079": [
-"|cffffffffGlobe of Water|r",
-"Crafting Reagent"
-],
-"7080": [
-"|cff1eff00Essence of Water|r",
-"Crafting Reagent"
 ],
 "7192": [
 "|cff1eff00Schematic: Goblin Rocket Boots|r",
@@ -585,37 +203,9 @@
 "Use: Teaches you how to make a Gnomish Cloaking Device.",
 "Requires Engineering (200)"
 ],
-"7912": [
-"|cffffffffSolid Stone|r",
-"Crafting Reagent"
-],
-"7972": [
-"|cffffffffIchor of Undeath|r",
-"Crafting Reagent"
-],
-"7973": [
-"|cffffffffBig-mouth Clam|r",
-"<Right Click to Open>"
-],
 "8053": [
 "|cffffffffObsidian Power Source|r",
 "Quest Item"
-],
-"8146": [
-"|cffffffffWicked Claw|r",
-"Crafting Reagent"
-],
-"8150": [
-"|cffffffffDeeprock Salt|r",
-"Crafting Reagent"
-],
-"8151": [
-"|cffffffffFlask of Mojo|r",
-"Crafting Reagent"
-],
-"8152": [
-"|cffffffffFlask of Big Mojo|r",
-"Crafting Reagent"
 ],
 "8490": [
 "|cffffffffCat Carrier (Siamese)|r",
@@ -627,70 +217,17 @@
 "Quest Item",
 "Unique"
 ],
-"8623": [
-"|cff1eff00OOX-17/TN Distress Beacon|r",
-"Binds when picked up",
-"Unique",
-"This Item Begins a Quest",
-"Requires Level 43"
-],
 "8707": [
 "|cffffffffGahz'rilla's Electrified Scale|r",
 "Quest Item"
-],
-"8766": [
-"|cffffffffMorning Glory Dew|r",
-"Requires Level 45",
-"|cff1eff00Use: Restores 2821 mana over 30 sec. Must remain seated while drinking.|r"
-],
-"8932": [
-"|cffffffffAlterac Swiss|r",
-"Requires Level 45",
-"|cff1eff00Use: Restores 2065 health over 30 sec. Must remain seated while eating.|r"
-],
-"8948": [
-"|cffffffffDried King Bolete|r",
-"Requires Level 45",
-"|cff1eff00Use: Restores 2065 health over 30 sec. Must remain seated while eating.|r"
 ],
 "9234": [
 "|cffffffffTiara of the Deep|r",
 "Quest Item",
 "Unique"
 ],
-"9242": [
-"|cff9d9d9dAncient Tablet|r",
-"<Right Click to Read>"
-],
-"9299": [
-"|cffffffffThermaplugg's Safe Combination|r",
-"Quest Item",
-"Unique"
-],
-"9308": [
-"|cffffffffGrime-Encrusted Object|r",
-"|cffffd100\"Caked grime obscures the true identity of this object.\"|r"
-],
-"9309": [
-"|cffffffffRobo-mechanical Guts|r",
-"Quest Item"
-],
-"9327": [
-"|cff1eff00Security DELTA Data Access Card|r",
-"Unique",
-"Requires Engineering (1)"
-],
-"9451": [
-"|cffffffffBubbling Water|r",
-"Requires Level 15",
-"|cff1eff00Use: Restores 835 mana over 24 sec. Must remain seated while drinking.|r"
-],
 "9471": [
 "|cffffffffNekrum's Medallion|r",
-"Quest Item"
-],
-"9523": [
-"|cffffffffTroll Temper|r",
 "Quest Item"
 ],
 "9738": [
@@ -708,14 +245,6 @@
 "9741": [
 "|cffffffffGem of Serpentis|r",
 "Quest Item"
-],
-"10285": [
-"|cffffffffShadow Silk|r",
-"Crafting Reagent"
-],
-"10286": [
-"|cffffffffHeart of the Wild|r",
-"Crafting Reagent"
 ],
 "10420": [
 "|cffffffffSkull of the Coldbringer|r",
@@ -749,19 +278,11 @@
 "Unique",
 "|cffffd100\"Etched into the face of the hammer are the letters: F.F.F.\"|r"
 ],
-"11078": [
-"|cffffffffRelic Coffer Key|r",
-"|cff1eff00Use: Opens a Black Vault Relic Coffer Door.|r"
-],
 "11126": [
 "|cffffffffTablet of Kurniya|r",
 "Quest Item",
 "Unique",
 "|cffffd100\"Runes filled with liquid fire dance across the tablet.\"|r"
-],
-"11129": [
-"|cffffffffEssence of the Elements|r",
-"Quest Item"
 ],
 "11140": [
 "|cffffffffPrison Cell Key|r",
@@ -795,25 +316,6 @@
 "|cffffffffDark Iron Ore|r",
 "Crafting Reagent"
 ],
-"11391": [
-"|cff9d9d9dSpined Bat Wing|r"
-],
-"11392": [
-"|cff9d9d9dSevered Bat Claw|r"
-],
-"11393": [
-"|cff9d9d9dSmall Bat Skull|r"
-],
-"11394": [
-"|cff9d9d9dBat Heart|r"
-],
-"11446": [
-"|cffffffffA Crumpled Up Note|r",
-"Binds when picked up",
-"Unique",
-"This Item Begins a Quest",
-"Requires Level 50"
-],
 "11464": [
 "|cffffffffMarshal Windsor's Lost Information|r",
 "Quest Item",
@@ -825,10 +327,6 @@
 "Quest Item",
 "Unique",
 "|cffffd100\"-Golem Lord Argelmach\"|r"
-],
-"11468": [
-"|cffffffffDark Iron Fanny Pack|r",
-"Quest Item"
 ],
 "11813": [
 "|cff1eff00Formula: Smoking Heart of the Mountain|r",
@@ -864,23 +362,6 @@
 "|cffffffffThaurissan Family Jewels|r",
 "Locked"
 ],
-"12203": [
-"|cffffffffRed Wolf Meat|r",
-"Crafting Reagent"
-],
-"12205": [
-"|cffffffffWhite Spider Meat|r",
-"Crafting Reagent"
-],
-"12208": [
-"|cffffffffTender Wolf Meat|r",
-"Crafting Reagent"
-],
-"12219": [
-"|cffffffffUnadorned Seal of Ascension|r",
-"Unique",
-"|cffffd100\"Three empty sockets cover the face.\"|r"
-],
 "12335": [
 "|cff1eff00Gemstone of Smolderthorn|r",
 "Binds when picked up",
@@ -914,33 +395,9 @@
 "Unique",
 "|cffffd100\"Sickening, bloody, foulness.\"|r"
 ],
-"12662": [
-"|cff1eff00Demonic Rune|r",
-"Binds when picked up",
-"Crafting Reagent",
-"|cff1eff00Use: Restores 900 to 1500 mana at the cost of 600 to 1000 life. (2 Min Cooldown)|r"
-],
 "12712": [
 "|cffffffffWarosh's Mojo|r",
 "Quest Item"
-],
-"12728": [
-"|cffa335eePattern: Invulnerable Mail|r",
-"Requires Elemental Leatherworking",
-" ",
-"|cffa335eeInvulnerable Mail|r",
-"Binds when equipped",
-"Chest\tMail",
-"404 Armor",
-"+20 Stamina",
-"Requires Level 57",
-"|cff1eff00Equip: When struck in combat has a 5% chance to make you invulnerable to melee damage for 3 sec. This effect can only occur once every 10 sec.|r",
-"Use: Teaches you how to make Invulnerable Mail.",
-"Requires Leatherworking (295)"
-],
-"12735": [
-"|cff1eff00Frayed Abomination Stitching|r",
-"Binds when picked up"
 ],
 "12753": [
 "|cff1eff00Skin of Shadow|r",
@@ -952,14 +409,6 @@
 "Unique",
 "This Item Begins a Quest",
 "Requires Level 55"
-],
-"12808": [
-"|cff1eff00Essence of Undeath|r",
-"Crafting Reagent"
-],
-"12811": [
-"|cff1eff00Righteous Orb|r",
-"Crafting Reagent"
 ],
 "12833": [
 "|cff0070ddPlans: Hammer of the Titans|r",
@@ -1041,14 +490,6 @@
 "Requires Blacksmithing (300)",
 "Use: Teaches you how to make Heartseeker."
 ],
-"12841": [
-"|cffffffffInvader's Scourgestone|r",
-"Binds when picked up"
-],
-"12843": [
-"|cff1eff00Corruptor's Scourgestone|r",
-"Binds when picked up"
-],
 "12847": [
 "|cffffffffSoul Stained Pike|r",
 "Quest Item",
@@ -1059,10 +500,6 @@
 "Quest Item",
 "Unique",
 "|cffffd100\"Bears the mark of Ezra Grimm.\"|r"
-],
-"13174": [
-"|cffffffffPlagued Flesh Sample|r",
-"Quest Item"
 ],
 "13250": [
 "|cffffffffHead of Balnazzar|r",
@@ -1088,16 +525,6 @@
 "|cffffffffVosh'gajin's Snakestone|r",
 "Quest Item",
 "Unique"
-],
-"13444": [
-"|cffffffffMajor Mana Potion|r",
-"Requires Level 49",
-"|cff1eff00Use: Restores 1350 to 2250 mana. (2 Min Cooldown)|r"
-],
-"13446": [
-"|cffffffffMajor Healing Potion|r",
-"Requires Level 45",
-"|cff1eff00Use: Restores 1050 to 1750 health. (2 Min Cooldown)|r"
 ],
 "13501": [
 "|cff1eff00Recipe: Major Mana Potion|r",
@@ -1166,10 +593,6 @@
 ],
 "14047": [
 "|cffffffffRunecloth|r",
-"Crafting Reagent"
-],
-"14227": [
-"|cffffffffIronweb Spider Silk|r",
 "Crafting Reagent"
 ],
 "14512": [
@@ -1246,20 +669,10 @@
 "+9 Spirit",
 "Requires Level 39"
 ],
-"16250": [
-"|cff1eff00Formula: Enchant Weapon - Superior Striking|r",
-"Requires Enchanting (300)",
-"Use: Teaches you how to permanently enchant a weapon to do 5 additional damage.",
-"Permanently enchant a Melee Weapon to do 5 additional points of damage."
-],
 "16663": [
 "|cffffffffBlood of the Black Dragon Champion|r",
 "Quest Item",
 "Unique"
-],
-"16786": [
-"|cffffffffBlack Dragonspawn Eye|r",
-"Quest Item"
 ],
 "17008": [
 "|cffffffffSmall Scroll|r",
@@ -1269,18 +682,8 @@
 "Requires Level 28",
 "|cffffd100\"The scroll bears an insignia foreign to you.\"|r"
 ],
-"17057": [
-"|cffffffffShiny Fish Scales|r"
-],
-"17058": [
-"|cffffffffFish Oil|r"
-],
 "17322": [
 "|cffffffffEye of the Emberseer|r",
-"Quest Item"
-],
-"17684": [
-"|cffffffffTheradric Crystal Carving|r",
 "Quest Item"
 ],
 "17702": [
@@ -1308,17 +711,6 @@
 "Binds when picked up",
 "Unique"
 ],
-"18250": [
-"|cff1eff00Gordok Shackle Key|r",
-"Binds when picked up",
-"Unique",
-"|cffffd100\"Used with Gordok ogre shackles.\"|r"
-],
-"18255": [
-"|cffffffffRunn Tum Tuber|r",
-"Requires Level 45",
-"|cff1eff00Use: Restores 1338 health over 30 sec. Must remain seated while eating.|r"
-],
 "18261": [
 "|cffffffffBook of Incantations|r",
 "Quest Item"
@@ -1337,31 +729,6 @@
 "18299": [
 "|cffffffffHydrospawn Essence|r",
 "Quest Item"
-],
-"18332": [
-"|cff1eff00Libram of Rapidity|r",
-"Unique",
-"Requires Level 50",
-"|cffffd100\"Dark runes skitter across the surface.\"|r",
-"<Right Click to Read>"
-],
-"18333": [
-"|cff1eff00Libram of Focus|r",
-"Unique",
-"Requires Level 50",
-"|cffffd100\"Dark runes skitter across the surface.\"|r",
-"<Right Click to Read>"
-],
-"18334": [
-"|cff1eff00Libram of Protection|r",
-"Unique",
-"Requires Level 50",
-"|cffffd100\"Dark runes skitter across the surface.\"|r",
-"<Right Click to Read>"
-],
-"18335": [
-"|cff0070ddPristine Black Diamond|r",
-"Crafting Reagent"
 ],
 "18364": [
 "|cff0070ddThe Emerald Dream|r",
@@ -1390,11 +757,6 @@
 "18426": [
 "|cffffffffLethtendris's Web|r",
 "Quest Item"
-],
-"18640": [
-"|cffffffffHappy Fun Rock|r",
-"Unique (4)",
-"|cff1eff00Use: Throw rock to a friendly target. If they have free room in their pack they will catch it!|r"
 ],
 "18657": [
 "|cff1eff00Schematic: Hyper-Radiant Flame Reflector|r",
@@ -1441,9 +803,6 @@
 "Requires Level 50",
 "|cff1eff00Use: Combines the Top and Bottom Half of Advanced Armorsmithing: Volume III.|r"
 ],
-"18945": [
-"|cffffffffDark Iron Residue|r"
-],
 "19227": [
 "|cff0070ddAce of Beasts|r",
 "|cff1eff00Use: Combine the Ace through Eight of Beasts to complete the set.|r"
@@ -1451,10 +810,6 @@
 "19258": [
 "|cff0070ddAce of Warlords|r",
 "|cff1eff00Use: Combine the Ace through Eight of Warlords to complete the set.|r"
-],
-"19268": [
-"|cff0070ddAce of Elementals|r",
-"|cff1eff00Use: Combine the Ace through Eight of Elementals to complete the set.|r"
 ],
 "19276": [
 "|cff0070ddAce of Portals|r",
@@ -1465,20 +820,11 @@
 "Crafting Reagent",
 "|cff1eff00Use: Restores 900 to 1500 mana at the cost of 600 to 1000 life. (2 Min Cooldown)|r"
 ],
-"20608": [
-"|cffffffffGreen Voodoo Feather|r",
-"Quest Item",
-"Unique (2)"
-],
 "21108": [
 "|cffa335eeDraconic for Dummies|r",
 "Binds when picked up",
 "Unique",
 "|cffffd100\"Chapter VI\"|r"
-],
-"21982": [
-"|cffffffffOgre Warbeads|r",
-"Quest Item"
 ],
 "21984": [
 "|cffffffffLeft Piece of Lord Valthalak's Amulet|r",
@@ -1504,11 +850,6 @@
 "|cff1eff00Use: Recombines the left, right and top pieces of Lord Valthalak's Amulet into one whole.|r",
 "|cffffd100\"This section of the amulet vibrates with a palpable fervor to be rejoined with its sibling pieces.\"|r"
 ],
-"22138": [
-"|cffffffffBlackrock Bracer|r",
-"Quest Item",
-"|cffffd100\"Crudely crafted, mostly from dark iron, these bracers exhibit trace amounts of a shiny metal.\"|r"
-],
 "22206": [
 "|cff1eff00Bouquet of Red Roses|r",
 "Binds when picked up",
@@ -1528,21 +869,6 @@
 "22444": [
 "|cffffffffPutrid Vine|r",
 "Quest Item"
-],
-"22525": [
-"|cffffffffCrypt Fiend Parts|r"
-],
-"22526": [
-"|cffffffffBone Fragments|r"
-],
-"22527": [
-"|cffffffffCore of Elements|r"
-],
-"22528": [
-"|cffffffffDark Iron Scraps|r"
-],
-"22529": [
-"|cffffffffSavage Frond|r"
 ],
 "22897": [
 "|cff0070ddTome of Conjure Food VII|r",

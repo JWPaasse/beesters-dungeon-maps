@@ -446,15 +446,6 @@
 "Requires Level 14",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
-"5516": [
-"|cff9d9d9dThreshadon Fang|r",
-"One-Hand\tDagger",
-"5 - 10 Damage\tSpeed 1.50",
-"(5.0 damage per second)",
-"Durability 35 / 35",
-"Requires Level 11",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
 "5970": [
 "|cff1eff00Serpent Gloves|r",
 "Binds when picked up",
@@ -1479,14 +1470,6 @@
 "+15 Strength",
 "+4 Stamina",
 "Durability 115 / 115",
-"Requires Level 40",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"9243": [
-"|cff1eff00Shriveled Heart|r",
-"Binds when picked up",
-"Neck",
-"+13 Stamina",
 "Requires Level 40",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -6349,17 +6332,6 @@
 "Requires Level 56",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
-"16710": [
-"|cff0070ddShadowcraft Bracers|r",
-"Binds when equipped",
-"Wrist\tLeather",
-"71 Armor",
-"+15 Agility",
-"+7 Stamina",
-"Durability 35 / 35",
-"Requires Level 52",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
 "16711": [
 "|cff0070ddShadowcraft Boots|r",
 "Binds when picked up",
@@ -6393,29 +6365,6 @@
 "+10 Stamina",
 "+9 Intellect",
 "Durability 50 / 50",
-"Requires Level 54",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"16716": [
-"|cff0070ddWildheart Belt|r",
-"Binds when equipped",
-"Waist\tLeather",
-"93 Armor",
-"+17 Intellect",
-"+10 Spirit",
-"+9 Stamina",
-"Durability 35 / 35",
-"Requires Level 53",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"16717": [
-"|cff0070ddWildheart Gloves|r",
-"Binds when equipped",
-"Hands\tLeather",
-"105 Armor",
-"+21 Spirit",
-"+9 Intellect",
-"Durability 35 / 35",
 "Requires Level 54",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
@@ -6468,19 +6417,6 @@
 "+12 Spirit",
 "Durability 100 / 100",
 "Requires Level 58",
-"|cff808080Classic values; WoW Forever may differ.|r"
-],
-"16722": [
-"|cff0070ddLightforge Bracers|r",
-"Binds when equipped",
-"Wrist\tPlate",
-"261 Armor",
-"+10 Stamina",
-"+8 Spirit",
-"+7 Strength",
-"+4 Agility",
-"Durability 45 / 45",
-"Requires Level 52",
 "|cff808080Classic values; WoW Forever may differ.|r"
 ],
 "16724": [
