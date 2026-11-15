@@ -1,0 +1,4 @@
+{
+ "_source": "Models of bosses new in WoW Forever, noted in game when a player targeted the boss (the addon saves them as bossModels in its settings). [npcID] = creature display ID.",
+ "models": {}
+}

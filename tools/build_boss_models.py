@@ -21,8 +21,18 @@ sys.path.insert(0, str(ROOT / "tools"))
 from build_quest_text import parse_values  # noqa: E402
 
 
+LEARNED = ROOT / "tools" / "learned_models.json"
+
+
 def models_block(models):
-    lines = ["-- [npcID] = creature display ID, for the boss's picture (CMaNGOS Classic-DB, GPL-3.0)", "ns.BossModels = {"]
+    """The classic bosses' models, plus the Forever bosses' models noted in game when a player
+    targeted them (tools/learned_models.json, from their saved settings)."""
+    models = dict(models)
+    if LEARNED.exists():
+        for nid, display in json.loads(LEARNED.read_text(encoding="utf-8"))["models"].items():
+            models.setdefault(nid, display)
+    lines = ["-- [npcID] = creature display ID, for the boss's picture (CMaNGOS Classic-DB, GPL-3.0;",
+             "-- bosses new in WoW Forever: noted in game, tools/learned_models.json)", "ns.BossModels = {"]
     for nid in sorted(models, key=int):
         lines.append("    [%s] = %d," % (nid, models[nid]))
     lines.append("}")

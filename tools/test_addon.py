@@ -746,6 +746,30 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:OpenDungeonMap("ulda")
         check("Uldaman's entrance hall opens the first level", ns:CurrentDungeonFloor() == 1)
         ns:CloseDungeonMap(true)
+        -- A new Forever boss has no picture: the pin is a ring with the skull, like the others.
+        GetInstanceInfo = function() return "Krol'dok Stronghold", "party", 1, "Normal", 5, 0, false, 3039 end
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        ns:OpenDungeonMap("kroldok")
+        local mugg
+        for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Overlord Mugg" then mugg = b end end
+        check("a boss without a picture gets the ring with a skull", mugg and mugg.Ring:IsShown() and mugg.Icon:IsShown() and not mugg.Badge:IsShown())
+        -- Targeting it notes its model, and the pin gets its portrait.
+        local realCreate, realExists, realIsPlayer, realName = CreateFrame, UnitExists, UnitIsPlayer, UnitName
+        CreateFrame = function(kind, ...)
+            local f = realCreate(kind, ...)
+            if kind == "PlayerModel" then f.GetDisplayInfo = function() return 98765 end end
+            return f
+        end
+        UnitExists = function() return true end
+        UnitIsPlayer = function() return false end
+        UnitName = function() return "Overlord Mugg" end
+        runEvent(nil, "PLAYER_TARGET_CHANGED")
+        CreateFrame, UnitExists, UnitIsPlayer, UnitName = realCreate, realExists, realIsPlayer, realName
+        check("targeting a boss without a picture notes its model", ns.db.bossModels and ns.db.bossModels.kroldok and ns.db.bossModels.kroldok["Overlord Mugg"] == 98765)
+        for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Overlord Mugg" then mugg = b end end
+        check("its pin then shows the portrait", mugg and mugg.displayID == 98765 and mugg.Badge:IsShown())
+        ns.db.bossModels = nil
+        ns:CloseDungeonMap(true)
         -- Deadmines: Ironclad Cove is on the second map.
         GetInstanceInfo = function() return "The Deadmines", "party", 1, "Normal", 5, 0, false, 36 end
         runEvent(nil, "PLAYER_ENTERING_WORLD")

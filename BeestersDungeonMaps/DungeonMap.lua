@@ -785,8 +785,8 @@ local function CreateBossButton(parent)
     button.Badge:SetPoint("CENTER", button.BadgeBack, "CENTER")
     SetSkull(button.Badge)
     -- Plain skull, for bosses without a portrait.
-    button.Icon = button:CreateTexture(nil, "ARTWORK")
-    button.Icon:SetSize(26, 26)
+    button.Icon = button:CreateTexture(nil, "ARTWORK", nil, 2)
+    button.Icon:SetSize(20, 20)
     button.Icon:SetPoint("CENTER")
     SetSkull(button.Icon)
     button.Highlight = button:CreateTexture(nil, "HIGHLIGHT")
@@ -797,14 +797,28 @@ local function CreateBossButton(parent)
 end
 
 -- Portrait or plain skull, for the boss this pin shows now.
+-- The boss's model: from the addon's data, or noted when you targeted it in game.
+local function BossDisplayID(key, boss)
+    local id = boss and boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
+    if id then return id end
+    local learned = boss and ns.db and ns.db.bossModels and ns.db.bossModels[key]
+    return learned and learned[boss.name] or nil
+end
+
 local function UpdateBossPin(button)
     local boss = button.boss
-    local displayID = boss and boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
+    local displayID = BossDisplayID(current.key, boss)
     local portrait = displayID and SetPortraitTextureFromCreatureDisplayID and true or false
     button.displayID = portrait and displayID or nil
-    if portrait then SetPortraitTextureFromCreatureDisplayID(button.Portrait, displayID) end
-    button.Portrait:SetShown(portrait)
-    button.Ring:SetShown(portrait)
+    if portrait then
+        SetPortraitTextureFromCreatureDisplayID(button.Portrait, displayID)
+    else
+        -- No picture yet: the same ring round a dark disc with the boss skull, so every pin
+        -- looks alike.
+        button.Portrait:SetColorTexture(0.1, 0.075, 0.05, 1)
+    end
+    button.Portrait:Show()
+    button.Ring:Show()
     -- Rare bosses get a silver ring, like the silver dragon round a rare's portrait in the game.
     local rare = boss and boss.note == "Rare"
     button.Ring:SetDesaturated(rare)
@@ -813,15 +827,10 @@ local function UpdateBossPin(button)
     button.Badge:SetShown(portrait)
     button.Icon:SetShown(not portrait)
     button.Highlight:ClearAllPoints()
-    if portrait then
-        button.Highlight:SetTexture(GOLD_RING)
-        button.Highlight:SetDesaturated(rare)
-        button.Highlight:SetSize(RING_SIZE, RING_SIZE)
-        button.Highlight:SetPoint("CENTER")
-    else
-        SetSkull(button.Highlight)
-        button.Highlight:SetAllPoints(button.Icon)
-    end
+    button.Highlight:SetTexture(GOLD_RING)
+    button.Highlight:SetDesaturated(rare)
+    button.Highlight:SetSize(RING_SIZE, RING_SIZE)
+    button.Highlight:SetPoint("CENTER")
 end
 
 -- Portraits load a moment later the first time; draw them again when they do.
@@ -1437,6 +1446,37 @@ function ns:InitDungeonMap()
         if here and here ~= current.floor then ShowFloor(here) end
     end)
 
+    -- Targeting a boss whose picture the addon doesn't have notes its model (saved with your
+    -- settings, like the boss positions you place), so its pin gets the portrait.
+    local probe
+    local function LearnModel(key)
+        if not (UnitExists("target") and not UnitIsPlayer("target")) then return end
+        local name = UnitName("target")
+        if type(name) ~= "string" or (issecretvalue and issecretvalue(name)) then return end
+        local boss
+        for _, b in ipairs(BossesWithPositions(key)) do
+            if Normalize(b.name) == Normalize(name) then boss = b end
+        end
+        if not boss or BossDisplayID(key, boss) then return end
+        probe = probe or CreateFrame("PlayerModel", nil, UIParent)
+        probe:SetSize(2, 2)
+        probe:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 0, 0)
+        probe:SetAlpha(0)
+        probe:Show()
+        probe:SetUnit("target")
+        local function read()
+            local ok, id = pcall(probe.GetDisplayInfo, probe)
+            if not ok or type(id) ~= "number" or (issecretvalue and issecretvalue(id)) or id <= 0 then return false end
+            ns.db.bossModels = ns.db.bossModels or {}
+            ns.db.bossModels[key] = ns.db.bossModels[key] or {}
+            ns.db.bossModels[key][boss.name] = id
+            probe:Hide()
+            if ns:IsDungeonMapOpen() and current.key == key then ShowFloor(current.floor) end
+            return true
+        end
+        if not read() and C_Timer then C_Timer.After(0.5, function() pcall(read) end) end
+    end
+
     -- Leaving the dungeon ends the run; a boss pulled or targeted tells which level you're on.
     local runWatcher = CreateFrame("Frame", "BeestersDungeonMapsRunWatcher")
     for _, event in ipairs({ "PLAYER_ENTERING_WORLD", "ENCOUNTER_START", "PLAYER_TARGET_CHANGED" }) do
@@ -1458,6 +1498,7 @@ function ns:InitDungeonMap()
                 floor = BossFloor(key, nil, UnitName("target"))
             end
         end)
+        if event == "PLAYER_TARGET_CHANGED" then pcall(LearnModel, key) end
         if not floor then return end
         NoteRunFloor(key, floor)
         -- A boss pulled here stands on this level: remember the subzone (targeting can reach

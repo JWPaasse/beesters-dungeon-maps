@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Bosses without a picture yet get the same ring as the others, round a dark disc with the boss skull, so every pin looks alike.
+- Target a boss that has no picture yet and the addon notes its model, so its pin shows its portrait from then on. Mostly the bosses new in Forever: the game doesn't have their pictures in its files.
 - Krol'dok Stronghold: Bossman Toof added to its bosses, all six have their place on the new map, and two go by the names the game shows: War Handler Ashka and Overlord Mugg (their encounters are called Handler Ashka and Overseer Mugg).
 - Maps for The Drowned City (two levels: The Drowned City and Atal'byzal), Krol'dok Stronghold, Alcaz Prison (two levels: Main Unit and Maximum Security Unit), Shaper's Terrace and Blackmaw Hold, by Santiago Reyes. Their bosses don't have a place on them yet: shift-drag them from the list in the corner. Blackmaw Hold has six levels: Blackmaw Hold, Festering Grotto and the Depths of the Fallen Grove, the Elders, the Burrow and Forbidden Magic.
 - Krol'dok Stronghold lists Krol'dok Moulding (both factions) and its follow-up Key Ingredients. The quest starts from an item that drops inside, so its text never names the dungeon.
