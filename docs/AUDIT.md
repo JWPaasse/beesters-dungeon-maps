@@ -17,7 +17,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Excavation Site: Wetlands | 3/3 | 0/3 | 0 | 9 | 9 |
 | Gnomeregan | 6/6 | 0/6 | 0 | 24 | 4 |
 | Hall of Thanes | 4/4 | 0/4 | 0 | 12 | 12 |
-| Krol'dok Stronghold | 6/6 | 0/6 | 0 | 22 | 20 |
+| Krol'dok Stronghold | 6/6 | 0/6 | 0 | 22 | 19 |
 | Maraudon | 9/9 | 0/9 | 0 | 29 | 1 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
 | Ragefire Chasm | 4/4 | 0/4 | 0 | 15 | 6 |
@@ -35,7 +35,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 200/243 | 0/243 | 11 | 1215 | 223 |
+| **All** | 200/243 | 0/243 | 11 | 1215 | 222 |
 
 ## Alcaz Prison
 
@@ -203,7 +203,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | War Handler Ashka | yes | placed in game |  | 0 (+3 unknown) | 3 |
 | Nar'gurk | yes | placed in game |  | 0 (+4 unknown) | 3 |
 | Bossman Toof | yes | placed in game |  | 0 (+3 unknown) | 3 |
-| Overlord Mugg | yes | placed in game |  | 0 (+5 unknown) | 5 |
+| Overlord Mugg | yes | placed in game |  | 0 (+5 unknown) | 4 |
 
 ## Maraudon
 
