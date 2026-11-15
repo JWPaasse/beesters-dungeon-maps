@@ -280,8 +280,8 @@ def main():
         for _, m in pairs(ns.DungeonMaps) do
             if m.placeholder then placeholders = placeholders + 1 else mapCount = mapCount + 1 end
         end
-        check("30 dungeon maps (22 classic, 8 by Santiago Reyes)", mapCount == 30)
-        check("only Blackmaw Hold is still without a map", placeholders == 1 and ns.DungeonMaps.blackmaw.placeholder)
+        check("31 dungeon maps (22 classic, 9 by Santiago Reyes)", mapCount == 31)
+        check("every dungeon has a map now (Blackmaw Hold: six levels)", placeholders == 0 and #ns.DungeonMaps.blackmaw.floors == 6)
         local missingMaps = {}
         for key in pairs(ns.Instances) do if not ns.DungeonMaps[key] then table.insert(missingMaps, key) end end
         check("every dungeon in the list has a map", #missingMaps == 0)

@@ -42,6 +42,8 @@ SANTIAGO = {
     "kroldok": ["Krol'dok Stronghold"],
     "alcaz": ["Main Unit", "Maximum Security Unit"],
     "shaper": ["Shaper's Terrace"],
+    "blackmaw": ["Blackmaw Hold", "Festering Grotto", "Depths of the Fallen Grove", "Depths of the Elders",
+                 "Depths of the Burrow", "Depths of Forbidden Magic"],
 }
 
 

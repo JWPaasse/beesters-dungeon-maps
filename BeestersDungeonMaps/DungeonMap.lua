@@ -133,6 +133,8 @@ local SUBZONE_FLOORS = {
         ["The Crimson Throne"] = 1,
         ["Elders' Square"] = 2, ["The Gauntlet"] = 2, ["Slaughter Square"] = 2, ["The Slaughter House"] = 2,
     },
+    -- Its outdoor part (the first map); the deeper levels go by their own names.
+    blackmaw = { ["Blackmaw Grove"] = 1, ["Blackmaw Stillwater"] = 1, ["Bonesnout's Thicket"] = 1 },
     -- Learned in game.
     ulda = {
         ["Hall of the Keepers"] = 1, ["Map Chamber"] = 1, ["Temple Hall"] = 1, ["The Stone Vault"] = 1,
