@@ -31,11 +31,11 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Stratholme | 16/17 | 0/17 | 0 | 128 | 9 |
 | Sunken Temple | 5/7 | 0/7 | 3 | 20 | 1 |
 | The Deadmines | 8/8 | 0/8 | 0 | 35 | 5 |
-| The Drowned City | 0/6 | 0/6 | 4 | 6 | 6 |
+| The Drowned City | 6/6 | 0/6 | 4 | 6 | 6 |
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 200/243 | 0/243 | 11 | 1215 | 223 |
+| **All** | 206/243 | 0/243 | 11 | 1215 | 223 |
 
 ## Alcaz Prison
 
@@ -386,12 +386,12 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Zul'Alai | **no** | — |  | 0 | 0 |
-| Var'Taka | **no** | — |  | 0 | 0 |
-| Captain Dreadrise | **no** | — |  | 0 (+3 unknown) | 3 |
-| Deathless Guardians | **no** | — |  | 0 | 0 |
-| Primeval Elemental | **no** | — |  | 0 | 0 |
-| Min'loth the Serpent | **no** | — |  | 0 (+3 unknown) | 3 |
+| Zul'Alai | yes | placed in game |  | 0 | 0 |
+| Var'Taka | yes | placed in game |  | 0 | 0 |
+| Captain Dreadrise | yes | placed in game |  | 0 (+3 unknown) | 3 |
+| Deathless Guardians | yes | placed in game |  | 0 | 0 |
+| Primeval Elemental | yes | placed in game |  | 0 | 0 |
+| Min'loth the Serpent | yes | placed in game |  | 0 (+3 unknown) | 3 |
 
 ## The Stockade
 

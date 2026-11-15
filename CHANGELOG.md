@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+- The Drowned City: all six bosses have their place on the map (the Primeval Elemental in Atal'byzal).
+
 ## 1.3.0
 
 - Bosses without a picture yet get the same ring as the others, round a dark disc with the boss skull, so every pin looks alike.

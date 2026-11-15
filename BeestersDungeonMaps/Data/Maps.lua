@@ -49,6 +49,7 @@ ns.BossPositions = {
     ["dme"] = { {2,0.575,0.744,343,"Zevrim Thornhoof"}, {2,0.537,0.715,344,"Hydrospawn"}, {1,0.439,0.482,345,"Lethtendris"}, {2,0.567,0.289,346,"Alzzin the Wildshaper"}, {1,0.122,0.31,2792,"Pusillin"} },
     ["dmn"] = { {1,0.695,0.76,362,"Guard Mol'dar"}, {1,0.612,0.693,363,"Stomper Kreeg"}, {1,0.495,0.781,364,"Guard Fengus"}, {1,0.266,0.572,365,"Guard Slip'kik"}, {1,0.318,0.506,366,"Captain Kromcrush"}, {1,0.32,0.304,367,"Cho'Rush the Observer"}, {1,0.32,0.229,368,"King Gordok"} },
     ["dmw"] = { {1,0.336,0.537,350,"Tendris Warpwood"}, {1,0.204,0.777,347,"Illyanna Ravenoak"}, {2,0.339,0.451,348,"Magister Kalendris"}, {3,0.35,0.576,349,"Immol'thar"}, {3,0.623,0.232,361,"Prince Tortheldrin"}, {3,0.684,0.243,2794,"Tsu'zee"} },
+    ["drowned"] = { {1,0.206,0.569,0,"Min'loth the Serpent"}, {1,0.692,0.572,0,"Zul'Alai"}, {1,0.555,0.339,0,"Captain Dreadrise"}, {2,0.671,0.558,0,"Primeval Elemental"}, {1,0.511,0.718,0,"Var'Taka"}, {1,0.352,0.542,0,"Deathless Guardians"} },
     ["exc"] = { {1,0.32,0.52,3481,"Shadetooth"}, {1,0.34,0.676,3482,"Relic Guardian"}, {1,0.512,0.368,3480,"Saltspine"} },
     ["gnomer"] = { {3,0.432,0.883,381,"Crowd Pummeler 9-60"}, {1,0.779,0.67,379,"Grubbis"}, {2,0.76,0.465,378,"Viscous Fallout"}, {2,0.243,0.684,380,"Electrocutioner 6000"}, {4,0.311,0.303,382,"Mekgineer Thermaplugg"}, {4,0.295,0.54,0,"Dark Iron Ambassador"} },
     ["hot"] = { {1,0.511,0.494,3494,"Plunder"}, {1,0.509,0.239,3496,"Durgen Dirgehammer"}, {1,0.511,0.633,3493,"Faldrim Anvilmar"}, {1,0.627,0.501,0,"Magmatus"} },
