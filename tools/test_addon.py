@@ -316,7 +316,7 @@ def main():
                 if r.itemID % 4 < 2 then lowQuality = true end
             end
         end
-        check("clicking a boss opens its loot", panel:IsShown() and rows > 0)
+        check("clicking a boss shows its loot too", panel:IsShown() and rows > 0)
         -- Each loot row says what kind of item it is, like the Dungeon Journal ("Legs, Cloth").
         INVTYPE_HEAD, INVTYPE_WEAPON, INVTYPE_TRINKET = "Head", "One-Hand", "Trinket"
         check("loot says what kind of item it is", ns.ItemTypeText(1003) == "Head, Cloth" and ns.ItemTypeText(1001) == "One-Hand, Swords"
@@ -346,13 +346,8 @@ def main():
         check("hovering an item the game hasn't loaded shows WoW Forever's tooltip from the addon's data", tipText and tipText:find("Pronged Reaver"))
         C_Item.GetItemInfo = realInfo
         check("a rare's own loot is listed (Haunting Blade, Deathsworn Captain)", contains(ns.BossLoot[3872], 6641))
-        -- Hovering a boss shows its portrait in the tooltip.
-        local inserted, portraitID = nil, nil
-        GameTooltip_InsertFrame = function(tooltip, frame) inserted = frame end
+        local portraitID
         SetPortraitTextureFromCreatureDisplayID = function(texture, displayID) portraitID = displayID end
-        GameTooltip.GetName = function() return "GameTooltip" end
-        GameTooltipTextLeft3 = CreateFrame("Frame")
-        mutanus.scripts.OnEnter(mutanus)
         local pinPortrait
         SetPortraitTextureFromCreatureDisplayID = function(texture, displayID) if texture == mutanus.Portrait then pinPortrait = displayID end portraitID = displayID end
         ns:CloseDungeonMap(true); ns:OpenDungeonMap("wc")
@@ -360,13 +355,24 @@ def main():
         check("boss pins show the boss's portrait in a ring", pinPortrait == ns.BossModels[mutanus.boss.npcID])
         -- Fake loot covering every kind, to check the grouping and order.
         ns.BossLoot[mutanus.boss.npcID] = { 15, 22, 13, 30, 34, 38, 27, 42, 43, 150 }
+        -- Hovering a boss opens its loot; it stays while the mouse is on the boss or the list
+        -- (so you can reach the items) and closes a moment after it's on neither.
         panel:Hide()
+        local overBoss, overList = true, false
+        mutanus.IsMouseOver = function() return overBoss end
         mutanus.scripts.OnEnter(mutanus)
-        local preview = BeestersDungeonMapsLootPreview
-        check("hovering a boss shows its loot window, saying a click keeps it open",
-            preview and preview:IsShown() and preview.Hint:IsShown() and not panel:IsShown())
+        check("hovering a boss opens its loot", panel:IsShown() and panel.boss == mutanus.boss)
+        panel.IsMouseOver = function() return overList end
+        local update = panel.scripts.OnUpdate
         mutanus.scripts.OnLeave(mutanus)
-        check("leaving the boss hides that window again", not preview:IsShown())
+        overBoss, overList = false, true
+        update(panel, 1)
+        check("the loot stays open while the mouse is on it", panel:IsShown())
+        overList = false
+        update(panel, 0.1)
+        check("it doesn't close the instant the mouse leaves", panel:IsShown())
+        update(panel, 0.5)
+        check("it closes a moment after the mouse left both", not panel:IsShown())
         panel:Hide(); mutanus.scripts.OnClick(mutanus, "LeftButton")
         local order = {}
         for _, e in ipairs(panel.shown) do table.insert(order, e[1] .. ":" .. e[2]) end

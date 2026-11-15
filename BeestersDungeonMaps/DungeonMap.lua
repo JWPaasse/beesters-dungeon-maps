@@ -433,87 +433,6 @@ local function ForEachLoot(groups, onHeader, onItem)
     end
 end
 
--- The boss's picture: the game's still portrait of the creature's model (the same picture
--- the Dungeon Journal uses), nothing around it. Model IDs: tools/boss_models.json.
--- The picture sits in a few empty tooltip lines, anchored to the first of them. (Not with
--- GameTooltip_InsertFrame: that does arithmetic on the tooltip's line height, which inside a
--- dungeon is a "secret" value the addon may not touch, and it writes into the game's tooltip.)
-local PORTRAIT_LINES = 5 -- blank lines that make room for the 64 px picture
-local portrait
-local function ShowPortrait(tooltip, boss, firstLine)
-    local displayID = boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
-    if not (displayID and SetPortraitTextureFromCreatureDisplayID) then return end
-    local anchor = _G[tooltip:GetName() .. "TextLeft" .. firstLine]
-    if not portrait then
-        portrait = CreateFrame("Frame", nil, tooltip)
-        portrait:SetSize(64, 64)
-        portrait.Image = portrait:CreateTexture(nil, "ARTWORK")
-        portrait.Image:SetAllPoints()
-        portrait:RegisterEvent("PORTRAITS_UPDATED")
-        portrait:SetScript("OnEvent", function(self)
-            if self:IsShown() and self.displayID then SetPortraitTextureFromCreatureDisplayID(self.Image, self.displayID) end
-        end)
-        -- Gone as soon as the tooltip shows something else.
-        tooltip:HookScript("OnTooltipCleared", function() portrait:Hide() end)
-        tooltip:HookScript("OnHide", function() portrait:Hide() end)
-    end
-    for _ = 1, PORTRAIT_LINES do tooltip:AddLine(" ") end
-    if not anchor then
-        anchor = _G[tooltip:GetName() .. "TextLeft" .. firstLine]
-        if not anchor then return end
-    end
-    portrait.displayID = displayID
-    SetPortraitTextureFromCreatureDisplayID(portrait.Image, displayID)
-    portrait:ClearAllPoints()
-    portrait:SetPoint("TOPLEFT", anchor, "TOPLEFT", 0, -2)
-    portrait:Show()
-end
-
-local lootPanel    -- the loot list you clicked open (stays)
-local previewPanel -- the same list while you hover a boss
-local tooltipBoss -- the boss whose tooltip is showing (refreshed when item names arrive)
-
-local function ShowBossTooltip(owner, boss, total)
-    tooltipBoss = { owner = owner, boss = boss, total = total }
-    GameTooltip:SetOwner(owner, "ANCHOR_RIGHT")
-    GameTooltip:SetText(boss.name, 1, 1, 1)
-    GameTooltip:AddLine(("Boss %d of %d"):format(boss.order, total), NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-    if boss.note then GameTooltip:AddLine(boss.note, 0.75, 0.75, 0.75) end
-    ShowPortrait(GameTooltip, boss, boss.note and 4 or 3) -- after the name, "Boss x of y" and its note
-    local hasLoot = boss.npcID and ns.BossLoot and ns.BossLoot[boss.npcID]
-    local panelOpen = lootPanel and lootPanel:IsShown() and lootPanel.boss == boss
-    if hasLoot and not panelOpen then
-        local groups, waiting = LootGroups(boss)
-        local any = false
-        ForEachLoot(groups, function(text, isProfession)
-            if isProfession then
-                GameTooltip:AddLine("  " .. text, 0.6, 0.6, 0.6)
-            else
-                GameTooltip:AddLine(" ")
-                GameTooltip:AddLine(text, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
-            end
-        end, function(item)
-            any = true
-            local color = item.loading and GRAY_FONT_COLOR or (ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality])
-            -- What kind of item, on the right: "Legs, Cloth", "Staff".
-            GameTooltip:AddDoubleLine(("|T%s:16|t %s"):format(item.icon or 134400, item.name), ItemTypeText(item.id) or "",
-                color and color.r or 1, color and color.g or 1, color and color.b or 1, 0.75, 0.75, 0.75)
-        end)
-        if waiting and not any then
-            GameTooltip:AddLine(SEARCH_LOADING_TEXT or "Loading...", 0.6, 0.6, 0.6)
-        end
-        if any then
-            GameTooltip:AddLine(" ")
-            GameTooltip:AddLine("<Click to keep the loot open>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
-        end
-    end
-    if boss.custom then
-        GameTooltip:AddLine("Placed by you. Shift-right-click to undo.", 0.6, 0.6, 0.6, true)
-    elseif not boss.x then
-        GameTooltip:AddLine("Shift-drag onto the map to place this boss.", 0.6, 0.6, 0.6, true)
-    end
-    GameTooltip:Show()
-end
 
 -- The game's item tooltip needs the server's data. While that hasn't come (or for items the
 -- server never sends) it would say "Retrieving item information" for good, so show what the
@@ -655,17 +574,12 @@ local function RefreshLootPanel(panel)
     panel.Empty:SetShown(rowIndex == 0)
     panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Bind on Pickup loot of Uncommon or better known.")
     if rowIndex == 0 then y = 54 end
-    -- While hovering: how to keep it open, and how to place or undo a boss's spot.
+    -- How to place a boss's spot yourself, or undo it.
     local hint = {}
-    if panel.preview then
-        if rowIndex > 0 then
-            table.insert(hint, "|cff20ff20<Click to keep the loot open>|r")
-        end
-        if boss.custom then
-            table.insert(hint, "|cff999999Placed by you. Shift-right-click to undo.|r")
-        elseif not boss.x then
-            table.insert(hint, "|cff999999Shift-drag onto the map to place this boss.|r")
-        end
+    if boss.custom then
+        table.insert(hint, "|cff999999Placed by you. Shift-right-click to undo.|r")
+    elseif not boss.x then
+        table.insert(hint, "|cff999999Shift-drag onto the map to place this boss.|r")
     end
     panel.Hint:SetText(table.concat(hint, "\n"))
     panel.Hint:SetShown(#hint > 0)
@@ -710,44 +624,33 @@ local function CreateLootPanel(parent, name)
     return panel
 end
 
--- The loot list while you hover a boss: the same window, without the close button, saying
--- that a click keeps it open.
-local function ShowLootPreview(owner, boss)
-    if lootPanel and lootPanel:IsShown() and lootPanel.boss == boss then return end -- already open
-    if not previewPanel then
-        previewPanel = CreateLootPanel(view, "BeestersDungeonMapsLootPreview")
-        previewPanel.preview = true
-        previewPanel.Close:Hide()
-        previewPanel:EnableMouse(false)
+-- The loot list opens when you hover a boss and stays while the mouse is on the boss or on
+-- the list, so you can move over to the items; it closes a moment after you leave both.
+local LINGER = 0.3
+local function ShowLoot(owner, boss)
+    if not lootPanel then
+        lootPanel = CreateLootPanel(view)
+        lootPanel.Close:Hide()
+        lootPanel:SetScript("OnUpdate", function(self, elapsed)
+            local owner = self.owner
+            if self:IsMouseOver() or (owner and owner:IsShown() and owner:IsMouseOver()) then
+                self.away = 0
+                return
+            end
+            self.away = (self.away or 0) + elapsed
+            if self.away > LINGER then self:Hide() end
+        end)
     end
     GameTooltip:Hide()
-    previewPanel.boss = boss
-    previewPanel:SetFrameStrata(lootPanel and lootPanel:GetFrameStrata() or "DIALOG")
-    previewPanel:ClearAllPoints()
-    previewPanel:SetPoint("TOPLEFT", owner, "TOPRIGHT", 6, 0)
-    previewPanel:SetClampedToScreen(true)
-    previewPanel:Show()
-    previewPanel:Raise()
-    RefreshLootPanel(previewPanel)
-end
-
-local function HideLootPreview()
-    if previewPanel then previewPanel:Hide() end
-end
-
-local function ToggleLoot(owner, boss)
-    if not lootPanel then lootPanel = CreateLootPanel(view) end
-    GameTooltip:Hide()
-    HideLootPreview()
-    if lootPanel:IsShown() and lootPanel.boss == boss then
-        lootPanel:Hide()
-        return
-    end
-    lootPanel.boss = boss
+    lootPanel.away = 0
+    if lootPanel:IsShown() and lootPanel.boss == boss and lootPanel.owner == owner then return end
+    lootPanel.boss, lootPanel.owner = boss, owner
     lootPanel:ClearAllPoints()
-    lootPanel:SetPoint("TOPLEFT", owner, "TOPRIGHT", 6, 0)
+    -- Right against the boss, so the mouse can go straight across.
+    lootPanel:SetPoint("TOPLEFT", owner, "TOPRIGHT", 2, 0)
     lootPanel:SetClampedToScreen(true)
     lootPanel:Show()
+    lootPanel:Raise()
     RefreshLootPanel()
 end
 
@@ -759,12 +662,8 @@ local function RefreshOpenLoot()
     C_Timer.After(0.1, function()
         itemListener.pending = false
         RefreshLootPanel()
-        RefreshLootPanel(previewPanel)
-        local t = tooltipBoss
         local owner = GameTooltip:IsShown() and GameTooltip:GetOwner()
-        if t and owner == t.owner then
-            ShowBossTooltip(t.owner, t.boss, t.total)
-        elseif owner and type(owner.waitingTooltip) == "number" then
+        if owner and type(owner.waitingTooltip) == "number" then
             local id = owner.waitingTooltip
             owner.waitingTooltip = nil
             ShowItemTooltip(owner, id)
@@ -824,7 +723,7 @@ local function BossClick(self, button)
         if list then list[self.boss.name] = nil end
         ShowFloor(current.floor)
     elseif button == "LeftButton" and not IsShiftKeyDown() then
-        ToggleLoot(self, self.boss)
+        ShowLoot(self, self.boss)
     end
 end
 
@@ -834,8 +733,8 @@ local function SetupBossFrame(frame)
     frame:SetScript("OnDragStart", StartPlacing)
     frame:SetScript("OnDragStop", StopPlacing)
     frame:SetScript("OnClick", BossClick)
-    frame:SetScript("OnEnter", function(self) ShowLootPreview(self, self.boss) end)
-    frame:SetScript("OnLeave", function() HideLootPreview(); GameTooltip:Hide() end)
+    frame:SetScript("OnEnter", function(self) ShowLoot(self, self.boss) end)
+    frame:SetScript("OnLeave", function() GameTooltip:Hide() end) -- the loot list closes by itself
 end
 
 ----------------------------------------------------------------------
@@ -990,7 +889,6 @@ end
 
 function ShowFloor(index)
     if lootPanel then lootPanel:Hide() end
-    if previewPanel then previewPanel:Hide() end
     local map = ns.DungeonMaps[current.key]
     current.floor = index
     NoteRunFloor(current.key, index)
@@ -1229,7 +1127,6 @@ local function LiftView(lift)
     end
     if view:GetFrameStrata() ~= strata then view:SetFrameStrata(strata) end
     if lootPanel then lootPanel:SetFrameStrata(lift and STRATA[#STRATA] or "DIALOG") end
-    if previewPanel then previewPanel:SetFrameStrata(lift and STRATA[#STRATA] or "DIALOG") end
 end
 
 local function SetCanvasShown(shown)
@@ -1337,7 +1234,6 @@ function ns:CloseDungeonMap(refreshNavBar)
     if not ns:IsDungeonMapOpen() then return end
     view:Hide()
     if lootPanel then lootPanel:Hide() end
-    if previewPanel then previewPanel:Hide() end
     if ns.HideDungeonQuests then ns:HideDungeonQuests() end
     current.key = nil
     current.zoneMapID = nil
