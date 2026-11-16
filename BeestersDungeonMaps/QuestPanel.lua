@@ -1159,6 +1159,20 @@ function ShowDetail(id, entry, stepOverride)
     local text = ns.QuestText and ns.QuestText[stepID]
     local inLog = InLog(stepID)
     d.current = { id = id, entry = entry, stepOverride = stepOverride, stepID = stepID }
+    -- Where it's done inside: the bosses and objects on the dungeon map. For a chain whose
+    -- dungeon part comes later, the first step from here on that has any.
+    if ns.ShowQuestTargets then
+        local target = stepID
+        if not (ns.QuestTargets and ns.QuestTargets[stepID]) and entry and entry.steps then
+            local from
+            for i, sid in ipairs(entry.steps) do
+                if sid == stepID then from = i end
+                if from and ns.QuestTargets and ns.QuestTargets[sid] then target = sid; break end
+            end
+        end
+        local tq = Q(target)
+        ns:ShowQuestTargets(target, tq and tq[F.NAME])
+    end
     d.textCount, d.buttonCount, d.rtextCount = 0, 0, 0
     d.host = nil
     for _, fs in ipairs(d.texts) do fs:Hide() end
@@ -1305,7 +1319,10 @@ local function CreateDetail(parent)
     d:SetPoint("TOPLEFT", 0, 3)
     d:SetPoint("BOTTOMRIGHT", 0, 0)
     d:Hide()
-    d:SetScript("OnHide", function(self) ns:HideTooltipWithin(self) end)
+    d:SetScript("OnHide", function(self)
+        ns:HideTooltipWithin(self)
+        if ns.ShowQuestTargets then ns:ShowQuestTargets(nil) end
+    end)
     d:EnableMouse(true)
     d.texts, d.buttons, d.textCount, d.buttonCount = {}, {}, 0, 0
     d.rtexts, d.rtextCount = {}, 0

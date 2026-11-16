@@ -625,6 +625,20 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local v = BeestersDungeonMapsView
         check("Alcaz Prison opens on its map, two levels", ns:IsDungeonMapOpen() and not v.NoMap:IsShown() and #ns.DungeonMaps.alcaz.floors == 2)
         ns:CloseDungeonMap(true)
+        -- A selected quest on the map: the boss it has you kill in blue, the book it uses as a blue spot.
+        ns:OpenDungeonMap("sm", 1)
+        ns:ShowQuestTargets(1049, "Mythology of the Titans")
+        local spotShown = false
+        for _, sp in ipairs(rawget(BeestersDungeonMapsView, "QuestSpots") or {}) do if sp:IsShown() then spotShown = true end end
+        check("a quest's object shows as a blue spot, on its level (Scarlet Monastery's Library)", ns:CurrentDungeonFloor() == 2 and spotShown)
+        ns:OpenDungeonMap("dm")
+        ns:ShowQuestTargets(166, "The Defias Brotherhood")
+        local vancleef
+        for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.npcID == 639 then vancleef = b end end
+        check("the boss a quest has you kill gets a blue area", vancleef and vancleef.QuestArea:IsShown())
+        ns:ShowQuestTargets(nil)
+        check("clearing the quest removes it", not vancleef.QuestArea:IsShown())
+        ns:CloseDungeonMap(true)
         -- A dungeon without a map: its page opens with the notice, its bosses in the list.
         local realMap = ns.DungeonMaps.shaper
         ns.DungeonMaps.shaper = { placeholder = true, floors = { { name = "No map yet" } } }

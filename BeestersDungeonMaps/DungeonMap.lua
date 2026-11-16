@@ -790,6 +790,7 @@ end
 -- Boss pin: the boss's still portrait in a round gold ring, with a small skull in the bottom-left
 -- corner. Bosses without a known portrait keep the plain skull.
 local PIN_SIZE, RING_SIZE, BADGE_SIZE = 30, 38, 14
+local QUEST_BLUE = { 0.25, 0.55, 1 } -- the blue of the game's quest objective areas
 local PORTRAIT_MASK = "Interface\\CharacterFrame\\TempPortraitAlphaMask"
 local GOLD_RING = "Interface\\Common\\GoldRing"
 
@@ -836,6 +837,14 @@ local function CreateBossButton(parent)
     button.Highlight = button:CreateTexture(nil, "HIGHLIGHT")
     button.Highlight:SetBlendMode("ADD")
     button.Highlight:SetAlpha(0.4)
+    -- The quest you selected has you kill this boss: a blue area round it, like the game's
+    -- quest objective areas on the map.
+    button.QuestArea = button:CreateTexture(nil, "BACKGROUND")
+    button.QuestArea:SetSize(RING_SIZE + 22, RING_SIZE + 22)
+    button.QuestArea:SetPoint("CENTER")
+    button.QuestArea:SetTexture(PORTRAIT_MASK)
+    button.QuestArea:SetVertexColor(QUEST_BLUE[1], QUEST_BLUE[2], QUEST_BLUE[3], 0.55)
+    button.QuestArea:Hide()
     SetupBossFrame(button)
     return button
 end
@@ -940,6 +949,94 @@ local function Layout()
             button:SetPoint("CENTER", view.Art, "TOPLEFT", button.boss.x * artW, -button.boss.y * artH)
         end
     end
+    for _, spot in ipairs(rawget(view, "QuestSpots") or {}) do
+        if spot:IsShown() then
+            spot:ClearAllPoints()
+            spot:SetPoint("CENTER", view.Art, "TOPLEFT", spot.x * artW, -spot.y * artH)
+        end
+    end
+end
+
+----------------------------------------------------------------------
+-- The quest you selected in the dungeon tab, on the map: the bosses it has you kill get a blue
+-- area round their pin, the objects it uses (a book, a chest, a tablet) a blue area of their
+-- own (ns.QuestTargets, tools/build_quests.py). Quests about ordinary creatures get none.
+----------------------------------------------------------------------
+
+local questTargets -- { bosses = {npcID = true}, spots = { {floor, x, y, name}, ... }, name = questName }
+
+local function CreateQuestSpot(parent)
+    local spot = CreateFrame("Frame", nil, parent)
+    spot:SetSize(26, 26)
+    spot:SetFrameLevel(parent:GetFrameLevel() + 2)
+    spot.Area = spot:CreateTexture(nil, "ARTWORK")
+    spot.Area:SetAllPoints()
+    spot.Area:SetTexture(PORTRAIT_MASK)
+    spot.Area:SetVertexColor(QUEST_BLUE[1], QUEST_BLUE[2], QUEST_BLUE[3], 0.55)
+    spot.Ring = spot:CreateTexture(nil, "OVERLAY")
+    spot.Ring:SetTexture(GOLD_RING)
+    spot.Ring:SetSize(30, 30)
+    spot.Ring:SetPoint("CENTER")
+    spot.Ring:SetDesaturated(true)
+    spot.Ring:SetVertexColor(0.55, 0.75, 1)
+    spot:EnableMouse(true)
+    spot:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(self.name or "", 1, 1, 1)
+        if questTargets and questTargets.name then
+            GameTooltip:AddLine(questTargets.name, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b)
+        end
+        GameTooltip:Show()
+    end)
+    spot:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    return spot
+end
+
+function ns:DrawQuestTargets()
+    if not view then return end
+    for _, button in ipairs(view.BossButtons) do
+        local on = questTargets and button:IsShown() and button.boss and button.boss.npcID and questTargets.bosses[button.boss.npcID]
+        button.QuestArea:SetShown(on and true or false)
+    end
+    view.QuestSpots = rawget(view, "QuestSpots") or {}
+    local n = 0
+    for _, s in ipairs(questTargets and questTargets.spots or {}) do
+        if s[1] == current.floor then
+            n = n + 1
+            local spot = view.QuestSpots[n] or CreateQuestSpot(view.Art)
+            view.QuestSpots[n] = spot
+            spot.x, spot.y, spot.name = s[2], s[3], s[4]
+            spot:Show()
+        end
+    end
+    for i = n + 1, #view.QuestSpots do view.QuestSpots[i]:Hide() end
+    Layout()
+end
+
+-- The level a quest's targets are on, when none are on the level showing.
+local function QuestTargetFloor()
+    if not questTargets then return nil end
+    local floors = {}
+    for _, b in ipairs(BossesWithPositions(current.key)) do
+        if b.npcID and questTargets.bosses[b.npcID] and b.floor then floors[b.floor] = true end
+    end
+    for _, s in ipairs(questTargets.spots) do floors[s[1]] = true end
+    if floors[current.floor] then return nil end
+    for f = 1, 10 do if floors[f] then return f end end
+end
+
+-- questID: the quest (or chain step) selected in the dungeon tab; nil clears the marks.
+function ns:ShowQuestTargets(questID, questName)
+    questTargets = nil
+    local t = questID and ns.QuestTargets and ns.QuestTargets[questID]
+    local here = t and current.key and t[current.key]
+    if here then
+        questTargets = { bosses = {}, spots = here[2] or {}, name = questName }
+        for _, npc in ipairs(here[1] or {}) do questTargets.bosses[npc] = true end
+    end
+    if not (view and ns:IsDungeonMapOpen()) then return end
+    local floor = QuestTargetFloor()
+    if floor then ShowFloor(floor) else ns:DrawQuestTargets() end
 end
 
 function ShowFloor(index)
@@ -1000,6 +1097,7 @@ function ShowFloor(index)
     end
     for i = pinIndex + 1, #view.BossButtons do view.BossButtons[i]:Hide() end
     for i = rowIndex + 1, #view.ListRows do view.ListRows[i]:Hide() end
+    ns:DrawQuestTargets()
     view.List:SetShown(rowIndex > 0)
     if rowIndex > 0 then
         local widest = 120
@@ -1287,6 +1385,7 @@ end
 
 function ns:CloseDungeonMap(refreshNavBar)
     if not ns:IsDungeonMapOpen() then return end
+    ns:ShowQuestTargets(nil)
     view:Hide()
     if lootPanel then lootPanel:Hide() end
     if ns.HideDungeonQuests then ns:HideDungeonQuests() end

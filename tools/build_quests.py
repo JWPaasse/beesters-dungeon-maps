@@ -162,6 +162,52 @@ def find_new_dungeon_quests(quests_lua, npcs_lua, curated):
     return found, links
 
 
+def target_lines(quest_rows, item):
+    """Where in the dungeon a quest is done, for the dungeon map: the bosses it has you kill (or
+    that drop its item; not items ordinary creatures drop too), and the objects it uses (where the
+    Classic database's spawn points land reliably on the map, tools/quest_spots.json)."""
+    text = (ROOT / "BeestersDungeonMaps" / "Data" / "Bosses.lua").read_text(encoding="utf-8")
+    body = text.split("ns.Bosses = {", 1)[1].split("\n}\n", 1)[0]
+    boss_npcs = {key: {int(n) for n in re.findall(r'\{\d+,"(?:[^"\\]|\\.)*",(\d+),', b)}
+                 for key, b in re.findall(r'\["(\w+)"\] = \{ (.*?) \},?\n', body + "\n")}
+    all_bosses = set().union(*boss_npcs.values()) if boss_npcs else set()
+    spots_file = ROOT / "tools" / "quest_spots.json"
+    spots = json.loads(spots_file.read_text(encoding="utf-8"))["objects"] if spots_file.exists() else {}
+    lines = ["-- Where a quest is done inside the dungeon: [questID] = { [instanceKey] = { {bossNpcID, ...},",
+             "--   { {floor, x, y, objectName}, ... } } }", "ns.QuestTargets = {"]
+    count = 0
+    for qid, r in sorted(quest_rows.items()):
+        bosses = set(r["kills"])
+        for iid in r["items"]:
+            it = item(iid)
+            drops = set(ids(field(it, I_NPC_DROPS)))
+            if drops & all_bosses and len(drops - all_bosses) < 3:
+                bosses |= drops & all_bosses
+        objects = set(r["objects"]) | set(r["startObject"]) | set(r["endObject"])
+        for iid in r["items"]:
+            objects |= set(ids(field(item(iid), I_OBJECT_DROPS)))
+        per_key = {}
+        for key, npcs in boss_npcs.items():
+            hit = sorted(bosses & npcs)
+            if hit:
+                per_key.setdefault(key, [hit, []])
+        for oid in sorted(objects):
+            entry = spots.get(str(oid))
+            for key, floor, x, y in (entry or {}).get("spots", []):
+                per_key.setdefault(key, [[], []])[1].append((floor, x, y, entry["name"]))
+        if not per_key:
+            continue
+        count += 1
+        parts = []
+        for key, (hit, where) in sorted(per_key.items()):
+            spot_txt = ",".join("{%d,%.3f,%.3f,%s}" % (f, x, y, lua_str(n)) for f, x, y, n in where)
+            parts.append("[%s]={{%s},{%s}}" % (lua_str(key), ",".join(map(str, hit)), spot_txt))
+        lines.append(f"    [{qid}] = {{{','.join(parts)}}},")
+    lines.append("}")
+    print(f"Quest targets on the dungeon maps: {count} quests")
+    return lines
+
+
 def main():
     if len(sys.argv) != 2:
         sys.exit(__doc__)
@@ -314,6 +360,7 @@ def main():
         objectives = field(q, Q_OBJECTIVES) or []
         obj_items = [field(o, 1) for o in (field(objectives, 3) or []) if field(o, 1)]
         obj_creatures = [field(o, 1) for o in (field(objectives, 1) or []) if field(o, 1)]
+        obj_objects = [field(o, 1) for o in (field(objectives, 2) or []) if field(o, 1)]
         npc_refs.update(start_npcs + end_npcs + obj_creatures)
         obj_refs.update(start_objs + end_objs)
         item_refs.update(start_items + obj_items)
@@ -330,7 +377,7 @@ def main():
             "startNpc": start_npcs, "startObject": start_objs, "startItem": start_items,
             "endNpc": end_npcs, "endObject": end_objs,
             "preAny": ids(field(q, Q_PRE_SINGLE)), "preAll": ids(field(q, Q_PRE_GROUP)),
-            "items": obj_items, "kills": obj_creatures,
+            "items": obj_items, "kills": obj_creatures, "objects": obj_objects,
             "rewards": sorted(rewards.get(qid, [])),
             "repeatable": bool((field(q, Q_SPECIAL_FLAGS) or 0) & 1),
             "followUp": followups.get(qid),
@@ -416,6 +463,7 @@ def main():
         out.append("    [%d] = {%s,%s,%s,%s}," % (iid, lua_str(r["name"] or "?"), lua_list(r["drops"]),
                                                   lua_list(r["objects"]), r["starts"] or "nil"))
     out.append("}")
+    out += [""] + target_lines(quest_rows, item)
     OUT.write_text("\n".join(out) + "\n", encoding="utf-8")
 
     total = sum(len(v) for v in dungeon_quests.values())
