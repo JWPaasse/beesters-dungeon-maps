@@ -198,7 +198,23 @@ def main():
         if c not in good:
             print("  off:", c)
 
+    # Only dungeons where the bosses land where they belong are trusted for the objects.
+    per_key = {}
+    for c in checks:
+        per_key.setdefault(c[0], [0, 0])
+        per_key[c[0]][1] += 1
+        if c in good:
+            per_key[c[0]][0] += 1
+    trusted = {k for k, (ok, n) in per_key.items() if n and ok / n >= 0.8}
+    print("Trusted dungeons:", ", ".join(sorted(trusted)))
+    print("Not trusted:", ", ".join(f"{k} {ok}/{n}" for k, (ok, n) in sorted(per_key.items()) if k not in trusted))
+    for oid in list(spots):
+        spots[oid] = [s for s in spots[oid] if s[0] in trusted]
+        if not spots[oid]:
+            del spots[oid]
+
     result = {"_source": f"Object spawn points: CMaNGOS Classic database (GPL-3.0). Map projection: the game's UiMapAssignment ({product} {build}, via wago.tools).",
+              "trusted": sorted(trusted),
               "objects": {str(k): {"name": objects[k], "spots": v} for k, v in sorted(spots.items())},
               "missing": sorted(set(missing))}
     OUT.write_text(json.dumps(result, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
