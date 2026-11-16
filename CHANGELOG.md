@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Quests that only send you to someone (breadcrumbs, like Tabetha's Task: "Speak with Tabetha in Dustwallow Marsh") are no longer listed as dungeon quests when the quest they lead to is already there; Tiara of the Deep says where to find Tabetha. About a dozen of them, in Zul'Farrak, Gnomeregan, Blackrock Depths and Spire, Dire Maul and Blackfathom Deeps.
+
 ## 1.3.2
 
 - The loot window says under the boss's name what it is, the way the game's own tooltip does: "Level 41 Humanoid (Elite)", or "Level ?? Dragonkin (Boss)". Classic bosses from the Classic database; the bosses new in Forever are noted when you target them.

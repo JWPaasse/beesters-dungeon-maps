@@ -230,6 +230,25 @@ def main():
                 dungeon_quests[key].append(qid)
             core.add(qid)
 
+    # Breadcrumbs ("Speak with Tabetha in Dustwallow Marsh", which only sends you to the giver of
+    # Tiara of the Deep) aren't dungeon quests when the quest they lead to is already listed;
+    # unless the breadcrumb itself sends you into the dungeon.
+    for key, qids in dungeon_quests.items():
+        names = [info["name"].lower() for info in curated.values() if info["key"] == key]
+        if key in ("dme", "dmn", "dmw"):
+            names.append("dire maul")
+        listed = set(qids)
+        keep = []
+        for qid in qids:
+            q = quest(qid)
+            target = field(q, Q_BREADCRUMB_FOR)
+            text = field(q, Q_OBJ_TEXT)
+            text = " ".join(t for t in text if isinstance(t, str)) if isinstance(text, list) else (text or "")
+            if target in listed and not any(n in text.lower() for n in names):
+                continue
+            keep.append(qid)
+        dungeon_quests[key] = keep
+
     # Lead-in quests (everything that must be done first) and direct follow-ups.
     wanted = set(core)
     todo = list(core)
