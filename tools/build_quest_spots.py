@@ -69,6 +69,7 @@ def wago_tables(names):
     candidates.sort(key=lambda pv: [int(x) for x in pv[1].split(".")], reverse=True)
     for product, build in candidates[:4]:
         out = {}
+
         for name in names:
             out[name] = list(csv.DictReader(io.StringIO(fetch(f"{WAGO}/db2/{name}/csv?build={build}"))))
         print(f"{product} {build}: " + ", ".join(f"{n} {len(r)} rows" for n, r in out.items()))
@@ -110,7 +111,12 @@ def main():
     objects = quest_objects(Path(sys.argv[2]).resolve())
     print(f"{len(objects)} objects used by dungeon quests")
 
-    product, build, t = wago_tables(["UiMapAssignment", "UiMapXMapArt", "UiMapArtTile"])
+    # Which UiMap each of our map pictures is: the current Classic client knows the picture
+    # files (the map IDs are the same in every version); the regions come from Wrath Classic.
+    latest = json.loads(fetch(WAGO + "/api/builds"))["wow_classic"][0]["version"]
+    t = {n: list(csv.DictReader(io.StringIO(fetch(f"{WAGO}/db2/{n}/csv?build={latest}")))) for n in ("UiMapXMapArt", "UiMapArtTile")}
+    product, build, t3 = wago_tables(["UiMapAssignment"])
+    t["UiMapAssignment"] = t3["UiMapAssignment"]
     tile_art = {as_int(r["FileDataID"]): as_int(r["UiMapArtID"]) for r in t["UiMapArtTile"]}
     art_maps = {}
     for r in t["UiMapXMapArt"]:
