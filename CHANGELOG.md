@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- The loot window says under the boss's name what it is, the way the game's own tooltip does: "Level 41 Humanoid (Elite)", or "Level ?? Dragonkin (Boss)". Classic bosses from the Classic database; the bosses new in Forever are noted when you target them.
 - The Drowned City: Zul'Alai, Var'Taka and the Primeval Elemental show their loot. QuestieDB has several creatures by each name, and the addon picked one without loot; it now takes the one whose loot is known.
 
 ## 1.3.1

@@ -531,14 +531,53 @@ local function AcquireHeader(panel, index, sub)
     return h
 end
 
+-- The line under a boss's name, as the game's own unit tooltip has it: "Level 41 Humanoid
+-- (Elite)", or "Level ?? Dragonkin (Boss)" for a boss with a skull. From the addon's data, or
+-- noted when you targeted the boss (the bosses new in Forever).
+local CREATURE_TYPES = { "Beast", "Dragonkin", "Demon", "Elemental", "Giant", "Undead", "Humanoid", "Critter", "Mechanical" }
+local RANKS = { [1] = ELITE or "Elite", [2] = "Rare Elite", [3] = BOSS or "Boss", [4] = ITEM_QUALITY3_DESC or "Rare" }
+local CLASSIFICATION_RANK = { elite = 1, rareelite = 2, worldboss = 3, rare = 4 }
+local function CreatureTypeName(id)
+    local info = C_CreatureInfo and C_CreatureInfo.GetCreatureTypeInfo and C_CreatureInfo.GetCreatureTypeInfo(id)
+    return type(info) == "table" and info.name or CREATURE_TYPES[id]
+end
+local function BossLine(key, boss)
+    local minLevel, maxLevel, rank, kind
+    local data = boss.npcID and ns.BossInfo and ns.BossInfo[boss.npcID]
+    local learned = ns.db and ns.db.bossInfo and ns.db.bossInfo[key] and ns.db.bossInfo[key][boss.name]
+    if data then
+        minLevel, maxLevel, rank, kind = data[1], data[2], data[3], CreatureTypeName(data[4])
+    elseif learned then
+        minLevel, maxLevel, rank, kind = learned[1], learned[1], learned[2], learned[3]
+    else
+        return nil
+    end
+    local level
+    if rank == 3 or (minLevel or 0) <= 0 then
+        level = "??"
+    elseif maxLevel and maxLevel > minLevel then
+        level = ("%d-%d"):format(minLevel, maxLevel)
+    else
+        level = tostring(minLevel)
+    end
+    local text = (UNIT_TYPE_LEVEL_TEMPLATE or "Level %s %s"):format(level, kind or "")
+    text = text:gsub("%s+$", "")
+    if RANKS[rank] then text = ("%s (%s)"):format(text, RANKS[rank]) end
+    return text
+end
+ns.BossLine = BossLine -- used by tools/test_addon.py
+
 local function RefreshLootPanel(panel)
     panel = panel or lootPanel
     if not panel or not panel:IsShown() then return end
     local boss = panel.boss
     panel.Title:SetText(boss.name)
+    local line = BossLine(current.key, boss)
+    panel.Sub:SetText(line or "")
+    panel.Sub:SetShown(line ~= nil)
     local groups, waiting = LootGroups(boss)
 
-    local y, rowIndex, headerIndex = 32, 0, 0
+    local y, rowIndex, headerIndex = line and 46 or 32, 0, 0
     panel.shown = {} -- { section, itemID } in display order (read by tools/test_addon.py)
     ForEachLoot(groups, function(text, sub)
         if not sub and headerIndex > 0 then y = y + 4 end
@@ -573,9 +612,11 @@ local function RefreshLootPanel(panel)
     end)
     for i = rowIndex + 1, #panel.Rows do panel.Rows[i]:Hide() end
     for i = headerIndex + 1, #panel.Headers do panel.Headers[i]:Hide() end
+    panel.Empty:ClearAllPoints()
+    panel.Empty:SetPoint("TOPLEFT", 12, -(line and 48 or 34))
     panel.Empty:SetShown(rowIndex == 0)
     panel.Empty:SetText(waiting and (SEARCH_LOADING_TEXT or "Loading...") or "No Bind on Pickup loot of Uncommon or better known.")
-    if rowIndex == 0 then y = 54 end
+    if rowIndex == 0 then y = line and 68 or 54 end
     -- How to place a boss's spot yourself, or undo it.
     local hint = {}
     if boss.custom then
@@ -612,6 +653,9 @@ local function CreateLootPanel(parent, name)
     panel.Title:SetPoint("TOPLEFT", 12, -10)
     panel.Title:SetPoint("RIGHT", -30, 0)
     panel.Title:SetJustifyH("LEFT")
+    panel.Sub = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+    panel.Sub:SetPoint("TOPLEFT", panel.Title, "BOTTOMLEFT", 0, -3)
+    panel.Sub:SetJustifyH("LEFT")
     panel.Close = CreateFrame("Button", nil, panel, "UIPanelCloseButton")
     panel.Close:SetPoint("TOPRIGHT", 2, 2)
     panel.Empty = panel:CreateFontString(nil, "ARTWORK", "GameFontDisableSmall")
@@ -1457,7 +1501,21 @@ function ns:InitDungeonMap()
         for _, b in ipairs(BossesWithPositions(key)) do
             if Normalize(b.name) == Normalize(name) then boss = b end
         end
-        if not boss or BossDisplayID(key, boss) then return end
+        if not boss then return end
+        -- Its level, rank and creature type, when the addon's data doesn't have them.
+        if not (boss.npcID and ns.BossInfo and ns.BossInfo[boss.npcID]) then
+            pcall(function()
+                local level, class, kind = UnitLevel("target"), UnitClassification("target"), UnitCreatureType("target")
+                for _, v in ipairs({ level, class, kind }) do
+                    if issecretvalue and issecretvalue(v) then return end
+                end
+                if type(level) ~= "number" then return end
+                ns.db.bossInfo = ns.db.bossInfo or {}
+                ns.db.bossInfo[key] = ns.db.bossInfo[key] or {}
+                ns.db.bossInfo[key][boss.name] = { level, CLASSIFICATION_RANK[class] or 0, type(kind) == "string" and kind or nil }
+            end)
+        end
+        if BossDisplayID(key, boss) then return end
         probe = probe or CreateFrame("PlayerModel", nil, UIParent)
         probe:SetSize(2, 2)
         probe:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 0, 0)

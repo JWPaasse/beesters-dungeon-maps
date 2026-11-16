@@ -763,12 +763,22 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         UnitExists = function() return true end
         UnitIsPlayer = function() return false end
         UnitName = function() return "Overlord Mugg" end
+        UnitLevel = function() return 45 end
+        UnitClassification = function() return "elite" end
+        UnitCreatureType = function() return "Humanoid" end
         runEvent(nil, "PLAYER_TARGET_CHANGED")
         CreateFrame, UnitExists, UnitIsPlayer, UnitName = realCreate, realExists, realIsPlayer, realName
         check("targeting a boss without a picture notes its model", ns.db.bossModels and ns.db.bossModels.kroldok and ns.db.bossModels.kroldok["Overlord Mugg"] == 98765)
         for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Overlord Mugg" then mugg = b end end
         check("its pin then shows the portrait", mugg and mugg.displayID == 98765 and mugg.Badge:IsShown())
-        ns.db.bossModels = nil
+        check("targeting it also notes its level, rank and type", ns.BossLine("kroldok", mugg.boss) == "Level 45 Humanoid (Elite)")
+        ns.db.bossModels, ns.db.bossInfo = nil, nil
+        -- From the data: "Level ?? Dragonkin (Boss)", like the game's tooltip.
+        ns.BossInfo = ns.BossInfo or {}
+        ns.BossInfo[999001] = { 63, 63, 3, 2 }
+        ns.BossInfo[999002] = { 41, 42, 1, 7 }
+        check("a boss's level line reads like the game's tooltip",
+            ns.BossLine("x", { npcID = 999001 }) == "Level ?? Dragonkin (Boss)" and ns.BossLine("x", { npcID = 999002 }) == "Level 41-42 Humanoid (Elite)")
         ns:CloseDungeonMap(true)
         -- Deadmines: Ironclad Cove is on the second map.
         GetInstanceInfo = function() return "The Deadmines", "party", 1, "Normal", 5, 0, false, 36 end
