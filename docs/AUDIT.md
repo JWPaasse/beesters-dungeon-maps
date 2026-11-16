@@ -9,7 +9,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Blackfathom Deeps | 6/6 | 0/6 | 0 | 34 | 3 |
 | Blackmaw Hold | 0/7 | 0/7 | 0 | 24 | 21 |
 | Blackrock Depths | 18/18 | 0/18 | 1 | 81 | 1 |
-| Blackrock Spire | 19/21 | 0/21 | 0 | 121 | 1 |
+| Blackrock Spire | 19/21 | 0/21 | 0 | 122 | 1 |
 | City of Dalaran | 8/8 | 0/8 | 0 | 24 | 24 |
 | Dire Maul East | 5/6 | 0/6 | 0 | 31 | 0 |
 | Dire Maul North | 6/6 | 0/6 | 0 | 47 | 0 |
@@ -27,7 +27,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 35 | 7 |
 | Scholomance | 12/15 | 0/15 | 1 | 233 | 0 |
 | Shadowfang Keep | 10/10 | 0/10 | 0 | 35 | 7 |
-| Shaper's Terrace | 0/11 | 0/11 | 2 | 18 | 17 |
+| Shaper's Terrace | 0/11 | 0/11 | 2 | 22 | 21 |
 | Stratholme | 16/17 | 0/17 | 0 | 128 | 9 |
 | Sunken Temple | 5/7 | 0/7 | 3 | 20 | 1 |
 | The Deadmines | 8/8 | 0/8 | 0 | 35 | 5 |
@@ -35,7 +35,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 206/243 | 0/243 | 8 | 1224 | 231 |
+| **All** | 206/243 | 0/243 | 8 | 1229 | 235 |
 
 ## Alcaz Prison
 
@@ -101,7 +101,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Shadow Hunter Vosh'gajin | yes | journal |  | 6 | 1 |
 | War Master Voone | yes | journal |  | 7 | 0 |
 | Mor Grayhoof | **no** | — |  | 5 | 0 |
-| Mother Smolderweb | yes | journal |  | 4 | 0 |
+| Mother Smolderweb | yes | journal |  | 4 (+1 unknown) | 0 |
 | Urok Doomhowl | yes | journal |  | 4 | 0 |
 | Quartermaster Zigris | yes | journal |  | 2 (+1 unknown) | 0 |
 | Halycon | yes | journal |  | 4 | 0 |
@@ -323,17 +323,17 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Titanosaur | **no** | — |  | 0 (+2 unknown) | 2 |
+| Titanosaur | **no** | — |  | 0 (+3 unknown) | 3 |
 | Ravasaur Hunters | **no** | — |  | 0 | 0 |
-| Thunderhoof | **no** | — |  | 0 (+2 unknown) | 2 |
-| Venomridge | **no** | — |  | 0 (+2 unknown) | 2 |
+| Thunderhoof | **no** | — |  | 0 (+3 unknown) | 3 |
+| Venomridge | **no** | — |  | 0 (+3 unknown) | 3 |
 | Direhorn Matriarch | **no** | — |  | 0 (+3 unknown) | 3 |
 | Cinder | **no** | — |  | 0 (+1 unknown) | 1 |
 | King Op | **no** | — |  | 0 | 0 |
 | Snowtalon | **no** | — |  | 0 (+2 unknown) | 2 |
 | Bolt | **no** | — |  | 0 (+2 unknown) | 2 |
 | Vitrix | **no** | — |  | 0 (+1 unknown) | 1 |
-| Nanaya | **no** | — |  | 0 (+3 unknown) | 2 |
+| Nanaya | **no** | — |  | 0 (+4 unknown) | 3 |
 
 ## Stratholme
 
