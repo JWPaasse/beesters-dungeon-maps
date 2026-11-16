@@ -321,6 +321,10 @@ def main():
     if models_file.exists():
         from build_boss_models import models_block
         out += [models_block(json.loads(models_file.read_text(encoding="utf-8"))["models"]), ""]
+    info_file = ROOT / "tools" / "boss_info.json"
+    if info_file.exists():
+        from build_boss_models import info_block
+        out += [info_block(json.loads(info_file.read_text(encoding="utf-8"))["info"]), ""]
     # Name, quality and binding of the loot (tools/loot_items.json, made by tools/build_loot_items.py).
     items_file = ROOT / "tools" / "loot_items.json"
     if items_file.exists():

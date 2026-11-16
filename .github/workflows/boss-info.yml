@@ -1,0 +1,38 @@
+name: Boss levels and types
+
+# Reads the bosses' pictures, levels, ranks and creature types from the CMaNGOS Classic
+# database and commits them (tools/boss_models.json, tools/boss_info.json, Data/Bosses.lua).
+# Runs when the script changes, or by hand. It never publishes a release; the daily data
+# refresh keeps these up to date afterwards.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/build_boss_models.py"
+      - ".github/workflows/boss-info.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Read the Classic database
+        run: |
+          python3 tools/get_classicdb.py /tmp/classicdb.sql.gz
+          python3 tools/build_boss_models.py /tmp/classicdb.sql.gz
+      - name: Commit
+        run: |
+          git add tools/boss_models.json tools/boss_info.json BeestersDungeonMaps/Data/Bosses.lua
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Boss levels and types"
+          git pull --rebase
+          git push

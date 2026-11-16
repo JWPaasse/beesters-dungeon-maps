@@ -22,6 +22,18 @@ from build_quest_text import parse_values  # noqa: E402
 
 
 LEARNED = ROOT / "tools" / "learned_models.json"
+INFO = ROOT / "tools" / "boss_info.json"
+
+
+def info_block(info):
+    """[npcID] = { minLevel, maxLevel, rank, creatureType } for the line under a boss's name.
+    Rank: 1 elite, 2 rare elite, 3 boss (level ??), 4 rare. Creature type: the game's numbers."""
+    lines = ["-- [npcID] = { minLevel, maxLevel, rank (1 elite, 2 rare elite, 3 boss, 4 rare), creature type }",
+             "-- (CMaNGOS Classic-DB, GPL-3.0)", "ns.BossInfo = {"]
+    for nid in sorted(info, key=int):
+        lines.append("    [%s] = {%s}," % (nid, ",".join(str(int(v)) for v in info[nid])))
+    lines.append("}")
+    return "\n".join(lines)
 
 
 def models_block(models):
@@ -46,6 +58,12 @@ def write_block(models):
         text = re.sub(r"-- \[npcID\] = creature display ID.*?\nns\.BossModels = \{.*?\n\}", lambda m: block, text, flags=re.S)
     else:
         text = text.replace("-- [npcID] = { itemID, ... }", block + "\n\n-- [npcID] = { itemID, ... }", 1)
+    if INFO.exists():
+        block = info_block(json.loads(INFO.read_text(encoding="utf-8"))["info"])
+        if "ns.BossInfo = {" in text:
+            text = re.sub(r"-- \[npcID\] = \{ minLevel.*?\nns\.BossInfo = \{.*?\n\}", lambda m: block, text, flags=re.S)
+        else:
+            text = text.replace("-- [npcID] = { itemID, ... }", block + "\n\n-- [npcID] = { itemID, ... }", 1)
     BOSSES.write_text(text, encoding="utf-8")
 
 
@@ -55,15 +73,19 @@ def main():
     create = re.search(r"CREATE TABLE `creature_template` \((.*?)\) ENGINE", sql, re.S).group(1)
     cols = re.findall(r"^\s*`(\w+)`", create, re.M)
     wanted = {int(n) for n in re.findall(r'\{\d+,"(?:[^"\\]|\\.)*",(\d+)[,}]', BOSSES.read_text(encoding="utf-8"))}
-    models = {}
+    models, info = {}, {}
     for m in re.finditer(r"INSERT INTO `creature_template` VALUES (.*?);\n", sql, re.S):
         for row in parse_values(m.group(1)):
             r = dict(zip(cols, row))
             if r["Entry"] in wanted and r["ModelId1"]:
                 models[str(r["Entry"])] = r["ModelId1"]
+            if r["Entry"] in wanted:
+                info[str(r["Entry"])] = [r.get("MinLevel") or 0, r.get("MaxLevel") or 0, r.get("Rank") or 0, r.get("CreatureType") or 0]
     OUT.write_text(json.dumps({"_source": "CMaNGOS Classic-DB creature_template.ModelId1 (GPL-3.0)", "models": models}, indent=1) + "\n", encoding="utf-8")
+    INFO.write_text(json.dumps({"_source": "CMaNGOS Classic-DB creature_template MinLevel, MaxLevel, Rank, CreatureType (GPL-3.0)",
+                                "info": info}, indent=1) + "\n", encoding="utf-8")
     write_block(models)
-    print(f"Models for {len(models)} of {len(wanted)} bosses")
+    print(f"Models for {len(models)} of {len(wanted)} bosses, level and type for {len(info)}")
 
 
 if __name__ == "__main__":

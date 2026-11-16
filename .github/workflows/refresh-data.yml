@@ -81,6 +81,7 @@ jobs:
           if [ -f /tmp/classicdb.sql.gz ]; then
             python3 tools/build_loot_items.py /tmp/classicdb.sql.gz || echo "::warning::Loot item data not refreshed"
             python3 tools/build_classic_tooltips.py /tmp/classicdb.sql.gz || echo "::warning::Classic tooltips not refreshed"
+            python3 tools/build_boss_models.py /tmp/classicdb.sql.gz || echo "::warning::Boss pictures and levels not refreshed"
           fi
           # Item tooltips: from the game's own item tables, else classic stats. Keeps the old data if wago.tools is down.
           python3 tools/fetch_game_items.py || echo "::warning::Game item data not refreshed"
