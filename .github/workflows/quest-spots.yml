@@ -1,0 +1,39 @@
+name: Quest spots
+
+# Where the objects that dungeon quests use stand on the dungeon maps (tools/quest_spots.json),
+# from the CMaNGOS Classic database's spawn points and the game's map tables. Runs when the
+# script changes, or by hand. It never publishes a release.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tools/build_quest_spots.py"
+      - ".github/workflows/quest-spots.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build
+        run: |
+          pip install lupa
+          git clone --depth 1 https://github.com/Questie/QuestieDB.git /tmp/QuestieDB
+          python3 tools/get_classicdb.py /tmp/classicdb.sql.gz
+          python3 tools/build_quest_spots.py /tmp/classicdb.sql.gz /tmp/QuestieDB
+      - name: Commit
+        run: |
+          git add tools/quest_spots.json
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Quest spots"
+          git pull --rebase
+          git push
