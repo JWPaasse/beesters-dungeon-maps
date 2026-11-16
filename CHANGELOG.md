@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The Drowned City: Zul'Alai, Var'Taka and the Primeval Elemental show their loot. QuestieDB has several creatures by each name, and the addon picked one without loot; it now takes the one whose loot is known.
+
 ## 1.3.1
 
 - The Drowned City: all six bosses have their place on the map (the Primeval Elemental in Atal'byzal).

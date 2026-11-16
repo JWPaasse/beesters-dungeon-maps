@@ -250,13 +250,16 @@ def main():
         candidates = by_name.get(norm(aliases.get(norm(name), name)), [])
         if not candidates:
             return None
-        best = None
+        # The creature spawned in this dungeon; else (several creatures of that name, none with
+        # known spawns: WoW Forever's new bosses) the one QuestieDB knows the most loot of.
+        best, best_key = None, None
         for nid in candidates:
             spawns = to_py(npcs[nid][N_SPAWNS]) or {}
             if isinstance(spawns, dict) and areas & set(spawns):
                 return nid
-            if best is None or (not spawns and (npcs[nid][N_RANK] or 0) >= 1):
-                best = nid
+            key = (not spawns and (npcs[nid][N_RANK] or 0) >= 1, drop_counts.get(nid, 0))
+            if best is None or key > best_key:
+                best, best_key = nid, key
         return best
 
     # Every item's droppers, for the boss-only filter below.
@@ -265,6 +268,10 @@ def main():
         npc_list = ids(to_py(entity[I_NPC_DROPS]))
         if npc_list and entity[I_CLASS] in LOOT_CLASSES:
             droppers[iid] = set(npc_list)
+    drop_counts = {}
+    for who in droppers.values():
+        for nid in who:
+            drop_counts[nid] = drop_counts.get(nid, 0) + 1
 
     bosses, loot, unmatched = {}, {}, []
     for area_str, info in curated.items():
