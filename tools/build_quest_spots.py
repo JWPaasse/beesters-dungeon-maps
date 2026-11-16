@@ -56,11 +56,18 @@ def table(sql, name):
 
 
 def wago_tables(names):
+    """The map tables of a client whose dungeons are still the classic ones: Wrath of the Lich
+    King Classic (3.4). Later Classic clients have the Cataclysm and Mists rebuilds (Shadowfang
+    Keep, the Deadmines, Scarlet Monastery, Scholomance), and Classic Era's copy of the table is
+    nearly empty."""
     builds = json.loads(fetch(WAGO + "/api/builds"))
-    for product in ("wow_classic_era", "wow_classic", "wowf"):
-        if product not in builds:
-            continue
-        build = builds[product][0]["version"]
+    candidates = []
+    for product, versions in builds.items():
+        for v in versions:
+            if str(v.get("version", "")).startswith("3.4."):
+                candidates.append((product, v["version"]))
+    candidates.sort(key=lambda pv: [int(x) for x in pv[1].split(".")], reverse=True)
+    for product, build in candidates[:4]:
         out = {}
         for name in names:
             out[name] = list(csv.DictReader(io.StringIO(fetch(f"{WAGO}/db2/{name}/csv?build={build}"))))
