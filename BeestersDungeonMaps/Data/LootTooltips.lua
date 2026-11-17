@@ -976,6 +976,7 @@ ns.LootTooltips = {
     [228312] = {"|cffa335eePlans: Invincible Mail|r","Requires Armorsmith","Requires Blacksmithing (300)","Use: Teaches you how to make Invincible Mail."},
     [245675] = {"|cffffffffGordok Inner Door Key|r","Binds when picked up","Unique"},
     [249520] = {"|cff0070ddFormula: Molten Heart of the Mountain|r","Binds when picked up","Requires Enchanting (265)","Use: Teaches you how to craft a Molten Heart of the Mountain."},
+    [249521] = {"|cff0070ddFormula: Dormant Heart of the Mountain|r","Binds when picked up","Requires Enchanting (265)","Use: Teaches you how to craft a Dormant Heart of the Mountain."},
     [249696] = {"|cffffffffTusks of the Unbroken|r","Quest Item","Unique"},
     [249697] = {"|cffffffffClaws of the Great Bear|r","Quest Item","Unique"},
     [251360] = {"|cff0070ddPlans: Veteran's Gloves|r","Binds when picked up"," ","|cff0070ddVeteran's Gloves|r","Binds when picked up","Hands\tMail","115 Armor","+5 Strength","+3 Agility","+5 Stamina","Requires Level 15","Use: Teaches you how to craft Veteran's Gloves.","Requires Blacksmithing (80)"},
