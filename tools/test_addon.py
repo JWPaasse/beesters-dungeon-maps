@@ -552,6 +552,15 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("Share sends a quest in your log to the group", pushed == 3 and rawget(share, "reason") == nil)
         ns.ShowQuestDetail(5725)
         check("Share is off for a quest you don't have", rawget(share, "reason") ~= nil)
+        -- Abandon: only for a quest in your log, through the game's own confirmation.
+        local abandon = qp.Detail.AbandonButton
+        check("Abandon is off for a quest you don't have", rawget(abandon, "reason") ~= nil)
+        local abandoned
+        QuestMapQuestOptions_AbandonQuest = function(id) abandoned = id end
+        ns.ShowQuestDetail(5723)
+        abandon.scripts.OnClick(abandon)
+        check("Abandon asks the game to abandon a quest in your log", abandoned == 5723)
+        QuestMapQuestOptions_AbandonQuest = nil
         IsInGroup = function() return false end
         -- Experience: from the data (5725 at its level), and the game's own number when it has one.
         local function special()

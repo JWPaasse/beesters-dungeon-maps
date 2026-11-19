@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The quest details' button bar is Abandon | Share | Show on map, three equal buttons like the game's quest log. Abandon asks for confirmation the way the game does, and only works for quests in your log.
+
 ## 1.4.0
 
 - Select a quest in the dungeon tab and the map shows where it's done: the bosses it has you kill get a blue area round their pin, and the objects it uses (a book, a chest, a tablet) get a blue spot of their own; hover a spot for its name. The map turns to their level if they're on another one. Quests about ordinary creatures get no marks. Objects are shown in the dungeons where their spot is known to be right: Blackfathom Deeps, the Deadmines, Dire Maul North, Ragefire Chasm, Razorfen Downs and Kraul, Scarlet Monastery, Sunken Temple and Zul'Farrak.

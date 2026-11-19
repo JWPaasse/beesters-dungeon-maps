@@ -1144,6 +1144,12 @@ UpdateShareButton = function(d, questID)
     end
     b.reason = reason
     b:SetEnabled(reason == nil)
+    local a = d.AbandonButton
+    if a then
+        a.questID = questID
+        a.reason = not InLog(questID) and "This quest isn't in your quest log." or nil
+        a:SetEnabled(a.reason == nil)
+    end
 end
 
 function ShowDetail(id, entry, stepOverride)
@@ -1459,7 +1465,6 @@ local function CreateDetail(parent)
     d.MapButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     -- One bar of equal buttons under the text, like the game's Abandon | Share | Track.
     d.MapButton:SetHeight(22)
-    d.MapButton:SetPoint("BOTTOMLEFT", d, "BOTTOM", 1, 2)
     d.MapButton:SetPoint("BOTTOMRIGHT", 0, 2)
     d.MapButton:SetFrameLevel(math.max(scroll:GetFrameLevel(), d.Border and d.Border:GetFrameLevel() or 0) + 10)
     d.MapButton:SetText("Show on map")
@@ -1471,8 +1476,7 @@ local function CreateDetail(parent)
     -- Share the quest with your group, like the quest log's Share button.
     d.ShareButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
     d.ShareButton:SetHeight(22)
-    d.ShareButton:SetPoint("BOTTOMLEFT", 0, 2)
-    d.ShareButton:SetPoint("BOTTOMRIGHT", d, "BOTTOM", -1, 2)
+    d.ShareButton:SetPoint("BOTTOM", 0, 2)
     d.ShareButton:SetFrameLevel(d.MapButton:GetFrameLevel())
     d.ShareButton:SetText(SHARE_QUEST_ABBREV or "Share")
     d.ShareButton:SetMotionScriptsWhileDisabled(true)
@@ -1491,6 +1495,44 @@ local function CreateDetail(parent)
         end
     end)
     d.ShareButton:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+    -- Abandon, like the quest log's: the game's own confirmation ("Abandon <quest>?").
+    d.AbandonButton = CreateFrame("Button", nil, d, "UIPanelButtonTemplate")
+    d.AbandonButton:SetHeight(22)
+    d.AbandonButton:SetPoint("BOTTOMLEFT", 0, 2)
+    d.AbandonButton:SetFrameLevel(d.MapButton:GetFrameLevel())
+    d.AbandonButton:SetText(ABANDON_QUEST_ABBREV or "Abandon")
+    d.AbandonButton:SetMotionScriptsWhileDisabled(true)
+    d.AbandonButton:SetScript("OnClick", function(self)
+        local id = self.questID
+        if not (id and InLog(id)) then return end
+        if QuestMapQuestOptions_AbandonQuest then
+            QuestMapQuestOptions_AbandonQuest(id)
+        elseif C_QuestLog.SetSelectedQuest and C_QuestLog.SetAbandonQuest then
+            C_QuestLog.SetSelectedQuest(id)
+            C_QuestLog.SetAbandonQuest()
+            local title = C_QuestLog.GetTitleForQuestID and C_QuestLog.GetTitleForQuestID(id) or ""
+            StaticPopup_Show("ABANDON_QUEST", title)
+        end
+    end)
+    d.AbandonButton:SetScript("OnEnter", function(self)
+        if self.reason then
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText(self.reason, 1, 1, 1, 1, true)
+            GameTooltip:Show()
+        end
+    end)
+    d.AbandonButton:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+    -- Three equal buttons across the bar: Abandon | Share | Show on map.
+    local function SizeButtons()
+        local w = d:GetWidth()
+        if type(w) ~= "number" or w <= 0 then return end
+        local each = (w - 4) / 3
+        for _, b in ipairs({ d.AbandonButton, d.ShareButton, d.MapButton }) do b:SetWidth(each) end
+    end
+    d:HookScript("OnSizeChanged", SizeButtons)
+    SizeButtons()
     return d
 end
 
