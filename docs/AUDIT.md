@@ -6,36 +6,36 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Instance | Bosses placed | Confirmed | Bosses without loot | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
 | Alcaz Prison | 0/5 | 0/5 | 0 | 19 | 15 |
-| Blackfathom Deeps | 6/6 | 0/6 | 0 | 34 | 3 |
-| Blackmaw Hold | 0/7 | 0/7 | 0 | 24 | 21 |
-| Blackrock Depths | 18/18 | 0/18 | 1 | 81 | 1 |
+| Blackfathom Deeps | 6/6 | 0/6 | 0 | 18 | 3 |
+| Blackmaw Hold | 0/7 | 0/7 | 0 | 26 | 21 |
+| Blackrock Depths | 18/18 | 0/18 | 1 | 82 | 1 |
 | Blackrock Spire | 19/21 | 0/21 | 0 | 122 | 1 |
 | City of Dalaran | 8/8 | 0/8 | 0 | 24 | 24 |
 | Dire Maul East | 5/6 | 0/6 | 0 | 31 | 0 |
 | Dire Maul North | 6/6 | 0/6 | 0 | 47 | 0 |
-| Dire Maul West | 6/7 | 0/7 | 0 | 43 | 0 |
+| Dire Maul West | 6/7 | 0/7 | 0 | 44 | 0 |
 | Excavation Site: Wetlands | 3/3 | 0/3 | 0 | 9 | 9 |
-| Gnomeregan | 6/6 | 0/6 | 0 | 24 | 4 |
+| Gnomeregan | 6/6 | 0/6 | 0 | 22 | 4 |
 | Hall of Thanes | 4/4 | 0/4 | 0 | 12 | 12 |
 | Krol'dok Stronghold | 6/6 | 0/6 | 0 | 22 | 19 |
 | Maraudon | 9/9 | 0/9 | 0 | 29 | 1 |
 | Onyxia's Lair | 1/1 | 0/1 | 0 | 20 | 0 |
-| Ragefire Chasm | 4/4 | 0/4 | 0 | 15 | 6 |
+| Ragefire Chasm | 4/4 | 0/4 | 0 | 12 | 6 |
 | Razorfen Downs | 6/6 | 0/6 | 0 | 21 | 3 |
-| Razorfen Kraul | 8/8 | 0/8 | 0 | 24 | 7 |
+| Razorfen Kraul | 8/8 | 0/8 | 0 | 22 | 7 |
 | Ruins of Lordaeron | 6/6 | 0/6 | 0 | 18 | 18 |
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 35 | 7 |
-| Scholomance | 12/15 | 0/15 | 1 | 233 | 0 |
-| Shadowfang Keep | 10/10 | 0/10 | 0 | 35 | 7 |
-| Shaper's Terrace | 0/11 | 0/11 | 2 | 22 | 21 |
-| Stratholme | 16/17 | 0/17 | 0 | 128 | 9 |
+| Scholomance | 12/15 | 0/15 | 1 | 240 | 3 |
+| Shadowfang Keep | 10/10 | 0/10 | 0 | 26 | 7 |
+| Shaper's Terrace | 0/11 | 0/11 | 1 | 31 | 29 |
+| Stratholme | 16/17 | 0/17 | 0 | 130 | 9 |
 | Sunken Temple | 5/7 | 0/7 | 3 | 20 | 1 |
-| The Deadmines | 8/8 | 0/8 | 0 | 35 | 5 |
+| The Deadmines | 8/8 | 0/8 | 0 | 24 | 5 |
 | The Drowned City | 6/6 | 0/6 | 1 | 15 | 15 |
-| The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
+| The Stockade | 5/6 | 0/6 | 0 | 18 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
-| Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 206/243 | 0/243 | 8 | 1229 | 235 |
+| Wailing Caverns | 8/8 | 0/8 | 0 | 23 | 4 |
+| **All** | 206/243 | 0/243 | 7 | 1189 | 246 |
 
 ## Alcaz Prison
 
@@ -51,12 +51,12 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Ghamoo-ra | yes | journal |  | 4 (+1 unknown) | 1 |
-| Lady Sarevess | yes | spawn point |  | 5 | 0 |
-| Gelihast | yes | spawn point |  | 5 (+1 unknown) | 1 |
-| Twilight Lord Kelris | yes | spawn point |  | 6 (+1 unknown) | 1 |
-| Old Serra'kis | yes | spawn point |  | 5 | 0 |
-| Aku'mai | yes | journal |  | 6 | 0 |
+| Ghamoo-ra | yes | journal |  | 2 (+1 unknown) | 1 |
+| Lady Sarevess | yes | spawn point |  | 3 | 0 |
+| Gelihast | yes | spawn point |  | 2 (+1 unknown) | 1 |
+| Twilight Lord Kelris | yes | spawn point |  | 2 (+1 unknown) | 1 |
+| Old Serra'kis | yes | spawn point |  | 3 | 0 |
+| Aku'mai | yes | journal |  | 3 | 0 |
 
 ## Blackmaw Hold
 
@@ -64,9 +64,9 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 |---|---|---|---|---|---|
 | Withermaw | **no** | — |  | 0 (+4 unknown) | 3 |
 | Impaan the Imprisoner | **no** | — |  | 0 (+3 unknown) | 3 |
-| Elder Shaman Bloodmane | **no** | — |  | 0 (+4 unknown) | 3 |
+| Elder Shaman Bloodmane | **no** | — |  | 0 (+5 unknown) | 3 |
 | Bonesnout the Unbroken | **no** | — |  | 0 (+4 unknown) | 3 |
-| Varrox Bleakhoof | **no** | — |  | 0 (+3 unknown) | 3 |
+| Varrox Bleakhoof | **no** | — |  | 0 (+4 unknown) | 3 |
 | Blackmaw Behemoth | **no** | — |  | 0 (+3 unknown) | 3 |
 | Unbound Spirit | **no** | — |  | 0 (+3 unknown) | 3 |
 
@@ -83,7 +83,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Bael'Gar | yes | journal |  | 4 | 0 |
 | Lord Incendius | yes | journal |  | 4 | 0 |
 | General Angerforge | yes | journal |  | 5 | 0 |
-| Golem Lord Argelmach | yes | journal |  | 4 (+1 unknown) | 0 |
+| Golem Lord Argelmach | yes | journal |  | 4 (+2 unknown) | 0 |
 | Phalanx | yes | journal |  | 3 (+1 unknown) | 1 |
 | Hurley Blackbreath | yes | journal |  | 4 | 0 |
 | Ambassador Flamelash | yes | journal |  | 5 (+1 unknown) | 0 |
@@ -158,7 +158,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Tendris Warpwood | yes | ? |  | 4 | 0 |
+| Tendris Warpwood | yes | ? |  | 4 (+1 unknown) | 0 |
 | Magister Kalendris | yes | ? |  | 5 (+1 unknown) | 0 |
 | Illyanna Ravenoak | yes | ? |  | 5 | 0 |
 | Immol'thar | yes | ? |  | 10 | 0 |
@@ -178,7 +178,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Grubbis | yes | journal |  | 3 (+2 unknown) | 2 |
+| Grubbis | yes | journal |  | 1 (+2 unknown) | 2 |
 | Viscous Fallout | yes | journal |  | 3 | 0 |
 | Electrocutioner 6000 | yes | journal |  | 3 | 0 |
 | Crowd Pummeler 9-60 | yes | journal |  | 3 (+2 unknown) | 2 |
@@ -229,10 +229,10 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Oggleflint | yes | placed in game |  | 1 (+3 unknown) | 3 |
-| Taragaman the Hungerer | yes | placed in game |  | 4 | 0 |
+| Oggleflint | yes | placed in game |  | 0 (+3 unknown) | 3 |
+| Taragaman the Hungerer | yes | placed in game |  | 3 | 0 |
 | Jergosh the Invoker | yes | placed in game |  | 3 | 0 |
-| Bazzalan | yes | placed in game |  | 1 (+3 unknown) | 3 |
+| Bazzalan | yes | placed in game |  | 0 (+3 unknown) | 3 |
 
 ## Razorfen Downs
 
@@ -251,7 +251,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 |---|---|---|---|---|---|
 | Roogug | yes | journal |  | 0 (+3 unknown) | 3 |
 | Aggem Thorncurse | yes | spawn point |  | 0 (+2 unknown) | 2 |
-| Death Speaker Jargba | yes | spawn point |  | 5 | 0 |
+| Death Speaker Jargba | yes | spawn point |  | 3 | 0 |
 | Overlord Ramtusk | yes | journal |  | 2 (+1 unknown) | 1 |
 | Agathelos the Raging | yes | spawn point |  | 2 (+1 unknown) | 1 |
 | Charlga Razorflank | yes | journal |  | 3 | 0 |
@@ -292,12 +292,12 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Kirtonos the Herald | **no** | — |  | 9 | 0 |
 | Jandice Barov | yes | spawn point |  | 8 | 0 |
 | Rattlegore | yes | spawn point |  | 7 | 0 |
-| Marduk Blackpool | yes | spawn point |  | 2 | 0 |
-| Vectus | yes | spawn point |  | 2 | 0 |
-| Ras Frostwhisper | yes | spawn point |  | 13 (+1 unknown) | 0 |
+| Marduk Blackpool | yes | spawn point |  | 2 (+2 unknown) | 2 |
+| Vectus | yes | spawn point |  | 2 (+3 unknown) | 1 |
+| Ras Frostwhisper | yes | spawn point |  | 13 (+2 unknown) | 0 |
 | Kormok | **no** | — |  | 5 | 0 |
 | Instructor Malicia | yes | spawn point |  | 28 | 0 |
-| Doctor Theolen Krastinov | yes | spawn point |  | 27 | 0 |
+| Doctor Theolen Krastinov | yes | spawn point |  | 27 (+1 unknown) | 0 |
 | Lorekeeper Polkelt | yes | spawn point |  | 29 | 0 |
 | The Ravenian | yes | spawn point |  | 28 | 0 |
 | Lord Alexei Barov | yes | spawn point |  | 27 | 0 |
@@ -309,15 +309,15 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
 | Rethilgore | yes | spawn point |  | 0 (+2 unknown) | 2 |
-| Fel Steeds / Shadow Charger | yes | placed in game |  | 1 (+2 unknown) | 0 |
+| Fel Steeds / Shadow Charger | yes | placed in game |  | 1 | 0 |
 | Razorclaw the Butcher | yes | spawn point |  | 3 | 0 |
-| Baron Silverlaine | yes | journal |  | 3 (+1 unknown) | 1 |
-| Commander Springvale | yes | journal |  | 3 (+1 unknown) | 1 |
+| Baron Silverlaine | yes | journal |  | 2 (+1 unknown) | 1 |
+| Commander Springvale | yes | journal |  | 2 (+1 unknown) | 1 |
 | Odo the Blindwatcher | yes | spawn point |  | 2 (+1 unknown) | 1 |
-| Fenrus the Devourer | yes | spawn point |  | 4 (+1 unknown) | 1 |
-| Wolf Master Nandos | yes | spawn point |  | 4 (+1 unknown) | 1 |
+| Fenrus the Devourer | yes | spawn point |  | 2 (+1 unknown) | 1 |
+| Wolf Master Nandos | yes | spawn point |  | 2 (+1 unknown) | 1 |
 | Archmage Arugal | yes | spawn point |  | 3 | 0 |
-| Deathsworn Captain | yes | spawn point |  | 3 | 0 |
+| Deathsworn Captain | yes | spawn point |  | 2 | 0 |
 
 ## Shaper's Terrace
 
@@ -328,18 +328,18 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Thunderhoof | **no** | — |  | 0 (+3 unknown) | 3 |
 | Venomridge | **no** | — |  | 0 (+3 unknown) | 3 |
 | Direhorn Matriarch | **no** | — |  | 0 (+3 unknown) | 3 |
-| Cinder | **no** | — |  | 0 (+1 unknown) | 1 |
-| King Op | **no** | — |  | 0 | 0 |
+| Cinder | **no** | — |  | 0 (+2 unknown) | 2 |
+| King Op | **no** | — |  | 0 (+2 unknown) | 2 |
 | Snowtalon | **no** | — |  | 0 (+2 unknown) | 2 |
 | Bolt | **no** | — |  | 0 (+2 unknown) | 2 |
-| Vitrix | **no** | — |  | 0 (+1 unknown) | 1 |
-| Nanaya | **no** | — |  | 0 (+4 unknown) | 3 |
+| Vitrix | **no** | — |  | 0 (+6 unknown) | 6 |
+| Nanaya | **no** | — |  | 0 (+5 unknown) | 3 |
 
 ## Stratholme
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Ezra Grimm | **no** | — |  | 0 (+4 unknown) | 3 |
+| Ezra Grimm | **no** | — |  | 0 (+5 unknown) | 3 |
 | The Unforgiven | yes | journal |  | 4 | 0 |
 | Postmaster Malown | yes | journal |  | 6 | 0 |
 | Timmy the Cruel | yes | journal |  | 4 | 0 |
@@ -351,7 +351,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Hearthsinger Forresten | yes | journal |  | 5 | 0 |
 | Magistrate Barthilas | yes | journal |  | 7 | 0 |
 | Nerub'enkan | yes | journal |  | 10 | 1 |
-| Baroness Anastari | yes | journal |  | 10 (+1 unknown) | 1 |
+| Baroness Anastari | yes | journal |  | 10 (+2 unknown) | 1 |
 | Maleki the Pallid | yes | journal |  | 10 (+1 unknown) | 0 |
 | Ramstein the Gorger | yes | journal |  | 6 | 0 |
 | Baron Rivendare | yes | journal |  | 23 | 0 |
@@ -373,13 +373,13 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Rhahk'Zor | yes | journal |  | 3 (+1 unknown) | 1 |
-| Sneed's Shredder | yes | journal |  | 4 (+2 unknown) | 1 |
+| Rhahk'Zor | yes | journal |  | 1 (+1 unknown) | 1 |
+| Sneed's Shredder | yes | journal |  | 2 (+2 unknown) | 1 |
 | Gilnid | yes | journal |  | 2 (+1 unknown) | 1 |
-| Mr. Smite | yes | journal |  | 5 (+1 unknown) | 1 |
-| Captain Greenskin | yes | journal |  | 4 | 0 |
+| Mr. Smite | yes | journal |  | 3 (+1 unknown) | 1 |
+| Captain Greenskin | yes | journal |  | 2 | 0 |
 | Edwin VanCleef | yes | journal |  | 4 | 0 |
-| Cookie | yes | journal |  | 4 (+2 unknown) | 1 |
+| Cookie | yes | journal |  | 2 (+1 unknown) | 1 |
 | Miner Johnson | yes | spawn point |  | 2 | 0 |
 
 ## The Drowned City
@@ -397,10 +397,10 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Targorr the Dread | yes | spawn point |  | 1 (+3 unknown) | 3 |
+| Targorr the Dread | yes | spawn point |  | 0 (+3 unknown) | 3 |
 | Kam Deepfury | yes | spawn point |  | 0 (+2 unknown) | 2 |
 | Hamhock | yes | spawn point |  | 0 (+3 unknown) | 3 |
-| Bazil Thredd | yes | spawn point |  | 4 (+4 unknown) | 4 |
+| Bazil Thredd | yes | spawn point |  | 0 (+4 unknown) | 4 |
 | Dextren Ward | yes | spawn point |  | 0 (+3 unknown) | 3 |
 | Bruegal Ironknuckle | **no** | — |  | 3 | 0 |
 
@@ -421,12 +421,12 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Kresh | yes | journal |  | 3 (+2 unknown) | 1 |
-| Lady Anacondra | yes | journal |  | 2 (+1 unknown) | 1 |
-| Lord Cobrahn | yes | journal |  | 6 | 0 |
-| Lord Pythas | yes | journal |  | 4 (+1 unknown) | 1 |
-| Skum | yes | journal |  | 3 (+1 unknown) | 1 |
-| Lord Serpentis | yes | journal |  | 5 | 0 |
-| Verdan the Everliving | yes | journal |  | 6 | 0 |
+| Kresh | yes | journal |  | 1 (+1 unknown) | 1 |
+| Lady Anacondra | yes | journal |  | 1 (+1 unknown) | 1 |
+| Lord Cobrahn | yes | journal |  | 3 | 0 |
+| Lord Pythas | yes | journal |  | 2 (+1 unknown) | 1 |
+| Skum | yes | journal |  | 2 (+1 unknown) | 1 |
+| Lord Serpentis | yes | journal |  | 4 | 0 |
+| Verdan the Everliving | yes | journal |  | 3 | 0 |
 | Mutanus the Devourer | yes | journal |  | 3 | 0 |
 
