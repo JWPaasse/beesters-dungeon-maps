@@ -219,15 +219,17 @@ def main():
 
     lua = load_questiedb(qdb)
     quests_lua = lua.eval("DB.Quest.entities")
-    # Requirements WoW Forever added that QuestieDB doesn't have yet (tools/quest_prereqs.json).
-    # QuestieDB's own data wins as soon as it has a requirement for the quest.
+    # Requirements and factions WoW Forever added that QuestieDB doesn't have yet (tools/quest_prereqs.json).
+    # QuestieDB's own data wins as soon as it has a requirement or a faction for the quest.
     fixes = json.loads((ROOT / "tools" / "quest_prereqs.json").read_text(encoding="utf-8"))["quests"]
     for qid_text, fix in fixes.items():
         entity = quests_lua[int(qid_text)]
         if entity is None:
             continue
-        if not ids(to_py(entity[Q_PRE_SINGLE])) and not ids(to_py(entity[Q_PRE_GROUP])):
+        if fix.get("pre") and not ids(to_py(entity[Q_PRE_SINGLE])) and not ids(to_py(entity[Q_PRE_GROUP])):
             entity[Q_PRE_SINGLE] = lua.table(*fix["pre"])
+        if fix.get("faction") and not entity[Q_RACES]:
+            entity[Q_RACES] = 4294967373 if fix["faction"] == "A" else 8589934770
     npcs_lua = lua.eval("DB.Npc.entities")
     # New dungeons QuestieDB doesn't file quests under yet: their quests, and the chain links
     # QuestieDB's data shows (as requirements, unless QuestieDB has one for the quest).

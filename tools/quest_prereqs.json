@@ -1,5 +1,5 @@
 {
- "_source": "Quest requirements WoW Forever added or changed that QuestieDB doesn't have yet. Applied by tools/build_quests.py only while QuestieDB has no requirement of its own for the quest. Sources: Wowhead (wowhead.com/forever) quest series and player comments.",
+ "_source": "Quest requirements and factions WoW Forever added or changed that QuestieDB doesn't have yet. Applied by tools/build_quests.py only while QuestieDB has nothing of its own for the quest (no requirement; no faction, i.e. both). Sources: Wowhead (wowhead.com/forever) quest series and player comments, and what players see in game.",
  "quests": {
   "92422": {
    "pre": [
@@ -102,6 +102,10 @@
     275
    ],
    "note": "Horrors in the Highland (Alliance) needs Rethiel the Greenwarden's chain Tramping Paws > Fire Taboo > Blisters on The Land; The Greenwarden is the breadcrumb to it (Wowhead comment, confirmed in game)"
+  },
+  "96335": {
+   "faction": "A",
+   "note": "The Man in the Iron Chains is Alliance only (seen in game, 21 Nov 2026)"
   }
  }
 }
