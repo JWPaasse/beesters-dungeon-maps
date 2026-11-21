@@ -18,6 +18,7 @@ local function NewCheckbox(parent, label, tooltip, key, anchor)
     check:SetScript("OnClick", function(self)
         ns.db[key] = self:GetChecked() and true or false
         ns:RefreshMapPins()
+        if ns.UpdateDungeonTracker then ns:UpdateDungeonTracker() end
     end)
     check:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
@@ -99,9 +100,11 @@ function ns:InitOptions()
         "Adds a Dungeons button after the zone name (World > Kalimdor > Durotar > Dungeons).", "dungeonsInTopBar", auto)
     local quests = NewCheckbox(panel, "Show the dungeon's quests next to its map",
         "Adds a tab with the dungeon's quests to the quest list while a dungeon map is open.", "questPanel", topBar)
+    local trackerOption = NewCheckbox(panel, "Track the dungeon's quests inside dungeons",
+        "Inside a dungeon, shows the quests in your log for that dungeon with their objectives, like the game's quest tracker. Drag its header to move it.", "dungeonTracker", quests)
 
     local minimapHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    minimapHeader:SetPoint("TOPLEFT", quests, "BOTTOMLEFT", 0, -16)
+    minimapHeader:SetPoint("TOPLEFT", trackerOption, "BOTTOMLEFT", 0, -16)
     minimapHeader:SetText(MINIMAP_LABEL or "Minimap")
     local minimapButton = NewCheckbox(panel, "Show the minimap button",
         "A button on the minimap that lists every dungeon and raid, yours on top. The list also opens with /bdm list.", "minimapButton", minimapHeader)

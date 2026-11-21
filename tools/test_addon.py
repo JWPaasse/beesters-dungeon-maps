@@ -769,6 +769,29 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:OpenDungeonMap("ulda")
         check("Uldaman's entrance hall opens the first level", ns:CurrentDungeonFloor() == 1)
         ns:CloseDungeonMap(true)
+        -- The dungeon quest tracker: inside Ragefire Chasm, only that dungeon's quests in your log.
+        ns:InitDungeonTracker()
+        local realInInstance, realInstanceInfo = IsInInstance, GetInstanceInfo
+        IsInInstance = function() return true, "party" end
+        GetInstanceInfo = function() return "Ragefire Chasm", "party", 1, "Normal", 5, 0, false, 389 end
+        local realLog = { C_QuestLog.GetNumQuestLogEntries, C_QuestLog.GetInfo, C_QuestLog.GetQuestObjectives, C_QuestLog.IsComplete }
+        C_QuestLog.GetNumQuestLogEntries = function() return 3 end
+        C_QuestLog.GetInfo = function(i)
+            return ({ { isHeader = true, title = "Orgrimmar" }, { questID = 5725, title = "The Power to Destroy..." }, { questID = 99999, title = "Elsewhere" } })[i]
+        end
+        C_QuestLog.GetQuestObjectives = function() return { { text = "Spells of Shadow: 0/1", finished = false } } end
+        C_QuestLog.IsComplete = function() return false end
+        ns:UpdateDungeonTracker()
+        local tr = BeestersDungeonMapsTracker
+        local shown = {}
+        for _, l in ipairs(tr.Lines) do if l:IsShown() then table.insert(shown, l.Text._text or "") end end
+        check("inside a dungeon the tracker shows its quests in your log", tr:IsShown() and #shown == 2)
+        GetInstanceInfo = function() return "Kalimdor", "none", 0, "", 0, 0, false, 1 end
+        IsInInstance = function() return false end
+        ns:UpdateDungeonTracker()
+        check("outside dungeons the tracker is hidden", not tr:IsShown())
+        IsInInstance, GetInstanceInfo = realInInstance, realInstanceInfo
+        C_QuestLog.GetNumQuestLogEntries, C_QuestLog.GetInfo, C_QuestLog.GetQuestObjectives, C_QuestLog.IsComplete = realLog[1], realLog[2], realLog[3], realLog[4]
         -- A new Forever boss has no picture: the pin is a ring with the skull, like the others.
         GetInstanceInfo = function() return "Krol'dok Stronghold", "party", 1, "Normal", 5, 0, false, 3039 end
         runEvent(nil, "PLAYER_ENTERING_WORLD")
