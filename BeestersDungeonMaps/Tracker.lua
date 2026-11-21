@@ -23,10 +23,10 @@ local OPEN = { 0.8, 0.8, 0.8 }
 
 -- The quests in your log that belong to this dungeon: { {questID, title, ready}, ... }
 local function QuestsHere(key)
-    local list = ns.DungeonQuests and ns.DungeonQuests[key]
-    if not list then return {} end
     local wanted = {}
-    for _, id in ipairs(list) do wanted[id] = true end
+    for _, lists in ipairs({ ns.DungeonQuests, ns.DungeonLogOnlyQuests }) do
+        for _, id in ipairs(lists and lists[key] or {}) do wanted[id] = true end
+    end
     local out = {}
     local n = C_QuestLog.GetNumQuestLogEntries and C_QuestLog.GetNumQuestLogEntries() or 0
     for i = 1, n do

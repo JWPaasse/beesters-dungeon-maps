@@ -163,7 +163,8 @@ def find_new_dungeon_quests(quests_lua, npcs_lua, curated):
 
 
 # The Tier 0.5 set upgrade (Dungeon Set 2) is a long chain across all the level 60 dungeons;
-# listing it under each of them would bury the dungeon's own quests.
+# listing it under each of them would bury the dungeon's own quests. These are only shown
+# while they're in your quest log (ns.DungeonLogOnlyQuests).
 SKIP_INSIDE = {"An Earnest Proposition", "Just Compensation", "Anthion's Parting Words",
                "Saving the Best for Last", "The Instigator's Enchantment"}
 
@@ -172,7 +173,7 @@ def find_inside_class_quests(quests_lua, npcs_lua, items_lua, objects_lua, area_
     """Class quests filed under a city or a zone whose work is done inside a dungeon: a creature
     that lives only in dungeons, an item only dungeon creatures or objects drop, or an object that
     stands only in dungeons (the Orb of Soran'ruk, the Sunken Temple class quests).
-    {key: [questIDs]}."""
+    Returns ({key: [questIDs]}, {key: [questIDs shown only while in your log]})."""
     def keys_of(spawns):
         sp = to_py(spawns) or {}
         if not isinstance(sp, dict) or not sp:
@@ -185,13 +186,14 @@ def find_inside_class_quests(quests_lua, npcs_lua, items_lua, objects_lua, area_
         e = table[eid] if eid else None
         return keys_of(e[spawn_field]) if e is not None else None
 
-    out = {}
+    out, log_only = {}, {}
     for qid, entity in quests_lua.items():
-        if not entity[Q_CLASSES] or entity[Q_ZONE] in area_to_key:
+        if entity[Q_ZONE] in area_to_key:
+            continue
+        log_only_quest = entity[Q_NAME] in SKIP_INSIDE
+        if not entity[Q_CLASSES] and not log_only_quest:
             continue
         q = to_py(entity)
-        if field(q, Q_NAME) in SKIP_INSIDE:
-            continue
         objectives = field(q, Q_OBJECTIVES) or []
         found = set()
         for o in field(objectives, 1) or []:
@@ -211,8 +213,8 @@ def find_inside_class_quests(quests_lua, npcs_lua, items_lua, objects_lua, area_
             if places and all(places):
                 found |= set().union(*places)
         for key in found:
-            out.setdefault(key, []).append(qid)
-    return out
+            (log_only if log_only_quest else out).setdefault(key, []).append(qid)
+    return out, log_only
 
 
 def target_lines(quest_rows, item):
@@ -325,7 +327,7 @@ def main():
             for key in area_to_key[zone]:
                 dungeon_quests[key].append(qid)
             core.add(qid)
-    inside = find_inside_class_quests(quests_lua, npcs_lua, items_lua, objects_lua, area_to_key)
+    inside, log_only = find_inside_class_quests(quests_lua, npcs_lua, items_lua, objects_lua, area_to_key)
     for key, qids in list(found_quests.items()) + list(inside.items()):
         for qid in qids:
             if qid not in dungeon_quests[key]:
@@ -361,6 +363,9 @@ def main():
             if pre not in wanted and quests_lua[pre] is not None:
                 wanted.add(pre)
                 todo.append(pre)
+    # The Tier 0.5 quests (shown only while in your log): their own data, no lead-ins.
+    for qids in log_only.values():
+        wanted.update(qids)
     followups = {}
     for qid, entity in quests_lua.items():
         q = None
@@ -487,6 +492,11 @@ def main():
     ]
     for key in sorted(dungeon_quests):
         out.append(f"    [{lua_str(key)}] = {lua_list(sorted(dungeon_quests[key]))},")
+    out += ["}", "",
+            "-- [instanceKey] = { questID, ... } shown only while in your quest log (the Tier 0.5 set quests)",
+            "ns.DungeonLogOnlyQuests = {"]
+    for key in sorted(log_only):
+        out.append(f"    [{lua_str(key)}] = {lua_list(sorted(set(log_only[key])))},")
     out += ["}", "",
             "-- [questID] = { name, level, requiredLevel, faction ('H'/'A'/nil), objective text,",
             "--   startNpc, startObject, startItem, endNpc, endObject, preAny, preAll, objectiveItems, rewards,",

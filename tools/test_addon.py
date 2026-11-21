@@ -802,6 +802,20 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("outside dungeons the tracker is hidden", not tr:IsShown())
         IsInInstance, GetInstanceInfo = realInInstance, realInstanceInfo
         C_QuestLog.GetNumQuestLogEntries, C_QuestLog.GetInfo, C_QuestLog.GetQuestObjectives, C_QuestLog.IsComplete = realLog[1], realLog[2], realLog[3], realLog[4]
+        -- The Tier 0.5 set quests show up only while they're in your log.
+        local t05 = ns.DungeonLogOnlyQuests.strat[1]
+        local function listed(groups)
+            for _, g in pairs(groups) do for _, e in ipairs(g) do if e.id == t05 then return true end end end
+            return false
+        end
+        local realLogIndex = C_QuestLog.GetLogIndexForQuestID
+        C_QuestLog.GetLogIndexForQuestID = function() return nil end
+        local hiddenOk = not listed(ns.ClassifyDungeonQuests("strat"))
+        C_QuestLog.GetLogIndexForQuestID = function(id) if id == t05 then return 1 end end
+        local shownOk = listed(ns.ClassifyDungeonQuests("strat"))
+        C_QuestLog.GetLogIndexForQuestID = realLogIndex
+        check("Tier 0.5 set quests are hidden unless in your log", hiddenOk)
+        check("a Tier 0.5 set quest in your log is listed", shownOk)
         -- Item tooltips name the boss and dungeon an item drops from.
         local tara = ns.BossLoot[11520] or {}
         local dropText

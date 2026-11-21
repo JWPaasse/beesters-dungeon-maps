@@ -201,6 +201,14 @@ local function Classify(key)
             end
         end
     end
+    -- The Tier 0.5 set quests run through every level 60 dungeon: listed only while in your log.
+    for _, id in ipairs(ns.DungeonLogOnlyQuests and ns.DungeonLogOnlyQuests[key] or {}) do
+        local q = Q(id)
+        if q and not seen[id] and InLog(id) then
+            seen[id] = true
+            table.insert(groups.log, { id = id, q = q, ready = ReadyToTurnIn(id) })
+        end
+    end
     -- One block per chain: a dungeon quest that is an earlier step of a longer chain in this
     -- list (Hamuul Runetotem on the way to Leaders of the Fang) is shown inside that chain.
     local partOf = {}
