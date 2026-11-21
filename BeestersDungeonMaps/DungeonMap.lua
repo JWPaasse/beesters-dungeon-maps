@@ -1275,8 +1275,27 @@ local function LiftView(lift)
         end
     end
     if view:GetFrameStrata() ~= strata then view:SetFrameStrata(strata) end
+    if not lift then
+        -- Back in the map's own layer, right above its (hidden) picture.
+        local container = WorldMapFrame.ScrollContainer
+        view:SetFrameLevel(container:GetFrameLevel() + 1)
+    end
     if lootPanel then lootPanel:SetFrameStrata(lift and STRATA[#STRATA] or "DIALOG") end
 end
+
+-- After combat (and whenever the map opens): exactly one of the two pictures shows. The game's
+-- map when the dungeon map is closed, the dungeon map, drawn again, when it's open. Nothing
+-- left half-way, like both hidden (an empty brown map).
+local function SettleCanvas()
+    if InCombatLockdown() then return end
+    local child = WorldMapFrame.ScrollContainer and WorldMapFrame.ScrollContainer.Child
+    if not child then return end
+    local open = ns:IsDungeonMapOpen()
+    child:SetShown(not open)
+    LiftView(false)
+    if open and current.key and current.floor then ShowFloor(current.floor) end
+end
+ns.SettleDungeonCanvas = SettleCanvas
 
 local function SetCanvasShown(shown)
     local child = WorldMapFrame.ScrollContainer and WorldMapFrame.ScrollContainer.Child
@@ -1288,7 +1307,7 @@ local function SetCanvasShown(shown)
         canvasRetry:RegisterEvent("PLAYER_REGEN_ENABLED")
         canvasRetry:SetScript("OnEvent", function(self)
             self:UnregisterAllEvents()
-            SetCanvasShown(not ns:IsDungeonMapOpen())
+            SettleCanvas()
         end)
         return
     end
@@ -1566,6 +1585,7 @@ function ns:InitDungeonMap()
 
     -- Inside a dungeon the game has no map, so open ours when the map opens.
     WorldMapFrame:HookScript("OnShow", function()
+        SettleCanvas()
         if not ns.db.autoOpenInside then return end
         local key = CurrentInstanceKey()
         if key and ns.DungeonMaps[key] then

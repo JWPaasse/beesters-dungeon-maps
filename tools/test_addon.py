@@ -434,7 +434,17 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:CloseDungeonMap(true)
         ns:OpenDungeonMap("wc")
         check("in combat the dungeon map goes over the game's map", strata == "DIALOG")
+        -- The fight ends with the dungeon map open: its own picture shows, the game's is hidden.
+        local child = WorldMapFrame.ScrollContainer.Child
+        inCombat = false
+        ns.SettleDungeonCanvas()
+        check("after combat the dungeon map shows, not an empty map", ns:IsDungeonMapOpen() and not child:IsShown() and strata == "HIGH")
+        -- Closed during a fight: after it, the game's own map is back.
+        inCombat = true
         ns:CloseDungeonMap(true)
+        inCombat = false
+        ns.SettleDungeonCanvas()
+        check("a dungeon map closed in combat leaves the game's map after the fight", child:IsShown())
         view.SetFrameStrata = setStrata
         inCombat = false
         ns:OpenDungeonMap("wc")
