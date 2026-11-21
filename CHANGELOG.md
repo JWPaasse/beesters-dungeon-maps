@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.5.0
 
 - The map no longer goes blank (just the brown background) when a fight ends with the map open: after combat, and whenever the map opens, either the dungeon map or the game's own map shows, never neither.
 - The addon no longer tries to note a boss's portrait and level when you target it: the game hides those from addons inside dungeons, so it never worked. The bosses new in Forever keep the ring with the skull until there's data for them.
