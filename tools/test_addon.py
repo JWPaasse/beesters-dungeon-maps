@@ -808,7 +808,11 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:OpenDungeonMap("kroldok")
         local mugg
         for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Overlord Mugg" then mugg = b end end
-        check("a boss without a picture gets the ring with a skull", mugg and mugg.Ring:IsShown() and mugg.Icon:IsShown() and not mugg.Badge:IsShown())
+        check("a new Forever boss shows the creature itself in its ring", mugg and mugg.Ring:IsShown() and mugg.Model:IsShown() and not mugg.Icon:IsShown())
+        ns:OpenDungeonMap("drowned")
+        local guardians
+        for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Deathless Guardians" then guardians = b end end
+        check("a boss with no creature to draw gets the ring with a skull", guardians and guardians.Ring:IsShown() and guardians.Icon:IsShown() and not guardians.Model:IsShown())
         -- From the data: "Level ?? Dragonkin (Boss)", like the game's tooltip.
         ns.BossInfo = ns.BossInfo or {}
         ns.BossInfo[999001] = { 63, 63, 3, 2 }

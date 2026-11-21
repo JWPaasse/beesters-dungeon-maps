@@ -808,20 +808,31 @@ local function CreateBossButton(parent)
     mask:SetTexture(PORTRAIT_MASK, "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
     mask:SetAllPoints(button.Portrait)
     button.Portrait:AddMaskTexture(mask)
-    button.Ring = button:CreateTexture(nil, "OVERLAY")
+    -- Bosses new in Forever have no portrait the game hands out, but it does draw the creature
+    -- itself: a small live model inside the ring, square but kept within the ring's opening.
+    button.Model = CreateFrame("PlayerModel", nil, button)
+    button.Model:SetSize(PIN_SIZE - 4, PIN_SIZE - 4)
+    button.Model:SetPoint("CENTER")
+    button.Model:SetScript("OnModelLoaded", function(self) self:SetPortraitZoom(1) end)
+    button.Model:Hide()
+    -- Ring and badge go on a layer of their own above that model.
+    button.Over = CreateFrame("Frame", nil, button)
+    button.Over:SetAllPoints()
+    button.Over:SetFrameLevel(button:GetFrameLevel() + 3)
+    button.Ring = button.Over:CreateTexture(nil, "OVERLAY")
     button.Ring:SetTexture(GOLD_RING)
     button.Ring:SetSize(RING_SIZE, RING_SIZE)
     button.Ring:SetPoint("CENTER")
     -- Skull badge: a dark disc with the skull on it.
-    button.BadgeBack = button:CreateTexture(nil, "OVERLAY", nil, 2)
+    button.BadgeBack = button.Over:CreateTexture(nil, "OVERLAY", nil, 2)
     button.BadgeBack:SetSize(BADGE_SIZE, BADGE_SIZE)
     button.BadgeBack:SetPoint("BOTTOMLEFT", button, "BOTTOMLEFT", -3, -3)
     button.BadgeBack:SetColorTexture(0.12, 0.08, 0.04, 1)
-    local badgeMask = button:CreateMaskTexture()
+    local badgeMask = button.Over:CreateMaskTexture()
     badgeMask:SetTexture(PORTRAIT_MASK, "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
     badgeMask:SetAllPoints(button.BadgeBack)
     button.BadgeBack:AddMaskTexture(badgeMask)
-    button.Badge = button:CreateTexture(nil, "OVERLAY", nil, 3)
+    button.Badge = button.Over:CreateTexture(nil, "OVERLAY", nil, 3)
     button.Badge:SetSize(BADGE_SIZE - 2, BADGE_SIZE - 2)
     button.Badge:SetPoint("CENTER", button.BadgeBack, "CENTER")
     SetSkull(button.Badge)
@@ -830,7 +841,7 @@ local function CreateBossButton(parent)
     button.Icon:SetSize(20, 20)
     button.Icon:SetPoint("CENTER")
     SetSkull(button.Icon)
-    button.Highlight = button:CreateTexture(nil, "HIGHLIGHT")
+    button.Highlight = button.Over:CreateTexture(nil, "HIGHLIGHT")
     button.Highlight:SetBlendMode("ADD")
     button.Highlight:SetAlpha(0.4)
     -- The quest you selected has you kill this boss: a blue area round it, like the game's
@@ -859,13 +870,21 @@ local function UpdateBossPin(button)
     local displayID = BossDisplayID(current.key, boss)
     local portrait = displayID and SetPortraitTextureFromCreatureDisplayID and true or false
     button.displayID = portrait and displayID or nil
+    -- No portrait but a known creature (the bosses new in Forever): the game draws the creature.
+    local model = not portrait and boss and boss.npcID and button.Model.SetCreature and true or false
     if portrait then
         SetPortraitTextureFromCreatureDisplayID(button.Portrait, displayID)
     else
-        -- No picture yet: the same ring round a dark disc with the boss skull, so every pin
-        -- looks alike.
+        -- Behind a model, or with no picture at all (the boss skull on it): a dark disc, so
+        -- every pin looks alike.
         button.Portrait:SetColorTexture(0.1, 0.075, 0.05, 1)
     end
+    button.Model:SetShown(model)
+    if model then
+        button.Model:SetCreature(boss.npcID)
+        button.Model:SetPortraitZoom(1)
+    end
+    portrait = portrait or model
     button.Portrait:Show()
     button.Ring:Show()
     -- Rare bosses get a silver ring, like the silver dragon round a rare's portrait in the game.

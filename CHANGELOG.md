@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The bosses new in Forever show themselves in their pin: the game doesn't hand out their portraits, but it does draw the creature, so the pin has a small live model of the boss inside its ring. Group bosses with no single creature (Deathless Guardians, Ravasaur Hunters) keep the skull.
+
 ## 1.5.0
 
 - The map no longer goes blank (just the brown background) when a fight ends with the map open: after combat, and whenever the map opens, either the dungeon map or the game's own map shows, never neither.
