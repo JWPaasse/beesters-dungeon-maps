@@ -799,26 +799,6 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local mugg
         for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Overlord Mugg" then mugg = b end end
         check("a boss without a picture gets the ring with a skull", mugg and mugg.Ring:IsShown() and mugg.Icon:IsShown() and not mugg.Badge:IsShown())
-        -- Targeting it notes its model, and the pin gets its portrait.
-        local realCreate, realExists, realIsPlayer, realName = CreateFrame, UnitExists, UnitIsPlayer, UnitName
-        CreateFrame = function(kind, ...)
-            local f = realCreate(kind, ...)
-            if kind == "PlayerModel" then f.GetDisplayInfo = function() return 98765 end end
-            return f
-        end
-        UnitExists = function() return true end
-        UnitIsPlayer = function() return false end
-        UnitName = function() return "Overlord Mugg" end
-        UnitLevel = function() return 45 end
-        UnitClassification = function() return "elite" end
-        UnitCreatureType = function() return "Humanoid" end
-        runEvent(nil, "PLAYER_TARGET_CHANGED")
-        CreateFrame, UnitExists, UnitIsPlayer, UnitName = realCreate, realExists, realIsPlayer, realName
-        check("targeting a boss without a picture notes its model", ns.db.bossModels and ns.db.bossModels.kroldok and ns.db.bossModels.kroldok["Overlord Mugg"] == 98765)
-        for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Overlord Mugg" then mugg = b end end
-        check("its pin then shows the portrait", mugg and mugg.displayID == 98765 and mugg.Badge:IsShown())
-        check("targeting it also notes its level, rank and type", ns.BossLine("kroldok", mugg.boss) == "Level 45 Humanoid (Elite)")
-        ns.db.bossModels, ns.db.bossInfo = nil, nil
         -- From the data: "Level ?? Dragonkin (Boss)", like the game's tooltip.
         ns.BossInfo = ns.BossInfo or {}
         ns.BossInfo[999001] = { 63, 63, 3, 2 }

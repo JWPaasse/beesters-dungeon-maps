@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- The addon no longer tries to note a boss's portrait and level when you target it: the game hides those from addons inside dungeons, so it never worked. The bosses new in Forever keep the ring with the skull until there's data for them.
 - Alcaz Prison: all five bosses have their place on the map (Katerina the Cleaner and Blazeroar in the Maximum Security Unit).
 - A dungeon quest tracker: inside a dungeon, the quests in your log for that dungeon with their objectives, in the look of the game's own tracker (for when Questie's tracker folds up inside). Quests show their level. Click a quest to open it on the dungeon map; drag the tracker anywhere to move it (`/bdm tracker reset` puts it back), the button folds it up. It can be turned off in the options.
 - The quest details' button bar is Abandon | Share | Show on map, three equal buttons like the game's quest log. Abandon asks for confirmation the way the game does, and only works for quests in your log.

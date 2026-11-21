@@ -533,10 +533,9 @@ end
 
 -- The line under a boss's name, as the game's own unit tooltip has it: "Level 41 Humanoid
 -- (Elite)", or "Level ?? Dragonkin (Boss)" for a boss with a skull. From the addon's data, or
--- noted when you targeted the boss (the bosses new in Forever).
+-- (the classic bosses; the bosses new in Forever have no data yet).
 local CREATURE_TYPES = { "Beast", "Dragonkin", "Demon", "Elemental", "Giant", "Undead", "Humanoid", "Critter", "Mechanical" }
 local RANKS = { [1] = ELITE or "Elite", [2] = "Rare Elite", [3] = BOSS or "Boss", [4] = ITEM_QUALITY3_DESC or "Rare" }
-local CLASSIFICATION_RANK = { elite = 1, rareelite = 2, worldboss = 3, rare = 4 }
 local function CreatureTypeName(id)
     local info = C_CreatureInfo and C_CreatureInfo.GetCreatureTypeInfo and C_CreatureInfo.GetCreatureTypeInfo(id)
     return type(info) == "table" and info.name or CREATURE_TYPES[id]
@@ -544,11 +543,8 @@ end
 local function BossLine(key, boss)
     local minLevel, maxLevel, rank, kind
     local data = boss.npcID and ns.BossInfo and ns.BossInfo[boss.npcID]
-    local learned = ns.db and ns.db.bossInfo and ns.db.bossInfo[key] and ns.db.bossInfo[key][boss.name]
     if data then
         minLevel, maxLevel, rank, kind = data[1], data[2], data[3], CreatureTypeName(data[4])
-    elseif learned then
-        minLevel, maxLevel, rank, kind = learned[1], learned[1], learned[2], learned[3]
     else
         return nil
     end
@@ -850,12 +846,12 @@ local function CreateBossButton(parent)
 end
 
 -- Portrait or plain skull, for the boss this pin shows now.
--- The boss's model: from the addon's data, or noted when you targeted it in game.
+-- The boss's model, from the addon's data (the classic bosses; the game doesn't give addons
+-- the model of a creature inside a dungeon, so the bosses new in Forever have none yet).
 local function BossDisplayID(key, boss)
     local id = boss and boss.npcID and ns.BossModels and ns.BossModels[boss.npcID]
     if id then return id end
-    local learned = boss and ns.db and ns.db.bossModels and ns.db.bossModels[key]
-    return learned and learned[boss.name] or nil
+    return nil
 end
 
 local function UpdateBossPin(button)
@@ -1589,51 +1585,6 @@ function ns:InitDungeonMap()
         if here and here ~= current.floor then ShowFloor(here) end
     end)
 
-    -- Targeting a boss whose picture the addon doesn't have notes its model (saved with your
-    -- settings, like the boss positions you place), so its pin gets the portrait.
-    local probe
-    local function LearnModel(key)
-        if not (UnitExists("target") and not UnitIsPlayer("target")) then return end
-        local name = UnitName("target")
-        if type(name) ~= "string" or (issecretvalue and issecretvalue(name)) then return end
-        local boss
-        for _, b in ipairs(BossesWithPositions(key)) do
-            if Normalize(b.name) == Normalize(name) then boss = b end
-        end
-        if not boss then return end
-        -- Its level, rank and creature type, when the addon's data doesn't have them.
-        if not (boss.npcID and ns.BossInfo and ns.BossInfo[boss.npcID]) then
-            pcall(function()
-                local level, class, kind = UnitLevel("target"), UnitClassification("target"), UnitCreatureType("target")
-                for _, v in ipairs({ level, class, kind }) do
-                    if issecretvalue and issecretvalue(v) then return end
-                end
-                if type(level) ~= "number" then return end
-                ns.db.bossInfo = ns.db.bossInfo or {}
-                ns.db.bossInfo[key] = ns.db.bossInfo[key] or {}
-                ns.db.bossInfo[key][boss.name] = { level, CLASSIFICATION_RANK[class] or 0, type(kind) == "string" and kind or nil }
-            end)
-        end
-        if BossDisplayID(key, boss) then return end
-        probe = probe or CreateFrame("PlayerModel", nil, UIParent)
-        probe:SetSize(2, 2)
-        probe:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 0, 0)
-        probe:SetAlpha(0)
-        probe:Show()
-        probe:SetUnit("target")
-        local function read()
-            local ok, id = pcall(probe.GetDisplayInfo, probe)
-            if not ok or type(id) ~= "number" or (issecretvalue and issecretvalue(id)) or id <= 0 then return false end
-            ns.db.bossModels = ns.db.bossModels or {}
-            ns.db.bossModels[key] = ns.db.bossModels[key] or {}
-            ns.db.bossModels[key][boss.name] = id
-            probe:Hide()
-            if ns:IsDungeonMapOpen() and current.key == key then ShowFloor(current.floor) end
-            return true
-        end
-        if not read() and C_Timer then C_Timer.After(0.5, function() pcall(read) end) end
-    end
-
     -- Leaving the dungeon ends the run; a boss pulled or targeted tells which level you're on.
     local runWatcher = CreateFrame("Frame", "BeestersDungeonMapsRunWatcher")
     for _, event in ipairs({ "PLAYER_ENTERING_WORLD", "ENCOUNTER_START", "PLAYER_TARGET_CHANGED" }) do
@@ -1655,7 +1606,6 @@ function ns:InitDungeonMap()
                 floor = BossFloor(key, nil, UnitName("target"))
             end
         end)
-        if event == "PLAYER_TARGET_CHANGED" then pcall(LearnModel, key) end
         if not floor then return end
         NoteRunFloor(key, floor)
         -- A boss pulled here stands on this level: remember the subzone (targeting can reach
