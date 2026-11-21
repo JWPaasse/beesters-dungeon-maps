@@ -33,7 +33,7 @@ local function QuestsHere(key)
         local info = C_QuestLog.GetInfo(i)
         if info and not info.isHeader and info.questID and wanted[info.questID] then
             local ready = C_QuestLog.IsComplete and C_QuestLog.IsComplete(info.questID)
-            table.insert(out, { id = info.questID, title = info.title, ready = ready and true or false })
+            table.insert(out, { id = info.questID, title = info.title, level = info.level, ready = ready and true or false })
         end
     end
     return out
@@ -111,7 +111,9 @@ function ns:UpdateDungeonTracker()
     for qi, q in ipairs(quests) do
         if qi > 1 then y = y + 8 end
         local yellow = NORMAL_FONT_COLOR
-        Add(TITLE_FONT, q.title or ("Quest " .. q.id), { yellow.r, yellow.g, yellow.b }, 0, q.id, q.title, true)
+        local title = q.title or ("Quest " .. q.id)
+        if q.level and q.level > 0 then title = ("[%d] %s"):format(q.level, title) end -- as in the dungeon tab
+        Add(TITLE_FONT, title, { yellow.r, yellow.g, yellow.b }, 0, q.id, q.title, true)
         if q.ready then
             local g = GREEN_FONT_COLOR
             Add(LINE_FONT, "- " .. READY_TEXT, { g.r, g.g, g.b }, 8, q.id)

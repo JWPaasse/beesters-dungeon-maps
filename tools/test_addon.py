@@ -777,7 +777,7 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local realLog = { C_QuestLog.GetNumQuestLogEntries, C_QuestLog.GetInfo, C_QuestLog.GetQuestObjectives, C_QuestLog.IsComplete }
         C_QuestLog.GetNumQuestLogEntries = function() return 3 end
         C_QuestLog.GetInfo = function(i)
-            return ({ { isHeader = true, title = "Orgrimmar" }, { questID = 5725, title = "The Power to Destroy..." }, { questID = 99999, title = "Elsewhere" } })[i]
+            return ({ { isHeader = true, title = "Orgrimmar" }, { questID = 5725, title = "The Power to Destroy...", level = 16 }, { questID = 99999, title = "Elsewhere" } })[i]
         end
         C_QuestLog.GetQuestObjectives = function() return { { text = "Spells of Shadow: 0/1", finished = false } } end
         C_QuestLog.IsComplete = function() return false end
