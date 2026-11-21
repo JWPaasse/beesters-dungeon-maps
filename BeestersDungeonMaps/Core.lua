@@ -75,6 +75,9 @@ function ns:InitSlashCommands()
             PrintStatus()
         elseif message == "list" then
             ns:ToggleDungeonList(ns.MinimapButton)
+        elseif message == "tracker reset" then
+            if ns.ResetDungeonTracker then ns:ResetDungeonTracker() end
+            ns:Print("The dungeon quest tracker is back in its place under the minimap.")
         elseif message == "map" then
             local key = ns.CurrentInstanceKey and ns.CurrentInstanceKey()
             if key then ns:OpenDungeonMap(key) else ns:Print("You are not inside a dungeon. Click an entrance on the map instead.") end

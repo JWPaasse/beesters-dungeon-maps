@@ -39,6 +39,20 @@ local function QuestsHere(key)
     return out
 end
 
+-- The whole tracker can be dragged: by its header, its quest lines or the space between them.
+local function StartDrag() tracker:StartMoving() end
+local function StopDrag()
+    tracker:StopMovingOrSizing()
+    local point, _, relPoint, x, y = tracker:GetPoint(1)
+    ns.db.dungeonTrackerPos = { point, relPoint, x, y }
+end
+local function Draggable(frame)
+    frame:EnableMouse(true)
+    frame:RegisterForDrag("LeftButton")
+    frame:SetScript("OnDragStart", StartDrag)
+    frame:SetScript("OnDragStop", StopDrag)
+end
+
 local function AcquireLine(index)
     local line = tracker.Lines[index]
     if not line then
@@ -49,6 +63,7 @@ local function AcquireLine(index)
         line.Text:SetWidth(WIDTH - 12)
         line.Text:SetJustifyH("LEFT")
         line:RegisterForClicks("LeftButtonUp")
+        Draggable(line)
         line:SetScript("OnClick", function(self)
             if self.questID then ns:OpenTrackedQuest(self.questID) end
         end)
@@ -58,6 +73,7 @@ local function AcquireLine(index)
             GameTooltip:SetOwner(self, "ANCHOR_LEFT")
             GameTooltip:SetText(self.title or "", 1, 0.82, 0)
             GameTooltip:AddLine("<Click to open it on the dungeon map>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
+            GameTooltip:AddLine("<Drag to move the tracker>", GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b)
             GameTooltip:Show()
         end)
         line:SetScript("OnLeave", function(self)
@@ -144,11 +160,6 @@ function ns:OpenTrackedQuest(questID)
     end)
 end
 
-local function SavePosition()
-    local point, _, relPoint, x, y = tracker:GetPoint(1)
-    ns.db.dungeonTrackerPos = { point, relPoint, x, y }
-end
-
 local function CreateTracker()
     tracker = CreateFrame("Frame", "BeestersDungeonMapsTracker", UIParent)
     tracker:SetSize(WIDTH, 40)
@@ -189,9 +200,7 @@ local function CreateTracker()
         ns.db.dungeonTrackerCollapsed = not ns.db.dungeonTrackerCollapsed
         ns:UpdateDungeonTracker()
     end)
-    header:RegisterForDrag("LeftButton")
-    header:SetScript("OnDragStart", function() if not InCombatLockdown() then tracker:StartMoving() end end)
-    header:SetScript("OnDragStop", function() tracker:StopMovingOrSizing(); SavePosition() end)
+    Draggable(header)
     header:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_LEFT")
         GameTooltip:SetText("Dungeon quests", 1, 1, 1)
@@ -201,11 +210,19 @@ local function CreateTracker()
     header:SetScript("OnLeave", function() GameTooltip:Hide() end)
     tracker.Header = header
 
+    Draggable(tracker)
     tracker.Content = CreateFrame("Frame", nil, tracker)
     tracker.Content:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 8, -6)
     tracker.Content:SetSize(WIDTH - 8, 1)
     tracker.Lines = {}
     tracker:Hide()
+end
+
+function ns:ResetDungeonTracker()
+    ns.db.dungeonTrackerPos = nil
+    if not tracker then return end
+    tracker:ClearAllPoints()
+    tracker:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -85, -260)
 end
 
 function ns:InitDungeonTracker()

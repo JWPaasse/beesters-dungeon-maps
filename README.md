@@ -52,6 +52,7 @@ To update by hand, delete the old `BeestersDungeonMaps` folder first, then unzip
 - `/bdm` opens the options. If another addon already uses `/bdm`, use `/beesterdm`.
 - `/bdm map` opens the map of the dungeon you're in.
 - `/bdm list` opens the list of all dungeons and raids.
+- `/bdm tracker reset` puts the dungeon quest tracker back in its place under the minimap.
 - `/bdm status` prints the addon, game and data versions and the map you're on. Please include it when you report a problem.
 
 Right-click a dungeon map to go back to the normal map.

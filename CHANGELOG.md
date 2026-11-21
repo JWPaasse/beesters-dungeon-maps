@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- A dungeon quest tracker: inside a dungeon, the quests in your log for that dungeon with their objectives, in the look of the game's own tracker (for when Questie's tracker folds up inside). Click a quest to open it on the dungeon map; drag the header to move it, the button folds it up. It can be turned off in the options.
+- A dungeon quest tracker: inside a dungeon, the quests in your log for that dungeon with their objectives, in the look of the game's own tracker (for when Questie's tracker folds up inside). Quests show their level. Click a quest to open it on the dungeon map; drag the tracker anywhere to move it (`/bdm tracker reset` puts it back), the button folds it up. It can be turned off in the options.
 - The quest details' button bar is Abandon | Share | Show on map, three equal buttons like the game's quest log. Abandon asks for confirmation the way the game does, and only works for quests in your log.
 
 ## 1.4.0
