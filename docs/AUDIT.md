@@ -5,7 +5,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 
 | Instance | Bosses placed | Confirmed | Bosses without loot | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Alcaz Prison | 0/5 | 0/5 | 0 | 19 | 15 |
+| Alcaz Prison | 5/5 | 0/5 | 0 | 19 | 15 |
 | Blackfathom Deeps | 6/6 | 0/6 | 0 | 34 | 3 |
 | Blackmaw Hold | 0/7 | 0/7 | 0 | 24 | 21 |
 | Blackrock Depths | 18/18 | 0/18 | 1 | 81 | 1 |
@@ -35,17 +35,17 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 206/243 | 0/243 | 8 | 1229 | 235 |
+| **All** | 211/243 | 0/243 | 8 | 1229 | 235 |
 
 ## Alcaz Prison
 
 | Boss | Position | Source | Confirmed | Loot shown | Without tooltip |
 |---|---|---|---|---|---|
-| Overseer Wrex | **no** | — |  | 0 (+4 unknown) | 3 |
-| Tidemistress Ca'zass | **no** | — |  | 0 (+4 unknown) | 3 |
-| Katerina the Cleaner | **no** | — |  | 0 (+3 unknown) | 3 |
-| The Questioner | **no** | — |  | 0 (+4 unknown) | 3 |
-| Blazeroar | **no** | — |  | 0 (+4 unknown) | 3 |
+| Overseer Wrex | yes | placed in game |  | 0 (+4 unknown) | 3 |
+| Tidemistress Ca'zass | yes | placed in game |  | 0 (+4 unknown) | 3 |
+| Katerina the Cleaner | yes | placed in game |  | 0 (+3 unknown) | 3 |
+| The Questioner | yes | placed in game |  | 0 (+4 unknown) | 3 |
+| Blazeroar | yes | placed in game |  | 0 (+4 unknown) | 3 |
 
 ## Blackfathom Deeps
 
