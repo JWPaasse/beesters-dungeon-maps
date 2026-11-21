@@ -1,5 +1,5 @@
 {
-"_source": "WoW Forever client tables, build 1.60.1.70938 (via wago.tools)",
+"_source": "WoW Forever client tables, build 1.60.1.70959 (via wago.tools)",
 "items": {
 "1470": [
 "|cffffffffMurloc Skin Bag|r",
@@ -811,6 +811,10 @@
 "|cff0070ddAce of Warlords|r",
 "|cff1eff00Use: Combine the Ace through Eight of Warlords to complete the set.|r"
 ],
+"19268": [
+"|cff0070ddAce of Elementals|r",
+"|cff1eff00Use: Combine the Ace through Eight of Elementals to complete the set.|r"
+],
 "19276": [
 "|cff0070ddAce of Portals|r",
 "|cff1eff00Use: Combine the Ace through Eight of Portals to complete the set.|r"
@@ -943,6 +947,11 @@
 "Binds when picked up",
 "Requires Enchanting (265)",
 "Use: Teaches you how to craft a Dormant Heart of the Mountain."
+],
+"249692": [
+"|cffffffffHead of Varrox Bleakhoof|r",
+"Quest Item",
+"Unique"
 ],
 "249696": [
 "|cffffffffTusks of the Unbroken|r",
@@ -1118,6 +1127,15 @@
 "|cffffffffArcane Mote|r",
 "Quest Item",
 "Unique"
+],
+"252512": [
+"|cff0070ddBrawler's Leather Helm|r",
+"Binds when picked up",
+"Head\tLeather",
+"84 Armor",
+"+10 Agility",
+"+13 Stamina",
+"Requires Level 25"
 ],
 "252514": [
 "|cff0070ddStormrider's Leather Helm|r",
@@ -1599,6 +1617,29 @@
 "Craft a Trapper's Workbench.",
 "Requires Skinning (300)"
 ],
+"273112": [
+"|cff1eff00Blueprint: Alchemy Laboratory|r",
+" ",
+"|cffffffffAlchemy Laboratory|r",
+"Requires Alchemy (300)",
+"|cff1eff00Use: Places an Alchemy Laboratory usable for recipes that require it, and provides all of the benefits of a Mana Well. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Mana Well to replace it.|r",
+"|cff1eff00All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place an Alchemy Laboratory at a campsite.",
+"Craft an Alchemy Laboratory.",
+"Requires Alchemy (300)"
+],
+"273113": [
+"|cff1eff00Blueprint: Master Forge|r",
+" ",
+"|cffffffffMaster Forge|r",
+"Requires Blacksmithing (300)",
+"|cff1eff00Use: Places a Master Forge usable for recipes that require it, and provides all of the benefits of a Sharpening Wheel. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Sharpening Wheel to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place a Master Forge at a campsite.",
+"Craft a Master Forge.",
+"Requires Blacksmithing (300)"
+],
 "273115": [
 "|cff1eff00Blueprint: Iron Oven|r",
 " ",
@@ -1609,6 +1650,39 @@
 "Use: Teaches you how to place a Iron Oven at a campsite.",
 "Craft an Iron Oven.",
 "Requires Cooking (300)"
+],
+"273116": [
+"|cff1eff00Blueprint: Arcane Forge|r",
+" ",
+"|cffffffffArcane Forge|r",
+"Requires Enchanting (300)",
+"|cff1eff00Use: Places an Arcane Forge usable for recipes that require it, and provides all the benefits of an Enchanted Lute. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over an Enchanted Lute to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place an Arcane Forge at a campsite.",
+"Craft an Arcane Forge.",
+"Requires Enchanting (300)"
+],
+"273117": [
+"|cff1eff00Blueprint: Anarchist's Workbench|r",
+" ",
+"|cffffffffAnarchist's Workbench|r",
+"Requires Engineering (300)",
+"|cff1eff00Use: Places an Anarchist's Workbench usable for recipes that require it.|r",
+"|cff1eff00Requires a Campfire nearby. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place an Anarchist's Workbench at a campsite.",
+"Craft an Anarchist's Workbench.",
+"Requires Engineering (300)"
+],
+"273118": [
+"|cff1eff00Blueprint: Plague Doctor's Laboratory|r",
+" ",
+"|cffffffffPlague Doctor's Laboratory|r",
+"Requires First Aid (300)",
+"|cff1eff00Use: Places a Plague Doctor's Laboratory that contains healing potions and poultices, and provides all of the benefits of a First Aid Kit. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a First Aid Kit to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place a Plague Doctor's Laboratory at a campsite.",
+"Craft a Plague Doctor's Laboratory.",
+"Requires First Aid (300)"
 ],
 "273119": [
 "|cff1eff00Blueprint: Fishing Hut|r",
@@ -1621,6 +1695,28 @@
 "Craft a Fishing Hut.",
 "Requires Fishing (300)"
 ],
+"273120": [
+"|cff1eff00Blueprint: Seed Hybridizer|r",
+" ",
+"|cffffffffSeed Hybridizer|r",
+"Requires Herbalism (300)",
+"|cff1eff00Use: Places a Seed Hybridizer that allows seeds to be multiplied or combined into rarer tiers, and provides all of the benefits of an Incense Candle. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over an Incense Candle to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place a Seed Hybridizer at a campsite.",
+"Craft a Seed Hybridizer.",
+"Requires Herbalism (300)"
+],
+"273121": [
+"|cff1eff00Blueprint: Sewing Machine|r",
+" ",
+"|cffffffffSewing Machine|r",
+"Requires Leatherworking (300)",
+"|cff1eff00Use: Places a Sewing Machine usable for recipes that require it, and provides all of the benefits of a Camp Tent. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Camp Tent to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place a Sewing Machine at a campsite.",
+"Craft a Sewing Machine.",
+"Requires Leatherworking (300)"
+],
 "273122": [
 "|cff1eff00Blueprint: Molten Foundry|r",
 " ",
@@ -1631,6 +1727,17 @@
 "Use: Teaches you how to place a Molten Foundry at a campsite.",
 "Craft a Molten Foundry.",
 "Requires Mining (300)"
+],
+"273124": [
+"|cff1eff00Blueprint: Loom|r",
+" ",
+"|cffffffffLoom|r",
+"Requires Tailoring (300)",
+"|cff1eff00Use: Places a Loom usable for recipes that require it, and provides all the benefits of a Faction Banner. Requires a Campfire nearby.|r",
+"|cff1eff00May be placed over a Faction Banner to replace it. All camping features share a cooldown of 1 hour. (1 Hour Cooldown)|r",
+"Use: Teaches you how to place a Loom at a campsite.",
+"Craft a Loom.",
+"Requires Tailoring (300)"
 ],
 "273125": [
 "|cff1eff00Lich's Index Finger|r",
@@ -1651,6 +1758,11 @@
 "|cff1eff00Essence of Anarchy|r",
 "Crafting Reagent",
 "|cffffd100\"An unstable mote of chaos, just what's needed for an Anarchist's Workbench.\"|r"
+],
+"273130": [
+"|cff1eff00Undeath Engine|r",
+"Crafting Reagent",
+"|cffffd100\"Harnessed undead spirits used to power Vectus's Sewing Machine.\"|r"
 ],
 "273131": [
 "|cff1eff00Bottled Screams|r",
@@ -1748,6 +1860,12 @@
 "|cffffffffGandling's Signet Ring|r",
 "Quest Item",
 "Unique"
+],
+"286415": [
+"|cffa335eeReliquary of Tyr|r",
+"Quest Item",
+"Unique",
+"Classes: Paladin"
 ]
 }
 }
