@@ -21,5 +21,6 @@ MapPins.xml
 DungeonMap.lua
 QuestPanel.lua
 Tracker.lua
+DropTooltip.lua
 Minimap.lua
 Options.lua

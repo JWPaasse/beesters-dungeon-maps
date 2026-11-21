@@ -808,14 +808,7 @@ local function CreateBossButton(parent)
     mask:SetTexture(PORTRAIT_MASK, "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
     mask:SetAllPoints(button.Portrait)
     button.Portrait:AddMaskTexture(mask)
-    -- Bosses new in Forever have no portrait the game hands out, but it does draw the creature
-    -- itself: a small live model inside the ring, square but kept within the ring's opening.
-    button.Model = CreateFrame("PlayerModel", nil, button)
-    button.Model:SetSize(PIN_SIZE - 4, PIN_SIZE - 4)
-    button.Model:SetPoint("CENTER")
-    button.Model:SetScript("OnModelLoaded", function(self) self:SetPortraitZoom(1) end)
-    button.Model:Hide()
-    -- Ring and badge go on a layer of their own above that model.
+    -- Ring and badge go on a layer of their own above the portrait.
     button.Over = CreateFrame("Frame", nil, button)
     button.Over:SetAllPoints()
     button.Over:SetFrameLevel(button:GetFrameLevel() + 3)
@@ -870,21 +863,13 @@ local function UpdateBossPin(button)
     local displayID = BossDisplayID(current.key, boss)
     local portrait = displayID and SetPortraitTextureFromCreatureDisplayID and true or false
     button.displayID = portrait and displayID or nil
-    -- No portrait but a known creature (the bosses new in Forever): the game draws the creature.
-    local model = not portrait and boss and boss.npcID and button.Model.SetCreature and true or false
     if portrait then
         SetPortraitTextureFromCreatureDisplayID(button.Portrait, displayID)
     else
-        -- Behind a model, or with no picture at all (the boss skull on it): a dark disc, so
-        -- every pin looks alike.
+        -- No picture (the bosses new in Forever): a dark disc with the boss skull on it, so every
+        -- pin looks alike.
         button.Portrait:SetColorTexture(0.1, 0.075, 0.05, 1)
     end
-    button.Model:SetShown(model)
-    if model then
-        button.Model:SetCreature(boss.npcID)
-        button.Model:SetPortraitZoom(1)
-    end
-    portrait = portrait or model
     button.Portrait:Show()
     button.Ring:Show()
     -- Rare bosses get a silver ring, like the silver dragon round a rare's portrait in the game.

@@ -20,6 +20,7 @@ ns.defaults = {
     minimapButton = true,
     suggestDungeons = true,
     dungeonTracker = true,
+    dropTooltip = true,
 }
 
 function ns:Print(message)
@@ -132,6 +133,7 @@ loader:SetScript("OnEvent", function(self, _, loadedName)
     ns:InitQuestPanel()
     ns:InitMinimap()
     ns:InitDungeonTracker()
+    ns:InitDropTooltip()
 end)
 
 -- Item tooltips with the game's comparison tooltips ("Currently equipped"). Those hang off

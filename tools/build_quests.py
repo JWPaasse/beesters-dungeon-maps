@@ -162,6 +162,59 @@ def find_new_dungeon_quests(quests_lua, npcs_lua, curated):
     return found, links
 
 
+# The Tier 0.5 set upgrade (Dungeon Set 2) is a long chain across all the level 60 dungeons;
+# listing it under each of them would bury the dungeon's own quests.
+SKIP_INSIDE = {"An Earnest Proposition", "Just Compensation", "Anthion's Parting Words",
+               "Saving the Best for Last", "The Instigator's Enchantment"}
+
+
+def find_inside_class_quests(quests_lua, npcs_lua, items_lua, objects_lua, area_to_key):
+    """Class quests filed under a city or a zone whose work is done inside a dungeon: a creature
+    that lives only in dungeons, an item only dungeon creatures or objects drop, or an object that
+    stands only in dungeons (the Orb of Soran'ruk, the Sunken Temple class quests).
+    {key: [questIDs]}."""
+    def keys_of(spawns):
+        sp = to_py(spawns) or {}
+        if not isinstance(sp, dict) or not sp:
+            return None
+        if any(a not in area_to_key for a in sp):
+            return False  # also found outside a dungeon
+        return {k for a in sp for k in area_to_key[a]}
+
+    def where_entity(table, eid, spawn_field):
+        e = table[eid] if eid else None
+        return keys_of(e[spawn_field]) if e is not None else None
+
+    out = {}
+    for qid, entity in quests_lua.items():
+        if not entity[Q_CLASSES] or entity[Q_ZONE] in area_to_key:
+            continue
+        q = to_py(entity)
+        if field(q, Q_NAME) in SKIP_INSIDE:
+            continue
+        objectives = field(q, Q_OBJECTIVES) or []
+        found = set()
+        for o in field(objectives, 1) or []:
+            found |= where_entity(npcs_lua, field(o, 1), N_SPAWNS) or set()
+        for o in field(objectives, 2) or []:
+            found |= where_entity(objects_lua, field(o, 1), O_SPAWNS) or set()
+        for o in field(objectives, 3) or []:
+            it = items_lua[field(o, 1)] if field(o, 1) else None
+            if it is None:
+                continue
+            sources = [(npcs_lua, d, N_SPAWNS) for d in ids(to_py(it[I_NPC_DROPS]))] \
+                + [(objects_lua, d, O_SPAWNS) for d in ids(to_py(it[I_OBJECT_DROPS]))]
+            if not sources or len(sources) > 8:
+                continue
+            # Sources without any known spawn (unused or Season of Discovery creatures) don't count.
+            places = [p for p in (where_entity(*s) for s in sources) if p is not None]
+            if places and all(places):
+                found |= set().union(*places)
+        for key in found:
+            out.setdefault(key, []).append(qid)
+    return out
+
+
 def target_lines(quest_rows, item):
     """Where in the dungeon a quest is done, for the dungeon map: the bosses it has you kill (or
     that drop its item; not items ordinary creatures drop too), and the objects it uses (where the
@@ -272,7 +325,8 @@ def main():
             for key in area_to_key[zone]:
                 dungeon_quests[key].append(qid)
             core.add(qid)
-    for key, qids in found_quests.items():
+    inside = find_inside_class_quests(quests_lua, npcs_lua, items_lua, objects_lua, area_to_key)
+    for key, qids in list(found_quests.items()) + list(inside.items()):
         for qid in qids:
             if qid not in dungeon_quests[key]:
                 dungeon_quests[key].append(qid)

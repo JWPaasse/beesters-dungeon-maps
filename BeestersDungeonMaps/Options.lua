@@ -102,9 +102,11 @@ function ns:InitOptions()
         "Adds a tab with the dungeon's quests to the quest list while a dungeon map is open.", "questPanel", topBar)
     local trackerOption = NewCheckbox(panel, "Track the dungeon's quests inside dungeons",
         "Inside a dungeon, shows the quests in your log for that dungeon with their objectives, like the game's quest tracker. Drag its header to move it.", "dungeonTracker", quests)
+    local dropOption = NewCheckbox(panel, "Show which boss drops an item",
+        "Adds \"Dropped by: boss (dungeon)\" to the tooltip of every item the dungeon bosses drop.", "dropTooltip", trackerOption)
 
     local minimapHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    minimapHeader:SetPoint("TOPLEFT", trackerOption, "BOTTOMLEFT", 0, -16)
+    minimapHeader:SetPoint("TOPLEFT", dropOption, "BOTTOMLEFT", 0, -16)
     minimapHeader:SetText(MINIMAP_LABEL or "Minimap")
     local minimapButton = NewCheckbox(panel, "Show the minimap button",
         "A button on the minimap that lists every dungeon and raid, yours on top. The list also opens with /bdm list.", "minimapButton", minimapHeader)

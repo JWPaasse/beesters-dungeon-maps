@@ -802,17 +802,29 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         check("outside dungeons the tracker is hidden", not tr:IsShown())
         IsInInstance, GetInstanceInfo = realInInstance, realInstanceInfo
         C_QuestLog.GetNumQuestLogEntries, C_QuestLog.GetInfo, C_QuestLog.GetQuestObjectives, C_QuestLog.IsComplete = realLog[1], realLog[2], realLog[3], realLog[4]
+        -- Item tooltips name the boss and dungeon an item drops from.
+        local tara = ns.BossLoot[11520] or {}
+        local dropText
+        local realItemInfo = C_Item.GetItemInfo
+        C_Item.GetItemInfo = function(id) return "Item " .. id, nil, 3, nil, nil, nil, nil, nil, nil, 134400, nil, nil, nil, 1 end
+        for _, id in ipairs(tara) do dropText = dropText or ns.DroppedByText(id) end
+        C_Item.GetItemInfo = function(id) return "Item " .. id, nil, 1, nil, nil, nil, nil, nil, nil, 134400, nil, nil, nil, 1 end
+        check("common items (grey and white) get no drop line", ns.DroppedByText(tara[1]) == nil)
+        C_Item.GetItemInfo = realItemInfo
+        check("an item tooltip says which boss drops it, and where", dropText and dropText:find("Taragaman the Hungerer (Ragefire Chasm)", 1, true) ~= nil)
+        check("an item no boss drops gets no drop line", ns.DroppedByText(6948) == nil)
+        print("drop line: " .. tostring(dropText))
         -- A new Forever boss has no picture: the pin is a ring with the skull, like the others.
         GetInstanceInfo = function() return "Krol'dok Stronghold", "party", 1, "Normal", 5, 0, false, 3039 end
         runEvent(nil, "PLAYER_ENTERING_WORLD")
         ns:OpenDungeonMap("kroldok")
         local mugg
         for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Overlord Mugg" then mugg = b end end
-        check("a new Forever boss shows the creature itself in its ring", mugg and mugg.Ring:IsShown() and mugg.Model:IsShown() and not mugg.Icon:IsShown())
+        check("a new Forever boss gets the ring with a skull, no 3D model", mugg and mugg.Ring:IsShown() and mugg.Icon:IsShown() and rawget(mugg, "Model") == nil)
         ns:OpenDungeonMap("drowned")
         local guardians
         for _, b in ipairs(BeestersDungeonMapsView.BossButtons) do if b:IsShown() and b.boss.name == "Deathless Guardians" then guardians = b end end
-        check("a boss with no creature to draw gets the ring with a skull", guardians and guardians.Ring:IsShown() and guardians.Icon:IsShown() and not guardians.Model:IsShown())
+        check("a boss with no creature to draw gets the ring with a skull", guardians and guardians.Ring:IsShown() and guardians.Icon:IsShown())
         -- From the data: "Level ?? Dragonkin (Boss)", like the game's tooltip.
         ns.BossInfo = ns.BossInfo or {}
         ns.BossInfo[999001] = { 63, 63, 3, 2 }

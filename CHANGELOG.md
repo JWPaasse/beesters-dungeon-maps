@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- The bosses new in Forever show themselves in their pin: the game doesn't hand out their portraits, but it does draw the creature, so the pin has a small live model of the boss inside its ring. Group bosses with no single creature (Deathless Guardians, Ravasaur Hunters) keep the skull.
+- Item tooltips say where an item comes from: "Dropped by: Taragaman the Hungerer (Ragefire Chasm)". Only for boss loot the dungeon maps list (Bind on Pickup, Uncommon and better); you can turn it off in the options.
+- Class quests whose work is done inside a dungeon are now on that dungeon's quest list, with the quests that lead up to them: the Sunken Temple class quests (The Green Drake, The Azure Key, Destroy Morphaz, Blood of Morphaz, Da Voodoo, Forging the Mightstone, Trolls of a Feather, Voodoo Feathers, A Better Ingredient), The Orb of Soran'ruk (Blackfathom Deeps and Shadowfang Keep), The Test of Righteousness (Shadowfang Keep and the Deadmines), Fire Hardened Mail, Brutal Armor and Elemental Aid (Razorfen Kraul), and more. You only see the ones for your class.
+- The new Forever bosses are back to the ring with the skull: the live 3D model only showed for bosses the game had already loaded.
 
 ## 1.5.0
 

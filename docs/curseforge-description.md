@@ -32,6 +32,7 @@ The aim from day one: nothing in this addon should look like an addon. Every par
 - The dungeon's quests in a tab next to its map: the ones in your log, the ones you can still pick up and where, the ones that start inside, and the ones you've done.
 - Quest chains fold up to the step you're on.
 - Click a quest for its objectives, description and rewards. Experience and money are worked out for your level.
+- Class quests that send you into a dungeon are on its list too, for your class only.
 - Share a quest with your group, or show its quest giver on the map.
 - Shift-click a quest to link it in chat. Quests you've never had in your log go in as a link Questie players can click, and you can click them too, even without Questie.
 - Switch between Horde and Alliance quests.
@@ -39,7 +40,8 @@ The aim from day one: nothing in this addon should look like an addon. Every par
 **The new Forever dungeons**
 - The Drowned City, Krol'dok Stronghold, Alcaz Prison, Blackmaw Hold and Shaper's Terrace are in, with their entrances, maps, bosses, loot and quests.
 
-**Tooltips that don't get stuck**
+**Item tooltips**
+- Boss loot says where it drops: "Dropped by: Taragaman the Hungerer (Ragefire Chasm)".
 - If the game hasn't loaded an item yet, you see the addon's copy of its tooltip instead of "Retrieving item information".
 
 ## Still in progress
