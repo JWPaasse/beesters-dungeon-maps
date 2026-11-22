@@ -7,7 +7,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 |---|---|---|---|---|---|
 | Alcaz Prison | 5/5 | 0/5 | 0 | 19 | 15 |
 | Blackfathom Deeps | 6/6 | 0/6 | 0 | 35 | 3 |
-| Blackmaw Hold | 0/7 | 0/7 | 0 | 26 | 21 |
+| Blackmaw Hold | 0/7 | 0/7 | 0 | 27 | 21 |
 | Blackrock Depths | 18/18 | 0/18 | 1 | 82 | 1 |
 | Blackrock Spire | 19/21 | 0/21 | 0 | 122 | 1 |
 | City of Dalaran | 8/8 | 0/8 | 0 | 24 | 24 |
@@ -25,7 +25,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Razorfen Kraul | 8/8 | 0/8 | 0 | 24 | 7 |
 | Ruins of Lordaeron | 6/6 | 0/6 | 0 | 18 | 18 |
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 35 | 7 |
-| Scholomance | 12/15 | 0/15 | 1 | 240 | 3 |
+| Scholomance | 12/15 | 0/15 | 1 | 241 | 4 |
 | Shadowfang Keep | 10/10 | 0/10 | 0 | 35 | 7 |
 | Shaper's Terrace | 0/11 | 0/11 | 1 | 31 | 29 |
 | Stratholme | 16/17 | 0/17 | 0 | 130 | 9 |
@@ -35,7 +35,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 211/243 | 0/243 | 7 | 1252 | 246 |
+| **All** | 211/243 | 0/243 | 7 | 1254 | 247 |
 
 ## Alcaz Prison
 
@@ -66,7 +66,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Impaan the Imprisoner | **no** | — |  | 0 (+3 unknown) | 3 |
 | Elder Shaman Bloodmane | **no** | — |  | 0 (+5 unknown) | 3 |
 | Bonesnout the Unbroken | **no** | — |  | 0 (+4 unknown) | 3 |
-| Varrox Bleakhoof | **no** | — |  | 0 (+4 unknown) | 3 |
+| Varrox Bleakhoof | **no** | — |  | 0 (+5 unknown) | 3 |
 | Blackmaw Behemoth | **no** | — |  | 0 (+3 unknown) | 3 |
 | Unbound Spirit | **no** | — |  | 0 (+3 unknown) | 3 |
 
@@ -293,7 +293,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Jandice Barov | yes | spawn point |  | 8 | 0 |
 | Rattlegore | yes | spawn point |  | 7 | 0 |
 | Marduk Blackpool | yes | spawn point |  | 2 (+2 unknown) | 2 |
-| Vectus | yes | spawn point |  | 2 (+3 unknown) | 1 |
+| Vectus | yes | spawn point |  | 2 (+4 unknown) | 2 |
 | Ras Frostwhisper | yes | spawn point |  | 13 (+2 unknown) | 0 |
 | Kormok | **no** | — |  | 5 | 0 |
 | Instructor Malicia | yes | spawn point |  | 28 | 0 |

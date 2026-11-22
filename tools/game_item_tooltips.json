@@ -1,5 +1,5 @@
 {
-"_source": "WoW Forever client tables, build 1.60.1.70959 (via wago.tools)",
+"_source": "WoW Forever client tables, build 1.60.1.71037 (via wago.tools)",
 "items": {
 "1470": [
 "|cffffffffMurloc Skin Bag|r",
@@ -1462,6 +1462,12 @@
 "Quest Item",
 "Unique",
 "|cffffd100\"Detailed grain shipment orders written by Baron Rivendare during the great plague\"|r"
+],
+"272027": [
+"|cff0070ddMark of Xavius|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"A mark of service to the burning legion, in the name of the satyr Xavius.\"|r"
 ],
 "273085": [
 "|cff1eff00Blueprint: Fermenter|r",
