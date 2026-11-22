@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Sunken Temple has a second level: the lower ring with the six statues and Atal'alarion, which the game's own map leaves out. The map always opens on the game's level; pick "Lower Level" in the floor menu to see it. It then stays on that level until you pick the other one again or leave the dungeon.
 - Item tooltips say where an item comes from: "Dropped by: Taragaman the Hungerer (Ragefire Chasm)". Only for boss loot the dungeon maps list (Bind on Pickup, Uncommon and better); you can turn it off in the options.
 - Class quests whose work is done inside a dungeon are now on that dungeon's quest list, with the quests that lead up to them: the Sunken Temple class quests (The Green Drake, The Azure Key, Destroy Morphaz, Blood of Morphaz, Da Voodoo, Forging the Mightstone, Trolls of a Feather, Voodoo Feathers, A Better Ingredient), The Orb of Soran'ruk (Blackfathom Deeps and Shadowfang Keep), The Test of Righteousness (Shadowfang Keep and the Deadmines), Fire Hardened Mail, Brutal Armor and Elemental Aid (Razorfen Kraul), and more. You only see the ones for your class.
 - The Dungeon Set 2 (Tier 0.5) quests show up under Blackrock Spire, Scholomance and Stratholme, and in the dungeon quest tracker, but only while you have them in your quest log. They run through all of these dungeons, so listing every one of them all the time would bury the dungeon's own quests.

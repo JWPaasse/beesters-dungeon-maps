@@ -853,6 +853,32 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:OpenDungeonMap("dm")
         check("Deadmines: Ironclad Cove opens the second map", ns:CurrentDungeonFloor() == 2)
         ns:CloseDungeonMap(true)
+        -- Sunken Temple: the lower level only shows when picked, and then stays.
+        GetInstanceInfo = function() return "Sunken Temple", "party", 1, "Normal", 5, 0, false, 109 end
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        subzone = "Hall of Ritual"
+        ns:OpenDungeonMap("st")
+        check("Sunken Temple opens on the game's own level", ns:CurrentDungeonFloor() == 1)
+        ns.PickDungeonFloor(2)
+        runEvent(nil, "ENCOUNTER_START", 3583, "Avatar of Hakkar")
+        check("the lower level stays when a boss on the other level is pulled", ns:CurrentDungeonFloor() == 2)
+        ns:CloseDungeonMap(true)
+        ns:OpenDungeonMap("st")
+        check("the lower level stays when the map is opened again", ns:CurrentDungeonFloor() == 2)
+        ns.PickDungeonFloor(1)
+        ns:CloseDungeonMap(true)
+        ns:OpenDungeonMap("st")
+        check("picking the game's level again goes back to normal", ns:CurrentDungeonFloor() == 1)
+        ns.PickDungeonFloor(2)
+        ns:CloseDungeonMap(true)
+        runEvent(nil, "ENCOUNTER_START", 3582, "Atal'alarion")
+        GetInstanceInfo = function() return "Kalimdor", "none", 0, "", 0, 0, false, 1 end
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        GetInstanceInfo = function() return "Sunken Temple", "party", 1, "Normal", 5, 0, false, 109 end
+        runEvent(nil, "PLAYER_ENTERING_WORLD")
+        ns:OpenDungeonMap("st")
+        check("after leaving, Sunken Temple starts on the game's level again", ns:CurrentDungeonFloor() == 1)
+        ns:CloseDungeonMap(true)
         -- Scholomance: pulling a boss teaches the addon the subzone's level.
         GetInstanceInfo = function() return "Scholomance", "party", 1, "Normal", 5, 0, false, 289 end
         runEvent(nil, "PLAYER_ENTERING_WORLD")

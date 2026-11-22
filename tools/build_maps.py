@@ -30,6 +30,7 @@ from blp import save_blp  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 ADDON = ROOT / "BeestersDungeonMaps"
 ART = ROOT / "tools" / "art" / "santiago"
+EXTRA_ART = ROOT / "tools" / "art" / "extra"
 MEDIA = ADDON / "Media" / "Maps"
 
 # Santiago's maps: instance key -> floor names, in floor order (file <key><n>.webp).
@@ -44,6 +45,13 @@ SANTIAGO = {
     "shaper": ["Shaper's Terrace"],
     "blackmaw": ["Blackmaw Hold", "Festering Grotto", "Depths of the Fallen Grove", "Depths of the Elders",
                  "Depths of the Burrow", "Depths of Forbidden Magic"],
+}
+
+# Extra levels for classic dungeons whose game map leaves part of the dungeon out, drawn for the
+# addon (tools/art/extra/<key><n>.png): instance key -> [(floor number, name), ...]. Added after
+# the game's own levels; the addon only shows them when picked from the floor menu.
+EXTRA_FLOORS = {
+    "st": [(2, "Lower Level")],
 }
 
 
@@ -88,6 +96,13 @@ def main():
             if (dungeon, norm(b[2])) not in known and (dungeon, b[1]) not in known:
                 journal.append(b)
     santiago = build_santiago()
+    extra = {}
+    for key, floors in EXTRA_FLOORS.items():
+        for n, name in floors:
+            img = Image.open(EXTRA_ART / f"{key}{n}.png").convert("RGB").resize((1536, 1024), Image.LANCZOS)
+            save_blp(img.crop((0, 0, 1024, 1024)), MEDIA / f"{key}{n}a.blp")
+            save_blp(img.crop((1024, 0, 1536, 1024)), MEDIA / f"{key}{n}b.blp")
+            extra.setdefault(key, []).append((n, name))
 
     # Which instance key and floor does each journal map floor belong to?
     floor_owner = {}
@@ -100,6 +115,9 @@ def main():
     # Santiago Reyes's maps (positions for these come from players placing bosses in game).
     for key, names in santiago.items():
         for n in range(1, len(names) + 1):
+            floor_owner.setdefault(f"{key}|{n}", (key, n))
+    for key, floors in extra.items():
+        for n, _ in floors:
             floor_owner.setdefault(f"{key}|{n}", (key, n))
 
     lines = [
@@ -121,7 +139,11 @@ def main():
     for key in sorted(tiles["maps"]):
         if key == "diremaul":
             continue
-        lines.append(f"    [{lua_str(key)}] = {{ floors = {{ {tile_floors(key)} }} }},")
+        parts = [tile_floors(key)]
+        for n, name in extra.get(key, []):
+            tex = f"Interface\\\\AddOns\\\\BeestersDungeonMaps\\\\Media\\\\Maps\\\\{key}{n}"
+            parts.append(f'{{ texture = "{tex}", name = {lua_str(name)}, manual = true }}')
+        lines.append(f"    [{lua_str(key)}] = {{ floors = {{ {', '.join(parts)} }} }},")
     for wing, (base, wing_floors) in sorted(tiles["wings"].items()):
         lines.append(f"    [{lua_str(wing)}] = {{ floors = {{ {tile_floors(base, wing_floors)} }} }},")
     for key, names in sorted(santiago.items()):

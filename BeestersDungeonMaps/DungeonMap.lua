@@ -26,6 +26,7 @@ local FLOOR_NAMES = {
     strat = { "Main Gate", "Service Gate" },
     ulda = { "Hall of the Keepers", "Khaz'goroth's Seat" },
     mara = { "Caverns of Maraudon", "Zaetar's Grave" },
+    st = { "Upper Level", "Lower Level" },
 }
 
 -- Boss names that differ between the game's boss list and the Dungeon Journal.
@@ -155,6 +156,14 @@ local function SubzoneHere(key)
     return subzone
 end
 
+-- Levels the addon only shows when you pick them yourself (Sunken Temple's lower level, drawn
+-- for the addon: the game's map leaves it out). Nothing turns the map to them, and while one is
+-- open nothing turns it away, until you pick another level or leave the dungeon.
+local function ManualFloor(key, floor)
+    local map = floor and ns.DungeonMaps[key]
+    return map and map.floors[floor] and map.floors[floor].manual == true or false
+end
+
 -- The floor you're standing on, when it can be told from the subzone; nil otherwise.
 local function FloorHere(key)
     local subzone = SubzoneHere(key)
@@ -162,10 +171,10 @@ local function FloorHere(key)
     local known = SUBZONE_FLOORS[key] and SUBZONE_FLOORS[key][subzone]
     if known then return known end
     local learned = ns.db.subzoneFloors and ns.db.subzoneFloors[key] and ns.db.subzoneFloors[key][subzone]
-    if learned then return learned end
+    if learned and not ManualFloor(key, learned) then return learned end
     local map = ns.DungeonMaps[key]
     for i = 1, map and #map.floors or 0 do
-        if FloorName(key, i) == subzone then return i end
+        if FloorName(key, i) == subzone and not ManualFloor(key, i) then return i end
     end
 end
 
@@ -197,6 +206,7 @@ end
 
 -- Switching floors by hand inside the dungeon teaches the addon which floor this subzone is on.
 local function LearnFloorHere(key, floor)
+    if ManualFloor(key, floor) then return end
     if not (ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key) then return end
     local subzone = SubzoneHere(key)
     if not subzone or (SUBZONE_FLOORS[key] and SUBZONE_FLOORS[key][subzone]) then return end
@@ -208,6 +218,9 @@ end
 local function DefaultFloor(key)
     if START_FLOOR[key] then return START_FLOOR[key] end
     local counts = BossesPerFloor(key)
+    for floor in pairs(counts) do
+        if ManualFloor(key, floor) then counts[floor] = nil end
+    end
     if (counts[1] or 0) > 0 then return 1 end
     local best, most = 1, 0
     for floor, n in pairs(counts) do
@@ -1207,7 +1220,7 @@ local function CreateView()
                 local label = FloorName(current.key, i) .. (n > 0 and ("  |cff9d9d9d(%d %s)|r"):format(n, n == 1 and "boss" or "bosses") or "")
                 root:CreateRadio(label,
                     function() return current.floor == i end,
-                    function() LearnFloorHere(current.key, i); ShowFloor(i) end)
+                    function() ns.PickDungeonFloor(i) end)
             end
         end)
     else
@@ -1259,6 +1272,12 @@ function ns:IsDungeonMapOpen()
 end
 
 function ns:CurrentDungeonFloor() return current.floor end
+
+-- Picking a level from the floor menu.
+function ns.PickDungeonFloor(index)
+    LearnFloorHere(current.key, index)
+    ShowFloor(index)
+end
 
 function ns:CurrentDungeonKey()
     return current.key
@@ -1392,6 +1411,8 @@ function ns:OpenDungeonMap(key, floor)
         -- Inside this dungeon: the level you're on. Otherwise where a group starts.
         local inside = ns.CurrentInstanceKey and ns.CurrentInstanceKey() == key
         local here = inside and FloorHere(key)
+        -- A level you picked yourself stays until you pick another one or leave.
+        if inside and ManualFloor(key, RunFloor(key)) then here = nil end
         current.floor = floor or here or (inside and RunFloor(key)) or DefaultFloor(key) -- before Show: its layout reads it
         current.zoneMapID = WorldMapFrame:GetMapID()
         SetCanvasShown(false)
@@ -1605,6 +1626,7 @@ function ns:InitDungeonMap()
     for _, event in ipairs({ "ZONE_CHANGED", "ZONE_CHANGED_INDOORS" }) do pcall(zoneWatcher.RegisterEvent, zoneWatcher, event) end
     zoneWatcher:SetScript("OnEvent", function()
         if not (ns:IsDungeonMapOpen() and current.key and CurrentInstanceKey() == current.key) then return end
+        if ManualFloor(current.key, current.floor) then return end
         local here = FloorHere(current.key)
         if here and here ~= current.floor then ShowFloor(here) end
     end)
@@ -1630,7 +1652,7 @@ function ns:InitDungeonMap()
                 floor = BossFloor(key, nil, UnitName("target"))
             end
         end)
-        if not floor then return end
+        if not floor or ManualFloor(key, floor) or ManualFloor(key, RunFloor(key)) then return end
         NoteRunFloor(key, floor)
         -- A boss pulled here stands on this level: remember the subzone (targeting can reach
         -- across levels, so only a pull counts).
