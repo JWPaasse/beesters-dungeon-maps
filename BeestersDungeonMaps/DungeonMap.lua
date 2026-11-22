@@ -1165,7 +1165,7 @@ local function CreateView()
     view.BossButtons = {}
 
     view.Credit = view.Art:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
-    view.Credit:SetPoint("BOTTOMLEFT", 10, 8)
+    view.Credit:SetPoint("BOTTOMLEFT", 10, 32) -- above coordinate bars other addons put along the bottom
     view.Credit:SetJustifyH("LEFT")
 
     -- Where the map would be, for a dungeon that has none yet.
