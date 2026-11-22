@@ -51,12 +51,13 @@ SANTIAGO = {
 # addon (tools/art/extra/<key><n>.png): instance key -> [(floor number, name), ...]. Added after
 # the game's own levels; the addon only shows them when picked from the floor menu.
 EXTRA_FLOORS = {
-    "st": [(2, "Lower Level")],
+    "st": [(2, "Lower Level", "This map was made with AI and may contain errors.\n"
+                              "The numbers show the order in which to activate the statues.")],
 }
 
 
 def lua_str(s):
-    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n") + '"'
 
 
 def build_santiago():
@@ -98,11 +99,11 @@ def main():
     santiago = build_santiago()
     extra = {}
     for key, floors in EXTRA_FLOORS.items():
-        for n, name in floors:
+        for n, name, note in floors:
             img = Image.open(EXTRA_ART / f"{key}{n}.png").convert("RGB").resize((1536, 1024), Image.LANCZOS)
             save_blp(img.crop((0, 0, 1024, 1024)), MEDIA / f"{key}{n}a.blp")
             save_blp(img.crop((1024, 0, 1536, 1024)), MEDIA / f"{key}{n}b.blp")
-            extra.setdefault(key, []).append((n, name))
+            extra.setdefault(key, []).append((n, name, note))
 
     # Which instance key and floor does each journal map floor belong to?
     floor_owner = {}
@@ -117,7 +118,7 @@ def main():
         for n in range(1, len(names) + 1):
             floor_owner.setdefault(f"{key}|{n}", (key, n))
     for key, floors in extra.items():
-        for n, _ in floors:
+        for n, _, _ in floors:
             floor_owner.setdefault(f"{key}|{n}", (key, n))
 
     lines = [
@@ -140,9 +141,9 @@ def main():
         if key == "diremaul":
             continue
         parts = [tile_floors(key)]
-        for n, name in extra.get(key, []):
+        for n, name, note in extra.get(key, []):
             tex = f"Interface\\\\AddOns\\\\BeestersDungeonMaps\\\\Media\\\\Maps\\\\{key}{n}"
-            parts.append(f'{{ texture = "{tex}", name = {lua_str(name)}, manual = true }}')
+            parts.append(f'{{ texture = "{tex}", name = {lua_str(name)}, note = {lua_str(note)}, manual = true }}')
         lines.append(f"    [{lua_str(key)}] = {{ floors = {{ {', '.join(parts)} }} }},")
     for wing, (base, wing_floors) in sorted(tiles["wings"].items()):
         lines.append(f"    [{lua_str(wing)}] = {{ floors = {{ {tile_floors(base, wing_floors)} }} }},")

@@ -1080,10 +1080,10 @@ function ShowFloor(index)
         view.Left:Show()
         view.Right:Show()
     end
-    view.Credit:SetShown(map.artist ~= nil)
-    if map.artist then
-        view.Credit:SetText(("Map by %s"):format(map.artist))
-    end
+    -- Bottom left: who drew the map, or a level's own note (the AI-made Sunken Temple level).
+    local credit = floor and floor.note or (map.artist and ("Map by %s"):format(map.artist))
+    view.Credit:SetShown(credit ~= nil)
+    if credit then view.Credit:SetText(credit) end
 
     -- Boss pins on this floor; bosses without a known position go in the list.
     local bosses = BossesWithPositions(current.key)
@@ -1166,6 +1166,7 @@ local function CreateView()
 
     view.Credit = view.Art:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
     view.Credit:SetPoint("BOTTOMLEFT", 10, 8)
+    view.Credit:SetJustifyH("LEFT")
 
     -- Where the map would be, for a dungeon that has none yet.
     view.NoMap = CreateFrame("Frame", nil, view.Art)
@@ -1209,7 +1210,7 @@ local function CreateView()
     -- Floor picker, like the game's own floor dropdown on multi-level maps.
     local ok, dropdown = pcall(CreateFrame, "DropdownButton", nil, view, "WowStyle1DropdownTemplate")
     if ok and dropdown and dropdown.SetupMenu then
-        dropdown:SetPoint("TOPLEFT", 12, -10)
+        dropdown:SetPoint("TOPLEFT", 52, -10) -- clear of the game's round map buttons on the left
         dropdown:SetWidth(190)
         dropdown:SetupMenu(function(_, root)
             local map = current.key and ns.DungeonMaps[current.key]
@@ -1225,7 +1226,7 @@ local function CreateView()
         end)
     else
         dropdown = CreateFrame("Button", nil, view, "UIPanelButtonTemplate")
-        dropdown:SetPoint("TOPLEFT", 12, -10)
+        dropdown:SetPoint("TOPLEFT", 52, -10) -- clear of the game's round map buttons on the left
         dropdown:SetSize(190, 22)
         dropdown:SetScript("OnClick", function()
             local map = ns.DungeonMaps[current.key]
