@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.7.0
 
 - The dungeon quest tracker shows a quest's item beside it when you have it in your bags, like the game's own tracker: click it to use the item. In a fight the buttons can't be moved or changed (the game doesn't allow it), so a change waits until the fight is over.
 
