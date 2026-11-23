@@ -27,7 +27,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Scarlet Monastery | 7/10 | 0/10 | 0 | 35 | 7 |
 | Scholomance | 12/15 | 0/15 | 1 | 241 | 4 |
 | Shadowfang Keep | 10/10 | 0/10 | 0 | 35 | 7 |
-| Shaper's Terrace | 0/11 | 0/11 | 1 | 31 | 29 |
+| Shaper's Terrace | 0/11 | 0/11 | 1 | 32 | 29 |
 | Stratholme | 16/17 | 0/17 | 0 | 130 | 9 |
 | Sunken Temple | 6/7 | 0/7 | 3 | 20 | 1 |
 | The Deadmines | 8/8 | 0/8 | 0 | 35 | 5 |
@@ -35,7 +35,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 212/243 | 0/243 | 7 | 1254 | 247 |
+| **All** | 212/243 | 0/243 | 7 | 1255 | 247 |
 
 ## Alcaz Prison
 
@@ -333,7 +333,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Snowtalon | **no** | — |  | 0 (+2 unknown) | 2 |
 | Bolt | **no** | — |  | 0 (+2 unknown) | 2 |
 | Vitrix | **no** | — |  | 0 (+6 unknown) | 6 |
-| Nanaya | **no** | — |  | 0 (+5 unknown) | 3 |
+| Nanaya | **no** | — |  | 0 (+6 unknown) | 3 |
 
 ## Stratholme
 

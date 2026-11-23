@@ -226,6 +226,11 @@
 "Quest Item",
 "Unique"
 ],
+"9299": [
+"|cffffffffThermaplugg's Safe Combination|r",
+"Quest Item",
+"Unique"
+],
 "9471": [
 "|cffffffffNekrum's Medallion|r",
 "Quest Item"
@@ -1468,6 +1473,12 @@
 "Quest Item",
 "Unique",
 "|cffffd100\"A mark of service to the burning legion, in the name of the satyr Xavius.\"|r"
+],
+"272028": [
+"|cff0070ddFreya's Sigil|r",
+"Quest Item",
+"Unique",
+"|cffffd100\"A stone marked with the sigil of the titan Freya.\"|r"
 ],
 "273085": [
 "|cff1eff00Blueprint: Fermenter|r",
