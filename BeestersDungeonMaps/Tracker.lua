@@ -39,10 +39,139 @@ local function QuestsHere(key)
     return out
 end
 
+----------------------------------------------------------------------
+-- Quest item buttons: an item the quest has you use, beside the quest like the game's own
+-- tracker. Clicking uses it. Using an item takes a secure button, and secure buttons can't be
+-- moved, shown or hidden during a fight; so they hang on UIParent (the tracker itself stays free
+-- to change in combat) and are only set up out of combat. A change in a fight waits until it ends.
+----------------------------------------------------------------------
+
+local ITEM_SIZE = 26
+local itemButtons = {}
+local lineItem = {} -- [title line] = { itemID, icon }
+local itemsPending = false
+
+local function ItemCount(itemID)
+    local count = (C_Item and C_Item.GetItemCount) or GetItemCount
+    return count and count(itemID) or 0
+end
+
+local function ItemSpell(itemID)
+    local spell = (C_Item and C_Item.GetItemSpell) or GetItemSpell
+    return spell and spell(itemID)
+end
+
+-- The item to show for this quest: the one the game ties to it, else one from the addon's data
+-- that's in your bags and can be used. Returns itemID, icon.
+local function QuestItem(questID, ready)
+    local index = C_QuestLog.GetLogIndexForQuestID and C_QuestLog.GetLogIndexForQuestID(questID)
+    if index and GetQuestLogSpecialItemInfo then
+        local link, icon, _, showWhenComplete = GetQuestLogSpecialItemInfo(index)
+        local id = link and tonumber(link:match("item:(%d+)"))
+        if id and (not ready or showWhenComplete) then return id, icon end
+    end
+    if ready then return nil end
+    local q = ns.Quests and ns.Quests[questID]
+    for _, id in ipairs(q and q[19] or {}) do
+        if ItemCount(id) > 0 and ItemSpell(id) then
+            local getIcon = (C_Item and C_Item.GetItemIconByID) or GetItemIcon
+            return id, getIcon and getIcon(id) or 134400
+        end
+    end
+end
+
+local function ItemButton(index)
+    local b = itemButtons[index]
+    if b then return b end
+    b = CreateFrame("Button", "BeestersDungeonMapsTrackerItem" .. index, UIParent, "SecureActionButtonTemplate")
+    b:SetSize(ITEM_SIZE, ITEM_SIZE)
+    b:SetFrameStrata("LOW")
+    b:RegisterForClicks("AnyUp", "AnyDown")
+    b:SetAttribute("type", "item")
+    b.Icon = b:CreateTexture(nil, "ARTWORK")
+    b.Icon:SetAllPoints()
+    b:SetNormalTexture("Interface\\Buttons\\UI-Quickslot2")
+    local normal = b:GetNormalTexture()
+    normal:ClearAllPoints()
+    normal:SetPoint("CENTER")
+    normal:SetSize(ITEM_SIZE * 64 / 37, ITEM_SIZE * 64 / 37)
+    b:SetPushedTexture("Interface\\Buttons\\UI-Quickslot-Depress")
+    b:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square", "ADD")
+    b.Count = b:CreateFontString(nil, "OVERLAY", "NumberFontNormalSmall")
+    b.Count:SetPoint("BOTTOMRIGHT", -1, 1)
+    b.Cooldown = CreateFrame("Cooldown", nil, b, "CooldownFrameTemplate")
+    b.Cooldown:SetAllPoints()
+    b:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_LEFT")
+        if self.itemID then GameTooltip:SetItemByID(self.itemID) end
+        GameTooltip:Show()
+    end)
+    b:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    b:Hide()
+    itemButtons[index] = b
+    return b
+end
+
+local function UpdateItemCounts()
+    for _, b in ipairs(itemButtons) do
+        if b:IsShown() and b.itemID then
+            local n = ItemCount(b.itemID)
+            b.Count:SetText(n > 1 and n or "")
+            local cd = (C_Container and C_Container.GetItemCooldown) or GetItemCooldown
+            if cd then
+                local start, duration, enable = cd(b.itemID)
+                if start and duration and duration > 0 and enable ~= 0 then
+                    b.Cooldown:SetCooldown(start, duration)
+                else
+                    b.Cooldown:Clear()
+                end
+            end
+        end
+    end
+end
+
+-- Put the buttons beside their quests. Out of combat only.
+local function PlaceItemButtons()
+    if InCombatLockdown() then
+        itemsPending = true
+        return
+    end
+    itemsPending = false
+    local used = 0
+    if tracker and tracker:IsShown() and tracker.Content:IsShown() then
+        local scale = tracker:GetEffectiveScale() / UIParent:GetEffectiveScale()
+        for _, line in ipairs(tracker.Lines) do
+            local item = line:IsShown() and lineItem[line]
+            if item and line:GetTop() then
+                used = used + 1
+                local b = ItemButton(used)
+                b.itemID = item[1]
+                b:SetAttribute("item", "item:" .. item[1])
+                b.Icon:SetTexture(item[2] or 134400)
+                b:ClearAllPoints()
+                b:SetPoint("TOPRIGHT", UIParent, "BOTTOMLEFT", tracker:GetRight() * scale - 2, line:GetTop() * scale)
+                b:Show()
+            end
+        end
+    end
+    for i = used + 1, #itemButtons do
+        itemButtons[i].itemID = nil
+        itemButtons[i]:Hide()
+    end
+    UpdateItemCounts()
+end
+ns.PlaceTrackerItemButtons = PlaceItemButtons -- used by tools/test_addon.py
+
 -- The whole tracker can be dragged: by its header, its quest lines or the space between them.
-local function StartDrag() tracker:StartMoving() end
+local function StartDrag()
+    tracker:StartMoving()
+    -- The item buttons follow while you drag (not in a fight; they catch up after it).
+    tracker:SetScript("OnUpdate", function() if not InCombatLockdown() then PlaceItemButtons() end end)
+end
 local function StopDrag()
     tracker:StopMovingOrSizing()
+    tracker:SetScript("OnUpdate", nil)
+    PlaceItemButtons()
     local point, _, relPoint, x, y = tracker:GetPoint(1)
     ns.db.dungeonTrackerPos = { point, relPoint, x, y }
 end
@@ -85,14 +214,14 @@ local function AcquireLine(index)
     return line
 end
 
-local function SetLine(line, font, text, color, indent)
+local function SetLine(line, font, text, color, indent, room)
     line.Text:SetFontObject(font)
     line.Text:SetText(text)
     line.r, line.g, line.b = color[1], color[2], color[3]
     line.Text:SetTextColor(color[1], color[2], color[3])
     line.Text:ClearAllPoints()
     line.Text:SetPoint("TOPLEFT", indent or 0, 0)
-    line.Text:SetWidth(WIDTH - 12 - (indent or 0))
+    line.Text:SetWidth(WIDTH - 12 - (indent or 0) - (room or 0))
     line:SetHeight(line.Text:GetStringHeight() + 2)
 end
 
@@ -102,6 +231,7 @@ function ns:UpdateDungeonTracker()
     local quests = key and ns.db.dungeonTracker and QuestsHere(key) or {}
     if #quests == 0 then
         tracker:Hide()
+        PlaceItemButtons()
         return
     end
     tracker:Show()
@@ -110,15 +240,18 @@ function ns:UpdateDungeonTracker()
     tracker.Header.Toggle:SetText(ns.db.dungeonTrackerCollapsed and "+" or "-")
     if ns.db.dungeonTrackerCollapsed then
         tracker:SetHeight(tracker.Header:GetHeight())
+        PlaceItemButtons()
         return
     end
 
     local index, y = 0, 0
-    local function Add(font, text, color, indent, questID, title, isTitle)
+    local function Add(font, text, color, indent, questID, title, isTitle, itemID, itemIcon)
         index = index + 1
         local line = AcquireLine(index)
-        SetLine(line, font, text, color, indent)
+        -- A quest with an item: its lines leave room on the right for the button.
+        SetLine(line, font, text, color, indent, itemID and (ITEM_SIZE + 4) or 0)
         line.questID, line.title, line.isTitle = questID, title, isTitle
+        lineItem[line] = isTitle and itemID and { itemID, itemIcon } or nil
         line:ClearAllPoints()
         line:SetPoint("TOPLEFT", tracker.Content, "TOPLEFT", 0, -y)
         line:Show()
@@ -129,21 +262,29 @@ function ns:UpdateDungeonTracker()
         local yellow = NORMAL_FONT_COLOR
         local title = q.title or ("Quest " .. q.id)
         if q.level and q.level > 0 then title = ("[%d] %s"):format(q.level, title) end -- as in the dungeon tab
-        Add(TITLE_FONT, title, { yellow.r, yellow.g, yellow.b }, 0, q.id, q.title, true)
+        local itemID, itemIcon = QuestItem(q.id, q.ready)
+        local top = y
+        Add(TITLE_FONT, title, { yellow.r, yellow.g, yellow.b }, 0, q.id, q.title, true, itemID, itemIcon)
         if q.ready then
             local g = GREEN_FONT_COLOR
-            Add(LINE_FONT, "- " .. READY_TEXT, { g.r, g.g, g.b }, 8, q.id)
+            Add(LINE_FONT, "- " .. READY_TEXT, { g.r, g.g, g.b }, 8, q.id, nil, nil, itemID)
         else
             for _, o in ipairs(C_QuestLog.GetQuestObjectives(q.id) or {}) do
                 if o.text and o.text ~= "" then
-                    Add(LINE_FONT, "- " .. o.text, o.finished and COMPLETE or OPEN, 8, q.id)
+                    Add(LINE_FONT, "- " .. o.text, o.finished and COMPLETE or OPEN, 8, q.id, nil, nil, itemID)
                 end
             end
         end
+        -- The button is as tall as two lines: a one-line quest still makes room for it.
+        if itemID then y = math.max(y, top + ITEM_SIZE + 2) end
     end
-    for i = index + 1, #tracker.Lines do tracker.Lines[i]:Hide() end
+    for i = index + 1, #tracker.Lines do
+        tracker.Lines[i]:Hide()
+        lineItem[tracker.Lines[i]] = nil
+    end
     tracker.Content:SetHeight(math.max(y, 1))
     tracker:SetHeight(tracker.Header:GetHeight() + 6 + y)
+    PlaceItemButtons()
 end
 
 -- Clicking a quest: open its dungeon's map with that quest's details (not in combat: the game
@@ -223,6 +364,7 @@ function ns:ResetDungeonTracker()
     if not tracker then return end
     tracker:ClearAllPoints()
     tracker:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -85, -260)
+    PlaceItemButtons()
 end
 
 function ns:InitDungeonTracker()
@@ -230,11 +372,14 @@ function ns:InitDungeonTracker()
     CreateTracker()
     local events = CreateFrame("Frame")
     for _, event in ipairs({ "PLAYER_ENTERING_WORLD", "QUEST_LOG_UPDATE", "QUEST_ACCEPTED", "QUEST_REMOVED",
-        "QUEST_TURNED_IN", "UNIT_QUEST_LOG_CHANGED", "ZONE_CHANGED_NEW_AREA" }) do
+        "QUEST_TURNED_IN", "UNIT_QUEST_LOG_CHANGED", "ZONE_CHANGED_NEW_AREA", "BAG_UPDATE_DELAYED",
+        "BAG_UPDATE_COOLDOWN", "PLAYER_REGEN_ENABLED" }) do
         pcall(events.RegisterEvent, events, event)
     end
     local pending = false
-    events:SetScript("OnEvent", function()
+    events:SetScript("OnEvent", function(_, event)
+        if event == "BAG_UPDATE_COOLDOWN" then UpdateItemCounts() return end
+        if event == "PLAYER_REGEN_ENABLED" and not itemsPending then return end
         -- Quest events come in bursts; draw once.
         if pending then return end
         pending = true

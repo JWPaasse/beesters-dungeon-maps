@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parent.parent
 ADDON = ROOT / "BeestersDungeonMaps"
 
 FAKE_WOW = r"""
-local NUMBERS = { GetWidth = 100, GetHeight = 50, GetStringWidth = 60, GetStringHeight = 14, GetFrameLevel = 5 }
+local NUMBERS = { GetWidth = 100, GetHeight = 50, GetStringWidth = 60, GetStringHeight = 14, GetFrameLevel = 5,
+    GetEffectiveScale = 1, GetTop = 500, GetRight = 900, GetLeft = 600, GetBottom = 300 }
 local function anything()
     local t = { _shown = true }
     return setmetatable(t, { __index = function(self, key)
@@ -32,6 +33,10 @@ local function anything()
             f = function(s) return s._shown end
         elseif key == "HookScript" or key == "SetScript" then
             f = function(s, event, fn) local sc = rawget(s, "scripts") or {}; rawset(s, "scripts", sc); sc[event] = fn end
+        elseif key == "SetAttribute" then
+            f = function(s, k, v) local a = rawget(s, "attrs") or {}; rawset(s, "attrs", a); a[k] = v end
+        elseif key == "GetAttribute" then
+            f = function(s, k) local a = rawget(s, "attrs"); return a and a[k] end
         elseif key == "GetFontString" then
             f = function() return nil end
         elseif key == "CreateFontString" or key == "CreateTexture" then
@@ -796,6 +801,25 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local shown = {}
         for _, l in ipairs(tr.Lines) do if l:IsShown() then table.insert(shown, l.Text._text or "") end end
         check("inside a dungeon the tracker shows its quests in your log", tr:IsShown() and #shown == 2)
+        -- A quest with an item to use gets the item's button beside it.
+        local realSpecial = GetQuestLogSpecialItemInfo
+        C_QuestLog.GetLogIndexForQuestID = C_QuestLog.GetLogIndexForQuestID or function() return nil end
+        local realIndex = C_QuestLog.GetLogIndexForQuestID
+        C_QuestLog.GetLogIndexForQuestID = function(id) if id == 5725 then return 2 end end
+        GetQuestLogSpecialItemInfo = function(i) if i == 2 then return "|Hitem:14395|h[Spells of Shadow]|h", 134400, 0, false end end
+        ns:UpdateDungeonTracker()
+        local itemButton = BeestersDungeonMapsTrackerItem1
+        check("a quest's item gets a button in the tracker", itemButton and itemButton:IsShown() and itemButton:GetAttribute("item") == "item:14395")
+        local realLockdown = InCombatLockdown
+        InCombatLockdown = function() return true end
+        GetQuestLogSpecialItemInfo = function() return nil end
+        ns:UpdateDungeonTracker()
+        check("in a fight the item button is left alone", itemButton:IsShown())
+        InCombatLockdown = realLockdown
+        runEvent(nil, "PLAYER_REGEN_ENABLED")
+        ns:UpdateDungeonTracker()
+        check("after the fight the item button is updated", not itemButton:IsShown())
+        GetQuestLogSpecialItemInfo, C_QuestLog.GetLogIndexForQuestID = realSpecial, realIndex
         GetInstanceInfo = function() return "Kalimdor", "none", 0, "", 0, 0, false, 1 end
         IsInInstance = function() return false end
         ns:UpdateDungeonTracker()

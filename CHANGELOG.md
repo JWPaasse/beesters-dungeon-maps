@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The dungeon quest tracker shows a quest's item beside it when you have it in your bags, like the game's own tracker: click it to use the item. In a fight the buttons can't be moved or changed (the game doesn't allow it), so a change waits until the fight is over.
+
 ## 1.6.0
 
 - Sunken Temple has a second level: the lower ring with the six statues and Atal'alarion, which the game's own map leaves out. The map always opens on the game's level; pick "Lower Level" in the floor menu to see it. It then stays on that level until you pick the other one again or leave the dungeon. A note in its bottom-left corner says the map was made with AI and may contain errors, and that the numbers are the order in which to activate the statues.

@@ -25,7 +25,7 @@ from build_data import lua_str, parse_area_to_uimap, parse_dungeons  # noqa: E40
 # QuestieDB quest field numbers (see data/Forever/foreverQuestDB.lua, questKeys)
 Q_NAME, Q_STARTED_BY, Q_FINISHED_BY, Q_REQ_LEVEL, Q_LEVEL, Q_RACES, Q_CLASSES = 1, 2, 3, 4, 5, 6, 7
 Q_OBJ_TEXT, Q_OBJECTIVES, Q_SOURCE_ITEM, Q_PRE_GROUP, Q_PRE_SINGLE = 8, 10, 11, 12, 13
-Q_ZONE, Q_NEXT_IN_CHAIN, Q_SPECIAL_FLAGS, Q_BREADCRUMB_FOR = 17, 22, 24, 27
+Q_ZONE, Q_REQ_SOURCE_ITEMS, Q_NEXT_IN_CHAIN, Q_SPECIAL_FLAGS, Q_BREADCRUMB_FOR = 17, 21, 22, 24, 27
 N_NAME, N_MIN_LEVEL, N_MAX_LEVEL, N_RANK, N_SPAWNS, N_ZONE, N_SUBNAME = 1, 4, 5, 6, 7, 9, 14
 O_NAME, O_SPAWNS = 1, 4
 I_NAME, I_NPC_DROPS, I_OBJECT_DROPS, I_START_QUEST, I_QUEST_REWARDS = 1, 2, 3, 5, 6
@@ -59,6 +59,10 @@ def ids(value):
     if isinstance(value, dict):
         value = [v for _, v in sorted(value.items())]
     return [v for v in value if isinstance(v, int)]
+
+
+def one_or_ids(value):
+    return [value] if isinstance(value, int) and value else ids(value)
 
 
 def load_questiedb(qdb):
@@ -442,6 +446,10 @@ def main():
             "rewards": sorted(rewards.get(qid, [])),
             "repeatable": bool((field(q, Q_SPECIAL_FLAGS) or 0) & 1),
             "followUp": followups.get(qid),
+            # Items the quest may have you use: the one the quest giver hands you, other items it
+            # needs, and its objective items. The tracker shows one when it's in your bags and
+            # can be used (the game says which; most objective items can't).
+            "use": list(dict.fromkeys(one_or_ids(field(q, Q_SOURCE_ITEM)) + one_or_ids(field(q, Q_REQ_SOURCE_ITEMS)) + obj_items)),
         }
 
     # Who drops the objective items and the items that start quests?
@@ -500,7 +508,7 @@ def main():
     out += ["}", "",
             "-- [questID] = { name, level, requiredLevel, faction ('H'/'A'/nil), objective text,",
             "--   startNpc, startObject, startItem, endNpc, endObject, preAny, preAll, objectiveItems, rewards,",
-            "--   classes, repeatable, followUpOf, objectiveCreatures }",
+            "--   classes, repeatable, followUpOf, objectiveCreatures, useItems }",
             "ns.Quests = {"]
     for qid, r in quest_rows.items():
         parts = [
@@ -514,6 +522,7 @@ def main():
             "true" if r["repeatable"] else "nil",
             lua_list(r["followUp"]) if r["followUp"] else "nil",
             lua_list(r["kills"]),
+            lua_list(r["use"]) if r["use"] else "nil",
         ]
         out.append(f"    [{qid}] = {{{','.join(parts)}}},")
     out += ["}", "", "-- [npcID] = { name, title, minLevel, maxLevel, rank, {uiMapID, x, y} }", "ns.NPCs = {"]
