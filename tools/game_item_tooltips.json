@@ -1,5 +1,5 @@
 {
-"_source": "WoW Forever client tables, build 1.60.1.71037 (via wago.tools)",
+"_source": "WoW Forever client tables, build 1.60.1.71091 (via wago.tools)",
 "items": {
 "1470": [
 "|cffffffffMurloc Skin Bag|r",
@@ -940,6 +940,12 @@
 "|cffffffffGordok Inner Door Key|r",
 "Binds when picked up",
 "Unique"
+],
+"249519": [
+"|cff0070ddFormula: Frozen Heart of the Mountain|r",
+"Binds when picked up",
+"Requires Enchanting (265)",
+"Use: Teaches you how to craft a Frozen Heart of the Mountain."
 ],
 "249520": [
 "|cff0070ddFormula: Molten Heart of the Mountain|r",

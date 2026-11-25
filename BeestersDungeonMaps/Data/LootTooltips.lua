@@ -976,6 +976,7 @@ ns.LootTooltips = {
     [227912] = {"|cffffffffApplied Divinity|r","Quest Item","Unique"},
     [228312] = {"|cffa335eePlans: Invincible Mail|r","Requires Armorsmith","Requires Blacksmithing (300)","Use: Teaches you how to make Invincible Mail."},
     [245675] = {"|cffffffffGordok Inner Door Key|r","Binds when picked up","Unique"},
+    [249519] = {"|cff0070ddFormula: Frozen Heart of the Mountain|r","Binds when picked up","Requires Enchanting (265)","Use: Teaches you how to craft a Frozen Heart of the Mountain."},
     [249520] = {"|cff0070ddFormula: Molten Heart of the Mountain|r","Binds when picked up","Requires Enchanting (265)","Use: Teaches you how to craft a Molten Heart of the Mountain."},
     [249521] = {"|cff0070ddFormula: Dormant Heart of the Mountain|r","Binds when picked up","Requires Enchanting (265)","Use: Teaches you how to craft a Dormant Heart of the Mountain."},
     [249692] = {"|cffffffffHead of Varrox Bleakhoof|r","Quest Item","Unique"},
