@@ -22,11 +22,17 @@ local LINE_FONT = CreateFont("BeestersDungeonMapsTrackerLineFont")
 TITLE_FONT:CopyFontObject(BASE_TITLE_FONT)
 LINE_FONT:CopyFontObject(BASE_LINE_FONT)
 
+-- Each font's typeface and the size the options ask for. Every line also gets the size set on
+-- the line itself: a font object's new size doesn't always reach text already using it.
+local fontSize = {} -- [font object] = { path, size, flags }
+
 local function SetSize(font, base, size)
     local source = _G[base]
     if not (source and source.GetFont) then return end
     local path, _, flags = source:GetFont()
-    if path then font:SetFont(path, size, flags or "") end
+    if not path then return end
+    font:SetFont(path, size, flags or "")
+    fontSize[font] = { path, size, flags or "" }
 end
 
 function ns:UpdateDungeonTrackerFonts()
@@ -238,6 +244,8 @@ end
 
 local function SetLine(line, font, text, color, indent, room)
     line.Text:SetFontObject(font)
+    local f = fontSize[font]
+    if f then line.Text:SetFont(f[1], f[2], f[3]) end
     line.Text:SetText(text)
     line.r, line.g, line.b = color[1], color[2], color[3]
     line.Text:SetTextColor(color[1], color[2], color[3])

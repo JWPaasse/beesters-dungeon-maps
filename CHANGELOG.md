@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The quest tracker text size option now really changes the text size.
+
 ## 1.8.0
 
 - Quests in your log show their full text in the dungeon quest details, straight from the game, exactly as the game's quest log shows it. This also fills in the description of the new Forever quests, which the addon has no text of its own for.
