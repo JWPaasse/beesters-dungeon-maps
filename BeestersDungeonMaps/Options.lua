@@ -5,9 +5,35 @@ local _, ns = ...
 
 local panel
 
-local function NewCheckbox(parent, label, tooltip, key, anchor)
-    local check = CreateFrame("CheckButton", nil, parent, "UICheckButtonTemplate")
-    check:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, -8)
+-- The page is built top to bottom: each part goes below the last at a fixed left edge, so
+-- everything lines up whatever its kind.
+local Layout = {}
+Layout.__index = Layout
+
+local function NewLayout(content, top)
+    return setmetatable({ content = content, y = top }, Layout)
+end
+
+-- A section title with a thin line under it, like the categories in the game's settings.
+function Layout:Header(text)
+    self.y = self.y - (self.started and 22 or 0)
+    self.started = true
+    local header = self.content:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+    header:SetPoint("TOPLEFT", 16, self.y)
+    header:SetText(text)
+    local line = self.content:CreateTexture(nil, "ARTWORK")
+    line:SetColorTexture(1, 0.82, 0, 0.25)
+    line:SetHeight(1)
+    line:SetPoint("TOPLEFT", header, "BOTTOMLEFT", 0, -5)
+    line:SetPoint("RIGHT", self.content, "RIGHT", -24, 0)
+    self.y = self.y - 30
+    return header
+end
+
+function Layout:Checkbox(label, tooltip, key)
+    local check = CreateFrame("CheckButton", nil, self.content, "UICheckButtonTemplate")
+    check:SetPoint("TOPLEFT", 24, self.y)
+    check:SetSize(26, 26)
     local text = check.Text or check.text
     if text then
         text:SetText(label)
@@ -26,15 +52,17 @@ local function NewCheckbox(parent, label, tooltip, key, anchor)
         GameTooltip:Show()
     end)
     check:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    self.y = self.y - 30
     return check
 end
 
-local function NewSlider(parent, name, label, key, minValue, maxValue, anchor, onChange)
-    local ok, slider = pcall(CreateFrame, "Slider", name, parent, "OptionsSliderTemplate")
+function Layout:Slider(name, label, key, minValue, maxValue, onChange)
+    self.y = self.y - 18 -- room for the label above the bar
+    local ok, slider = pcall(CreateFrame, "Slider", name, self.content, "OptionsSliderTemplate")
     if not ok or not slider then
-        slider = CreateFrame("Slider", name, parent, "UISliderTemplateWithLabels")
+        slider = CreateFrame("Slider", name, self.content, "UISliderTemplateWithLabels")
     end
-    slider:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 4, -28)
+    slider:SetPoint("TOPLEFT", 32, self.y)
     slider:SetWidth(220)
     slider:SetMinMaxValues(minValue, maxValue)
     slider:SetValueStep(1)
@@ -61,6 +89,7 @@ local function NewSlider(parent, name, label, key, minValue, maxValue, anchor, o
         end
         UpdateLabel(value)
     end)
+    self.y = self.y - 40 -- the bar and the numbers under it
     return slider
 end
 
@@ -68,52 +97,63 @@ function ns:InitOptions()
     panel = CreateFrame("Frame")
     panel.name = ns.title
 
-    local logo = panel:CreateTexture(nil, "ARTWORK")
+    -- The page scrolls when the window is too short for it.
+    local ok, scroll = pcall(CreateFrame, "ScrollFrame", nil, panel, "ScrollFrameTemplate")
+    if not ok or not scroll then
+        scroll = CreateFrame("ScrollFrame", nil, panel, "UIPanelScrollFrameTemplate")
+    end
+    scroll:SetPoint("TOPLEFT", 0, -4)
+    scroll:SetPoint("BOTTOMRIGHT", -26, 4)
+    local content = CreateFrame("Frame", nil, scroll)
+    content:SetSize(600, 600)
+    scroll:SetScrollChild(content)
+    scroll:SetScript("OnSizeChanged", function(self, width) content:SetWidth(width) end)
+
+    local logo = content:CreateTexture(nil, "ARTWORK")
     logo:SetTexture(ns.logo)
     logo:SetSize(48, 48)
-    logo:SetPoint("TOPLEFT", 12, -10)
+    logo:SetPoint("TOPLEFT", 12, -8)
 
-    local title = panel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+    local title = content:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
     title:SetPoint("TOPLEFT", logo, "TOPRIGHT", 10, -6)
     title:SetText(ns.title)
 
-    local subtitle = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+    local subtitle = content:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
     subtitle:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -6)
     subtitle:SetText(("Version %s · open with %s · entrance data: QuestieDB %s"):format(
         ns.version, ns.slashCommand or "/beesterdm", tostring(ns.dataVersion)))
 
-    local header = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    header:SetPoint("TOPLEFT", logo, "BOTTOMLEFT", 4, -16)
-    header:SetText(WORLD_MAP or "World Map")
+    local page = NewLayout(content, -76)
 
-    local dungeons = NewCheckbox(panel, "Show dungeon entrances", "Show dungeon entrances on zone and continent maps.", "showDungeons", header)
-    local raids = NewCheckbox(panel, "Show raid entrances", "Show raid entrances on zone and continent maps.", "showRaids", dungeons)
-    local continents = NewCheckbox(panel, "Also show entrances on continent maps", "Turn off to show entrances only on zone maps.", "showOnContinents", raids)
-    local slider = NewSlider(panel, "BeestersDungeonMapsEntranceSizeSlider", "Entrance icon size", "entranceSize", 16, 48, continents)
+    page:Header(WORLD_MAP or "World Map")
+    page:Checkbox("Show dungeon entrances", "Show dungeon entrances on zone and continent maps.", "showDungeons")
+    page:Checkbox("Show raid entrances", "Show raid entrances on zone and continent maps.", "showRaids")
+    page:Checkbox("Also show entrances on continent maps", "Turn off to show entrances only on zone maps.", "showOnContinents")
+    page:Checkbox("List dungeons in the map's top bar",
+        "Adds a Dungeons button after the zone name (World > Kalimdor > Durotar > Dungeons).", "dungeonsInTopBar")
+    page:Slider("BeestersDungeonMapsEntranceSizeSlider", "Entrance icon size", "entranceSize", 16, 48)
 
-    local mapsHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    mapsHeader:SetPoint("TOPLEFT", slider, "BOTTOMLEFT", -4, -28)
-    mapsHeader:SetText("Dungeon maps")
-    local auto = NewCheckbox(panel, "Open the dungeon map inside dungeons",
-        "When you open your map inside a dungeon, show that dungeon's map.", "autoOpenInside", mapsHeader)
-    local topBar = NewCheckbox(panel, "List dungeons in the map's top bar",
-        "Adds a Dungeons button after the zone name (World > Kalimdor > Durotar > Dungeons).", "dungeonsInTopBar", auto)
-    local quests = NewCheckbox(panel, "Show the dungeon's quests next to its map",
-        "Adds a tab with the dungeon's quests to the quest list while a dungeon map is open.", "questPanel", topBar)
-    local trackerOption = NewCheckbox(panel, "Track the dungeon's quests inside dungeons",
-        "Inside a dungeon, shows the quests in your log for that dungeon with their objectives, like the game's quest tracker. Drag its header to move it.", "dungeonTracker", quests)
-    local trackerFont = NewSlider(panel, "BeestersDungeonMapsTrackerFontSlider", "Quest tracker text size", "dungeonTrackerFontSize", 9, 20,
-        trackerOption, function() if ns.UpdateDungeonTrackerFonts then ns:UpdateDungeonTrackerFonts() end end)
-    local dropOption = NewCheckbox(panel, "Show which boss drops an item",
-        "Adds \"Dropped by: boss (dungeon)\" to the tooltip of every item the dungeon bosses drop.", "dropTooltip", trackerFont)
+    page:Header("Dungeon maps")
+    page:Checkbox("Open the dungeon map inside dungeons",
+        "When you open your map inside a dungeon, show that dungeon's map.", "autoOpenInside")
+    page:Checkbox("Show which boss drops an item",
+        "Adds \"Dropped by: boss (dungeon)\" to the tooltip of every item the dungeon bosses drop.", "dropTooltip")
 
-    local minimapHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-    minimapHeader:SetPoint("TOPLEFT", dropOption, "BOTTOMLEFT", 0, -16)
-    minimapHeader:SetText(MINIMAP_LABEL or "Minimap")
-    local minimapButton = NewCheckbox(panel, "Show the minimap button",
-        "A button on the minimap that lists every dungeon and raid, yours on top. The list also opens with /bdm list.", "minimapButton", minimapHeader)
-    NewCheckbox(panel, "List the dungeons for your level on top",
-        "Pins the dungeons within 5 levels of yours above the full list. Turn off to see only the full list.", "suggestDungeons", minimapButton)
+    page:Header(QUESTS_LABEL or "Quests")
+    page:Checkbox("Show the dungeon's quests next to its map",
+        "Adds a tab with the dungeon's quests to the quest list while a dungeon map is open.", "questPanel")
+    page:Checkbox("Track the dungeon's quests inside dungeons",
+        "Inside a dungeon, shows the quests in your log for that dungeon with their objectives, like the game's quest tracker. Drag it to move it.", "dungeonTracker")
+    page:Slider("BeestersDungeonMapsTrackerFontSlider", "Quest tracker text size", "dungeonTrackerFontSize", 9, 20,
+        function() if ns.UpdateDungeonTrackerFonts then ns:UpdateDungeonTrackerFonts() end end)
+
+    page:Header(MINIMAP_LABEL or "Minimap")
+    page:Checkbox("Show the minimap button",
+        "A button on the minimap that lists every dungeon and raid, yours on top. The list also opens with /bdm list.", "minimapButton")
+    page:Checkbox("List the dungeons for your level on top",
+        "Pins the dungeons within 5 levels of yours above the full list. Turn off to see only the full list.", "suggestDungeons")
+
+    content:SetHeight(-page.y + 16)
 
     if Settings and Settings.RegisterCanvasLayoutCategory then
         local category = Settings.RegisterCanvasLayoutCategory(panel, ns.title)
