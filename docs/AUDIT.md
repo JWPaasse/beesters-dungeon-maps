@@ -9,7 +9,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Blackfathom Deeps | 6/6 | 0/6 | 0 | 35 | 3 |
 | Blackmaw Hold | 0/7 | 0/7 | 0 | 27 | 21 |
 | Blackrock Depths | 18/18 | 0/18 | 1 | 82 | 1 |
-| Blackrock Spire | 19/21 | 0/21 | 0 | 122 | 1 |
+| Blackrock Spire | 19/21 | 0/21 | 0 | 123 | 1 |
 | City of Dalaran | 8/8 | 0/8 | 0 | 24 | 24 |
 | Dire Maul East | 5/6 | 0/6 | 0 | 31 | 0 |
 | Dire Maul North | 6/6 | 0/6 | 0 | 47 | 0 |
@@ -35,7 +35,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | The Stockade | 5/6 | 0/6 | 0 | 23 | 15 |
 | Uldaman | 8/8 | 0/8 | 0 | 27 | 7 |
 | Wailing Caverns | 8/8 | 0/8 | 0 | 37 | 4 |
-| **All** | 212/243 | 0/243 | 7 | 1255 | 247 |
+| **All** | 212/243 | 0/243 | 7 | 1256 | 247 |
 
 ## Alcaz Prison
 
@@ -100,7 +100,7 @@ loot the addon shows (Bind on Pickup, Uncommon+), and loot without WoW Forever's
 | Highlord Omokk | yes | journal |  | 7 | 0 |
 | Shadow Hunter Vosh'gajin | yes | journal |  | 6 | 1 |
 | War Master Voone | yes | journal |  | 7 | 0 |
-| Mor Grayhoof | **no** | — |  | 5 | 0 |
+| Mor Grayhoof | **no** | — |  | 5 (+1 unknown) | 0 |
 | Mother Smolderweb | yes | journal |  | 4 (+1 unknown) | 0 |
 | Urok Doomhowl | yes | journal |  | 4 | 0 |
 | Quartermaster Zigris | yes | journal |  | 2 (+1 unknown) | 0 |
