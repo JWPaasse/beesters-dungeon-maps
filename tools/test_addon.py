@@ -33,6 +33,8 @@ local function anything()
             f = function(s) return s._shown end
         elseif key == "HookScript" or key == "SetScript" then
             f = function(s, event, fn) local sc = rawget(s, "scripts") or {}; rawset(s, "scripts", sc); sc[event] = fn end
+        elseif key == "SetFrameStrata" then
+            f = function(s, v) rawset(s, "_strata", v) end
         elseif key == "SetAttribute" then
             f = function(s, k, v) local a = rawget(s, "attrs") or {}; rawset(s, "attrs", a); a[k] = v end
         elseif key == "GetAttribute" then
@@ -810,6 +812,12 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         ns:UpdateDungeonTracker()
         local itemButton = BeestersDungeonMapsTrackerItem1
         check("a quest's item gets a button in the tracker", itemButton and itemButton:IsShown() and itemButton:GetAttribute("item") == "item:14395")
+        check("the item button sits above the tracker, so it can be clicked", itemButton._strata == "MEDIUM")
+        C_QuestLog.IsComplete = function() return true end
+        ns:UpdateDungeonTracker()
+        check("a completed quest's item button goes away", not itemButton:IsShown())
+        C_QuestLog.IsComplete = function() return false end
+        ns:UpdateDungeonTracker()
         local realLockdown = InCombatLockdown
         InCombatLockdown = function() return true end
         GetQuestLogSpecialItemInfo = function() return nil end

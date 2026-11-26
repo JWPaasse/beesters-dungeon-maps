@@ -64,13 +64,14 @@ end
 -- The item to show for this quest: the one the game ties to it, else one from the addon's data
 -- that's in your bags and can be used. Returns itemID, icon.
 local function QuestItem(questID, ready)
+    -- Done with the quest's goals: the item has nothing left to do.
+    if ready then return nil end
     local index = C_QuestLog.GetLogIndexForQuestID and C_QuestLog.GetLogIndexForQuestID(questID)
     if index and GetQuestLogSpecialItemInfo then
-        local link, icon, _, showWhenComplete = GetQuestLogSpecialItemInfo(index)
+        local link, icon = GetQuestLogSpecialItemInfo(index)
         local id = link and tonumber(link:match("item:(%d+)"))
-        if id and (not ready or showWhenComplete) then return id, icon end
+        if id then return id, icon end
     end
-    if ready then return nil end
     local q = ns.Quests and ns.Quests[questID]
     for _, id in ipairs(q and q[19] or {}) do
         if ItemCount(id) > 0 and ItemSpell(id) then
@@ -85,7 +86,8 @@ local function ItemButton(index)
     if b then return b end
     b = CreateFrame("Button", "BeestersDungeonMapsTrackerItem" .. index, UIParent, "SecureActionButtonTemplate")
     b:SetSize(ITEM_SIZE, ITEM_SIZE)
-    b:SetFrameStrata("LOW")
+    -- Above the tracker (its quest lines take the mouse for clicking and dragging).
+    b:SetFrameStrata("MEDIUM")
     b:RegisterForClicks("AnyUp", "AnyDown")
     b:SetAttribute("type", "item")
     b.Icon = b:CreateTexture(nil, "ARTWORK")

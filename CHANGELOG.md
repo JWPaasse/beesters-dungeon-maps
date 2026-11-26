@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- The quest item buttons in the dungeon quest tracker can be clicked now: they sat under the tracker, which took the clicks.
+- A quest's item button goes away once the quest's goals are done. When that happens in a fight, it goes as soon as the fight is over.
+
 ## 1.7.0
 
 - The dungeon quest tracker shows a quest's item beside it when you have it in your bags, like the game's own tracker: click it to use the item. In a fight the buttons can't be moved or changed (the game doesn't allow it), so a change waits until the fight is over.
