@@ -473,6 +473,24 @@ local function QuestText(id)
     return ("[%s (%d)]"):format(name, id)
 end
 
+-- The game's own text of a quest in your log: { description, objectives }, as its quest log
+-- shows it. Nil for a quest you don't have (the game only sends the text once you take it).
+local function LogText(id)
+    if not (GetQuestLogQuestText and C_QuestLog.GetLogIndexForQuestID) then return nil end
+    local index = C_QuestLog.GetLogIndexForQuestID(id)
+    if not index then return nil end
+    local description, objectives
+    local ok = pcall(function()
+        -- Older clients read the selected quest: select it for a moment, then put back what was.
+        local before = C_QuestLog.GetSelectedQuest and C_QuestLog.GetSelectedQuest()
+        if C_QuestLog.SetSelectedQuest then C_QuestLog.SetSelectedQuest(id) end
+        description, objectives = GetQuestLogQuestText(index)
+        if before and before ~= id and C_QuestLog.SetSelectedQuest then C_QuestLog.SetSelectedQuest(before) end
+    end)
+    if not ok or type(description) ~= "string" or description == "" then return nil end
+    return { description, type(objectives) == "string" and objectives or "" }
+end
+
 local function InsertQuestName(id, editBox)
     local text = QuestText(id)
     if not text then return end
@@ -1172,6 +1190,11 @@ function ShowDetail(id, entry, stepOverride)
     local step = Q(stepID) or q
     local text = ns.QuestText and ns.QuestText[stepID]
     local inLog = InLog(stepID)
+    -- In your log: the game's own full text, exactly as its quest log shows it (the addon's
+    -- copy is only the fallback, and new Forever quests aren't in it at all).
+    local logText = inLog and LogText(stepID)
+    local description = logText and logText[1] or (text and text[1] ~= "" and text[1]) or nil
+    local objectiveText = logText and logText[2] ~= "" and logText[2] or (text and text[2] ~= "" and text[2]) or step[F.TEXT] or ""
     d.current = { id = id, entry = entry, stepOverride = stepOverride, stepID = stepID }
     -- Where it's done inside: the bosses and objects on the dungeon map. For a chain whose
     -- dungeon part comes later, the first step from here on that has any.
@@ -1227,7 +1250,7 @@ function ShowDetail(id, entry, stepOverride)
     y = PageText(d, "QuestFontNormalSmall", line, y, 10, FADED_INK)
 
     -- Objectives, then the quest's own story text, as in the quest log's details.
-    y = PageText(d, "QuestFont", FillText(text and text[2] ~= "" and text[2] or step[F.TEXT] or ""), y, 6)
+    y = PageText(d, "QuestFont", FillText(objectiveText), y, 6)
     if inLog and C_QuestLog.GetQuestObjectives then
         local lines = {}
         for _, obj in ipairs(C_QuestLog.GetQuestObjectives(stepID) or {}) do
@@ -1236,9 +1259,9 @@ function ShowDetail(id, entry, stepOverride)
         if #lines > 0 then y = PageText(d, "QuestFont", table.concat(lines, "\n"), y, 6) end
     end
     y = y + 6
-    if text and text[1] ~= "" then
+    if description then
         y = PageText(d, "QuestTitleFont", QUEST_DESCRIPTION or "Description", y, 4)
-        y = PageText(d, "QuestFont", FillText(text[1]), y, 12)
+        y = PageText(d, "QuestFont", FillText(description), y, 12)
     end
 
     -- Rewards: "choose one" items, items you always get, money.
