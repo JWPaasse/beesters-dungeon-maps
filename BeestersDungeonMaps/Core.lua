@@ -21,6 +21,7 @@ ns.defaults = {
     suggestDungeons = true,
     dungeonTracker = true,
     dropTooltip = true,
+    dungeonTrackerFontSize = 12,
 }
 
 function ns:Print(message)

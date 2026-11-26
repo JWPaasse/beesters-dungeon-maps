@@ -29,7 +29,7 @@ local function NewCheckbox(parent, label, tooltip, key, anchor)
     return check
 end
 
-local function NewSlider(parent, name, label, key, minValue, maxValue, anchor)
+local function NewSlider(parent, name, label, key, minValue, maxValue, anchor, onChange)
     local ok, slider = pcall(CreateFrame, "Slider", name, parent, "OptionsSliderTemplate")
     if not ok or not slider then
         slider = CreateFrame("Slider", name, parent, "UISliderTemplateWithLabels")
@@ -57,7 +57,7 @@ local function NewSlider(parent, name, label, key, minValue, maxValue, anchor)
         value = math.floor(value + 0.5)
         if ns.db[key] ~= value then
             ns.db[key] = value
-            ns:RefreshMapPins()
+            if onChange then onChange(value) else ns:RefreshMapPins() end
         end
         UpdateLabel(value)
     end)
@@ -102,8 +102,10 @@ function ns:InitOptions()
         "Adds a tab with the dungeon's quests to the quest list while a dungeon map is open.", "questPanel", topBar)
     local trackerOption = NewCheckbox(panel, "Track the dungeon's quests inside dungeons",
         "Inside a dungeon, shows the quests in your log for that dungeon with their objectives, like the game's quest tracker. Drag its header to move it.", "dungeonTracker", quests)
+    local trackerFont = NewSlider(panel, "BeestersDungeonMapsTrackerFontSlider", "Quest tracker text size", "dungeonTrackerFontSize", 9, 20,
+        trackerOption, function() if ns.UpdateDungeonTrackerFonts then ns:UpdateDungeonTrackerFonts() end end)
     local dropOption = NewCheckbox(panel, "Show which boss drops an item",
-        "Adds \"Dropped by: boss (dungeon)\" to the tooltip of every item the dungeon bosses drop.", "dropTooltip", trackerOption)
+        "Adds \"Dropped by: boss (dungeon)\" to the tooltip of every item the dungeon bosses drop.", "dropTooltip", trackerFont)
 
     local minimapHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
     minimapHeader:SetPoint("TOPLEFT", dropOption, "BOTTOMLEFT", 0, -16)

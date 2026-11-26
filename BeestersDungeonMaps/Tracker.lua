@@ -13,8 +13,28 @@ local WIDTH = 235
 local function Font(name, fallback)
     return _G[name] and name or fallback
 end
-local TITLE_FONT = Font("ObjectiveTrackerHeaderFont", "GameFontNormal")
-local LINE_FONT = Font("ObjectiveTrackerLineFont", "GameFontHighlightSmall")
+local BASE_TITLE_FONT = Font("ObjectiveTrackerHeaderFont", "GameFontNormal")
+local BASE_LINE_FONT = Font("ObjectiveTrackerLineFont", "GameFontHighlightSmall")
+-- The tracker's own copies of those fonts, at the size set in the options (quest titles one
+-- point bigger than the objectives, like the game's tracker).
+local TITLE_FONT = CreateFont("BeestersDungeonMapsTrackerTitleFont")
+local LINE_FONT = CreateFont("BeestersDungeonMapsTrackerLineFont")
+TITLE_FONT:CopyFontObject(BASE_TITLE_FONT)
+LINE_FONT:CopyFontObject(BASE_LINE_FONT)
+
+local function SetSize(font, base, size)
+    local source = _G[base]
+    if not (source and source.GetFont) then return end
+    local path, _, flags = source:GetFont()
+    if path then font:SetFont(path, size, flags or "") end
+end
+
+function ns:UpdateDungeonTrackerFonts()
+    local size = ns.db and ns.db.dungeonTrackerFontSize or 12
+    SetSize(LINE_FONT, BASE_LINE_FONT, size)
+    SetSize(TITLE_FONT, BASE_TITLE_FONT, size + 1)
+    ns:UpdateDungeonTracker()
+end
 local HEADER_FONT = Font("ObjectiveTrackerHeaderFont", "GameFontNormalMed2")
 
 local READY_TEXT = QUEST_WATCH_QUEST_READY or "Ready for turn-in"
@@ -189,7 +209,7 @@ local function AcquireLine(index)
     if not line then
         line = CreateFrame("Button", nil, tracker.Content)
         line:SetWidth(WIDTH - 12)
-        line.Text = line:CreateFontString(nil, "ARTWORK", LINE_FONT)
+        line.Text = line:CreateFontString(nil, "ARTWORK", "BeestersDungeonMapsTrackerLineFont")
         line.Text:SetPoint("TOPLEFT")
         line.Text:SetWidth(WIDTH - 12)
         line.Text:SetJustifyH("LEFT")
@@ -372,6 +392,7 @@ end
 function ns:InitDungeonTracker()
     if tracker then return end
     CreateTracker()
+    ns:UpdateDungeonTrackerFonts()
     local events = CreateFrame("Frame")
     for _, event in ipairs({ "PLAYER_ENTERING_WORLD", "QUEST_LOG_UPDATE", "QUEST_ACCEPTED", "QUEST_REMOVED",
         "QUEST_TURNED_IN", "UNIT_QUEST_LOG_CHANGED", "ZONE_CHANGED_NEW_AREA", "BAG_UPDATE_DELAYED",

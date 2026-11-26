@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- New option: the text size of the dungeon quest tracker (Options › Dungeon maps).
 - The quest item buttons in the dungeon quest tracker can be clicked now: they sat under the tracker, which took the clicks.
 - A quest's item button goes away once the quest's goals are done. When that happens in a fight, it goes as soon as the fight is over.
 

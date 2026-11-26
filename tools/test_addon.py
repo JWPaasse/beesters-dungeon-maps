@@ -95,6 +95,16 @@ function CreateFrame(kind, name, parent, template)
     return frame
 end
 
+function CreateFont(name)
+    local font = anything()
+    font.SetFont = function(self, path, size, flags) rawset(self, "_size", size) end
+    font.GetFont = function(self) return "Fonts\\FRIZQT__.TTF", rawget(self, "_size") or 12, "" end
+    if name then _G[name] = font end
+    return font
+end
+CreateFont("GameFontNormal")
+CreateFont("GameFontHighlightSmall")
+
 function CreateFromMixins(...)
     local result = {}
     for _, mixin in ipairs({ ... }) do for k, v in pairs(mixin) do result[k] = v end end
@@ -803,6 +813,12 @@ function GetQuestDifficultyColor() return { r = 1, g = 1, b = 0 } end
         local shown = {}
         for _, l in ipairs(tr.Lines) do if l:IsShown() then table.insert(shown, l.Text._text or "") end end
         check("inside a dungeon the tracker shows its quests in your log", tr:IsShown() and #shown == 2)
+        ns.db.dungeonTrackerFontSize = 16
+        ns:UpdateDungeonTrackerFonts()
+        check("the tracker's text size follows the option", select(2, BeestersDungeonMapsTrackerLineFont:GetFont()) == 16
+            and select(2, BeestersDungeonMapsTrackerTitleFont:GetFont()) == 17)
+        ns.db.dungeonTrackerFontSize = 12
+        ns:UpdateDungeonTrackerFonts()
         -- A quest with an item to use gets the item's button beside it.
         local realSpecial = GetQuestLogSpecialItemInfo
         C_QuestLog.GetLogIndexForQuestID = C_QuestLog.GetLogIndexForQuestID or function() return nil end
